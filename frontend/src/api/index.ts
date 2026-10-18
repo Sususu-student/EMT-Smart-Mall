@@ -1,0 +1,127 @@
+import { request } from './http'
+import type {
+  Address,
+  AddressPayload,
+  AdminProductPayload,
+  CartSummary,
+  Category,
+  ChatResponse,
+  CompareResult,
+  Conversation,
+  Dashboard,
+  ExecutionLog,
+  LlmStatus,
+  LoginResponse,
+  Order,
+  PageResult,
+  Preference,
+  Product,
+  Profile,
+  Review,
+  Turn,
+  User
+} from '@/types'
+
+export const authApi = {
+  login: (data: { username: string; password: string }) =>
+    request<LoginResponse>({ url: '/user/login', method: 'post', data }),
+  register: (data: { username: string; password: string; nickname?: string; email?: string }) =>
+    request<LoginResponse>({ url: '/user/register', method: 'post', data })
+}
+
+export const userApi = {
+  profile: () => request<Profile>({ url: '/user/profile' }),
+  updateProfile: (data: Partial<User>) => request<User>({ url: '/user/profile', method: 'put', data }),
+  addresses: () => request<Address[]>({ url: '/user/address' }),
+  createAddress: (data: AddressPayload) => request<Address>({ url: '/user/address', method: 'post', data }),
+  updateAddress: (id: string, data: AddressPayload) =>
+    request<Address>({ url: `/user/address/${id}`, method: 'put', data }),
+  deleteAddress: (id: string) => request<void>({ url: `/user/address/${id}`, method: 'delete' }),
+  setDefaultAddress: (id: string) => request<Address>({ url: `/user/address/${id}/default`, method: 'put' }),
+  preferences: () => request<Preference[]>({ url: '/user/preference' }),
+  savePreferences: (items: Preference[]) =>
+    request<Preference[]>({ url: '/user/preference', method: 'put', data: { items } }),
+  favorites: () => request<Product[]>({ url: '/user/favorites' }),
+  toggleFavorite: (productId: string) =>
+    request<boolean>({ url: `/user/favorite/${productId}`, method: 'post' }),
+  history: (limit = 12) => request<Product[]>({ url: '/user/history', params: { limit } })
+}
+
+export const productApi = {
+  list: (params: Record<string, unknown>) => request<PageResult<Product>>({ url: '/product/list', params }),
+  search: (params: Record<string, unknown>) => request<PageResult<Product>>({ url: '/product/search', params }),
+  detail: (id: string) => request<Product>({ url: `/product/${id}` }),
+  categories: () => request<Category[]>({ url: '/product/category' }),
+  related: (id: string) => request<Product[]>({ url: `/product/${id}/related` }),
+  reviews: (id: string, params: { page?: number; size?: number }) =>
+    request<PageResult<Review>>({ url: `/product/${id}/reviews`, params }),
+  addReview: (id: string, data: { rating: number; content: string }) =>
+    request<Review>({ url: `/product/${id}/review`, method: 'post', data }),
+  batch: (ids: string[]) => request<Product[]>({ url: '/product/batch', params: { ids: ids.join(',') } })
+}
+
+export const cartApi = {
+  summary: () => request<CartSummary>({ url: '/cart' }),
+  add: (productId: string, quantity = 1) =>
+    request<unknown>({ url: '/cart', method: 'post', data: { productId, quantity } }),
+  update: (id: number, quantity: number) =>
+    request<unknown>({ url: `/cart/${id}`, method: 'put', data: { quantity } }),
+  remove: (id: number) => request<void>({ url: `/cart/${id}`, method: 'delete' }),
+  select: (ids: number[] | null, selected: boolean) =>
+    request<void>({ url: '/cart/select', method: 'put', data: { ids, selected } })
+}
+
+export const orderApi = {
+  create: (data: {
+    productId?: string
+    quantity?: number
+    cartItemIds?: number[]
+    addressId: string
+    remark?: string
+  }) => request<Order>({ url: '/order', method: 'post', data }),
+  list: (params: { status?: string; page?: number; size?: number }) =>
+    request<PageResult<Order>>({ url: '/order/list', params }),
+  detail: (id: string) => request<Order>({ url: `/order/${id}` }),
+  pay: (id: string) => request<Order>({ url: `/order/${id}/pay`, method: 'put' }),
+  cancel: (id: string) => request<Order>({ url: `/order/${id}/cancel`, method: 'put' }),
+  confirm: (id: string) => request<Order>({ url: `/order/${id}/confirm`, method: 'put' })
+}
+
+export const agentApi = {
+  chat: (data: { message: string; conversationId?: string }) =>
+    request<ChatResponse>({ url: '/agent/chat', method: 'post', data }),
+  compare: (data: { productIds: string[]; weights?: Record<string, number>; conversationId?: string }) =>
+    request<CompareResult>({ url: '/agent/compare', method: 'post', data }),
+  conversations: () => request<Conversation[]>({ url: '/agent/conversations' }),
+  turns: (id: string) => request<Turn[]>({ url: `/agent/conversations/${id}/turns` }),
+  deleteConversation: (id: string) => request<void>({ url: `/agent/conversations/${id}`, method: 'delete' }),
+  logs: (params: { taskId?: string; conversationId?: string }) =>
+    request<ExecutionLog[]>({ url: '/agent/logs', params }),
+  status: () => request<LlmStatus>({ url: '/agent/status' })
+}
+
+export const adminApi = {
+  stats: () => request<Dashboard>({ url: '/admin/stats' }),
+  products: (params: Record<string, unknown>) =>
+    request<PageResult<Product>>({ url: '/admin/products', params }),
+  createProduct: (data: AdminProductPayload) =>
+    request<Product>({ url: '/admin/product', method: 'post', data }),
+  importProducts: (items: AdminProductPayload[]) =>
+    request<{ success: number; failed: number; errors: string[] }>({
+      url: '/admin/products/import',
+      method: 'post',
+      data: items
+    }),
+  updateProduct: (id: string, data: AdminProductPayload) =>
+    request<Product>({ url: `/admin/product/${id}`, method: 'put', data }),
+  deleteProduct: (id: string) => request<void>({ url: `/admin/product/${id}`, method: 'delete' }),
+  updateProductStatus: (id: string, status: number) =>
+    request<void>({ url: `/admin/product/${id}/status`, method: 'put', params: { status } }),
+  orders: (params: Record<string, unknown>) => request<PageResult<Order>>({ url: '/admin/orders', params }),
+  ship: (id: string) => request<Order>({ url: `/admin/order/${id}/ship`, method: 'put' }),
+  users: (params: Record<string, unknown>) => request<PageResult<User>>({ url: '/admin/users', params }),
+  updateUserStatus: (id: string, status: number) =>
+    request<void>({ url: `/admin/user/${id}/status`, method: 'put', params: { status } }),
+  agentLogs: (params: Record<string, unknown>) =>
+    request<PageResult<ExecutionLog>>({ url: '/admin/agent-logs', params })
+}

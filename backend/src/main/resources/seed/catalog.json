@@ -1,0 +1,3680 @@
+{
+  "generatedAt": "2026-10-18T13:22:59.748Z",
+  "categories": [
+    {
+      "id": "cat_digital",
+      "parentId": null,
+      "name": "数码影音",
+      "icon": "🎧",
+      "description": "耳机、手机与智能穿戴",
+      "sortOrder": 1,
+      "attributeSchema": null
+    },
+    {
+      "id": "cat_computer",
+      "parentId": null,
+      "name": "电脑办公",
+      "icon": "💻",
+      "description": "笔记本与外设",
+      "sortOrder": 2,
+      "attributeSchema": null
+    },
+    {
+      "id": "cat_sport",
+      "parentId": null,
+      "name": "运动户外",
+      "icon": "🏃",
+      "description": "跑步与瑜伽装备",
+      "sortOrder": 3,
+      "attributeSchema": null
+    },
+    {
+      "id": "cat_beauty",
+      "parentId": null,
+      "name": "美妆个护",
+      "icon": "✨",
+      "description": "护肤与个护",
+      "sortOrder": 4,
+      "attributeSchema": null
+    },
+    {
+      "id": "cat_home",
+      "parentId": null,
+      "name": "家用电器",
+      "icon": "🏠",
+      "description": "咖啡与空气健康",
+      "sortOrder": 5,
+      "attributeSchema": null
+    },
+    {
+      "id": "cat_food",
+      "parentId": null,
+      "name": "食品饮料",
+      "icon": "☕",
+      "description": "精品咖啡",
+      "sortOrder": 6,
+      "attributeSchema": null
+    },
+    {
+      "id": "cat_bag",
+      "parentId": null,
+      "name": "箱包服饰",
+      "icon": "🎒",
+      "description": "通勤与出行",
+      "sortOrder": 7,
+      "attributeSchema": null
+    },
+    {
+      "id": "cat_smarthome",
+      "parentId": null,
+      "name": "智能家居",
+      "icon": "🤖",
+      "description": "清洁与自动化",
+      "sortOrder": 8,
+      "attributeSchema": null
+    },
+    {
+      "id": "cat_headphone",
+      "parentId": "cat_digital",
+      "name": "蓝牙耳机",
+      "icon": "🎧",
+      "description": "通勤、运动、降噪全场景",
+      "sortOrder": 10,
+      "attributeSchema": [
+        {
+          "key": "续航",
+          "unit": "h",
+          "type": "number",
+          "higherBetter": true,
+          "weight": 1
+        },
+        {
+          "key": "防水等级",
+          "type": "enum",
+          "options": [
+            "IPX4",
+            "IPX5",
+            "IPX6",
+            "IPX7"
+          ],
+          "higherBetter": true,
+          "weight": 1
+        },
+        {
+          "key": "重量",
+          "unit": "g",
+          "type": "number",
+          "higherBetter": false,
+          "weight": 0.8
+        },
+        {
+          "key": "降噪",
+          "type": "enum",
+          "options": [
+            "无",
+            "通话降噪",
+            "主动降噪"
+          ],
+          "higherBetter": true,
+          "weight": 1.2
+        },
+        {
+          "key": "蓝牙版本",
+          "type": "enum",
+          "options": [
+            "5.2",
+            "5.3",
+            "5.4"
+          ],
+          "higherBetter": true,
+          "weight": 0.5
+        }
+      ]
+    },
+    {
+      "id": "cat_phone",
+      "parentId": "cat_digital",
+      "name": "智能手机",
+      "icon": "📱",
+      "description": "影像、续航与性能兼顾",
+      "sortOrder": 10,
+      "attributeSchema": [
+        {
+          "key": "屏幕",
+          "unit": "英寸",
+          "type": "number",
+          "higherBetter": true,
+          "weight": 1
+        },
+        {
+          "key": "电池",
+          "unit": "mAh",
+          "type": "number",
+          "higherBetter": true,
+          "weight": 1
+        },
+        {
+          "key": "存储",
+          "unit": "GB",
+          "type": "number",
+          "higherBetter": true,
+          "weight": 1
+        },
+        {
+          "key": "像素",
+          "unit": "万",
+          "type": "number",
+          "higherBetter": true,
+          "weight": 1
+        },
+        {
+          "key": "重量",
+          "unit": "g",
+          "type": "number",
+          "higherBetter": false,
+          "weight": 0.6
+        }
+      ]
+    },
+    {
+      "id": "cat_watch",
+      "parentId": "cat_digital",
+      "name": "智能手表",
+      "icon": "⌚",
+      "description": "健康监测与运动记录",
+      "sortOrder": 10,
+      "attributeSchema": [
+        {
+          "key": "续航",
+          "unit": "天",
+          "type": "number",
+          "higherBetter": true,
+          "weight": 1
+        },
+        {
+          "key": "防水",
+          "unit": "ATM",
+          "type": "number",
+          "higherBetter": true,
+          "weight": 1
+        },
+        {
+          "key": "屏幕",
+          "unit": "英寸",
+          "type": "number",
+          "higherBetter": true,
+          "weight": 1
+        },
+        {
+          "key": "重量",
+          "unit": "g",
+          "type": "number",
+          "higherBetter": false,
+          "weight": 0.7
+        }
+      ]
+    },
+    {
+      "id": "cat_laptop",
+      "parentId": "cat_computer",
+      "name": "笔记本电脑",
+      "icon": "💻",
+      "description": "轻薄本与性能本",
+      "sortOrder": 10,
+      "attributeSchema": [
+        {
+          "key": "屏幕",
+          "unit": "英寸",
+          "type": "number",
+          "higherBetter": true,
+          "weight": 1
+        },
+        {
+          "key": "内存",
+          "unit": "GB",
+          "type": "number",
+          "higherBetter": true,
+          "weight": 1
+        },
+        {
+          "key": "硬盘",
+          "unit": "GB",
+          "type": "number",
+          "higherBetter": true,
+          "weight": 1
+        },
+        {
+          "key": "重量",
+          "unit": "kg",
+          "type": "number",
+          "higherBetter": false,
+          "weight": 1
+        },
+        {
+          "key": "续航",
+          "unit": "h",
+          "type": "number",
+          "higherBetter": true,
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "id": "cat_keyboard",
+      "parentId": "cat_computer",
+      "name": "机械键盘",
+      "icon": "⌨️",
+      "description": "办公与游戏的输入体验",
+      "sortOrder": 10,
+      "attributeSchema": [
+        {
+          "key": "键数",
+          "unit": "键",
+          "type": "number",
+          "higherBetter": true,
+          "weight": 1
+        },
+        {
+          "key": "连接方式",
+          "type": "enum",
+          "options": [
+            "有线",
+            "蓝牙",
+            "三模"
+          ],
+          "higherBetter": true,
+          "weight": 1
+        },
+        {
+          "key": "轴体",
+          "type": "enum",
+          "options": [
+            "红轴",
+            "茶轴",
+            "青轴",
+            "静音红轴"
+          ],
+          "higherBetter": true,
+          "weight": 1
+        },
+        {
+          "key": "重量",
+          "unit": "g",
+          "type": "number",
+          "higherBetter": false,
+          "weight": 0.6
+        }
+      ]
+    },
+    {
+      "id": "cat_running",
+      "parentId": "cat_sport",
+      "name": "跑步鞋",
+      "icon": "👟",
+      "description": "缓震、轻量与透气",
+      "sortOrder": 10,
+      "attributeSchema": [
+        {
+          "key": "缓震",
+          "unit": "级",
+          "type": "number",
+          "higherBetter": true,
+          "weight": 1
+        },
+        {
+          "key": "重量",
+          "unit": "g",
+          "type": "number",
+          "higherBetter": false,
+          "weight": 1
+        },
+        {
+          "key": "透气性",
+          "unit": "级",
+          "type": "number",
+          "higherBetter": true,
+          "weight": 1
+        },
+        {
+          "key": "适合路面",
+          "type": "enum",
+          "options": [
+            "公路",
+            "跑道",
+            "越野",
+            "全地形"
+          ],
+          "higherBetter": true,
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "id": "cat_yoga",
+      "parentId": "cat_sport",
+      "name": "瑜伽垫",
+      "icon": "🧘",
+      "description": "防滑与支撑",
+      "sortOrder": 10,
+      "attributeSchema": [
+        {
+          "key": "厚度",
+          "unit": "mm",
+          "type": "number",
+          "higherBetter": true,
+          "weight": 1
+        },
+        {
+          "key": "长度",
+          "unit": "cm",
+          "type": "number",
+          "higherBetter": true,
+          "weight": 1
+        },
+        {
+          "key": "重量",
+          "unit": "g",
+          "type": "number",
+          "higherBetter": false,
+          "weight": 0.5
+        },
+        {
+          "key": "材质",
+          "type": "enum",
+          "options": [
+            "TPE",
+            "天然橡胶",
+            "PU"
+          ],
+          "higherBetter": true,
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "id": "cat_skincare",
+      "parentId": "cat_beauty",
+      "name": "护肤品",
+      "icon": "🧴",
+      "description": "保湿、修护与防晒",
+      "sortOrder": 10,
+      "attributeSchema": [
+        {
+          "key": "容量",
+          "unit": "ml",
+          "type": "number",
+          "higherBetter": true,
+          "weight": 1
+        },
+        {
+          "key": "防晒指数",
+          "unit": "SPF",
+          "type": "number",
+          "higherBetter": true,
+          "weight": 1
+        },
+        {
+          "key": "适合肤质",
+          "type": "enum",
+          "options": [
+            "干性",
+            "油性",
+            "混合",
+            "敏感"
+          ],
+          "higherBetter": true,
+          "weight": 1
+        },
+        {
+          "key": "功效",
+          "type": "enum",
+          "options": [
+            "保湿",
+            "修护",
+            "美白",
+            "抗皱"
+          ],
+          "higherBetter": true,
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "id": "cat_coffee",
+      "parentId": "cat_home",
+      "name": "咖啡机",
+      "icon": "☕",
+      "description": "在家喝到一杯好咖啡",
+      "sortOrder": 10,
+      "attributeSchema": [
+        {
+          "key": "容量",
+          "unit": "L",
+          "type": "number",
+          "higherBetter": true,
+          "weight": 1
+        },
+        {
+          "key": "功率",
+          "unit": "W",
+          "type": "number",
+          "higherBetter": false,
+          "weight": 0.5
+        },
+        {
+          "key": "压力",
+          "unit": "bar",
+          "type": "number",
+          "higherBetter": true,
+          "weight": 1
+        },
+        {
+          "key": "清洗方式",
+          "type": "enum",
+          "options": [
+            "手动",
+            "可拆卸",
+            "自动清洗"
+          ],
+          "higherBetter": true,
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "id": "cat_purifier",
+      "parentId": "cat_home",
+      "name": "空气净化器",
+      "icon": "🌬️",
+      "description": "除醛、除霾与静音",
+      "sortOrder": 10,
+      "attributeSchema": [
+        {
+          "key": "CADR",
+          "unit": "m³/h",
+          "type": "number",
+          "higherBetter": true,
+          "weight": 1
+        },
+        {
+          "key": "噪音",
+          "unit": "dB",
+          "type": "number",
+          "higherBetter": false,
+          "weight": 1
+        },
+        {
+          "key": "适用面积",
+          "unit": "㎡",
+          "type": "number",
+          "higherBetter": true,
+          "weight": 1
+        },
+        {
+          "key": "功率",
+          "unit": "W",
+          "type": "number",
+          "higherBetter": false,
+          "weight": 0.4
+        }
+      ]
+    },
+    {
+      "id": "cat_beans",
+      "parentId": "cat_food",
+      "name": "咖啡豆",
+      "icon": "🫘",
+      "description": "产地与烘焙风味",
+      "sortOrder": 10,
+      "attributeSchema": [
+        {
+          "key": "规格",
+          "unit": "g",
+          "type": "number",
+          "higherBetter": true,
+          "weight": 1
+        },
+        {
+          "key": "烘焙度",
+          "type": "enum",
+          "options": [
+            "浅烘",
+            "中烘",
+            "深烘"
+          ],
+          "higherBetter": true,
+          "weight": 1
+        },
+        {
+          "key": "产地",
+          "type": "enum",
+          "options": [
+            "埃塞俄比亚",
+            "哥伦比亚",
+            "云南",
+            "巴西"
+          ],
+          "higherBetter": true,
+          "weight": 1
+        },
+        {
+          "key": "风味",
+          "type": "enum",
+          "options": [
+            "花香果酸",
+            "坚果可可",
+            "焦糖甜感",
+            "莓果"
+          ],
+          "higherBetter": true,
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "id": "cat_backpack",
+      "parentId": "cat_bag",
+      "name": "双肩包",
+      "icon": "🎒",
+      "description": "通勤、差旅与户外",
+      "sortOrder": 10,
+      "attributeSchema": [
+        {
+          "key": "容量",
+          "unit": "L",
+          "type": "number",
+          "higherBetter": true,
+          "weight": 1
+        },
+        {
+          "key": "重量",
+          "unit": "g",
+          "type": "number",
+          "higherBetter": false,
+          "weight": 0.8
+        },
+        {
+          "key": "防水",
+          "type": "enum",
+          "options": [
+            "否",
+            "是"
+          ],
+          "higherBetter": true,
+          "weight": 1
+        },
+        {
+          "key": "材质",
+          "type": "enum",
+          "options": [
+            "尼龙",
+            "聚酯纤维",
+            "帆布"
+          ],
+          "higherBetter": true,
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "id": "cat_robot",
+      "parentId": "cat_smarthome",
+      "name": "扫地机器人",
+      "icon": "🤖",
+      "description": "吸拖一体与自动集尘",
+      "sortOrder": 10,
+      "attributeSchema": [
+        {
+          "key": "吸力",
+          "unit": "Pa",
+          "type": "number",
+          "higherBetter": true,
+          "weight": 1
+        },
+        {
+          "key": "续航",
+          "unit": "min",
+          "type": "number",
+          "higherBetter": true,
+          "weight": 1
+        },
+        {
+          "key": "噪音",
+          "unit": "dB",
+          "type": "number",
+          "higherBetter": false,
+          "weight": 0.8
+        },
+        {
+          "key": "水箱",
+          "unit": "L",
+          "type": "number",
+          "higherBetter": true,
+          "weight": 1
+        }
+      ]
+    }
+  ],
+  "products": [
+    {
+      "id": "p_headphone_01",
+      "name": "声屿 Beat 3 运动版",
+      "subtitle": "主动降噪 · 18h 续航 · IPX5 防水",
+      "categoryId": "cat_headphone",
+      "brand": "声屿",
+      "price": 199,
+      "originalPrice": 279,
+      "stock": 380,
+      "sales": 586,
+      "rating": 4.5,
+      "reviewCount": 83,
+      "description": "声屿 Beat 3 运动版，续航 18h，防水等级 IPX5，重量 3.8g，降噪 主动降噪，蓝牙版本 5.3。通勤、运动、降噪全场景。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "续航": 18,
+        "防水等级": "IPX5",
+        "重量": 3.8,
+        "降噪": "主动降噪",
+        "蓝牙版本": "5.3"
+      },
+      "tags": "蓝牙耳机,运动,降噪,防水,跑步,声屿",
+      "image": "/img/headphone.svg",
+      "status": 1
+    },
+    {
+      "id": "p_headphone_02",
+      "name": "澎湃 Wave 4 运动版",
+      "subtitle": "通话降噪 · 24h 续航 · IPX6 防水",
+      "categoryId": "cat_headphone",
+      "brand": "澎湃",
+      "price": 279,
+      "originalPrice": 369,
+      "stock": 69,
+      "sales": 2155,
+      "rating": 4.8,
+      "reviewCount": 307,
+      "description": "澎湃 Wave 4 运动版，续航 24h，防水等级 IPX6，重量 4.2g，降噪 通话降噪，蓝牙版本 5.4。通勤、运动、降噪全场景。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "续航": 24,
+        "防水等级": "IPX6",
+        "重量": 4.2,
+        "降噪": "通话降噪",
+        "蓝牙版本": "5.4"
+      },
+      "tags": "蓝牙耳机,运动,通勤,防水,跑步,澎湃",
+      "image": "/img/headphone.svg",
+      "status": 1
+    },
+    {
+      "id": "p_headphone_03",
+      "name": "律动 Liberty 5 轻盈版",
+      "subtitle": "通话降噪 · 30h 续航 · IPX4 防水",
+      "categoryId": "cat_headphone",
+      "brand": "律动",
+      "price": 299,
+      "originalPrice": 359,
+      "stock": 244,
+      "sales": 576,
+      "rating": 4.6,
+      "reviewCount": 82,
+      "description": "律动 Liberty 5 轻盈版，续航 30h，防水等级 IPX4，重量 4.6g，降噪 通话降噪，蓝牙版本 5.2。通勤、运动、降噪全场景。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "续航": 30,
+        "防水等级": "IPX4",
+        "重量": 4.6,
+        "降噪": "通话降噪",
+        "蓝牙版本": "5.2"
+      },
+      "tags": "蓝牙耳机,运动,通勤,防水,跑步,律动",
+      "image": "/img/headphone.svg",
+      "status": 1
+    },
+    {
+      "id": "p_headphone_04",
+      "name": "澎湃 Beat Pro 运动版",
+      "subtitle": "主动降噪 · 36h 续航 · IPX5 防水",
+      "categoryId": "cat_headphone",
+      "brand": "澎湃",
+      "price": 349,
+      "originalPrice": 399,
+      "stock": 190,
+      "sales": 2600,
+      "rating": 4.6,
+      "reviewCount": 371,
+      "description": "澎湃 Beat Pro 运动版，续航 36h，防水等级 IPX5，重量 5.2g，降噪 主动降噪，蓝牙版本 5.3。通勤、运动、降噪全场景。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "续航": 36,
+        "防水等级": "IPX5",
+        "重量": 5.2,
+        "降噪": "主动降噪",
+        "蓝牙版本": "5.3"
+      },
+      "tags": "蓝牙耳机,运动,降噪,防水,跑步,澎湃",
+      "image": "/img/headphone.svg",
+      "status": 1
+    },
+    {
+      "id": "p_headphone_05",
+      "name": "声屿 Air Max 运动版",
+      "subtitle": "通话降噪 · 40h 续航 · IPX7 防水",
+      "categoryId": "cat_headphone",
+      "brand": "声屿",
+      "price": 399,
+      "originalPrice": 459,
+      "stock": 153,
+      "sales": 1442,
+      "rating": 4.9,
+      "reviewCount": 206,
+      "description": "声屿 Air Max 运动版，续航 40h，防水等级 IPX7，重量 6g，降噪 通话降噪，蓝牙版本 5.4。通勤、运动、降噪全场景。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "续航": 40,
+        "防水等级": "IPX7",
+        "重量": 6,
+        "降噪": "通话降噪",
+        "蓝牙版本": "5.4"
+      },
+      "tags": "蓝牙耳机,运动,通勤,防水,跑步,声屿",
+      "image": "/img/headphone.svg",
+      "status": 1
+    },
+    {
+      "id": "p_headphone_06",
+      "name": "澎湃 Wave 3 运动版",
+      "subtitle": "通话降噪 · 48h 续航 · IPX5 防水",
+      "categoryId": "cat_headphone",
+      "brand": "澎湃",
+      "price": 459,
+      "originalPrice": 599,
+      "stock": 279,
+      "sales": 1645,
+      "rating": 4.7,
+      "reviewCount": 235,
+      "description": "澎湃 Wave 3 运动版，续航 48h，防水等级 IPX5，重量 3.8g，降噪 通话降噪，蓝牙版本 5.2。通勤、运动、降噪全场景。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "续航": 48,
+        "防水等级": "IPX5",
+        "重量": 3.8,
+        "降噪": "通话降噪",
+        "蓝牙版本": "5.2"
+      },
+      "tags": "蓝牙耳机,运动,通勤,防水,跑步,澎湃",
+      "image": "/img/headphone.svg",
+      "status": 1
+    },
+    {
+      "id": "p_headphone_07",
+      "name": "云听 Air 4 轻盈版",
+      "subtitle": "通话降噪 · 18h 续航 · IPX4 防水",
+      "categoryId": "cat_headphone",
+      "brand": "云听",
+      "price": 529,
+      "originalPrice": 659,
+      "stock": 228,
+      "sales": 115,
+      "rating": 4.4,
+      "reviewCount": 16,
+      "description": "云听 Air 4 轻盈版，续航 18h，防水等级 IPX4，重量 4.2g，降噪 通话降噪，蓝牙版本 5.3。通勤、运动、降噪全场景。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "续航": 18,
+        "防水等级": "IPX4",
+        "重量": 4.2,
+        "降噪": "通话降噪",
+        "蓝牙版本": "5.3"
+      },
+      "tags": "蓝牙耳机,运动,通勤,防水,跑步,云听",
+      "image": "/img/headphone.svg",
+      "status": 1
+    },
+    {
+      "id": "p_headphone_08",
+      "name": "声屿 Beat 5 运动版",
+      "subtitle": "通话降噪 · 24h 续航 · IPX6 防水",
+      "categoryId": "cat_headphone",
+      "brand": "声屿",
+      "price": 599,
+      "originalPrice": 699,
+      "stock": 62,
+      "sales": 1124,
+      "rating": 4.4,
+      "reviewCount": 160,
+      "description": "声屿 Beat 5 运动版，续航 24h，防水等级 IPX6，重量 4.6g，降噪 通话降噪，蓝牙版本 5.4。通勤、运动、降噪全场景。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "续航": 24,
+        "防水等级": "IPX6",
+        "重量": 4.6,
+        "降噪": "通话降噪",
+        "蓝牙版本": "5.4"
+      },
+      "tags": "蓝牙耳机,运动,通勤,防水,跑步,声屿",
+      "image": "/img/headphone.svg",
+      "status": 1
+    },
+    {
+      "id": "p_headphone_09",
+      "name": "云听 Liberty Pro 运动版",
+      "subtitle": "通话降噪 · 30h 续航 · IPX5 防水",
+      "categoryId": "cat_headphone",
+      "brand": "云听",
+      "price": 699,
+      "originalPrice": 859,
+      "stock": 96,
+      "sales": 741,
+      "rating": 4.8,
+      "reviewCount": 105,
+      "description": "云听 Liberty Pro 运动版，续航 30h，防水等级 IPX5，重量 5.2g，降噪 通话降噪，蓝牙版本 5.2。通勤、运动、降噪全场景。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "续航": 30,
+        "防水等级": "IPX5",
+        "重量": 5.2,
+        "降噪": "通话降噪",
+        "蓝牙版本": "5.2"
+      },
+      "tags": "蓝牙耳机,运动,通勤,防水,跑步,云听",
+      "image": "/img/headphone.svg",
+      "status": 1
+    },
+    {
+      "id": "p_headphone_10",
+      "name": "声屿 Liberty Max 运动版",
+      "subtitle": "主动降噪 · 36h 续航 · IPX7 防水",
+      "categoryId": "cat_headphone",
+      "brand": "声屿",
+      "price": 899,
+      "originalPrice": 1139,
+      "stock": 434,
+      "sales": 1991,
+      "rating": 4.7,
+      "reviewCount": 284,
+      "description": "声屿 Liberty Max 运动版，续航 36h，防水等级 IPX7，重量 6g，降噪 主动降噪，蓝牙版本 5.3。通勤、运动、降噪全场景。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "续航": 36,
+        "防水等级": "IPX7",
+        "重量": 6,
+        "降噪": "主动降噪",
+        "蓝牙版本": "5.3"
+      },
+      "tags": "蓝牙耳机,运动,降噪,防水,跑步,声屿",
+      "image": "/img/headphone.svg",
+      "status": 1
+    },
+    {
+      "id": "p_phone_01",
+      "name": "星野 Neo1 128GB",
+      "subtitle": "6.1 英寸 · 5000 万像素 · 4500mAh",
+      "categoryId": "cat_phone",
+      "brand": "星野",
+      "price": 1299,
+      "originalPrice": 1739,
+      "stock": 40,
+      "sales": 768,
+      "rating": 4.6,
+      "reviewCount": 109,
+      "description": "星野 Neo1 128GB，屏幕 6.1英寸，电池 4500mAh，存储 128GB，像素 5000万，重量 178g。影像、续航与性能兼顾。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "屏幕": 6.1,
+        "电池": 4500,
+        "存储": 128,
+        "像素": 5000,
+        "重量": 178
+      },
+      "tags": "智能手机,5G,拍照,日常,星野",
+      "image": "/img/phone.svg",
+      "status": 1
+    },
+    {
+      "id": "p_phone_02",
+      "name": "星野 Neo2 256GB",
+      "subtitle": "6.5 英寸 · 6400 万像素 · 5000mAh",
+      "categoryId": "cat_phone",
+      "brand": "星野",
+      "price": 1599,
+      "originalPrice": 1879,
+      "stock": 327,
+      "sales": 1586,
+      "rating": 4.7,
+      "reviewCount": 226,
+      "description": "星野 Neo2 256GB，屏幕 6.5英寸，电池 5000mAh，存储 256GB，像素 6400万，重量 189g。影像、续航与性能兼顾。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "屏幕": 6.5,
+        "电池": 5000,
+        "存储": 256,
+        "像素": 6400,
+        "重量": 189
+      },
+      "tags": "智能手机,5G,拍照,大存储,星野",
+      "image": "/img/phone.svg",
+      "status": 1
+    },
+    {
+      "id": "p_phone_03",
+      "name": "极光 X3 512GB",
+      "subtitle": "6.7 英寸 · 10800 万像素 · 5500mAh",
+      "categoryId": "cat_phone",
+      "brand": "极光",
+      "price": 1999,
+      "originalPrice": 2779,
+      "stock": 492,
+      "sales": 516,
+      "rating": 4.8,
+      "reviewCount": 73,
+      "description": "极光 X3 512GB，屏幕 6.7英寸，电池 5500mAh，存储 512GB，像素 10800万，重量 199g。影像、续航与性能兼顾。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "屏幕": 6.7,
+        "电池": 5500,
+        "存储": 512,
+        "像素": 10800,
+        "重量": 199
+      },
+      "tags": "智能手机,5G,拍照,大存储,极光",
+      "image": "/img/phone.svg",
+      "status": 1
+    },
+    {
+      "id": "p_phone_04",
+      "name": "极光 X4 128GB",
+      "subtitle": "6.8 英寸 · 5000 万像素 · 6000mAh",
+      "categoryId": "cat_phone",
+      "brand": "极光",
+      "price": 2499,
+      "originalPrice": 3059,
+      "stock": 175,
+      "sales": 97,
+      "rating": 4.5,
+      "reviewCount": 13,
+      "description": "极光 X4 128GB，屏幕 6.8英寸，电池 6000mAh，存储 128GB，像素 5000万，重量 210g。影像、续航与性能兼顾。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "屏幕": 6.8,
+        "电池": 6000,
+        "存储": 128,
+        "像素": 5000,
+        "重量": 210
+      },
+      "tags": "智能手机,5G,拍照,日常,极光",
+      "image": "/img/phone.svg",
+      "status": 1
+    },
+    {
+      "id": "p_phone_05",
+      "name": "星野 X5 256GB",
+      "subtitle": "6.1 英寸 · 6400 万像素 · 4500mAh",
+      "categoryId": "cat_phone",
+      "brand": "星野",
+      "price": 2999,
+      "originalPrice": 4059,
+      "stock": 101,
+      "sales": 1669,
+      "rating": 4.3,
+      "reviewCount": 238,
+      "description": "星野 X5 256GB，屏幕 6.1英寸，电池 4500mAh，存储 256GB，像素 6400万，重量 178g。影像、续航与性能兼顾。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "屏幕": 6.1,
+        "电池": 4500,
+        "存储": 256,
+        "像素": 6400,
+        "重量": 178
+      },
+      "tags": "智能手机,5G,拍照,大存储,星野",
+      "image": "/img/phone.svg",
+      "status": 1
+    },
+    {
+      "id": "p_phone_06",
+      "name": "青柚 Neo6 512GB",
+      "subtitle": "6.5 英寸 · 10800 万像素 · 5000mAh",
+      "categoryId": "cat_phone",
+      "brand": "青柚",
+      "price": 3499,
+      "originalPrice": 4249,
+      "stock": 346,
+      "sales": 1769,
+      "rating": 4.8,
+      "reviewCount": 252,
+      "description": "青柚 Neo6 512GB，屏幕 6.5英寸，电池 5000mAh，存储 512GB，像素 10800万，重量 189g。影像、续航与性能兼顾。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "屏幕": 6.5,
+        "电池": 5000,
+        "存储": 512,
+        "像素": 10800,
+        "重量": 189
+      },
+      "tags": "智能手机,5G,拍照,大存储,青柚",
+      "image": "/img/phone.svg",
+      "status": 1
+    },
+    {
+      "id": "p_phone_07",
+      "name": "青柚 X7 128GB",
+      "subtitle": "6.7 英寸 · 5000 万像素 · 5500mAh",
+      "categoryId": "cat_phone",
+      "brand": "青柚",
+      "price": 3999,
+      "originalPrice": 5109,
+      "stock": 99,
+      "sales": 1200,
+      "rating": 4.7,
+      "reviewCount": 171,
+      "description": "青柚 X7 128GB，屏幕 6.7英寸，电池 5500mAh，存储 128GB，像素 5000万，重量 199g。影像、续航与性能兼顾。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "屏幕": 6.7,
+        "电池": 5500,
+        "存储": 128,
+        "像素": 5000,
+        "重量": 199
+      },
+      "tags": "智能手机,5G,拍照,日常,青柚",
+      "image": "/img/phone.svg",
+      "status": 1
+    },
+    {
+      "id": "p_phone_08",
+      "name": "云舟 Neo8 256GB",
+      "subtitle": "6.8 英寸 · 6400 万像素 · 6000mAh",
+      "categoryId": "cat_phone",
+      "brand": "云舟",
+      "price": 4499,
+      "originalPrice": 5679,
+      "stock": 290,
+      "sales": 171,
+      "rating": 4.8,
+      "reviewCount": 24,
+      "description": "云舟 Neo8 256GB，屏幕 6.8英寸，电池 6000mAh，存储 256GB，像素 6400万，重量 210g。影像、续航与性能兼顾。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "屏幕": 6.8,
+        "电池": 6000,
+        "存储": 256,
+        "像素": 6400,
+        "重量": 210
+      },
+      "tags": "智能手机,5G,拍照,大存储,云舟",
+      "image": "/img/phone.svg",
+      "status": 1
+    },
+    {
+      "id": "p_phone_09",
+      "name": "云舟 Note9 512GB",
+      "subtitle": "6.1 英寸 · 10800 万像素 · 4500mAh",
+      "categoryId": "cat_phone",
+      "brand": "云舟",
+      "price": 5299,
+      "originalPrice": 6739,
+      "stock": 48,
+      "sales": 1636,
+      "rating": 4.4,
+      "reviewCount": 233,
+      "description": "云舟 Note9 512GB，屏幕 6.1英寸，电池 4500mAh，存储 512GB，像素 10800万，重量 178g。影像、续航与性能兼顾。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "屏幕": 6.1,
+        "电池": 4500,
+        "存储": 512,
+        "像素": 10800,
+        "重量": 178
+      },
+      "tags": "智能手机,5G,拍照,大存储,云舟",
+      "image": "/img/phone.svg",
+      "status": 1
+    },
+    {
+      "id": "p_phone_10",
+      "name": "青柚 Note10 128GB",
+      "subtitle": "6.5 英寸 · 5000 万像素 · 5000mAh",
+      "categoryId": "cat_phone",
+      "brand": "青柚",
+      "price": 5999,
+      "originalPrice": 8369,
+      "stock": 375,
+      "sales": 530,
+      "rating": 4.8,
+      "reviewCount": 75,
+      "description": "青柚 Note10 128GB，屏幕 6.5英寸，电池 5000mAh，存储 128GB，像素 5000万，重量 189g。影像、续航与性能兼顾。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "屏幕": 6.5,
+        "电池": 5000,
+        "存储": 128,
+        "像素": 5000,
+        "重量": 189
+      },
+      "tags": "智能手机,5G,拍照,日常,青柚",
+      "image": "/img/phone.svg",
+      "status": 1
+    },
+    {
+      "id": "p_watch_01",
+      "name": "云听 Fit 1 代",
+      "subtitle": "7 天续航 · 5ATM 防水 · 血氧监测",
+      "categoryId": "cat_watch",
+      "brand": "云听",
+      "price": 399,
+      "originalPrice": 559,
+      "stock": 288,
+      "sales": 1531,
+      "rating": 4.9,
+      "reviewCount": 218,
+      "description": "云听 Fit 1 代，续航 7天，防水 5ATM，屏幕 1.43英寸，重量 32g。健康监测与运动记录。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "续航": 7,
+        "防水": 5,
+        "屏幕": 1.43,
+        "重量": 32
+      },
+      "tags": "智能手表,运动,健康监测,防水,云听",
+      "image": "/img/watch.svg",
+      "status": 1
+    },
+    {
+      "id": "p_watch_02",
+      "name": "云听 Active 2 代",
+      "subtitle": "14 天续航 · 10ATM 防水 · 血氧监测",
+      "categoryId": "cat_watch",
+      "brand": "云听",
+      "price": 499,
+      "originalPrice": 589,
+      "stock": 322,
+      "sales": 652,
+      "rating": 4.8,
+      "reviewCount": 93,
+      "description": "云听 Active 2 代，续航 14天，防水 10ATM，屏幕 1.5英寸，重量 38g。健康监测与运动记录。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "续航": 14,
+        "防水": 10,
+        "屏幕": 1.5,
+        "重量": 38
+      },
+      "tags": "智能手表,运动,健康监测,防水,云听",
+      "image": "/img/watch.svg",
+      "status": 1
+    },
+    {
+      "id": "p_watch_03",
+      "name": "星野 Watch 3 代",
+      "subtitle": "21 天续航 · 5ATM 防水 · 血氧监测",
+      "categoryId": "cat_watch",
+      "brand": "星野",
+      "price": 599,
+      "originalPrice": 779,
+      "stock": 232,
+      "sales": 1274,
+      "rating": 4.9,
+      "reviewCount": 182,
+      "description": "星野 Watch 3 代，续航 21天，防水 5ATM，屏幕 1.78英寸，重量 45g。健康监测与运动记录。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "续航": 21,
+        "防水": 5,
+        "屏幕": 1.78,
+        "重量": 45
+      },
+      "tags": "智能手表,运动,健康监测,防水,星野",
+      "image": "/img/watch.svg",
+      "status": 1
+    },
+    {
+      "id": "p_watch_04",
+      "name": "律动 Fit 4 代",
+      "subtitle": "7 天续航 · 10ATM 防水 · 血氧监测",
+      "categoryId": "cat_watch",
+      "brand": "律动",
+      "price": 799,
+      "originalPrice": 949,
+      "stock": 301,
+      "sales": 1954,
+      "rating": 4.4,
+      "reviewCount": 279,
+      "description": "律动 Fit 4 代，续航 7天，防水 10ATM，屏幕 1.43英寸，重量 32g。健康监测与运动记录。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "续航": 7,
+        "防水": 10,
+        "屏幕": 1.43,
+        "重量": 32
+      },
+      "tags": "智能手表,运动,健康监测,防水,律动",
+      "image": "/img/watch.svg",
+      "status": 1
+    },
+    {
+      "id": "p_watch_05",
+      "name": "律动 Fit 5 代",
+      "subtitle": "14 天续航 · 5ATM 防水 · 血氧监测",
+      "categoryId": "cat_watch",
+      "brand": "律动",
+      "price": 899,
+      "originalPrice": 1179,
+      "stock": 346,
+      "sales": 1087,
+      "rating": 4.8,
+      "reviewCount": 155,
+      "description": "律动 Fit 5 代，续航 14天，防水 5ATM，屏幕 1.5英寸，重量 38g。健康监测与运动记录。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "续航": 14,
+        "防水": 5,
+        "屏幕": 1.5,
+        "重量": 38
+      },
+      "tags": "智能手表,运动,健康监测,防水,律动",
+      "image": "/img/watch.svg",
+      "status": 1
+    },
+    {
+      "id": "p_watch_06",
+      "name": "律动 Watch 6 代",
+      "subtitle": "21 天续航 · 10ATM 防水 · 血氧监测",
+      "categoryId": "cat_watch",
+      "brand": "律动",
+      "price": 1099,
+      "originalPrice": 1369,
+      "stock": 283,
+      "sales": 2074,
+      "rating": 4.8,
+      "reviewCount": 296,
+      "description": "律动 Watch 6 代，续航 21天，防水 10ATM，屏幕 1.78英寸，重量 45g。健康监测与运动记录。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "续航": 21,
+        "防水": 10,
+        "屏幕": 1.78,
+        "重量": 45
+      },
+      "tags": "智能手表,运动,健康监测,防水,律动",
+      "image": "/img/watch.svg",
+      "status": 1
+    },
+    {
+      "id": "p_watch_07",
+      "name": "星野 Fit 7 代",
+      "subtitle": "7 天续航 · 5ATM 防水 · 血氧监测",
+      "categoryId": "cat_watch",
+      "brand": "星野",
+      "price": 1299,
+      "originalPrice": 1579,
+      "stock": 66,
+      "sales": 504,
+      "rating": 4.6,
+      "reviewCount": 72,
+      "description": "星野 Fit 7 代，续航 7天，防水 5ATM，屏幕 1.43英寸，重量 32g。健康监测与运动记录。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "续航": 7,
+        "防水": 5,
+        "屏幕": 1.43,
+        "重量": 32
+      },
+      "tags": "智能手表,运动,健康监测,防水,星野",
+      "image": "/img/watch.svg",
+      "status": 1
+    },
+    {
+      "id": "p_watch_08",
+      "name": "律动 Watch 8 代",
+      "subtitle": "14 天续航 · 10ATM 防水 · 血氧监测",
+      "categoryId": "cat_watch",
+      "brand": "律动",
+      "price": 1499,
+      "originalPrice": 1839,
+      "stock": 434,
+      "sales": 177,
+      "rating": 4.3,
+      "reviewCount": 25,
+      "description": "律动 Watch 8 代，续航 14天，防水 10ATM，屏幕 1.5英寸，重量 38g。健康监测与运动记录。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "续航": 14,
+        "防水": 10,
+        "屏幕": 1.5,
+        "重量": 38
+      },
+      "tags": "智能手表,运动,健康监测,防水,律动",
+      "image": "/img/watch.svg",
+      "status": 1
+    },
+    {
+      "id": "p_watch_09",
+      "name": "云听 Watch 9 代",
+      "subtitle": "21 天续航 · 5ATM 防水 · 血氧监测",
+      "categoryId": "cat_watch",
+      "brand": "云听",
+      "price": 1799,
+      "originalPrice": 2259,
+      "stock": 74,
+      "sales": 252,
+      "rating": 4.3,
+      "reviewCount": 36,
+      "description": "云听 Watch 9 代，续航 21天，防水 5ATM，屏幕 1.78英寸，重量 45g。健康监测与运动记录。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "续航": 21,
+        "防水": 5,
+        "屏幕": 1.78,
+        "重量": 45
+      },
+      "tags": "智能手表,运动,健康监测,防水,云听",
+      "image": "/img/watch.svg",
+      "status": 1
+    },
+    {
+      "id": "p_watch_10",
+      "name": "云听 Watch 10 代",
+      "subtitle": "7 天续航 · 10ATM 防水 · 血氧监测",
+      "categoryId": "cat_watch",
+      "brand": "云听",
+      "price": 1999,
+      "originalPrice": 2609,
+      "stock": 360,
+      "sales": 2036,
+      "rating": 4.9,
+      "reviewCount": 290,
+      "description": "云听 Watch 10 代，续航 7天，防水 10ATM，屏幕 1.43英寸，重量 32g。健康监测与运动记录。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "续航": 7,
+        "防水": 10,
+        "屏幕": 1.43,
+        "重量": 32
+      },
+      "tags": "智能手表,运动,健康监测,防水,云听",
+      "image": "/img/watch.svg",
+      "status": 1
+    },
+    {
+      "id": "p_laptop_01",
+      "name": "极光 Studio 13.3 英寸",
+      "subtitle": "16GB 内存 · 1024GB 固态 · 1.2kg",
+      "categoryId": "cat_laptop",
+      "brand": "极光",
+      "price": 3999,
+      "originalPrice": 4619,
+      "stock": 300,
+      "sales": 177,
+      "rating": 4.7,
+      "reviewCount": 25,
+      "description": "极光 Studio 13.3 英寸，屏幕 13.3英寸，内存 16GB，硬盘 1024GB，重量 1.2kg，续航 8h。轻薄本与性能本。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "屏幕": 13.3,
+        "内存": 16,
+        "硬盘": 1024,
+        "重量": 1.2,
+        "续航": 8
+      },
+      "tags": "笔记本电脑,轻薄本,便携,办公,极光",
+      "image": "/img/laptop.svg",
+      "status": 1
+    },
+    {
+      "id": "p_laptop_02",
+      "name": "云舟 Book 14 英寸",
+      "subtitle": "32GB 内存 · 512GB 固态 · 1.4kg",
+      "categoryId": "cat_laptop",
+      "brand": "云舟",
+      "price": 4499,
+      "originalPrice": 6219,
+      "stock": 462,
+      "sales": 1277,
+      "rating": 4.3,
+      "reviewCount": 182,
+      "description": "云舟 Book 14 英寸，屏幕 14英寸，内存 32GB，硬盘 512GB，重量 1.4kg，续航 10h。轻薄本与性能本。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "屏幕": 14,
+        "内存": 32,
+        "硬盘": 512,
+        "重量": 1.4,
+        "续航": 10
+      },
+      "tags": "笔记本电脑,轻薄本,便携,办公,云舟",
+      "image": "/img/laptop.svg",
+      "status": 1
+    },
+    {
+      "id": "p_laptop_03",
+      "name": "磐石 Book 15.6 英寸",
+      "subtitle": "16GB 内存 · 512GB 固态 · 1.8kg",
+      "categoryId": "cat_laptop",
+      "brand": "磐石",
+      "price": 4999,
+      "originalPrice": 6929,
+      "stock": 396,
+      "sales": 1545,
+      "rating": 4.3,
+      "reviewCount": 220,
+      "description": "磐石 Book 15.6 英寸，屏幕 15.6英寸，内存 16GB，硬盘 512GB，重量 1.8kg，续航 12h。轻薄本与性能本。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "屏幕": 15.6,
+        "内存": 16,
+        "硬盘": 512,
+        "重量": 1.8,
+        "续航": 12
+      },
+      "tags": "笔记本电脑,轻薄本,大屏,办公,磐石",
+      "image": "/img/laptop.svg",
+      "status": 1
+    },
+    {
+      "id": "p_laptop_04",
+      "name": "云舟 Book 16 英寸",
+      "subtitle": "32GB 内存 · 1024GB 固态 · 2.1kg",
+      "categoryId": "cat_laptop",
+      "brand": "云舟",
+      "price": 5499,
+      "originalPrice": 6639,
+      "stock": 65,
+      "sales": 2016,
+      "rating": 4.9,
+      "reviewCount": 288,
+      "description": "云舟 Book 16 英寸，屏幕 16英寸，内存 32GB，硬盘 1024GB，重量 2.1kg，续航 15h。轻薄本与性能本。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "屏幕": 16,
+        "内存": 32,
+        "硬盘": 1024,
+        "重量": 2.1,
+        "续航": 15
+      },
+      "tags": "笔记本电脑,轻薄本,大屏,办公,云舟",
+      "image": "/img/laptop.svg",
+      "status": 1
+    },
+    {
+      "id": "p_laptop_05",
+      "name": "云舟 Air 13.3 英寸",
+      "subtitle": "16GB 内存 · 512GB 固态 · 1.2kg",
+      "categoryId": "cat_laptop",
+      "brand": "云舟",
+      "price": 6299,
+      "originalPrice": 8729,
+      "stock": 36,
+      "sales": 2021,
+      "rating": 4.6,
+      "reviewCount": 288,
+      "description": "云舟 Air 13.3 英寸，屏幕 13.3英寸，内存 16GB，硬盘 512GB，重量 1.2kg，续航 8h。轻薄本与性能本。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "屏幕": 13.3,
+        "内存": 16,
+        "硬盘": 512,
+        "重量": 1.2,
+        "续航": 8
+      },
+      "tags": "笔记本电脑,轻薄本,便携,办公,云舟",
+      "image": "/img/laptop.svg",
+      "status": 1
+    },
+    {
+      "id": "p_laptop_06",
+      "name": "磐石 Studio 14 英寸",
+      "subtitle": "32GB 内存 · 512GB 固态 · 1.4kg",
+      "categoryId": "cat_laptop",
+      "brand": "磐石",
+      "price": 6999,
+      "originalPrice": 8949,
+      "stock": 248,
+      "sales": 1174,
+      "rating": 4.4,
+      "reviewCount": 167,
+      "description": "磐石 Studio 14 英寸，屏幕 14英寸，内存 32GB，硬盘 512GB，重量 1.4kg，续航 10h。轻薄本与性能本。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "屏幕": 14,
+        "内存": 32,
+        "硬盘": 512,
+        "重量": 1.4,
+        "续航": 10
+      },
+      "tags": "笔记本电脑,轻薄本,便携,办公,磐石",
+      "image": "/img/laptop.svg",
+      "status": 1
+    },
+    {
+      "id": "p_laptop_07",
+      "name": "云舟 Book 15.6 英寸",
+      "subtitle": "16GB 内存 · 1024GB 固态 · 1.8kg",
+      "categoryId": "cat_laptop",
+      "brand": "云舟",
+      "price": 7599,
+      "originalPrice": 8739,
+      "stock": 159,
+      "sales": 2448,
+      "rating": 4.4,
+      "reviewCount": 349,
+      "description": "云舟 Book 15.6 英寸，屏幕 15.6英寸，内存 16GB，硬盘 1024GB，重量 1.8kg，续航 12h。轻薄本与性能本。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "屏幕": 15.6,
+        "内存": 16,
+        "硬盘": 1024,
+        "重量": 1.8,
+        "续航": 12
+      },
+      "tags": "笔记本电脑,轻薄本,大屏,办公,云舟",
+      "image": "/img/laptop.svg",
+      "status": 1
+    },
+    {
+      "id": "p_laptop_08",
+      "name": "磐石 Studio 16 英寸",
+      "subtitle": "32GB 内存 · 512GB 固态 · 2.1kg",
+      "categoryId": "cat_laptop",
+      "brand": "磐石",
+      "price": 8299,
+      "originalPrice": 10459,
+      "stock": 217,
+      "sales": 1520,
+      "rating": 4.9,
+      "reviewCount": 217,
+      "description": "磐石 Studio 16 英寸，屏幕 16英寸，内存 32GB，硬盘 512GB，重量 2.1kg，续航 15h。轻薄本与性能本。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "屏幕": 16,
+        "内存": 32,
+        "硬盘": 512,
+        "重量": 2.1,
+        "续航": 15
+      },
+      "tags": "笔记本电脑,轻薄本,大屏,办公,磐石",
+      "image": "/img/laptop.svg",
+      "status": 1
+    },
+    {
+      "id": "p_laptop_09",
+      "name": "磐石 Air 13.3 英寸",
+      "subtitle": "16GB 内存 · 512GB 固态 · 1.2kg",
+      "categoryId": "cat_laptop",
+      "brand": "磐石",
+      "price": 8999,
+      "originalPrice": 12499,
+      "stock": 129,
+      "sales": 413,
+      "rating": 4.3,
+      "reviewCount": 59,
+      "description": "磐石 Air 13.3 英寸，屏幕 13.3英寸，内存 16GB，硬盘 512GB，重量 1.2kg，续航 8h。轻薄本与性能本。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "屏幕": 13.3,
+        "内存": 16,
+        "硬盘": 512,
+        "重量": 1.2,
+        "续航": 8
+      },
+      "tags": "笔记本电脑,轻薄本,便携,办公,磐石",
+      "image": "/img/laptop.svg",
+      "status": 1
+    },
+    {
+      "id": "p_laptop_10",
+      "name": "极光 Air 14 英寸",
+      "subtitle": "32GB 内存 · 1024GB 固态 · 1.4kg",
+      "categoryId": "cat_laptop",
+      "brand": "极光",
+      "price": 9999,
+      "originalPrice": 13129,
+      "stock": 304,
+      "sales": 1404,
+      "rating": 4.6,
+      "reviewCount": 200,
+      "description": "极光 Air 14 英寸，屏幕 14英寸，内存 32GB，硬盘 1024GB，重量 1.4kg，续航 10h。轻薄本与性能本。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "屏幕": 14,
+        "内存": 32,
+        "硬盘": 1024,
+        "重量": 1.4,
+        "续航": 10
+      },
+      "tags": "笔记本电脑,轻薄本,便携,办公,极光",
+      "image": "/img/laptop.svg",
+      "status": 1
+    },
+    {
+      "id": "p_keyboard_01",
+      "name": "律动 Lite68 红轴",
+      "subtitle": "68 键 · 三模连接 · 红轴",
+      "categoryId": "cat_keyboard",
+      "brand": "律动",
+      "price": 199,
+      "originalPrice": 229,
+      "stock": 243,
+      "sales": 1598,
+      "rating": 4.8,
+      "reviewCount": 228,
+      "description": "律动 Lite68 红轴，键数 68键，连接方式 三模，轴体 红轴，重量 520g。办公与游戏的输入体验。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "键数": 68,
+        "连接方式": "三模",
+        "轴体": "红轴",
+        "重量": 520
+      },
+      "tags": "机械键盘,办公,无线,红轴,律动",
+      "image": "/img/keyboard.svg",
+      "status": 1
+    },
+    {
+      "id": "p_keyboard_02",
+      "name": "律动 Lite87 茶轴",
+      "subtitle": "87 键 · 有线连接 · 茶轴",
+      "categoryId": "cat_keyboard",
+      "brand": "律动",
+      "price": 249,
+      "originalPrice": 309,
+      "stock": 441,
+      "sales": 1490,
+      "rating": 4.4,
+      "reviewCount": 212,
+      "description": "律动 Lite87 茶轴，键数 87键，连接方式 有线，轴体 茶轴，重量 680g。办公与游戏的输入体验。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "键数": 87,
+        "连接方式": "有线",
+        "轴体": "茶轴",
+        "重量": 680
+      },
+      "tags": "机械键盘,办公,有线,茶轴,律动",
+      "image": "/img/keyboard.svg",
+      "status": 1
+    },
+    {
+      "id": "p_keyboard_03",
+      "name": "云舟 Lite104 青轴",
+      "subtitle": "104 键 · 蓝牙连接 · 青轴",
+      "categoryId": "cat_keyboard",
+      "brand": "云舟",
+      "price": 299,
+      "originalPrice": 409,
+      "stock": 89,
+      "sales": 391,
+      "rating": 4.8,
+      "reviewCount": 55,
+      "description": "云舟 Lite104 青轴，键数 104键，连接方式 蓝牙，轴体 青轴，重量 820g。办公与游戏的输入体验。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "键数": 104,
+        "连接方式": "蓝牙",
+        "轴体": "青轴",
+        "重量": 820
+      },
+      "tags": "机械键盘,办公,有线,青轴,云舟",
+      "image": "/img/keyboard.svg",
+      "status": 1
+    },
+    {
+      "id": "p_keyboard_04",
+      "name": "磐石 Lite68 静音红轴",
+      "subtitle": "68 键 · 三模连接 · 静音红轴",
+      "categoryId": "cat_keyboard",
+      "brand": "磐石",
+      "price": 359,
+      "originalPrice": 409,
+      "stock": 103,
+      "sales": 1067,
+      "rating": 4.3,
+      "reviewCount": 152,
+      "description": "磐石 Lite68 静音红轴，键数 68键，连接方式 三模，轴体 静音红轴，重量 950g。办公与游戏的输入体验。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "键数": 68,
+        "连接方式": "三模",
+        "轴体": "静音红轴",
+        "重量": 950
+      },
+      "tags": "机械键盘,办公,无线,静音红轴,磐石",
+      "image": "/img/keyboard.svg",
+      "status": 1
+    },
+    {
+      "id": "p_keyboard_05",
+      "name": "磐石 Lite87 红轴",
+      "subtitle": "87 键 · 有线连接 · 红轴",
+      "categoryId": "cat_keyboard",
+      "brand": "磐石",
+      "price": 429,
+      "originalPrice": 509,
+      "stock": 257,
+      "sales": 831,
+      "rating": 4.4,
+      "reviewCount": 118,
+      "description": "磐石 Lite87 红轴，键数 87键，连接方式 有线，轴体 红轴，重量 520g。办公与游戏的输入体验。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "键数": 87,
+        "连接方式": "有线",
+        "轴体": "红轴",
+        "重量": 520
+      },
+      "tags": "机械键盘,办公,有线,红轴,磐石",
+      "image": "/img/keyboard.svg",
+      "status": 1
+    },
+    {
+      "id": "p_keyboard_06",
+      "name": "云舟 K104 茶轴",
+      "subtitle": "104 键 · 蓝牙连接 · 茶轴",
+      "categoryId": "cat_keyboard",
+      "brand": "云舟",
+      "price": 499,
+      "originalPrice": 659,
+      "stock": 209,
+      "sales": 1108,
+      "rating": 4.8,
+      "reviewCount": 158,
+      "description": "云舟 K104 茶轴，键数 104键，连接方式 蓝牙，轴体 茶轴，重量 680g。办公与游戏的输入体验。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "键数": 104,
+        "连接方式": "蓝牙",
+        "轴体": "茶轴",
+        "重量": 680
+      },
+      "tags": "机械键盘,办公,有线,茶轴,云舟",
+      "image": "/img/keyboard.svg",
+      "status": 1
+    },
+    {
+      "id": "p_keyboard_07",
+      "name": "云舟 Pro68 青轴",
+      "subtitle": "68 键 · 三模连接 · 青轴",
+      "categoryId": "cat_keyboard",
+      "brand": "云舟",
+      "price": 599,
+      "originalPrice": 789,
+      "stock": 383,
+      "sales": 2397,
+      "rating": 4.8,
+      "reviewCount": 342,
+      "description": "云舟 Pro68 青轴，键数 68键，连接方式 三模，轴体 青轴，重量 820g。办公与游戏的输入体验。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "键数": 68,
+        "连接方式": "三模",
+        "轴体": "青轴",
+        "重量": 820
+      },
+      "tags": "机械键盘,办公,无线,青轴,云舟",
+      "image": "/img/keyboard.svg",
+      "status": 1
+    },
+    {
+      "id": "p_keyboard_08",
+      "name": "云舟 Pro87 静音红轴",
+      "subtitle": "87 键 · 有线连接 · 静音红轴",
+      "categoryId": "cat_keyboard",
+      "brand": "云舟",
+      "price": 699,
+      "originalPrice": 889,
+      "stock": 100,
+      "sales": 778,
+      "rating": 4.6,
+      "reviewCount": 111,
+      "description": "云舟 Pro87 静音红轴，键数 87键，连接方式 有线，轴体 静音红轴，重量 950g。办公与游戏的输入体验。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "键数": 87,
+        "连接方式": "有线",
+        "轴体": "静音红轴",
+        "重量": 950
+      },
+      "tags": "机械键盘,办公,有线,静音红轴,云舟",
+      "image": "/img/keyboard.svg",
+      "status": 1
+    },
+    {
+      "id": "p_keyboard_09",
+      "name": "云舟 K104 红轴",
+      "subtitle": "104 键 · 蓝牙连接 · 红轴",
+      "categoryId": "cat_keyboard",
+      "brand": "云舟",
+      "price": 799,
+      "originalPrice": 1009,
+      "stock": 95,
+      "sales": 466,
+      "rating": 4.5,
+      "reviewCount": 66,
+      "description": "云舟 K104 红轴，键数 104键，连接方式 蓝牙，轴体 红轴，重量 520g。办公与游戏的输入体验。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "键数": 104,
+        "连接方式": "蓝牙",
+        "轴体": "红轴",
+        "重量": 520
+      },
+      "tags": "机械键盘,办公,有线,红轴,云舟",
+      "image": "/img/keyboard.svg",
+      "status": 1
+    },
+    {
+      "id": "p_keyboard_10",
+      "name": "云舟 K68 茶轴",
+      "subtitle": "68 键 · 三模连接 · 茶轴",
+      "categoryId": "cat_keyboard",
+      "brand": "云舟",
+      "price": 899,
+      "originalPrice": 1069,
+      "stock": 491,
+      "sales": 180,
+      "rating": 4.6,
+      "reviewCount": 25,
+      "description": "云舟 K68 茶轴，键数 68键，连接方式 三模，轴体 茶轴，重量 680g。办公与游戏的输入体验。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "键数": 68,
+        "连接方式": "三模",
+        "轴体": "茶轴",
+        "重量": 680
+      },
+      "tags": "机械键盘,办公,无线,茶轴,云舟",
+      "image": "/img/keyboard.svg",
+      "status": 1
+    },
+    {
+      "id": "p_running_01",
+      "name": "行野 轻羽 1 代跑鞋",
+      "subtitle": "3 级缓震 · 210g · 公路路面",
+      "categoryId": "cat_running",
+      "brand": "行野",
+      "price": 299,
+      "originalPrice": 419,
+      "stock": 417,
+      "sales": 1231,
+      "rating": 4.7,
+      "reviewCount": 175,
+      "description": "行野 轻羽 1 代跑鞋，缓震 3级，重量 210g，透气性 3级，适合路面 公路。缓震、轻量与透气。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "缓震": 3,
+        "重量": 210,
+        "透气性": 3,
+        "适合路面": "公路"
+      },
+      "tags": "跑步鞋,运动,缓震,透气,公路,行野",
+      "image": "/img/shoes.svg",
+      "status": 1
+    },
+    {
+      "id": "p_running_02",
+      "name": "步履 云履 2 代跑鞋",
+      "subtitle": "4 级缓震 · 235g · 跑道路面",
+      "categoryId": "cat_running",
+      "brand": "步履",
+      "price": 369,
+      "originalPrice": 439,
+      "stock": 146,
+      "sales": 688,
+      "rating": 4.8,
+      "reviewCount": 98,
+      "description": "步履 云履 2 代跑鞋，缓震 4级，重量 235g，透气性 4级，适合路面 跑道。缓震、轻量与透气。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "缓震": 4,
+        "重量": 235,
+        "透气性": 4,
+        "适合路面": "跑道"
+      },
+      "tags": "跑步鞋,运动,缓震,透气,跑道,步履",
+      "image": "/img/shoes.svg",
+      "status": 1
+    },
+    {
+      "id": "p_running_03",
+      "name": "风驰 云履 3 代跑鞋",
+      "subtitle": "5 级缓震 · 260g · 全地形路面",
+      "categoryId": "cat_running",
+      "brand": "风驰",
+      "price": 429,
+      "originalPrice": 569,
+      "stock": 40,
+      "sales": 1192,
+      "rating": 4.8,
+      "reviewCount": 170,
+      "description": "风驰 云履 3 代跑鞋，缓震 5级，重量 260g，透气性 5级，适合路面 全地形。缓震、轻量与透气。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "缓震": 5,
+        "重量": 260,
+        "透气性": 5,
+        "适合路面": "全地形"
+      },
+      "tags": "跑步鞋,运动,缓震,透气,全地形,风驰",
+      "image": "/img/shoes.svg",
+      "status": 1
+    },
+    {
+      "id": "p_running_04",
+      "name": "步履 疾风 4 代跑鞋",
+      "subtitle": "3 级缓震 · 285g · 越野路面",
+      "categoryId": "cat_running",
+      "brand": "步履",
+      "price": 499,
+      "originalPrice": 569,
+      "stock": 98,
+      "sales": 1990,
+      "rating": 4.7,
+      "reviewCount": 284,
+      "description": "步履 疾风 4 代跑鞋，缓震 3级，重量 285g，透气性 3级，适合路面 越野。缓震、轻量与透气。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "缓震": 3,
+        "重量": 285,
+        "透气性": 3,
+        "适合路面": "越野"
+      },
+      "tags": "跑步鞋,运动,缓震,透气,越野,步履",
+      "image": "/img/shoes.svg",
+      "status": 1
+    },
+    {
+      "id": "p_running_05",
+      "name": "行野 轻羽 5 代跑鞋",
+      "subtitle": "4 级缓震 · 210g · 公路路面",
+      "categoryId": "cat_running",
+      "brand": "行野",
+      "price": 569,
+      "originalPrice": 689,
+      "stock": 273,
+      "sales": 1299,
+      "rating": 4.3,
+      "reviewCount": 185,
+      "description": "行野 轻羽 5 代跑鞋，缓震 4级，重量 210g，透气性 4级，适合路面 公路。缓震、轻量与透气。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "缓震": 4,
+        "重量": 210,
+        "透气性": 4,
+        "适合路面": "公路"
+      },
+      "tags": "跑步鞋,运动,缓震,透气,公路,行野",
+      "image": "/img/shoes.svg",
+      "status": 1
+    },
+    {
+      "id": "p_running_06",
+      "name": "行野 疾风 6 代跑鞋",
+      "subtitle": "5 级缓震 · 235g · 跑道路面",
+      "categoryId": "cat_running",
+      "brand": "行野",
+      "price": 649,
+      "originalPrice": 809,
+      "stock": 117,
+      "sales": 2112,
+      "rating": 4.7,
+      "reviewCount": 301,
+      "description": "行野 疾风 6 代跑鞋，缓震 5级，重量 235g，透气性 5级，适合路面 跑道。缓震、轻量与透气。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "缓震": 5,
+        "重量": 235,
+        "透气性": 5,
+        "适合路面": "跑道"
+      },
+      "tags": "跑步鞋,运动,缓震,透气,跑道,行野",
+      "image": "/img/shoes.svg",
+      "status": 1
+    },
+    {
+      "id": "p_running_07",
+      "name": "步履 轻羽 7 代跑鞋",
+      "subtitle": "3 级缓震 · 260g · 全地形路面",
+      "categoryId": "cat_running",
+      "brand": "步履",
+      "price": 729,
+      "originalPrice": 929,
+      "stock": 289,
+      "sales": 1087,
+      "rating": 4.4,
+      "reviewCount": 155,
+      "description": "步履 轻羽 7 代跑鞋，缓震 3级，重量 260g，透气性 3级，适合路面 全地形。缓震、轻量与透气。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "缓震": 3,
+        "重量": 260,
+        "透气性": 3,
+        "适合路面": "全地形"
+      },
+      "tags": "跑步鞋,运动,缓震,透气,全地形,步履",
+      "image": "/img/shoes.svg",
+      "status": 1
+    },
+    {
+      "id": "p_running_08",
+      "name": "风驰 轻羽 8 代跑鞋",
+      "subtitle": "4 级缓震 · 285g · 越野路面",
+      "categoryId": "cat_running",
+      "brand": "风驰",
+      "price": 829,
+      "originalPrice": 1049,
+      "stock": 136,
+      "sales": 327,
+      "rating": 4.8,
+      "reviewCount": 46,
+      "description": "风驰 轻羽 8 代跑鞋，缓震 4级，重量 285g，透气性 4级，适合路面 越野。缓震、轻量与透气。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "缓震": 4,
+        "重量": 285,
+        "透气性": 4,
+        "适合路面": "越野"
+      },
+      "tags": "跑步鞋,运动,缓震,透气,越野,风驰",
+      "image": "/img/shoes.svg",
+      "status": 1
+    },
+    {
+      "id": "p_running_09",
+      "name": "风驰 云履 9 代跑鞋",
+      "subtitle": "5 级缓震 · 210g · 公路路面",
+      "categoryId": "cat_running",
+      "brand": "风驰",
+      "price": 949,
+      "originalPrice": 1269,
+      "stock": 243,
+      "sales": 325,
+      "rating": 4.6,
+      "reviewCount": 46,
+      "description": "风驰 云履 9 代跑鞋，缓震 5级，重量 210g，透气性 5级，适合路面 公路。缓震、轻量与透气。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "缓震": 5,
+        "重量": 210,
+        "透气性": 5,
+        "适合路面": "公路"
+      },
+      "tags": "跑步鞋,运动,缓震,透气,公路,风驰",
+      "image": "/img/shoes.svg",
+      "status": 1
+    },
+    {
+      "id": "p_running_10",
+      "name": "步履 疾风 10 代跑鞋",
+      "subtitle": "3 级缓震 · 235g · 跑道路面",
+      "categoryId": "cat_running",
+      "brand": "步履",
+      "price": 1099,
+      "originalPrice": 1459,
+      "stock": 72,
+      "sales": 1086,
+      "rating": 4.3,
+      "reviewCount": 155,
+      "description": "步履 疾风 10 代跑鞋，缓震 3级，重量 235g，透气性 3级，适合路面 跑道。缓震、轻量与透气。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "缓震": 3,
+        "重量": 235,
+        "透气性": 3,
+        "适合路面": "跑道"
+      },
+      "tags": "跑步鞋,运动,缓震,透气,跑道,步履",
+      "image": "/img/shoes.svg",
+      "status": 1
+    },
+    {
+      "id": "p_yoga_01",
+      "name": "行野 大地 5mm 瑜伽垫 A",
+      "subtitle": "5mm 加厚 · TPE 材质 · 防滑纹理",
+      "categoryId": "cat_yoga",
+      "brand": "行野",
+      "price": 69,
+      "originalPrice": 89,
+      "stock": 83,
+      "sales": 2306,
+      "rating": 4.6,
+      "reviewCount": 329,
+      "description": "行野 大地 5mm 瑜伽垫 A，厚度 5mm，长度 183cm，重量 800g，材质 TPE。防滑与支撑。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "厚度": 5,
+        "长度": 183,
+        "重量": 800,
+        "材质": "TPE"
+      },
+      "tags": "瑜伽垫,健身,防滑,TPE,行野",
+      "image": "/img/yoga.svg",
+      "status": 1
+    },
+    {
+      "id": "p_yoga_02",
+      "name": "栖居 轻行 6mm 瑜伽垫 B",
+      "subtitle": "6mm 加厚 · 天然橡胶 材质 · 防滑纹理",
+      "categoryId": "cat_yoga",
+      "brand": "栖居",
+      "price": 89,
+      "originalPrice": 109,
+      "stock": 165,
+      "sales": 2331,
+      "rating": 4.7,
+      "reviewCount": 333,
+      "description": "栖居 轻行 6mm 瑜伽垫 B，厚度 6mm，长度 185cm，重量 1000g，材质 天然橡胶。防滑与支撑。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "厚度": 6,
+        "长度": 185,
+        "重量": 1000,
+        "材质": "天然橡胶"
+      },
+      "tags": "瑜伽垫,健身,防滑,天然橡胶,栖居",
+      "image": "/img/yoga.svg",
+      "status": 1
+    },
+    {
+      "id": "p_yoga_03",
+      "name": "行野 静心 8mm 瑜伽垫 C",
+      "subtitle": "8mm 加厚 · PU 材质 · 防滑纹理",
+      "categoryId": "cat_yoga",
+      "brand": "行野",
+      "price": 109,
+      "originalPrice": 149,
+      "stock": 340,
+      "sales": 794,
+      "rating": 4.4,
+      "reviewCount": 113,
+      "description": "行野 静心 8mm 瑜伽垫 C，厚度 8mm，长度 200cm，重量 1200g，材质 PU。防滑与支撑。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "厚度": 8,
+        "长度": 200,
+        "重量": 1200,
+        "材质": "PU"
+      },
+      "tags": "瑜伽垫,健身,防滑,PU,行野",
+      "image": "/img/yoga.svg",
+      "status": 1
+    },
+    {
+      "id": "p_yoga_04",
+      "name": "行野 轻行 10mm 瑜伽垫 D",
+      "subtitle": "10mm 加厚 · TPE 材质 · 防滑纹理",
+      "categoryId": "cat_yoga",
+      "brand": "行野",
+      "price": 139,
+      "originalPrice": 159,
+      "stock": 434,
+      "sales": 1060,
+      "rating": 4.5,
+      "reviewCount": 151,
+      "description": "行野 轻行 10mm 瑜伽垫 D，厚度 10mm，长度 183cm，重量 800g，材质 TPE。防滑与支撑。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "厚度": 10,
+        "长度": 183,
+        "重量": 800,
+        "材质": "TPE"
+      },
+      "tags": "瑜伽垫,健身,防滑,TPE,行野",
+      "image": "/img/yoga.svg",
+      "status": 1
+    },
+    {
+      "id": "p_yoga_05",
+      "name": "行野 大地 5mm 瑜伽垫 E",
+      "subtitle": "5mm 加厚 · 天然橡胶 材质 · 防滑纹理",
+      "categoryId": "cat_yoga",
+      "brand": "行野",
+      "price": 169,
+      "originalPrice": 209,
+      "stock": 228,
+      "sales": 2578,
+      "rating": 4.7,
+      "reviewCount": 368,
+      "description": "行野 大地 5mm 瑜伽垫 E，厚度 5mm，长度 185cm，重量 1000g，材质 天然橡胶。防滑与支撑。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "厚度": 5,
+        "长度": 185,
+        "重量": 1000,
+        "材质": "天然橡胶"
+      },
+      "tags": "瑜伽垫,健身,防滑,天然橡胶,行野",
+      "image": "/img/yoga.svg",
+      "status": 1
+    },
+    {
+      "id": "p_yoga_06",
+      "name": "云履 大地 6mm 瑜伽垫 F",
+      "subtitle": "6mm 加厚 · PU 材质 · 防滑纹理",
+      "categoryId": "cat_yoga",
+      "brand": "云履",
+      "price": 199,
+      "originalPrice": 229,
+      "stock": 349,
+      "sales": 1889,
+      "rating": 4.5,
+      "reviewCount": 269,
+      "description": "云履 大地 6mm 瑜伽垫 F，厚度 6mm，长度 200cm，重量 1200g，材质 PU。防滑与支撑。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "厚度": 6,
+        "长度": 200,
+        "重量": 1200,
+        "材质": "PU"
+      },
+      "tags": "瑜伽垫,健身,防滑,PU,云履",
+      "image": "/img/yoga.svg",
+      "status": 1
+    },
+    {
+      "id": "p_yoga_07",
+      "name": "行野 大地 8mm 瑜伽垫 G",
+      "subtitle": "8mm 加厚 · TPE 材质 · 防滑纹理",
+      "categoryId": "cat_yoga",
+      "brand": "行野",
+      "price": 239,
+      "originalPrice": 289,
+      "stock": 366,
+      "sales": 2334,
+      "rating": 4.4,
+      "reviewCount": 333,
+      "description": "行野 大地 8mm 瑜伽垫 G，厚度 8mm，长度 183cm，重量 800g，材质 TPE。防滑与支撑。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "厚度": 8,
+        "长度": 183,
+        "重量": 800,
+        "材质": "TPE"
+      },
+      "tags": "瑜伽垫,健身,防滑,TPE,行野",
+      "image": "/img/yoga.svg",
+      "status": 1
+    },
+    {
+      "id": "p_yoga_08",
+      "name": "行野 轻行 10mm 瑜伽垫 H",
+      "subtitle": "10mm 加厚 · 天然橡胶 材质 · 防滑纹理",
+      "categoryId": "cat_yoga",
+      "brand": "行野",
+      "price": 279,
+      "originalPrice": 369,
+      "stock": 374,
+      "sales": 1478,
+      "rating": 4.4,
+      "reviewCount": 211,
+      "description": "行野 轻行 10mm 瑜伽垫 H，厚度 10mm，长度 185cm，重量 1000g，材质 天然橡胶。防滑与支撑。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "厚度": 10,
+        "长度": 185,
+        "重量": 1000,
+        "材质": "天然橡胶"
+      },
+      "tags": "瑜伽垫,健身,防滑,天然橡胶,行野",
+      "image": "/img/yoga.svg",
+      "status": 1
+    },
+    {
+      "id": "p_yoga_09",
+      "name": "云履 静心 5mm 瑜伽垫 I",
+      "subtitle": "5mm 加厚 · PU 材质 · 防滑纹理",
+      "categoryId": "cat_yoga",
+      "brand": "云履",
+      "price": 329,
+      "originalPrice": 389,
+      "stock": 121,
+      "sales": 2506,
+      "rating": 4.4,
+      "reviewCount": 358,
+      "description": "云履 静心 5mm 瑜伽垫 I，厚度 5mm，长度 200cm，重量 1200g，材质 PU。防滑与支撑。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "厚度": 5,
+        "长度": 200,
+        "重量": 1200,
+        "材质": "PU"
+      },
+      "tags": "瑜伽垫,健身,防滑,PU,云履",
+      "image": "/img/yoga.svg",
+      "status": 1
+    },
+    {
+      "id": "p_yoga_10",
+      "name": "栖居 大地 6mm 瑜伽垫 J",
+      "subtitle": "6mm 加厚 · TPE 材质 · 防滑纹理",
+      "categoryId": "cat_yoga",
+      "brand": "栖居",
+      "price": 399,
+      "originalPrice": 489,
+      "stock": 104,
+      "sales": 1861,
+      "rating": 4.3,
+      "reviewCount": 265,
+      "description": "栖居 大地 6mm 瑜伽垫 J，厚度 6mm，长度 183cm，重量 800g，材质 TPE。防滑与支撑。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "厚度": 6,
+        "长度": 183,
+        "重量": 800,
+        "材质": "TPE"
+      },
+      "tags": "瑜伽垫,健身,防滑,TPE,栖居",
+      "image": "/img/yoga.svg",
+      "status": 1
+    },
+    {
+      "id": "p_skincare_01",
+      "name": "素研 清透 保湿精华 30ml",
+      "subtitle": "干性肌适用 · 保湿",
+      "categoryId": "cat_skincare",
+      "brand": "素研",
+      "price": 89,
+      "originalPrice": 99,
+      "stock": 202,
+      "sales": 1075,
+      "rating": 4.9,
+      "reviewCount": 153,
+      "description": "素研 清透 保湿精华 30ml，容量 30ml，防晒指数 0SPF，适合肤质 干性，功效 保湿。保湿、修护与防晒。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "容量": 30,
+        "防晒指数": 0,
+        "适合肤质": "干性",
+        "功效": "保湿"
+      },
+      "tags": "护肤品,保湿,干性肌,日常护理,素研",
+      "image": "/img/skincare.svg",
+      "status": 1
+    },
+    {
+      "id": "p_skincare_02",
+      "name": "青柚 屏障 修护精华 50ml",
+      "subtitle": "油性肌适用 · 修护 · SPF30",
+      "categoryId": "cat_skincare",
+      "brand": "青柚",
+      "price": 129,
+      "originalPrice": 149,
+      "stock": 335,
+      "sales": 215,
+      "rating": 4.5,
+      "reviewCount": 30,
+      "description": "青柚 屏障 修护精华 50ml，容量 50ml，防晒指数 30SPF，适合肤质 油性，功效 修护。保湿、修护与防晒。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "容量": 50,
+        "防晒指数": 30,
+        "适合肤质": "油性",
+        "功效": "修护"
+      },
+      "tags": "护肤品,修护,油性肌,防晒,青柚",
+      "image": "/img/skincare.svg",
+      "status": 1
+    },
+    {
+      "id": "p_skincare_03",
+      "name": "青柚 水光 美白精华 100ml",
+      "subtitle": "混合肌适用 · 美白 · SPF50",
+      "categoryId": "cat_skincare",
+      "brand": "青柚",
+      "price": 169,
+      "originalPrice": 199,
+      "stock": 343,
+      "sales": 2495,
+      "rating": 4.5,
+      "reviewCount": 356,
+      "description": "青柚 水光 美白精华 100ml，容量 100ml，防晒指数 50SPF，适合肤质 混合，功效 美白。保湿、修护与防晒。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "容量": 100,
+        "防晒指数": 50,
+        "适合肤质": "混合",
+        "功效": "美白"
+      },
+      "tags": "护肤品,美白,混合肌,防晒,青柚",
+      "image": "/img/skincare.svg",
+      "status": 1
+    },
+    {
+      "id": "p_skincare_04",
+      "name": "素研 清透 抗皱精华 30ml",
+      "subtitle": "敏感肌适用 · 抗皱",
+      "categoryId": "cat_skincare",
+      "brand": "素研",
+      "price": 219,
+      "originalPrice": 269,
+      "stock": 399,
+      "sales": 658,
+      "rating": 4.6,
+      "reviewCount": 94,
+      "description": "素研 清透 抗皱精华 30ml，容量 30ml，防晒指数 0SPF，适合肤质 敏感，功效 抗皱。保湿、修护与防晒。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "容量": 30,
+        "防晒指数": 0,
+        "适合肤质": "敏感",
+        "功效": "抗皱"
+      },
+      "tags": "护肤品,抗皱,敏感肌,日常护理,素研",
+      "image": "/img/skincare.svg",
+      "status": 1
+    },
+    {
+      "id": "p_skincare_05",
+      "name": "青柚 水光 保湿精华 50ml",
+      "subtitle": "干性肌适用 · 保湿 · SPF30",
+      "categoryId": "cat_skincare",
+      "brand": "青柚",
+      "price": 269,
+      "originalPrice": 329,
+      "stock": 320,
+      "sales": 1605,
+      "rating": 4.9,
+      "reviewCount": 229,
+      "description": "青柚 水光 保湿精华 50ml，容量 50ml，防晒指数 30SPF，适合肤质 干性，功效 保湿。保湿、修护与防晒。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "容量": 50,
+        "防晒指数": 30,
+        "适合肤质": "干性",
+        "功效": "保湿"
+      },
+      "tags": "护肤品,保湿,干性肌,防晒,青柚",
+      "image": "/img/skincare.svg",
+      "status": 1
+    },
+    {
+      "id": "p_skincare_06",
+      "name": "素研 清透 修护精华 100ml",
+      "subtitle": "油性肌适用 · 修护 · SPF50",
+      "categoryId": "cat_skincare",
+      "brand": "素研",
+      "price": 329,
+      "originalPrice": 429,
+      "stock": 422,
+      "sales": 1388,
+      "rating": 4.9,
+      "reviewCount": 198,
+      "description": "素研 清透 修护精华 100ml，容量 100ml，防晒指数 50SPF，适合肤质 油性，功效 修护。保湿、修护与防晒。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "容量": 100,
+        "防晒指数": 50,
+        "适合肤质": "油性",
+        "功效": "修护"
+      },
+      "tags": "护肤品,修护,油性肌,防晒,素研",
+      "image": "/img/skincare.svg",
+      "status": 1
+    },
+    {
+      "id": "p_skincare_07",
+      "name": "凝光 水光 美白精华 30ml",
+      "subtitle": "混合肌适用 · 美白",
+      "categoryId": "cat_skincare",
+      "brand": "凝光",
+      "price": 399,
+      "originalPrice": 519,
+      "stock": 262,
+      "sales": 1783,
+      "rating": 4.9,
+      "reviewCount": 254,
+      "description": "凝光 水光 美白精华 30ml，容量 30ml，防晒指数 0SPF，适合肤质 混合，功效 美白。保湿、修护与防晒。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "容量": 30,
+        "防晒指数": 0,
+        "适合肤质": "混合",
+        "功效": "美白"
+      },
+      "tags": "护肤品,美白,混合肌,日常护理,凝光",
+      "image": "/img/skincare.svg",
+      "status": 1
+    },
+    {
+      "id": "p_skincare_08",
+      "name": "青柚 水光 抗皱精华 50ml",
+      "subtitle": "敏感肌适用 · 抗皱 · SPF30",
+      "categoryId": "cat_skincare",
+      "brand": "青柚",
+      "price": 469,
+      "originalPrice": 589,
+      "stock": 187,
+      "sales": 654,
+      "rating": 4.7,
+      "reviewCount": 93,
+      "description": "青柚 水光 抗皱精华 50ml，容量 50ml，防晒指数 30SPF，适合肤质 敏感，功效 抗皱。保湿、修护与防晒。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "容量": 50,
+        "防晒指数": 30,
+        "适合肤质": "敏感",
+        "功效": "抗皱"
+      },
+      "tags": "护肤品,抗皱,敏感肌,防晒,青柚",
+      "image": "/img/skincare.svg",
+      "status": 1
+    },
+    {
+      "id": "p_skincare_09",
+      "name": "凝光 水光 保湿精华 100ml",
+      "subtitle": "干性肌适用 · 保湿 · SPF50",
+      "categoryId": "cat_skincare",
+      "brand": "凝光",
+      "price": 579,
+      "originalPrice": 709,
+      "stock": 316,
+      "sales": 2534,
+      "rating": 4.3,
+      "reviewCount": 362,
+      "description": "凝光 水光 保湿精华 100ml，容量 100ml，防晒指数 50SPF，适合肤质 干性，功效 保湿。保湿、修护与防晒。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "容量": 100,
+        "防晒指数": 50,
+        "适合肤质": "干性",
+        "功效": "保湿"
+      },
+      "tags": "护肤品,保湿,干性肌,防晒,凝光",
+      "image": "/img/skincare.svg",
+      "status": 1
+    },
+    {
+      "id": "p_skincare_10",
+      "name": "青柚 水光 修护精华 30ml",
+      "subtitle": "油性肌适用 · 修护",
+      "categoryId": "cat_skincare",
+      "brand": "青柚",
+      "price": 699,
+      "originalPrice": 849,
+      "stock": 451,
+      "sales": 1735,
+      "rating": 4.6,
+      "reviewCount": 247,
+      "description": "青柚 水光 修护精华 30ml，容量 30ml，防晒指数 0SPF，适合肤质 油性，功效 修护。保湿、修护与防晒。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "容量": 30,
+        "防晒指数": 0,
+        "适合肤质": "油性",
+        "功效": "修护"
+      },
+      "tags": "护肤品,修护,油性肌,日常护理,青柚",
+      "image": "/img/skincare.svg",
+      "status": 1
+    },
+    {
+      "id": "p_coffee_01",
+      "name": "晨光 Home 1 半自动咖啡机",
+      "subtitle": "15bar 压力 · 0.6L 水箱 · 手动",
+      "categoryId": "cat_coffee",
+      "brand": "晨光",
+      "price": 499,
+      "originalPrice": 649,
+      "stock": 111,
+      "sales": 1768,
+      "rating": 4.8,
+      "reviewCount": 252,
+      "description": "晨光 Home 1 半自动咖啡机，容量 0.6L，功率 800W，压力 15bar，清洗方式 手动。在家喝到一杯好咖啡。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "容量": 0.6,
+        "功率": 800,
+        "压力": 15,
+        "清洗方式": "手动"
+      },
+      "tags": "咖啡机,半自动,家用,手动,晨光",
+      "image": "/img/coffee.svg",
+      "status": 1
+    },
+    {
+      "id": "p_coffee_02",
+      "name": "晨光 Pro 2 半自动咖啡机",
+      "subtitle": "19bar 压力 · 1.2L 水箱 · 可拆卸",
+      "categoryId": "cat_coffee",
+      "brand": "晨光",
+      "price": 699,
+      "originalPrice": 919,
+      "stock": 346,
+      "sales": 1061,
+      "rating": 4.9,
+      "reviewCount": 151,
+      "description": "晨光 Pro 2 半自动咖啡机，容量 1.2L，功率 1200W，压力 19bar，清洗方式 可拆卸。在家喝到一杯好咖啡。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "容量": 1.2,
+        "功率": 1200,
+        "压力": 19,
+        "清洗方式": "可拆卸"
+      },
+      "tags": "咖啡机,半自动,家用,可拆卸,晨光",
+      "image": "/img/coffee.svg",
+      "status": 1
+    },
+    {
+      "id": "p_coffee_03",
+      "name": "岩咖 Home 3 半自动咖啡机",
+      "subtitle": "20bar 压力 · 1.8L 水箱 · 自动清洗",
+      "categoryId": "cat_coffee",
+      "brand": "岩咖",
+      "price": 899,
+      "originalPrice": 1099,
+      "stock": 322,
+      "sales": 2482,
+      "rating": 4.6,
+      "reviewCount": 354,
+      "description": "岩咖 Home 3 半自动咖啡机，容量 1.8L，功率 1450W，压力 20bar，清洗方式 自动清洗。在家喝到一杯好咖啡。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "容量": 1.8,
+        "功率": 1450,
+        "压力": 20,
+        "清洗方式": "自动清洗"
+      },
+      "tags": "咖啡机,半自动,家用,自动清洗,岩咖",
+      "image": "/img/coffee.svg",
+      "status": 1
+    },
+    {
+      "id": "p_coffee_04",
+      "name": "晨光 Home 4 半自动咖啡机",
+      "subtitle": "15bar 压力 · 0.6L 水箱 · 手动",
+      "categoryId": "cat_coffee",
+      "brand": "晨光",
+      "price": 1199,
+      "originalPrice": 1389,
+      "stock": 132,
+      "sales": 602,
+      "rating": 4.3,
+      "reviewCount": 86,
+      "description": "晨光 Home 4 半自动咖啡机，容量 0.6L，功率 800W，压力 15bar，清洗方式 手动。在家喝到一杯好咖啡。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "容量": 0.6,
+        "功率": 800,
+        "压力": 15,
+        "清洗方式": "手动"
+      },
+      "tags": "咖啡机,半自动,家用,手动,晨光",
+      "image": "/img/coffee.svg",
+      "status": 1
+    },
+    {
+      "id": "p_coffee_05",
+      "name": "晨光 Home 5 半自动咖啡机",
+      "subtitle": "19bar 压力 · 1.2L 水箱 · 可拆卸",
+      "categoryId": "cat_coffee",
+      "brand": "晨光",
+      "price": 1499,
+      "originalPrice": 1859,
+      "stock": 69,
+      "sales": 1050,
+      "rating": 4.9,
+      "reviewCount": 150,
+      "description": "晨光 Home 5 半自动咖啡机，容量 1.2L，功率 1200W，压力 19bar，清洗方式 可拆卸。在家喝到一杯好咖啡。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "容量": 1.2,
+        "功率": 1200,
+        "压力": 19,
+        "清洗方式": "可拆卸"
+      },
+      "tags": "咖啡机,半自动,家用,可拆卸,晨光",
+      "image": "/img/coffee.svg",
+      "status": 1
+    },
+    {
+      "id": "p_coffee_06",
+      "name": "岩咖 Pro 6 半自动咖啡机",
+      "subtitle": "20bar 压力 · 1.8L 水箱 · 自动清洗",
+      "categoryId": "cat_coffee",
+      "brand": "岩咖",
+      "price": 1799,
+      "originalPrice": 2439,
+      "stock": 33,
+      "sales": 841,
+      "rating": 4.3,
+      "reviewCount": 120,
+      "description": "岩咖 Pro 6 半自动咖啡机，容量 1.8L，功率 1450W，压力 20bar，清洗方式 自动清洗。在家喝到一杯好咖啡。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "容量": 1.8,
+        "功率": 1450,
+        "压力": 20,
+        "清洗方式": "自动清洗"
+      },
+      "tags": "咖啡机,半自动,家用,自动清洗,岩咖",
+      "image": "/img/coffee.svg",
+      "status": 1
+    },
+    {
+      "id": "p_coffee_07",
+      "name": "栖居 Mini 7 半自动咖啡机",
+      "subtitle": "15bar 压力 · 0.6L 水箱 · 手动",
+      "categoryId": "cat_coffee",
+      "brand": "栖居",
+      "price": 2199,
+      "originalPrice": 2769,
+      "stock": 410,
+      "sales": 719,
+      "rating": 4.4,
+      "reviewCount": 102,
+      "description": "栖居 Mini 7 半自动咖啡机，容量 0.6L，功率 800W，压力 15bar，清洗方式 手动。在家喝到一杯好咖啡。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "容量": 0.6,
+        "功率": 800,
+        "压力": 15,
+        "清洗方式": "手动"
+      },
+      "tags": "咖啡机,半自动,家用,手动,栖居",
+      "image": "/img/coffee.svg",
+      "status": 1
+    },
+    {
+      "id": "p_coffee_08",
+      "name": "晨光 Mini 8 半自动咖啡机",
+      "subtitle": "19bar 压力 · 1.2L 水箱 · 可拆卸",
+      "categoryId": "cat_coffee",
+      "brand": "晨光",
+      "price": 2599,
+      "originalPrice": 3109,
+      "stock": 191,
+      "sales": 2126,
+      "rating": 4.8,
+      "reviewCount": 303,
+      "description": "晨光 Mini 8 半自动咖啡机，容量 1.2L，功率 1200W，压力 19bar，清洗方式 可拆卸。在家喝到一杯好咖啡。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "容量": 1.2,
+        "功率": 1200,
+        "压力": 19,
+        "清洗方式": "可拆卸"
+      },
+      "tags": "咖啡机,半自动,家用,可拆卸,晨光",
+      "image": "/img/coffee.svg",
+      "status": 1
+    },
+    {
+      "id": "p_coffee_09",
+      "name": "岩咖 Mini 9 半自动咖啡机",
+      "subtitle": "20bar 压力 · 1.8L 水箱 · 自动清洗",
+      "categoryId": "cat_coffee",
+      "brand": "岩咖",
+      "price": 3199,
+      "originalPrice": 4049,
+      "stock": 52,
+      "sales": 1263,
+      "rating": 4.3,
+      "reviewCount": 180,
+      "description": "岩咖 Mini 9 半自动咖啡机，容量 1.8L，功率 1450W，压力 20bar，清洗方式 自动清洗。在家喝到一杯好咖啡。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "容量": 1.8,
+        "功率": 1450,
+        "压力": 20,
+        "清洗方式": "自动清洗"
+      },
+      "tags": "咖啡机,半自动,家用,自动清洗,岩咖",
+      "image": "/img/coffee.svg",
+      "status": 1
+    },
+    {
+      "id": "p_coffee_10",
+      "name": "栖居 Mini 10 半自动咖啡机",
+      "subtitle": "15bar 压力 · 0.6L 水箱 · 手动",
+      "categoryId": "cat_coffee",
+      "brand": "栖居",
+      "price": 3999,
+      "originalPrice": 5509,
+      "stock": 93,
+      "sales": 2162,
+      "rating": 4.4,
+      "reviewCount": 308,
+      "description": "栖居 Mini 10 半自动咖啡机，容量 0.6L，功率 800W，压力 15bar，清洗方式 手动。在家喝到一杯好咖啡。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "容量": 0.6,
+        "功率": 800,
+        "压力": 15,
+        "清洗方式": "手动"
+      },
+      "tags": "咖啡机,半自动,家用,手动,栖居",
+      "image": "/img/coffee.svg",
+      "status": 1
+    },
+    {
+      "id": "p_purifier_01",
+      "name": "磐石 森呼吸 1 空气净化器",
+      "subtitle": "CADR 300 · 28dB 静音 · 适用 30㎡",
+      "categoryId": "cat_purifier",
+      "brand": "磐石",
+      "price": 899,
+      "originalPrice": 1179,
+      "stock": 236,
+      "sales": 1709,
+      "rating": 4.8,
+      "reviewCount": 244,
+      "description": "磐石 森呼吸 1 空气净化器，CADR 300m³/h，噪音 28dB，适用面积 30㎡，功率 35W。除醛、除霾与静音。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "CADR": 300,
+        "噪音": 28,
+        "适用面积": 30,
+        "功率": 35
+      },
+      "tags": "空气净化器,除甲醛,静音,家用,磐石",
+      "image": "/img/purifier.svg",
+      "status": 1
+    },
+    {
+      "id": "p_purifier_02",
+      "name": "磐石 清风 2 空气净化器",
+      "subtitle": "CADR 500 · 34dB 静音 · 适用 50㎡",
+      "categoryId": "cat_purifier",
+      "brand": "磐石",
+      "price": 1199,
+      "originalPrice": 1649,
+      "stock": 326,
+      "sales": 572,
+      "rating": 4.7,
+      "reviewCount": 81,
+      "description": "磐石 清风 2 空气净化器，CADR 500m³/h，噪音 34dB，适用面积 50㎡，功率 50W。除醛、除霾与静音。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "CADR": 500,
+        "噪音": 34,
+        "适用面积": 50,
+        "功率": 50
+      },
+      "tags": "空气净化器,除甲醛,静音,家用,磐石",
+      "image": "/img/purifier.svg",
+      "status": 1
+    },
+    {
+      "id": "p_purifier_03",
+      "name": "晨光 净界 3 空气净化器",
+      "subtitle": "CADR 700 · 40dB 静音 · 适用 80㎡",
+      "categoryId": "cat_purifier",
+      "brand": "晨光",
+      "price": 1499,
+      "originalPrice": 1729,
+      "stock": 285,
+      "sales": 171,
+      "rating": 4.5,
+      "reviewCount": 24,
+      "description": "晨光 净界 3 空气净化器，CADR 700m³/h，噪音 40dB，适用面积 80㎡，功率 65W。除醛、除霾与静音。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "CADR": 700,
+        "噪音": 40,
+        "适用面积": 80,
+        "功率": 65
+      },
+      "tags": "空气净化器,除甲醛,静音,家用,晨光",
+      "image": "/img/purifier.svg",
+      "status": 1
+    },
+    {
+      "id": "p_purifier_04",
+      "name": "磐石 森呼吸 4 空气净化器",
+      "subtitle": "CADR 300 · 28dB 静音 · 适用 30㎡",
+      "categoryId": "cat_purifier",
+      "brand": "磐石",
+      "price": 1899,
+      "originalPrice": 2219,
+      "stock": 253,
+      "sales": 901,
+      "rating": 4.6,
+      "reviewCount": 128,
+      "description": "磐石 森呼吸 4 空气净化器，CADR 300m³/h，噪音 28dB，适用面积 30㎡，功率 35W。除醛、除霾与静音。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "CADR": 300,
+        "噪音": 28,
+        "适用面积": 30,
+        "功率": 35
+      },
+      "tags": "空气净化器,除甲醛,静音,家用,磐石",
+      "image": "/img/purifier.svg",
+      "status": 1
+    },
+    {
+      "id": "p_purifier_05",
+      "name": "栖居 清风 5 空气净化器",
+      "subtitle": "CADR 500 · 34dB 静音 · 适用 50㎡",
+      "categoryId": "cat_purifier",
+      "brand": "栖居",
+      "price": 2199,
+      "originalPrice": 2759,
+      "stock": 81,
+      "sales": 840,
+      "rating": 4.4,
+      "reviewCount": 120,
+      "description": "栖居 清风 5 空气净化器，CADR 500m³/h，噪音 34dB，适用面积 50㎡，功率 50W。除醛、除霾与静音。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "CADR": 500,
+        "噪音": 34,
+        "适用面积": 50,
+        "功率": 50
+      },
+      "tags": "空气净化器,除甲醛,静音,家用,栖居",
+      "image": "/img/purifier.svg",
+      "status": 1
+    },
+    {
+      "id": "p_purifier_06",
+      "name": "磐石 森呼吸 6 空气净化器",
+      "subtitle": "CADR 700 · 40dB 静音 · 适用 80㎡",
+      "categoryId": "cat_purifier",
+      "brand": "磐石",
+      "price": 2599,
+      "originalPrice": 3389,
+      "stock": 289,
+      "sales": 1787,
+      "rating": 4.8,
+      "reviewCount": 255,
+      "description": "磐石 森呼吸 6 空气净化器，CADR 700m³/h，噪音 40dB，适用面积 80㎡，功率 65W。除醛、除霾与静音。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "CADR": 700,
+        "噪音": 40,
+        "适用面积": 80,
+        "功率": 65
+      },
+      "tags": "空气净化器,除甲醛,静音,家用,磐石",
+      "image": "/img/purifier.svg",
+      "status": 1
+    },
+    {
+      "id": "p_purifier_07",
+      "name": "栖居 森呼吸 7 空气净化器",
+      "subtitle": "CADR 300 · 28dB 静音 · 适用 30㎡",
+      "categoryId": "cat_purifier",
+      "brand": "栖居",
+      "price": 2999,
+      "originalPrice": 4139,
+      "stock": 75,
+      "sales": 2263,
+      "rating": 4.8,
+      "reviewCount": 323,
+      "description": "栖居 森呼吸 7 空气净化器，CADR 300m³/h，噪音 28dB，适用面积 30㎡，功率 35W。除醛、除霾与静音。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "CADR": 300,
+        "噪音": 28,
+        "适用面积": 30,
+        "功率": 35
+      },
+      "tags": "空气净化器,除甲醛,静音,家用,栖居",
+      "image": "/img/purifier.svg",
+      "status": 1
+    },
+    {
+      "id": "p_purifier_08",
+      "name": "磐石 净界 8 空气净化器",
+      "subtitle": "CADR 500 · 34dB 静音 · 适用 50㎡",
+      "categoryId": "cat_purifier",
+      "brand": "磐石",
+      "price": 3299,
+      "originalPrice": 4409,
+      "stock": 415,
+      "sales": 2203,
+      "rating": 4.6,
+      "reviewCount": 314,
+      "description": "磐石 净界 8 空气净化器，CADR 500m³/h，噪音 34dB，适用面积 50㎡，功率 50W。除醛、除霾与静音。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "CADR": 500,
+        "噪音": 34,
+        "适用面积": 50,
+        "功率": 50
+      },
+      "tags": "空气净化器,除甲醛,静音,家用,磐石",
+      "image": "/img/purifier.svg",
+      "status": 1
+    },
+    {
+      "id": "p_purifier_09",
+      "name": "晨光 清风 9 空气净化器",
+      "subtitle": "CADR 700 · 40dB 静音 · 适用 80㎡",
+      "categoryId": "cat_purifier",
+      "brand": "晨光",
+      "price": 3699,
+      "originalPrice": 4589,
+      "stock": 30,
+      "sales": 70,
+      "rating": 4.5,
+      "reviewCount": 12,
+      "description": "晨光 清风 9 空气净化器，CADR 700m³/h，噪音 40dB，适用面积 80㎡，功率 65W。除醛、除霾与静音。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "CADR": 700,
+        "噪音": 40,
+        "适用面积": 80,
+        "功率": 65
+      },
+      "tags": "空气净化器,除甲醛,静音,家用,晨光",
+      "image": "/img/purifier.svg",
+      "status": 1
+    },
+    {
+      "id": "p_purifier_10",
+      "name": "磐石 森呼吸 10 空气净化器",
+      "subtitle": "CADR 300 · 28dB 静音 · 适用 30㎡",
+      "categoryId": "cat_purifier",
+      "brand": "磐石",
+      "price": 3999,
+      "originalPrice": 5079,
+      "stock": 201,
+      "sales": 945,
+      "rating": 4.8,
+      "reviewCount": 135,
+      "description": "磐石 森呼吸 10 空气净化器，CADR 300m³/h，噪音 28dB，适用面积 30㎡，功率 35W。除醛、除霾与静音。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "CADR": 300,
+        "噪音": 28,
+        "适用面积": 30,
+        "功率": 35
+      },
+      "tags": "空气净化器,除甲醛,静音,家用,磐石",
+      "image": "/img/purifier.svg",
+      "status": 1
+    },
+    {
+      "id": "p_beans_01",
+      "name": "晨光 埃塞俄比亚 浅烘 咖啡豆 250g",
+      "subtitle": "埃塞俄比亚产区 · 浅烘 · 花香果酸",
+      "categoryId": "cat_beans",
+      "brand": "晨光",
+      "price": 59,
+      "originalPrice": 79,
+      "stock": 306,
+      "sales": 725,
+      "rating": 4.9,
+      "reviewCount": 103,
+      "description": "晨光 埃塞俄比亚 浅烘 咖啡豆 250g，规格 250g，烘焙度 浅烘，产地 埃塞俄比亚，风味 花香果酸。产地与烘焙风味。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "规格": 250,
+        "烘焙度": "浅烘",
+        "产地": "埃塞俄比亚",
+        "风味": "花香果酸"
+      },
+      "tags": "咖啡豆,浅烘,埃塞俄比亚,花香果酸,晨光",
+      "image": "/img/beans.svg",
+      "status": 1
+    },
+    {
+      "id": "p_beans_02",
+      "name": "晨光 哥伦比亚 中烘 咖啡豆 500g",
+      "subtitle": "哥伦比亚产区 · 中烘 · 坚果可可",
+      "categoryId": "cat_beans",
+      "brand": "晨光",
+      "price": 69,
+      "originalPrice": 79,
+      "stock": 30,
+      "sales": 1931,
+      "rating": 4.5,
+      "reviewCount": 275,
+      "description": "晨光 哥伦比亚 中烘 咖啡豆 500g，规格 500g，烘焙度 中烘，产地 哥伦比亚，风味 坚果可可。产地与烘焙风味。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "规格": 500,
+        "烘焙度": "中烘",
+        "产地": "哥伦比亚",
+        "风味": "坚果可可"
+      },
+      "tags": "咖啡豆,中烘,哥伦比亚,坚果可可,晨光",
+      "image": "/img/beans.svg",
+      "status": 1
+    },
+    {
+      "id": "p_beans_03",
+      "name": "晨光 云南 深烘 咖啡豆 1000g",
+      "subtitle": "云南产区 · 深烘 · 焦糖甜感",
+      "categoryId": "cat_beans",
+      "brand": "晨光",
+      "price": 79,
+      "originalPrice": 99,
+      "stock": 398,
+      "sales": 2250,
+      "rating": 4.5,
+      "reviewCount": 321,
+      "description": "晨光 云南 深烘 咖啡豆 1000g，规格 1000g，烘焙度 深烘，产地 云南，风味 焦糖甜感。产地与烘焙风味。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "规格": 1000,
+        "烘焙度": "深烘",
+        "产地": "云南",
+        "风味": "焦糖甜感"
+      },
+      "tags": "咖啡豆,深烘,云南,焦糖甜感,晨光",
+      "image": "/img/beans.svg",
+      "status": 1
+    },
+    {
+      "id": "p_beans_04",
+      "name": "山间 巴西 浅烘 咖啡豆 250g",
+      "subtitle": "巴西产区 · 浅烘 · 莓果",
+      "categoryId": "cat_beans",
+      "brand": "山间",
+      "price": 89,
+      "originalPrice": 109,
+      "stock": 486,
+      "sales": 1077,
+      "rating": 4.5,
+      "reviewCount": 153,
+      "description": "山间 巴西 浅烘 咖啡豆 250g，规格 250g，烘焙度 浅烘，产地 巴西，风味 莓果。产地与烘焙风味。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "规格": 250,
+        "烘焙度": "浅烘",
+        "产地": "巴西",
+        "风味": "莓果"
+      },
+      "tags": "咖啡豆,浅烘,巴西,莓果,山间",
+      "image": "/img/beans.svg",
+      "status": 1
+    },
+    {
+      "id": "p_beans_05",
+      "name": "山间 埃塞俄比亚 中烘 咖啡豆 500g",
+      "subtitle": "埃塞俄比亚产区 · 中烘 · 花香果酸",
+      "categoryId": "cat_beans",
+      "brand": "山间",
+      "price": 99,
+      "originalPrice": 129,
+      "stock": 429,
+      "sales": 598,
+      "rating": 4.5,
+      "reviewCount": 85,
+      "description": "山间 埃塞俄比亚 中烘 咖啡豆 500g，规格 500g，烘焙度 中烘，产地 埃塞俄比亚，风味 花香果酸。产地与烘焙风味。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "规格": 500,
+        "烘焙度": "中烘",
+        "产地": "埃塞俄比亚",
+        "风味": "花香果酸"
+      },
+      "tags": "咖啡豆,中烘,埃塞俄比亚,花香果酸,山间",
+      "image": "/img/beans.svg",
+      "status": 1
+    },
+    {
+      "id": "p_beans_06",
+      "name": "山间 哥伦比亚 深烘 咖啡豆 1000g",
+      "subtitle": "哥伦比亚产区 · 深烘 · 坚果可可",
+      "categoryId": "cat_beans",
+      "brand": "山间",
+      "price": 109,
+      "originalPrice": 149,
+      "stock": 173,
+      "sales": 2508,
+      "rating": 4.4,
+      "reviewCount": 358,
+      "description": "山间 哥伦比亚 深烘 咖啡豆 1000g，规格 1000g，烘焙度 深烘，产地 哥伦比亚，风味 坚果可可。产地与烘焙风味。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "规格": 1000,
+        "烘焙度": "深烘",
+        "产地": "哥伦比亚",
+        "风味": "坚果可可"
+      },
+      "tags": "咖啡豆,深烘,哥伦比亚,坚果可可,山间",
+      "image": "/img/beans.svg",
+      "status": 1
+    },
+    {
+      "id": "p_beans_07",
+      "name": "晨光 云南 浅烘 咖啡豆 250g",
+      "subtitle": "云南产区 · 浅烘 · 焦糖甜感",
+      "categoryId": "cat_beans",
+      "brand": "晨光",
+      "price": 129,
+      "originalPrice": 149,
+      "stock": 63,
+      "sales": 1322,
+      "rating": 4.6,
+      "reviewCount": 188,
+      "description": "晨光 云南 浅烘 咖啡豆 250g，规格 250g，烘焙度 浅烘，产地 云南，风味 焦糖甜感。产地与烘焙风味。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "规格": 250,
+        "烘焙度": "浅烘",
+        "产地": "云南",
+        "风味": "焦糖甜感"
+      },
+      "tags": "咖啡豆,浅烘,云南,焦糖甜感,晨光",
+      "image": "/img/beans.svg",
+      "status": 1
+    },
+    {
+      "id": "p_beans_08",
+      "name": "晨光 巴西 中烘 咖啡豆 500g",
+      "subtitle": "巴西产区 · 中烘 · 莓果",
+      "categoryId": "cat_beans",
+      "brand": "晨光",
+      "price": 149,
+      "originalPrice": 209,
+      "stock": 485,
+      "sales": 859,
+      "rating": 4.8,
+      "reviewCount": 122,
+      "description": "晨光 巴西 中烘 咖啡豆 500g，规格 500g，烘焙度 中烘，产地 巴西，风味 莓果。产地与烘焙风味。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "规格": 500,
+        "烘焙度": "中烘",
+        "产地": "巴西",
+        "风味": "莓果"
+      },
+      "tags": "咖啡豆,中烘,巴西,莓果,晨光",
+      "image": "/img/beans.svg",
+      "status": 1
+    },
+    {
+      "id": "p_beans_09",
+      "name": "岩咖 埃塞俄比亚 深烘 咖啡豆 1000g",
+      "subtitle": "埃塞俄比亚产区 · 深烘 · 花香果酸",
+      "categoryId": "cat_beans",
+      "brand": "岩咖",
+      "price": 169,
+      "originalPrice": 209,
+      "stock": 469,
+      "sales": 558,
+      "rating": 4.5,
+      "reviewCount": 79,
+      "description": "岩咖 埃塞俄比亚 深烘 咖啡豆 1000g，规格 1000g，烘焙度 深烘，产地 埃塞俄比亚，风味 花香果酸。产地与烘焙风味。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "规格": 1000,
+        "烘焙度": "深烘",
+        "产地": "埃塞俄比亚",
+        "风味": "花香果酸"
+      },
+      "tags": "咖啡豆,深烘,埃塞俄比亚,花香果酸,岩咖",
+      "image": "/img/beans.svg",
+      "status": 1
+    },
+    {
+      "id": "p_beans_10",
+      "name": "山间 哥伦比亚 浅烘 咖啡豆 250g",
+      "subtitle": "哥伦比亚产区 · 浅烘 · 坚果可可",
+      "categoryId": "cat_beans",
+      "brand": "山间",
+      "price": 189,
+      "originalPrice": 249,
+      "stock": 301,
+      "sales": 558,
+      "rating": 4.5,
+      "reviewCount": 79,
+      "description": "山间 哥伦比亚 浅烘 咖啡豆 250g，规格 250g，烘焙度 浅烘，产地 哥伦比亚，风味 坚果可可。产地与烘焙风味。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "规格": 250,
+        "烘焙度": "浅烘",
+        "产地": "哥伦比亚",
+        "风味": "坚果可可"
+      },
+      "tags": "咖啡豆,浅烘,哥伦比亚,坚果可可,山间",
+      "image": "/img/beans.svg",
+      "status": 1
+    },
+    {
+      "id": "p_backpack_01",
+      "name": "栖居 轻旅 18L 双肩包",
+      "subtitle": "18L 容量 · 尼龙 · 防泼水",
+      "categoryId": "cat_backpack",
+      "brand": "栖居",
+      "price": 129,
+      "originalPrice": 179,
+      "stock": 33,
+      "sales": 512,
+      "rating": 4.5,
+      "reviewCount": 73,
+      "description": "栖居 轻旅 18L 双肩包，容量 18L，重量 600g，防水 是，材质 尼龙。通勤、差旅与户外。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "容量": 18,
+        "重量": 600,
+        "防水": "是",
+        "材质": "尼龙"
+      },
+      "tags": "双肩包,通勤,电脑包,防水,栖居",
+      "image": "/img/backpack.svg",
+      "status": 1
+    },
+    {
+      "id": "p_backpack_02",
+      "name": "拾光 轻旅 24L 双肩包",
+      "subtitle": "24L 容量 · 聚酯纤维 · 轻量",
+      "categoryId": "cat_backpack",
+      "brand": "拾光",
+      "price": 169,
+      "originalPrice": 209,
+      "stock": 485,
+      "sales": 593,
+      "rating": 4.8,
+      "reviewCount": 84,
+      "description": "拾光 轻旅 24L 双肩包，容量 24L，重量 800g，防水 否，材质 聚酯纤维。通勤、差旅与户外。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "容量": 24,
+        "重量": 800,
+        "防水": "否",
+        "材质": "聚酯纤维"
+      },
+      "tags": "双肩包,通勤,电脑包,轻量,拾光",
+      "image": "/img/backpack.svg",
+      "status": 1
+    },
+    {
+      "id": "p_backpack_03",
+      "name": "行野 轻旅 30L 双肩包",
+      "subtitle": "30L 容量 · 帆布 · 防泼水",
+      "categoryId": "cat_backpack",
+      "brand": "行野",
+      "price": 199,
+      "originalPrice": 279,
+      "stock": 171,
+      "sales": 153,
+      "rating": 4.8,
+      "reviewCount": 21,
+      "description": "行野 轻旅 30L 双肩包，容量 30L，重量 1000g，防水 是，材质 帆布。通勤、差旅与户外。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "容量": 30,
+        "重量": 1000,
+        "防水": "是",
+        "材质": "帆布"
+      },
+      "tags": "双肩包,通勤,电脑包,防水,行野",
+      "image": "/img/backpack.svg",
+      "status": 1
+    },
+    {
+      "id": "p_backpack_04",
+      "name": "栖居 通勤 18L 双肩包",
+      "subtitle": "18L 容量 · 尼龙 · 轻量",
+      "categoryId": "cat_backpack",
+      "brand": "栖居",
+      "price": 239,
+      "originalPrice": 329,
+      "stock": 360,
+      "sales": 1605,
+      "rating": 4.4,
+      "reviewCount": 229,
+      "description": "栖居 通勤 18L 双肩包，容量 18L，重量 600g，防水 否，材质 尼龙。通勤、差旅与户外。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "容量": 18,
+        "重量": 600,
+        "防水": "否",
+        "材质": "尼龙"
+      },
+      "tags": "双肩包,通勤,电脑包,轻量,栖居",
+      "image": "/img/backpack.svg",
+      "status": 1
+    },
+    {
+      "id": "p_backpack_05",
+      "name": "行野 通勤 24L 双肩包",
+      "subtitle": "24L 容量 · 聚酯纤维 · 防泼水",
+      "categoryId": "cat_backpack",
+      "brand": "行野",
+      "price": 279,
+      "originalPrice": 369,
+      "stock": 331,
+      "sales": 1482,
+      "rating": 4.7,
+      "reviewCount": 211,
+      "description": "行野 通勤 24L 双肩包，容量 24L，重量 800g，防水 是，材质 聚酯纤维。通勤、差旅与户外。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "容量": 24,
+        "重量": 800,
+        "防水": "是",
+        "材质": "聚酯纤维"
+      },
+      "tags": "双肩包,通勤,电脑包,防水,行野",
+      "image": "/img/backpack.svg",
+      "status": 1
+    },
+    {
+      "id": "p_backpack_06",
+      "name": "行野 城市 30L 双肩包",
+      "subtitle": "30L 容量 · 帆布 · 轻量",
+      "categoryId": "cat_backpack",
+      "brand": "行野",
+      "price": 329,
+      "originalPrice": 389,
+      "stock": 179,
+      "sales": 2127,
+      "rating": 4.3,
+      "reviewCount": 303,
+      "description": "行野 城市 30L 双肩包，容量 30L，重量 1000g，防水 否，材质 帆布。通勤、差旅与户外。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "容量": 30,
+        "重量": 1000,
+        "防水": "否",
+        "材质": "帆布"
+      },
+      "tags": "双肩包,通勤,电脑包,轻量,行野",
+      "image": "/img/backpack.svg",
+      "status": 1
+    },
+    {
+      "id": "p_backpack_07",
+      "name": "拾光 轻旅 18L 双肩包",
+      "subtitle": "18L 容量 · 尼龙 · 防泼水",
+      "categoryId": "cat_backpack",
+      "brand": "拾光",
+      "price": 379,
+      "originalPrice": 529,
+      "stock": 86,
+      "sales": 1552,
+      "rating": 4.8,
+      "reviewCount": 221,
+      "description": "拾光 轻旅 18L 双肩包，容量 18L，重量 600g，防水 是，材质 尼龙。通勤、差旅与户外。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "容量": 18,
+        "重量": 600,
+        "防水": "是",
+        "材质": "尼龙"
+      },
+      "tags": "双肩包,通勤,电脑包,防水,拾光",
+      "image": "/img/backpack.svg",
+      "status": 1
+    },
+    {
+      "id": "p_backpack_08",
+      "name": "拾光 通勤 24L 双肩包",
+      "subtitle": "24L 容量 · 聚酯纤维 · 轻量",
+      "categoryId": "cat_backpack",
+      "brand": "拾光",
+      "price": 429,
+      "originalPrice": 579,
+      "stock": 460,
+      "sales": 2497,
+      "rating": 4.7,
+      "reviewCount": 356,
+      "description": "拾光 通勤 24L 双肩包，容量 24L，重量 800g，防水 否，材质 聚酯纤维。通勤、差旅与户外。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "容量": 24,
+        "重量": 800,
+        "防水": "否",
+        "材质": "聚酯纤维"
+      },
+      "tags": "双肩包,通勤,电脑包,轻量,拾光",
+      "image": "/img/backpack.svg",
+      "status": 1
+    },
+    {
+      "id": "p_backpack_09",
+      "name": "栖居 通勤 30L 双肩包",
+      "subtitle": "30L 容量 · 帆布 · 防泼水",
+      "categoryId": "cat_backpack",
+      "brand": "栖居",
+      "price": 499,
+      "originalPrice": 659,
+      "stock": 268,
+      "sales": 1927,
+      "rating": 4.3,
+      "reviewCount": 275,
+      "description": "栖居 通勤 30L 双肩包，容量 30L，重量 1000g，防水 是，材质 帆布。通勤、差旅与户外。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "容量": 30,
+        "重量": 1000,
+        "防水": "是",
+        "材质": "帆布"
+      },
+      "tags": "双肩包,通勤,电脑包,防水,栖居",
+      "image": "/img/backpack.svg",
+      "status": 1
+    },
+    {
+      "id": "p_backpack_10",
+      "name": "行野 轻旅 18L 双肩包",
+      "subtitle": "18L 容量 · 尼龙 · 轻量",
+      "categoryId": "cat_backpack",
+      "brand": "行野",
+      "price": 599,
+      "originalPrice": 839,
+      "stock": 322,
+      "sales": 2170,
+      "rating": 4.9,
+      "reviewCount": 310,
+      "description": "行野 轻旅 18L 双肩包，容量 18L，重量 600g，防水 否，材质 尼龙。通勤、差旅与户外。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "容量": 18,
+        "重量": 600,
+        "防水": "否",
+        "材质": "尼龙"
+      },
+      "tags": "双肩包,通勤,电脑包,轻量,行野",
+      "image": "/img/backpack.svg",
+      "status": 1
+    },
+    {
+      "id": "p_robot_01",
+      "name": "云舟 X1 扫拖机器人",
+      "subtitle": "3000Pa 吸力 · 自动集尘 · 0.3L 水箱",
+      "categoryId": "cat_robot",
+      "brand": "云舟",
+      "price": 1299,
+      "originalPrice": 1679,
+      "stock": 260,
+      "sales": 1458,
+      "rating": 4.7,
+      "reviewCount": 208,
+      "description": "云舟 X1 扫拖机器人，吸力 3000Pa，续航 120min，噪音 55dB，水箱 0.3L。吸拖一体与自动集尘。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "吸力": 3000,
+        "续航": 120,
+        "噪音": 55,
+        "水箱": 0.3
+      },
+      "tags": "扫地机器人,扫拖一体,自动集尘,智能家居,云舟",
+      "image": "/img/robot.svg",
+      "status": 1
+    },
+    {
+      "id": "p_robot_02",
+      "name": "磐石 T2 扫拖机器人",
+      "subtitle": "5000Pa 吸力 · 自动集尘 · 0.4L 水箱",
+      "categoryId": "cat_robot",
+      "brand": "磐石",
+      "price": 1599,
+      "originalPrice": 2189,
+      "stock": 452,
+      "sales": 2528,
+      "rating": 4.5,
+      "reviewCount": 361,
+      "description": "磐石 T2 扫拖机器人，吸力 5000Pa，续航 150min，噪音 60dB，水箱 0.4L。吸拖一体与自动集尘。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "吸力": 5000,
+        "续航": 150,
+        "噪音": 60,
+        "水箱": 0.4
+      },
+      "tags": "扫地机器人,扫拖一体,自动集尘,智能家居,磐石",
+      "image": "/img/robot.svg",
+      "status": 1
+    },
+    {
+      "id": "p_robot_03",
+      "name": "栖居 T3 扫拖机器人",
+      "subtitle": "8000Pa 吸力 · 自动集尘 · 0.5L 水箱",
+      "categoryId": "cat_robot",
+      "brand": "栖居",
+      "price": 1899,
+      "originalPrice": 2509,
+      "stock": 497,
+      "sales": 167,
+      "rating": 4.6,
+      "reviewCount": 23,
+      "description": "栖居 T3 扫拖机器人，吸力 8000Pa，续航 180min，噪音 65dB，水箱 0.5L。吸拖一体与自动集尘。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "吸力": 8000,
+        "续航": 180,
+        "噪音": 65,
+        "水箱": 0.5
+      },
+      "tags": "扫地机器人,扫拖一体,自动集尘,智能家居,栖居",
+      "image": "/img/robot.svg",
+      "status": 1
+    },
+    {
+      "id": "p_robot_04",
+      "name": "云舟 T4 扫拖机器人",
+      "subtitle": "3000Pa 吸力 · 自动集尘 · 0.3L 水箱",
+      "categoryId": "cat_robot",
+      "brand": "云舟",
+      "price": 2199,
+      "originalPrice": 2529,
+      "stock": 187,
+      "sales": 1591,
+      "rating": 4.3,
+      "reviewCount": 227,
+      "description": "云舟 T4 扫拖机器人，吸力 3000Pa，续航 120min，噪音 55dB，水箱 0.3L。吸拖一体与自动集尘。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "吸力": 3000,
+        "续航": 120,
+        "噪音": 55,
+        "水箱": 0.3
+      },
+      "tags": "扫地机器人,扫拖一体,自动集尘,智能家居,云舟",
+      "image": "/img/robot.svg",
+      "status": 1
+    },
+    {
+      "id": "p_robot_05",
+      "name": "磐石 S5 扫拖机器人",
+      "subtitle": "5000Pa 吸力 · 自动集尘 · 0.4L 水箱",
+      "categoryId": "cat_robot",
+      "brand": "磐石",
+      "price": 2499,
+      "originalPrice": 3339,
+      "stock": 48,
+      "sales": 2281,
+      "rating": 4.4,
+      "reviewCount": 325,
+      "description": "磐石 S5 扫拖机器人，吸力 5000Pa，续航 150min，噪音 60dB，水箱 0.4L。吸拖一体与自动集尘。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "吸力": 5000,
+        "续航": 150,
+        "噪音": 60,
+        "水箱": 0.4
+      },
+      "tags": "扫地机器人,扫拖一体,自动集尘,智能家居,磐石",
+      "image": "/img/robot.svg",
+      "status": 1
+    },
+    {
+      "id": "p_robot_06",
+      "name": "云舟 T6 扫拖机器人",
+      "subtitle": "8000Pa 吸力 · 自动集尘 · 0.5L 水箱",
+      "categoryId": "cat_robot",
+      "brand": "云舟",
+      "price": 2799,
+      "originalPrice": 3539,
+      "stock": 169,
+      "sales": 1134,
+      "rating": 4.3,
+      "reviewCount": 162,
+      "description": "云舟 T6 扫拖机器人，吸力 8000Pa，续航 180min，噪音 65dB，水箱 0.5L。吸拖一体与自动集尘。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "吸力": 8000,
+        "续航": 180,
+        "噪音": 65,
+        "水箱": 0.5
+      },
+      "tags": "扫地机器人,扫拖一体,自动集尘,智能家居,云舟",
+      "image": "/img/robot.svg",
+      "status": 1
+    },
+    {
+      "id": "p_robot_07",
+      "name": "磐石 S7 扫拖机器人",
+      "subtitle": "3000Pa 吸力 · 自动集尘 · 0.3L 水箱",
+      "categoryId": "cat_robot",
+      "brand": "磐石",
+      "price": 3199,
+      "originalPrice": 4429,
+      "stock": 224,
+      "sales": 923,
+      "rating": 4.4,
+      "reviewCount": 131,
+      "description": "磐石 S7 扫拖机器人，吸力 3000Pa，续航 120min，噪音 55dB，水箱 0.3L。吸拖一体与自动集尘。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "吸力": 3000,
+        "续航": 120,
+        "噪音": 55,
+        "水箱": 0.3
+      },
+      "tags": "扫地机器人,扫拖一体,自动集尘,智能家居,磐石",
+      "image": "/img/robot.svg",
+      "status": 1
+    },
+    {
+      "id": "p_robot_08",
+      "name": "磐石 S8 扫拖机器人",
+      "subtitle": "5000Pa 吸力 · 自动集尘 · 0.4L 水箱",
+      "categoryId": "cat_robot",
+      "brand": "磐石",
+      "price": 3599,
+      "originalPrice": 4529,
+      "stock": 167,
+      "sales": 2591,
+      "rating": 4.6,
+      "reviewCount": 370,
+      "description": "磐石 S8 扫拖机器人，吸力 5000Pa，续航 150min，噪音 60dB，水箱 0.4L。吸拖一体与自动集尘。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "吸力": 5000,
+        "续航": 150,
+        "噪音": 60,
+        "水箱": 0.4
+      },
+      "tags": "扫地机器人,扫拖一体,自动集尘,智能家居,磐石",
+      "image": "/img/robot.svg",
+      "status": 1
+    },
+    {
+      "id": "p_robot_09",
+      "name": "云舟 X9 扫拖机器人",
+      "subtitle": "8000Pa 吸力 · 自动集尘 · 0.5L 水箱",
+      "categoryId": "cat_robot",
+      "brand": "云舟",
+      "price": 3999,
+      "originalPrice": 5349,
+      "stock": 419,
+      "sales": 1155,
+      "rating": 4.5,
+      "reviewCount": 165,
+      "description": "云舟 X9 扫拖机器人，吸力 8000Pa，续航 180min，噪音 65dB，水箱 0.5L。吸拖一体与自动集尘。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "吸力": 8000,
+        "续航": 180,
+        "噪音": 65,
+        "水箱": 0.5
+      },
+      "tags": "扫地机器人,扫拖一体,自动集尘,智能家居,云舟",
+      "image": "/img/robot.svg",
+      "status": 1
+    },
+    {
+      "id": "p_robot_10",
+      "name": "云舟 S10 扫拖机器人",
+      "subtitle": "3000Pa 吸力 · 自动集尘 · 0.3L 水箱",
+      "categoryId": "cat_robot",
+      "brand": "云舟",
+      "price": 4999,
+      "originalPrice": 6169,
+      "stock": 440,
+      "sales": 1389,
+      "rating": 4.4,
+      "reviewCount": 198,
+      "description": "云舟 S10 扫拖机器人，吸力 3000Pa，续航 120min，噪音 55dB，水箱 0.3L。吸拖一体与自动集尘。所有参数均来自商品库，支持同品类逐项对比；推荐理由只引用真实字段，不虚构价格与库存。",
+      "attributes": {
+        "吸力": 3000,
+        "续航": 120,
+        "噪音": 55,
+        "水箱": 0.3
+      },
+      "tags": "扫地机器人,扫拖一体,自动集尘,智能家居,云舟",
+      "image": "/img/robot.svg",
+      "status": 1
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-label="扫地机器人">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#eaeae3"/>
+      <stop offset="1" stop-color="#d6d7cd"/>
+    </linearGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3a3b35"/>
+      <stop offset="1" stop-color="#1c1d19"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="26" stdDeviation="24" flood-color="#2e3028" flood-opacity=".24"/>
+    </filter>
+  </defs>
+  <rect width="800" height="1000" fill="url(#bg)"/>
+  <circle cx="650" cy="200" r="230" fill="#ffffff" opacity=".4"/>
+  <circle cx="140" cy="790" r="170" fill="#f05a28" opacity=".06"/>
+  <text x="64" y="96" font-family="Inter, sans-serif" font-size="20" letter-spacing="9" fill="#777a6d">SMART GUIDE · 13</text>
+  <ellipse cx="400" cy="740" rx="250" ry="46" fill="#363830" opacity=".16"/>
+  <g filter="url(#shadow)">
+    <ellipse cx="400" cy="600" rx="230" ry="150" fill="url(#body)"/>
+    <ellipse cx="400" cy="574" rx="190" ry="120" fill="#2e2f29"/>
+    <ellipse cx="400" cy="560" rx="120" ry="72" fill="#232420"/>
+    <circle cx="400" cy="540" r="44" fill="#3a3c34" stroke="#55574a" stroke-width="2"/>
+    <circle cx="400" cy="540" r="14" fill="#f05a28"/>
+    <path d="M300 612 q100 42 200 0" stroke="#5a5c4d" stroke-width="4" fill="none" opacity=".6"/>
+    <rect x="560" y="570" width="34" height="70" rx="12" fill="#45473c"/>
+    <circle cx="577" cy="558" r="10" fill="#f05a28"/>
+    <ellipse cx="400" cy="688" rx="210" ry="28" fill="#4a4c40" opacity=".5"/>
+  </g>
+  <g font-family="Inter, sans-serif">
+    <text x="64" y="900" font-family="'Noto Serif SC','Songti SC',serif" font-size="46" fill="#20221c" letter-spacing="4">扫地机器人</text>
+    <text x="64" y="944" font-size="18" letter-spacing="7" fill="#777a6d">ROBOT VACUUM</text>
+  </g>
+</svg>

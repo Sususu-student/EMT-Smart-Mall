@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-label="双肩包">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ecebe3"/>
+      <stop offset="1" stop-color="#d9d7ca"/>
+    </linearGradient>
+    <linearGradient id="bag" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#5c5f4e"/>
+      <stop offset="1" stop-color="#393b30"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="26" stdDeviation="24" flood-color="#33352b" flood-opacity=".24"/>
+    </filter>
+  </defs>
+  <rect width="800" height="1000" fill="url(#bg)"/>
+  <circle cx="160" cy="190" r="220" fill="#ffffff" opacity=".4"/>
+  <text x="64" y="96" font-family="Inter, sans-serif" font-size="20" letter-spacing="9" fill="#7c7d6c">SMART GUIDE · 12</text>
+  <ellipse cx="400" cy="800" rx="220" ry="26" fill="#3b3d31" opacity=".16"/>
+  <g filter="url(#shadow)">
+    <path d="M300 300 C300 220 500 220 500 300" fill="none" stroke="#2f3128" stroke-width="34" stroke-linecap="round"/>
+    <path d="M290 340 C290 300 510 300 510 340 L560 720 C565 770 520 800 470 800 L330 800 C280 800 235 770 240 720 Z" fill="url(#bag)"/>
+    <path d="M300 400 C300 360 500 360 500 400 L520 610 C522 650 490 672 460 672 L340 672 C310 672 278 650 280 610 Z" fill="#6b6e59" opacity=".55"/>
+    <rect x="330" y="470" width="140" height="16" rx="8" fill="#2f3128"/>
+    <circle cx="400" cy="520" r="34" fill="#f05a28"/>
+    <path d="M388 520 h24" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+    <rect x="352" y="720" width="96" height="12" rx="6" fill="#8b8d78" opacity=".5"/>
+  </g>
+  <g font-family="Inter, sans-serif">
+    <text x="64" y="900" font-family="'Noto Serif SC','Songti SC',serif" font-size="46" fill="#22241d" letter-spacing="4">双肩包</text>
+    <text x="64" y="944" font-size="18" letter-spacing="7" fill="#7c7d6c">BACKPACK</text>
+  </g>
+</svg>

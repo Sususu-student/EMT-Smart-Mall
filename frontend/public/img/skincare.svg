@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-label="护肤品">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f4e9e5"/>
+      <stop offset="1" stop-color="#e6d3cd"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fdfaf4"/>
+      <stop offset="1" stop-color="#e9e1d3"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="24" stdDeviation="22" flood-color="#5c403a" flood-opacity=".2"/>
+    </filter>
+  </defs>
+  <rect width="800" height="1000" fill="url(#bg)"/>
+  <circle cx="640" cy="180" r="240" fill="#ffffff" opacity=".4"/>
+  <circle cx="120" cy="800" r="180" fill="#c98d7d" opacity=".08"/>
+  <text x="64" y="96" font-family="Inter, sans-serif" font-size="20" letter-spacing="9" fill="#8d746d">SMART GUIDE · 08</text>
+  <ellipse cx="400" cy="780" rx="260" ry="26" fill="#6b4c44" opacity=".15"/>
+  <g filter="url(#shadow)">
+    <rect x="210" y="470" width="150" height="290" rx="20" fill="url(#glass)"/>
+    <rect x="238" y="420" width="94" height="60" rx="12" fill="#f05a28"/>
+    <rect x="260" y="380" width="50" height="50" rx="10" fill="#c94618"/>
+    <rect x="228" y="540" width="114" height="90" rx="6" fill="#f7f2ea"/>
+    <text x="285" y="578" text-anchor="middle" font-family="Inter, sans-serif" font-size="15" letter-spacing="2" fill="#6b5a50">SERUM</text>
+    <text x="285" y="604" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#a38f83">30 ML</text>
+
+    <rect x="410" y="500" width="180" height="260" rx="40" fill="#34302a"/>
+    <rect x="440" y="470" width="120" height="46" rx="10" fill="#f05a28"/>
+    <rect x="424" y="580" width="152" height="100" rx="6" fill="#faf6ee"/>
+    <text x="500" y="622" text-anchor="middle" font-family="'Noto Serif SC','Songti SC',serif" font-size="22" fill="#2f2a24">凝光</text>
+    <text x="500" y="650" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" letter-spacing="2" fill="#9a8b7c">BARRIER CREAM</text>
+
+    <rect x="592" y="590" width="90" height="170" rx="16" fill="#dfd3c4"/>
+    <rect x="614" y="556" width="46" height="44" rx="8" fill="#2f6b53"/>
+    <rect x="604" y="646" width="66" height="60" rx="4" fill="#f7f2ea"/>
+  </g>
+  <g font-family="Inter, sans-serif">
+    <text x="64" y="900" font-family="'Noto Serif SC','Songti SC',serif" font-size="46" fill="#2a211e" letter-spacing="4">护肤品</text>
+    <text x="64" y="944" font-size="18" letter-spacing="7" fill="#8d746d">SKINCARE</text>
+  </g>
+</svg>

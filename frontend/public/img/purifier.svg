@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-label="空气净化器">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#e9eeec"/>
+      <stop offset="1" stop-color="#d4ded9"/>
+    </linearGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fbf9f3"/>
+      <stop offset="1" stop-color="#ded9cd"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="26" stdDeviation="24" flood-color="#2d4038" flood-opacity=".22"/>
+    </filter>
+  </defs>
+  <rect width="800" height="1000" fill="url(#bg)"/>
+  <circle cx="150" cy="190" r="230" fill="#ffffff" opacity=".45"/>
+  <circle cx="660" cy="800" r="170" fill="#2f7a5c" opacity=".06"/>
+  <text x="64" y="96" font-family="Inter, sans-serif" font-size="20" letter-spacing="9" fill="#6f7f78">SMART GUIDE · 10</text>
+  <ellipse cx="400" cy="792" rx="190" ry="24" fill="#31443c" opacity=".15"/>
+  <g filter="url(#shadow)">
+    <rect x="270" y="230" width="260" height="540" rx="60" fill="url(#body)"/>
+    <rect x="292" y="252" width="216" height="496" rx="46" fill="#f3efe6"/>
+    <g stroke="#cfc8ba" stroke-width="7" stroke-linecap="round">
+      <path d="M320 380 h160"/><path d="M320 410 h160"/><path d="M320 440 h160"/><path d="M320 470 h160"/>
+      <path d="M320 500 h160"/><path d="M320 530 h160"/><path d="M320 560 h160"/><path d="M320 590 h160"/>
+    </g>
+    <rect x="330" y="300" width="140" height="48" rx="12" fill="#1f2a26"/>
+    <text x="400" y="332" text-anchor="middle" font-family="Inter, sans-serif" font-size="20" fill="#8fe0bb">32</text>
+    <circle cx="400" cy="640" r="22" fill="none" stroke="#2f7a5c" stroke-width="3"/>
+    <circle cx="400" cy="640" r="6" fill="#f05a28"/>
+    <rect x="300" y="748" width="200" height="18" rx="9" fill="#c9c2b3"/>
+  </g>
+  <g font-family="Inter, sans-serif">
+    <text x="64" y="900" font-family="'Noto Serif SC','Songti SC',serif" font-size="46" fill="#1c2723" letter-spacing="4">空气净化器</text>
+    <text x="64" y="944" font-size="18" letter-spacing="7" fill="#6f7f78">AIR PURIFIER</text>
+  </g>
+</svg>

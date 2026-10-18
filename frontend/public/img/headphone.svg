@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-label="蓝牙耳机">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f4efe5"/>
+      <stop offset="1" stop-color="#e3d7c4"/>
+    </linearGradient>
+    <linearGradient id="case" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#33312c"/>
+      <stop offset="1" stop-color="#171613"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="26" stdDeviation="24" flood-color="#4a3c2a" flood-opacity=".22"/>
+    </filter>
+  </defs>
+  <rect width="800" height="1000" fill="url(#bg)"/>
+  <circle cx="640" cy="190" r="250" fill="#ffffff" opacity=".42"/>
+  <circle cx="120" cy="830" r="190" fill="#f05a28" opacity=".06"/>
+  <text x="64" y="96" font-family="Inter, sans-serif" font-size="20" letter-spacing="9" fill="#8b8171">SMART GUIDE · 01</text>
+  <ellipse cx="400" cy="742" rx="250" ry="34" fill="#6d5a43" opacity=".16"/>
+  <g filter="url(#shadow)">
+    <rect x="210" y="362" width="380" height="330" rx="94" fill="url(#case)"/>
+    <rect x="210" y="500" width="380" height="10" fill="#000" opacity=".35"/>
+    <rect x="356" y="722" width="88" height="10" rx="5" fill="#55514a"/>
+    <g>
+      <circle cx="318" cy="432" r="48" fill="#f7f2e8"/>
+      <rect x="303" y="470" width="30" height="104" rx="15" fill="#f7f2e8"/>
+      <circle cx="318" cy="432" r="16" fill="#2a2925"/>
+      <circle cx="482" cy="432" r="48" fill="#f7f2e8"/>
+      <rect x="467" y="470" width="30" height="104" rx="15" fill="#f7f2e8"/>
+      <circle cx="482" cy="432" r="16" fill="#2a2925"/>
+    </g>
+    <circle cx="400" cy="640" r="9" fill="#f05a28"/>
+  </g>
+  <g font-family="Inter, sans-serif">
+    <text x="64" y="900" font-family="'Noto Serif SC','Songti SC',serif" font-size="46" fill="#221f1a" letter-spacing="4">蓝牙耳机</text>
+    <text x="64" y="944" font-size="18" letter-spacing="7" fill="#8b8171">WIRELESS AUDIO</text>
+  </g>
+</svg>

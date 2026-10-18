@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-label="咖啡豆">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f0e6d8"/>
+      <stop offset="1" stop-color="#ddc9b1"/>
+    </linearGradient>
+    <linearGradient id="bag" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6a5240"/>
+      <stop offset="1" stop-color="#3d2f26"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="26" stdDeviation="24" flood-color="#4a3520" flood-opacity=".24"/>
+    </filter>
+  </defs>
+  <rect width="800" height="1000" fill="url(#bg)"/>
+  <circle cx="650" cy="180" r="230" fill="#ffffff" opacity=".4"/>
+  <text x="64" y="96" font-family="Inter, sans-serif" font-size="20" letter-spacing="9" fill="#8b735a">SMART GUIDE · 11</text>
+  <ellipse cx="400" cy="790" rx="240" ry="26" fill="#5d4630" opacity=".16"/>
+  <g filter="url(#shadow)">
+    <path d="M270 340 L530 340 L560 760 L240 760 Z" fill="url(#bag)"/>
+    <path d="M270 340 L530 340 L515 300 L285 300 Z" fill="#2c211a"/>
+    <path d="M300 300 L500 300" stroke="#8a6b52" stroke-width="6" stroke-dasharray="10 10"/>
+    <circle cx="400" cy="520" r="92" fill="#f1e7d6"/>
+    <text x="400" y="512" text-anchor="middle" font-family="'Noto Serif SC','Songti SC',serif" font-size="30" fill="#3d2f26">岩咖</text>
+    <text x="400" y="542" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" letter-spacing="4" fill="#8b735a">SINGLE ORIGIN</text>
+    <text x="400" y="572" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#8b735a">ETHIOPIA · 250G</text>
+    <rect x="330" y="656" width="140" height="8" rx="4" fill="#8a6b52" opacity=".5"/>
+  </g>
+  <g fill="#4a3325">
+    <ellipse cx="610" cy="720" rx="26" ry="18" transform="rotate(-24 610 720)"/>
+    <path d="M592 710 q18 10 36 0" stroke="#2c1e15" stroke-width="3" fill="none"/>
+    <ellipse cx="650" cy="760" rx="24" ry="16" transform="rotate(16 650 760)"/>
+    <path d="M632 752 q18 10 36 0" stroke="#2c1e15" stroke-width="3" fill="none"/>
+    <ellipse cx="160" cy="700" rx="22" ry="15" transform="rotate(20 160 700)"/>
+    <path d="M144 693 q16 9 32 0" stroke="#2c1e15" stroke-width="3" fill="none"/>
+  </g>
+  <g font-family="Inter, sans-serif">
+    <text x="64" y="900" font-family="'Noto Serif SC','Songti SC',serif" font-size="46" fill="#241b12" letter-spacing="4">咖啡豆</text>
+    <text x="64" y="944" font-size="18" letter-spacing="7" fill="#8b735a">COFFEE BEANS</text>
+  </g>
+</svg>
