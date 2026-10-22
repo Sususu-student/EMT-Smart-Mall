@@ -31,6 +31,7 @@ interface ChatMessage {
   intent?: string
   steps?: AgentStep[]
   degraded?: boolean
+  appliedPreferences?: string[]
   taskId?: string
   time: string
 }
@@ -226,6 +227,7 @@ function applyResponse(response: ChatResponse) {
     intent: response.intent,
     steps: response.steps || [],
     degraded: response.degraded,
+    appliedPreferences: response.appliedPreferences || [],
     taskId: response.taskId,
     time: nowTime()
   })
@@ -490,6 +492,9 @@ function goOrder(order: Order) {
                     <span class="meta-sep">·</span>
                     <span>{{ intentLabel(message.intent) }}</span>
                     <span v-if="message.degraded" class="degraded-tag">规则引擎</span>
+                    <span v-for="pref in message.appliedPreferences || []" :key="pref" class="degraded-tag pref-tag">
+                      偏好 {{ pref }}
+                    </span>
                     <button v-if="message.taskId" class="trace-link" @click="showTrace(message)">
                       执行轨迹 <el-icon><ArrowRight /></el-icon>
                     </button>
@@ -1126,6 +1131,11 @@ function goOrder(order: Order) {
   font-size: 8px;
   padding: 1px 5px;
   border-radius: 4px;
+}
+
+.pref-tag {
+  background: #edf6f0;
+  color: #2f7a5c;
 }
 
 .trace-link {

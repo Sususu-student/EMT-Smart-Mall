@@ -142,6 +142,8 @@ export interface Order {
   phone: string
   addressText: string
   remark?: string
+  carrier?: string
+  trackingNo?: string
   createdAt: string
   paidAt?: string
   shippedAt?: string
@@ -158,6 +160,46 @@ export interface Review {
   rating: number
   content: string
   createdAt: string
+}
+
+export interface ReviewAdmin {
+  id: number
+  productId: string
+  productName: string
+  userId: string
+  username: string
+  rating: number
+  content: string
+  status: number
+  createdAt: string
+}
+
+export interface AfterSale {
+  id: string
+  orderId: string
+  orderNo: string
+  userId: string
+  username: string
+  type: string
+  typeLabel: string
+  reason: string
+  status: string
+  statusLabel: string
+  adminNote?: string
+  createdAt: string
+  handledAt?: string
+  orderAmount?: number
+}
+
+export interface AdminConversation {
+  id: string
+  userId: string
+  username: string
+  nickname?: string
+  title: string
+  turnCount: number
+  createdAt: string
+  updatedAt: string
 }
 
 export interface RecommendedProduct {
@@ -243,6 +285,7 @@ export interface ChatResponse {
   degraded: boolean
   memorySummary?: string
   slots?: ChatSlots
+  appliedPreferences?: string[]
 }
 
 export interface Conversation {

@@ -23,6 +23,8 @@ public class Order {
     private String phone;
     private String addressText;
     private String remark;
+    private String carrier;
+    private String trackingNo;
     private LocalDateTime createdAt;
     private LocalDateTime paidAt;
     private LocalDateTime shippedAt;

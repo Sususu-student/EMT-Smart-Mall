@@ -76,6 +76,14 @@ public class ConversationService {
 
     public List<TurnVO> turns(String conversationId, String userId) {
         requireOwned(conversationId, userId);
+        return loadTurns(conversationId);
+    }
+
+    public List<TurnVO> turnsForAdmin(String conversationId) {
+        return loadTurns(conversationId);
+    }
+
+    private List<TurnVO> loadTurns(String conversationId) {
         List<DialogueTurn> turns = turnMapper.selectList(new LambdaQueryWrapper<DialogueTurn>()
                 .eq(DialogueTurn::getConversationId, conversationId)
                 .orderByAsc(DialogueTurn::getId)

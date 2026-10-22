@@ -31,6 +31,7 @@ import com.smartmall.product.mapper.CategoryMapper;
 import com.smartmall.product.mapper.ProductMapper;
 import com.smartmall.product.dto.ProductVO;
 import com.smartmall.product.service.ProductService;
+import com.smartmall.user.dto.PreferenceVO;
 import com.smartmall.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -140,6 +141,7 @@ public class GuideAgentService {
                 "槽位提取", message);
         Slots extracted = slotService.extract(message, slots, context);
         copySlots(extracted, slots);
+        applyPreferences(message, slots, userId, response);
         steps.add(slotTrace.success(JsonUtils.toJson(slots)));
 
         if (!slots.hasCategory() && !StringUtils.hasText(slots.getKeyword())) {
@@ -271,6 +273,15 @@ public class GuideAgentService {
     private void handleOrder(String message, String conversationId, String taskId, String userId,
                              ChatResponse response, List<AgentStep> steps) {
         response.setIntent(Intents.ORDER);
+        if (message.contains("政策") || message.contains("怎么退") || message.contains("售后怎么")) {
+            var policyTrace = logService.start(taskId, conversationId, "guide-agent", "after_sale_policy",
+                    "售后政策解答", message);
+            response.setReply("本演示支持签收后 7 天内申请退款、退货退款或换货：在订单详情页点击“申请售后”，"
+                    + "填写类型和原因，管理员审核后会给出处理备注。演示环境不产生真实退款。");
+            response.getClarifyOptions().addAll(List.of("查看我的订单", "我要申请售后"));
+            steps.add(policyTrace.success("返回售后政策"));
+            return;
+        }
         var orderTrace = logService.start(taskId, conversationId, "guide-agent", "query_order",
                 "查询订单", message);
         Matcher matcher = ORDER_NO.matcher(message);
@@ -297,7 +308,14 @@ public class GuideAgentService {
         if ("PENDING_PAYMENT".equals(latest.getStatus())) {
             reply.append("订单还未支付，请在 30 分钟内完成支付，否则会自动关闭。");
         } else if ("SHIPPED".equals(latest.getStatus())) {
-            reply.append("包裹已发出，注意查收。");
+            reply.append("包裹已发出");
+            if (StringUtils.hasText(latest.getCarrier())) {
+                reply.append("，承运商 ").append(latest.getCarrier());
+            }
+            if (StringUtils.hasText(latest.getTrackingNo())) {
+                reply.append("，运单号 ").append(latest.getTrackingNo());
+            }
+            reply.append("，注意查收。");
         } else if ("COMPLETED".equals(latest.getStatus())) {
             reply.append("订单已完成，感谢你的购买。");
         }
@@ -385,6 +403,51 @@ public class GuideAgentService {
         response.setReply(reply);
         response.getClarifyOptions().addAll(List.of("想买跑步耳机，预算300以内", "帮我对比前两个", "查询我的订单"));
         trace.success("闲聊回复");
+    }
+
+    /**
+     * 用户偏好只做“软补充”：仅当品类与偏好品类一致时补场景/品牌；
+     * 模糊推荐时可以用偏好品类起手。预算不自动套用，避免跳过澄清。
+     */
+    private void applyPreferences(String message, Slots slots, String userId, ChatResponse response) {
+        List<PreferenceVO> preferences;
+        try {
+            preferences = userService.preferences();
+        } catch (Exception e) {
+            return;
+        }
+        if (preferences.isEmpty()) {
+            return;
+        }
+        String category = preference(preferences, "品类");
+        String scene = preference(preferences, "场景");
+        String brand = preference(preferences, "品牌");
+        if (category != null && !slots.hasCategory() && !StringUtils.hasText(slots.getKeyword())
+                && (message.contains("推荐") || message.contains("随便") || message.contains("看着办"))) {
+            Category leaf = categoryMapper.selectOne(new LambdaQueryWrapper<Category>()
+                    .eq(Category::getName, category).eq(Category::getStatus, 1).last("LIMIT 1"));
+            if (leaf != null) {
+                slots.setCategoryId(leaf.getId());
+                slots.setCategoryName(leaf.getName());
+                response.getAppliedPreferences().add("品类：" + leaf.getName());
+            }
+        }
+        if (category == null || !category.equals(slots.getCategoryName())) {
+            return;
+        }
+        if (scene != null && slots.getScene() == null) {
+            slots.setScene(scene);
+            response.getAppliedPreferences().add("场景：" + scene);
+        }
+        if (brand != null && slots.getBrand() == null) {
+            slots.setBrand(brand);
+            response.getAppliedPreferences().add("品牌：" + brand);
+        }
+    }
+
+    private String preference(List<PreferenceVO> preferences, String key) {
+        return preferences.stream().filter(item -> key.equals(item.getKey()))
+                .map(PreferenceVO::getValue).filter(StringUtils::hasText).findFirst().orElse(null);
     }
 
     private String buildSearchReply(Slots slots, int count, ProductSearchTool.SearchOutcome outcome) {

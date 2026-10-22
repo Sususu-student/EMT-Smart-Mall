@@ -1,16 +1,25 @@
 package com.smartmall.admin.controller;
 
+import com.smartmall.admin.dto.AdminCategoryRequest;
+import com.smartmall.admin.dto.AdminConversationVO;
 import com.smartmall.admin.dto.AdminProductRequest;
+import com.smartmall.admin.dto.ReviewAdminVO;
 import com.smartmall.admin.dto.DashboardVO;
 import com.smartmall.admin.service.AdminService;
+import com.smartmall.aftersale.dto.AfterSaleVO;
+import com.smartmall.aftersale.dto.HandleAfterSaleRequest;
+import com.smartmall.aftersale.service.AfterSaleService;
 import com.smartmall.agent.dto.ExecutionLogVO;
+import com.smartmall.agent.dto.TurnVO;
 import com.smartmall.agent.service.AgentLogService;
+import com.smartmall.agent.service.ConversationService;
 import com.smartmall.auth.AdminOnly;
 import com.smartmall.common.ApiResponse;
 import com.smartmall.common.PageResult;
 import com.smartmall.order.dto.OrderVO;
 import com.smartmall.order.service.OrderService;
 import com.smartmall.product.dto.ProductVO;
+import com.smartmall.product.entity.Category;
 import com.smartmall.user.dto.UserVO;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -35,10 +44,34 @@ public class AdminController {
     private final AdminService adminService;
     private final OrderService orderService;
     private final AgentLogService agentLogService;
+    private final AfterSaleService afterSaleService;
+    private final ConversationService conversationService;
 
     @GetMapping("/stats")
     public ApiResponse<DashboardVO> stats() {
         return ApiResponse.ok(adminService.dashboard());
+    }
+
+    @GetMapping("/categories")
+    public ApiResponse<List<Category>> categories() {
+        return ApiResponse.ok(adminService.categories());
+    }
+
+    @PostMapping("/category")
+    public ApiResponse<Category> createCategory(@Valid @RequestBody AdminCategoryRequest request) {
+        return ApiResponse.ok(adminService.createCategory(request));
+    }
+
+    @PutMapping("/category/{id}")
+    public ApiResponse<Category> updateCategory(@PathVariable String id,
+                                                @Valid @RequestBody AdminCategoryRequest request) {
+        return ApiResponse.ok(adminService.updateCategory(id, request));
+    }
+
+    @DeleteMapping("/category/{id}")
+    public ApiResponse<Void> deleteCategory(@PathVariable String id) {
+        adminService.deleteCategory(id);
+        return ApiResponse.ok();
     }
 
     @GetMapping("/products")
@@ -88,8 +121,9 @@ public class AdminController {
     }
 
     @PutMapping("/order/{id}/ship")
-    public ApiResponse<OrderVO> ship(@PathVariable String id) {
-        return ApiResponse.ok(orderService.adminShip(id));
+    public ApiResponse<OrderVO> ship(@PathVariable String id,
+                                     @RequestBody(required = false) com.smartmall.order.dto.ShipRequest request) {
+        return ApiResponse.ok(orderService.adminShip(id, request));
     }
 
     @GetMapping("/users")
@@ -118,5 +152,44 @@ public class AdminController {
     @GetMapping("/agent-steps")
     public ApiResponse<List<ExecutionLogVO>> agentSteps(@RequestParam String taskId) {
         return ApiResponse.ok(agentLogService.byTask(taskId));
+    }
+
+    @GetMapping("/reviews")
+    public ApiResponse<PageResult<ReviewAdminVO>> reviews(@RequestParam(required = false) Integer status,
+                                                          @RequestParam(required = false) String keyword,
+                                                          @RequestParam(defaultValue = "1") long page,
+                                                          @RequestParam(defaultValue = "10") long size) {
+        return ApiResponse.ok(adminService.reviews(status, keyword, page, size));
+    }
+
+    @PutMapping("/review/{id}/status")
+    public ApiResponse<Void> updateReviewStatus(@PathVariable Long id, @RequestParam Integer status) {
+        adminService.updateReviewStatus(id, status);
+        return ApiResponse.ok();
+    }
+
+    @GetMapping("/after-sales")
+    public ApiResponse<PageResult<AfterSaleVO>> afterSales(@RequestParam(required = false) String status,
+                                                           @RequestParam(defaultValue = "1") long page,
+                                                           @RequestParam(defaultValue = "10") long size) {
+        return ApiResponse.ok(afterSaleService.adminList(status, page, size));
+    }
+
+    @PutMapping("/after-sale/{id}/handle")
+    public ApiResponse<AfterSaleVO> handleAfterSale(@PathVariable String id,
+                                                    @Valid @RequestBody HandleAfterSaleRequest request) {
+        return ApiResponse.ok(afterSaleService.handle(id, request));
+    }
+
+    @GetMapping("/conversations")
+    public ApiResponse<PageResult<AdminConversationVO>> conversations(@RequestParam(required = false) String keyword,
+                                                                      @RequestParam(defaultValue = "1") long page,
+                                                                      @RequestParam(defaultValue = "10") long size) {
+        return ApiResponse.ok(adminService.conversations(keyword, page, size));
+    }
+
+    @GetMapping("/conversations/{id}/turns")
+    public ApiResponse<List<TurnVO>> conversationTurns(@PathVariable String id) {
+        return ApiResponse.ok(conversationService.turnsForAdmin(id));
     }
 }

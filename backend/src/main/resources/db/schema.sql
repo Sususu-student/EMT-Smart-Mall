@@ -101,6 +101,7 @@ CREATE TABLE IF NOT EXISTS product_review (
     username    VARCHAR(50),
     rating      INT DEFAULT 5,
     content     VARCHAR(500),
+    status      TINYINT DEFAULT 1,
     created_at  DATETIME
 );
 
@@ -126,6 +127,8 @@ CREATE TABLE IF NOT EXISTS orders (
     phone         VARCHAR(20),
     address_text  VARCHAR(300),
     remark        VARCHAR(200),
+    carrier       VARCHAR(50),
+    tracking_no   VARCHAR(64),
     created_at    DATETIME,
     paid_at       DATETIME,
     shipped_at    DATETIME,
@@ -185,4 +188,16 @@ CREATE TABLE IF NOT EXISTS compare_record (
     product_ids  TEXT,
     result       TEXT,
     created_at   DATETIME
+);
+
+CREATE TABLE IF NOT EXISTS after_sale (
+    id           VARCHAR(32) PRIMARY KEY,
+    order_id     VARCHAR(32) NOT NULL,
+    user_id      VARCHAR(32) NOT NULL,
+    type         VARCHAR(20) NOT NULL,
+    reason       VARCHAR(500),
+    status       VARCHAR(20) NOT NULL,
+    admin_note   VARCHAR(300),
+    created_at   DATETIME,
+    handled_at   DATETIME
 );

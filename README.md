@@ -22,11 +22,13 @@
 | 意图识别 | LLM 分类 + 强规则兜底/纠偏，7 类意图 |
 | 主动澄清 | 缺少品类或预算时先追问，再检索 |
 | 商品检索 | MySQL/H2 结构化过滤 + 关键词 / 功能 / 场景 / 评分 / 销量加权排序 |
+| 个性化推荐 | 用户偏好（品类/场景/品牌）参与 Agent 排序，对话中显示“已应用偏好” |
 | 可解释推荐 | 推荐理由只引用数据库真实字段，输出前做价格、库存、属性一致性校验 |
 | 对比决策 Agent | 结构化对比矩阵、枚举/数值归一化、可调权重、雷达图与决策建议 |
 | 幻觉治理 | 输入结构化、检索真实化、输出校验化、LLM 不可用降级 |
 | 执行过程可视化 | 每一步写入 `agent_execution_log`，WebSocket 实时推送 |
-| 完整电商闭环 | 注册登录、商品、收藏、购物车、地址、订单、模拟支付、后台管理 |
+| 完整电商闭环 | 注册登录、改密、商品、收藏、购物车、地址、订单、模拟支付、物流单号、评价、售后、后台管理 |
+| 后台运营 | 商品/分类/订单/售后/评价/用户/会话审查/Agent 日志/统计 |
 | 无 Key 可运行 | 未配置 DeepSeek API Key 时自动切换规则引擎，全部功能可演示 |
 
 ---
@@ -144,7 +146,7 @@ llm:
 5. 调整对比权重 → 重新计算得分。
 6. 商品卡片「加购」→ 购物车结算 → 提交订单 → 模拟支付。
 7. 对 Agent 说 `我的订单到哪了` → 返回最近订单状态。
-8. 用 `admin / Admin@123` 登录 → 后台仪表盘、商品/订单/用户管理、Agent 执行日志。
+8. 用 `admin / Admin@123` 登录 → 后台仪表盘、商品/分类/订单/售后/评价/用户管理、会话审查、Agent 执行日志。
 
 ---
 
@@ -248,7 +250,8 @@ G:\EMT
 | 订单 | `POST /api/order`、`GET /api/order/list`、`PUT /api/order/{id}/pay`、`/cancel`、`/confirm` |
 | Agent | `POST /api/agent/chat`、`POST /api/agent/compare`、`GET /api/agent/conversations`、`GET /api/agent/logs` |
 | WebSocket | `ws://localhost:8080/ws/agent?token=JWT&conversationId=...` |
-| 后台 | `GET /api/admin/stats`、`/products`、`/orders`、`/users`、`/agent-logs` |
+| 售后 | `POST /api/after-sale`、`GET /api/after-sale`、`GET /api/after-sale/order/{orderId}` |
+| 后台 | `GET /api/admin/stats`、`/products`、`/categories`、`/orders`、`/after-sales`、`/reviews`、`/users`、`/conversations`、`/agent-logs` |
 
 完整参数与响应以 Swagger 为准。
 
@@ -256,7 +259,7 @@ G:\EMT
 
 ## 8. 数据模型
 
-`sys_user`、`user_address`、`user_preference`、`browse_history`、`user_favorite`、`category`、`product`、`product_image`、`product_review`、`cart_item`、`orders`、`order_item`、`conversation`、`dialogue_turn`、`agent_execution_log`、`compare_record`。
+`sys_user`、`user_address`、`user_preference`、`browse_history`、`user_favorite`、`category`、`product`、`product_image`、`product_review`、`cart_item`、`orders`、`order_item`、`after_sale`、`conversation`、`dialogue_turn`、`agent_execution_log`、`compare_record`。
 
 商品参数以 JSON 文本存储在 `product.attributes`，品类维度定义在 `category.attribute_schema`，因此同一套对比算法可适配不同品类。
 
@@ -279,7 +282,7 @@ node evaluation/run-eval.mjs
 
 同一套用例可以在规则引擎和 DeepSeek 模式下各跑一遍，作为论文的对比实验。可用 `--limit=10`、`--only=S01,D08` 做快速调试，`--strict` 让失败用例返回非零退出码。
 
-本次规则引擎基线（2026-10-22，本机 H2）：40/40 通过，意图 100%、槽位 100%、接口检查 5/5，平均 23ms、P95 60ms。该结果只代表规则基线；仓库未配置 DeepSeek Key，因此没有真实 LLM 准确率数据。按 Flash 当前公开价格，50 条多轮评测通常只需几元，具体以官方价格为准。
+本次规则引擎基线（2026-10-22，本机 H2）：40/40 通过，意图 100%、槽位 100%、接口检查 5/5，平均 23ms、P95 57ms。该结果只代表规则基线；仓库未配置 DeepSeek Key，因此没有真实 LLM 准确率数据。按 Flash 当前公开价格，50 条多轮评测通常只需几元，具体以官方价格为准。
 
 ## 10. 测试与构建
 
@@ -304,7 +307,7 @@ node scripts/browser-smoke.mjs
 
 集成测试 `SmartMallFlowTest` 覆盖：
 
-登录 → 多轮澄清 → 检索推荐 → 对比评分 → 购物车下单 → 支付 → Agent 日志 → 后台统计。
+登录 → 多轮澄清 → 检索推荐 → 对比评分 → 偏好个性化 → 购物车下单 → 支付 → 发货/物流 → 确认收货 → 售后申请/审核 → 评价审核 → 改密 → Agent 日志 → 后台统计。
 
 测试使用 H2 内存库和 130 件真实种子商品，不依赖外部服务。
 

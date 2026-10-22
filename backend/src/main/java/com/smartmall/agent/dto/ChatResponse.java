@@ -22,4 +22,5 @@ public class ChatResponse {
     private boolean degraded;
     private String memorySummary;
     private Slots slots;
+    private java.util.List<String> appliedPreferences = new java.util.ArrayList<>();
 }

@@ -307,6 +307,8 @@ public class OrderService {
         vo.setPhone(order.getPhone());
         vo.setAddressText(order.getAddressText());
         vo.setRemark(order.getRemark());
+        vo.setCarrier(order.getCarrier());
+        vo.setTrackingNo(order.getTrackingNo());
         vo.setCreatedAt(order.getCreatedAt());
         vo.setPaidAt(order.getPaidAt());
         vo.setShippedAt(order.getShippedAt());
@@ -333,7 +335,7 @@ public class OrderService {
     }
 
     @Transactional
-    public OrderVO adminShip(String id) {
+    public OrderVO adminShip(String id, com.smartmall.order.dto.ShipRequest request) {
         Order order = orderMapper.selectById(id);
         if (order == null) {
             throw BizException.notFound("订单不存在");
@@ -343,6 +345,15 @@ public class OrderService {
         }
         order.setStatus(OrderStatus.SHIPPED);
         order.setShippedAt(LocalDateTime.now());
+        if (request != null) {
+            order.setCarrier(StringUtils.hasText(request.getCarrier()) ? request.getCarrier() : "顺丰速运");
+            order.setTrackingNo(StringUtils.hasText(request.getTrackingNo())
+                    ? request.getTrackingNo()
+                    : "SF" + System.currentTimeMillis());
+        } else {
+            order.setCarrier("顺丰速运");
+            order.setTrackingNo("SF" + System.currentTimeMillis());
+        }
         orderMapper.updateById(order);
         return toVO(order, itemsOf(order.getId()));
     }

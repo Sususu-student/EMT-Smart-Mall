@@ -18,5 +18,6 @@ public class ProductReview {
     private String username;
     private Integer rating;
     private String content;
+    private Integer status;
     private LocalDateTime createdAt;
 }

@@ -166,6 +166,7 @@ public class ProductService {
         Page<ProductReview> page = reviewMapper.selectPage(new Page<>(Math.max(1, pageNo), Math.min(50, Math.max(1, size))),
                 new LambdaQueryWrapper<ProductReview>()
                         .eq(ProductReview::getProductId, productId)
+                        .eq(ProductReview::getStatus, 1)
                         .orderByDesc(ProductReview::getCreatedAt));
         return PageResult.of(page);
     }
@@ -189,11 +190,13 @@ public class ProductService {
         review.setUsername(AuthContext.require().username());
         review.setRating(request.getRating());
         review.setContent(request.getContent());
+        review.setStatus(1);
         review.setCreatedAt(LocalDateTime.now());
         reviewMapper.insert(review);
 
         List<ProductReview> all = reviewMapper.selectList(new LambdaQueryWrapper<ProductReview>()
-                .eq(ProductReview::getProductId, productId));
+                .eq(ProductReview::getProductId, productId)
+                .eq(ProductReview::getStatus, 1));
         BigDecimal avg = all.stream().map(r -> BigDecimal.valueOf(r.getRating()))
                 .reduce(BigDecimal.ZERO, BigDecimal::add)
                 .divide(BigDecimal.valueOf(all.size()), 1, RoundingMode.HALF_UP);

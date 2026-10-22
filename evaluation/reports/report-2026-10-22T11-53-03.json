@@ -1,7 +1,7 @@
 {
   "summary": {
-    "startedAt": "2026-10-22T11:37:04.688Z",
-    "finishedAt": "2026-10-22T11:37:05.751Z",
+    "startedAt": "2026-10-22T11:53:03.852Z",
+    "finishedAt": "2026-10-22T11:53:04.915Z",
     "base": "http://127.0.0.1:8080",
     "mode": "rule-engine",
     "model": "deepseek-flash",
@@ -19,7 +19,7 @@
     "replyCompliance": 100,
     "degradedCases": 40,
     "avgLatencyMs": 23,
-    "p95LatencyMs": 60,
+    "p95LatencyMs": 57,
     "apiChecksPassed": 5,
     "apiChecksTotal": 5
   },
@@ -114,8 +114,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 137,
-      "conversationId": "f02d148dafac42a0ad0ee353c8c63553",
+      "latencyMs": 116,
+      "conversationId": "2f5e81bd7db14dafa4d8566b9330c7e8",
       "final": {
         "intent": "search_product",
         "reply": "按你的需求，为你筛选出 3 款蓝牙耳机（预算 300 元以内，偏好 防水，跑步场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
@@ -123,6 +123,7 @@
         "slots": {
           "categoryId": "cat_headphone",
           "categoryName": "蓝牙耳机",
+          "brand": "声屿",
           "scene": "跑步",
           "maxPrice": 300,
           "features": [
@@ -131,17 +132,24 @@
           "budgetUnlimited": false,
           "askedBudget": false,
           "lastProductIds": [
+            "p_headphone_01",
             "p_headphone_02",
-            "p_headphone_03",
-            "p_headphone_01"
+            "p_headphone_03"
           ],
           "lastProductNames": [
+            "声屿 Beat 3 运动版",
             "澎湃 Wave 4 运动版",
-            "律动 Liberty 5 轻盈版",
-            "声屿 Beat 3 运动版"
+            "律动 Liberty 5 轻盈版"
           ]
         },
         "products": [
+          {
+            "id": "p_headphone_01",
+            "name": "声屿 Beat 3 运动版",
+            "price": 199,
+            "reason": "售价 199 元，防水等级 IPX5、续航 18h，更贴合跑步场景。",
+            "fallback": true
+          },
           {
             "id": "p_headphone_02",
             "name": "澎湃 Wave 4 运动版",
@@ -155,13 +163,6 @@
             "price": 299,
             "reason": "售价 299 元，防水等级 IPX4、续航 30h，更贴合跑步场景。",
             "fallback": true
-          },
-          {
-            "id": "p_headphone_01",
-            "name": "声屿 Beat 3 运动版",
-            "price": 199,
-            "reason": "售价 199 元，防水等级 IPX5、续航 18h，更贴合跑步场景。",
-            "fallback": true
           }
         ],
         "orders": []
@@ -169,11 +170,18 @@
       "turnDetails": [
         {
           "message": "我想买跑步用的蓝牙耳机，预算300以内，要防水",
-          "latencyMs": 137,
+          "latencyMs": 116,
           "intent": "search_product",
           "reply": "按你的需求，为你筛选出 3 款蓝牙耳机（预算 300 元以内，偏好 防水，跑步场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
           "degraded": true,
           "products": [
+            {
+              "id": "p_headphone_01",
+              "name": "声屿 Beat 3 运动版",
+              "price": 199,
+              "reason": "售价 199 元，防水等级 IPX5、续航 18h，更贴合跑步场景。",
+              "fallback": true
+            },
             {
               "id": "p_headphone_02",
               "name": "澎湃 Wave 4 运动版",
@@ -187,18 +195,12 @@
               "price": 299,
               "reason": "售价 299 元，防水等级 IPX4、续航 30h，更贴合跑步场景。",
               "fallback": true
-            },
-            {
-              "id": "p_headphone_01",
-              "name": "声屿 Beat 3 运动版",
-              "price": 199,
-              "reason": "售价 199 元，防水等级 IPX5、续航 18h，更贴合跑步场景。",
-              "fallback": true
             }
           ],
           "slots": {
             "categoryId": "cat_headphone",
             "categoryName": "蓝牙耳机",
+            "brand": "声屿",
             "scene": "跑步",
             "maxPrice": 300,
             "features": [
@@ -207,14 +209,14 @@
             "budgetUnlimited": false,
             "askedBudget": false,
             "lastProductIds": [
+              "p_headphone_01",
               "p_headphone_02",
-              "p_headphone_03",
-              "p_headphone_01"
+              "p_headphone_03"
             ],
             "lastProductNames": [
+              "声屿 Beat 3 运动版",
               "澎湃 Wave 4 运动版",
-              "律动 Liberty 5 轻盈版",
-              "声屿 Beat 3 运动版"
+              "律动 Liberty 5 轻盈版"
             ]
           },
           "compare": null,
@@ -244,8 +246,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 17,
-      "conversationId": "a6ab5fde4700466485f102eef34da714",
+      "latencyMs": 14,
+      "conversationId": "f1f8083c6a21486f97db5085d7f9a393",
       "final": {
         "intent": "clarify",
         "reply": "你的预算大概是多少？我可以在预算范围内按防水、续航、评分等维度帮你筛选。",
@@ -253,6 +255,7 @@
         "slots": {
           "categoryId": "cat_headphone",
           "categoryName": "蓝牙耳机",
+          "brand": "声屿",
           "scene": "跑步",
           "features": [],
           "budgetUnlimited": false,
@@ -267,7 +270,7 @@
       "turnDetails": [
         {
           "message": "我想买个耳机，跑步用",
-          "latencyMs": 17,
+          "latencyMs": 14,
           "intent": "clarify",
           "reply": "你的预算大概是多少？我可以在预算范围内按防水、续航、评分等维度帮你筛选。",
           "degraded": true,
@@ -275,6 +278,7 @@
           "slots": {
             "categoryId": "cat_headphone",
             "categoryName": "蓝牙耳机",
+            "brand": "声屿",
             "scene": "跑步",
             "features": [],
             "budgetUnlimited": false,
@@ -317,50 +321,52 @@
         }
       ],
       "error": null,
-      "latencyMs": 39,
-      "conversationId": "1faa0334f580495eb261dafff6f08882",
+      "latencyMs": 50,
+      "conversationId": "afe172e12b9e4da994ca447c70cc4c8e",
       "final": {
         "intent": "search_product",
-        "reply": "按你的需求，为你筛选出 3 款蓝牙耳机（预算 300 元以内），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
+        "reply": "按你的需求，为你筛选出 3 款蓝牙耳机（预算 300 元以内，跑步场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
         "degraded": true,
         "slots": {
           "categoryId": "cat_headphone",
           "categoryName": "蓝牙耳机",
+          "brand": "声屿",
+          "scene": "跑步",
           "maxPrice": 300,
           "features": [],
           "budgetUnlimited": false,
           "askedBudget": true,
           "lastProductIds": [
+            "p_headphone_01",
             "p_headphone_02",
-            "p_headphone_03",
-            "p_headphone_01"
+            "p_headphone_03"
           ],
           "lastProductNames": [
+            "声屿 Beat 3 运动版",
             "澎湃 Wave 4 运动版",
-            "律动 Liberty 5 轻盈版",
-            "声屿 Beat 3 运动版"
+            "律动 Liberty 5 轻盈版"
           ]
         },
         "products": [
           {
+            "id": "p_headphone_01",
+            "name": "声屿 Beat 3 运动版",
+            "price": 199,
+            "reason": "售价 199 元，续航 18h、防水等级 IPX5，更贴合跑步场景。",
+            "fallback": true
+          },
+          {
             "id": "p_headphone_02",
             "name": "澎湃 Wave 4 运动版",
             "price": 279,
-            "reason": "售价 279 元，续航 24h、防水等级 IPX6，参数与价格比较均衡。",
+            "reason": "售价 279 元，续航 24h、防水等级 IPX6，更贴合跑步场景。",
             "fallback": true
           },
           {
             "id": "p_headphone_03",
             "name": "律动 Liberty 5 轻盈版",
             "price": 299,
-            "reason": "售价 299 元，续航 30h、防水等级 IPX4，参数与价格比较均衡。",
-            "fallback": true
-          },
-          {
-            "id": "p_headphone_01",
-            "name": "声屿 Beat 3 运动版",
-            "price": 199,
-            "reason": "售价 199 元，续航 18h、防水等级 IPX5，参数与价格比较均衡。",
+            "reason": "售价 299 元，续航 30h、防水等级 IPX4，更贴合跑步场景。",
             "fallback": true
           }
         ],
@@ -369,7 +375,7 @@
       "turnDetails": [
         {
           "message": "我想买耳机",
-          "latencyMs": 15,
+          "latencyMs": 19,
           "intent": "clarify",
           "reply": "你的预算大概是多少？我可以在预算范围内按防水、续航、评分等维度帮你筛选。",
           "degraded": true,
@@ -377,6 +383,8 @@
           "slots": {
             "categoryId": "cat_headphone",
             "categoryName": "蓝牙耳机",
+            "brand": "声屿",
+            "scene": "跑步",
             "features": [],
             "budgetUnlimited": false,
             "askedBudget": true,
@@ -389,49 +397,51 @@
         },
         {
           "message": "300以内",
-          "latencyMs": 24,
+          "latencyMs": 30,
           "intent": "search_product",
-          "reply": "按你的需求，为你筛选出 3 款蓝牙耳机（预算 300 元以内），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
+          "reply": "按你的需求，为你筛选出 3 款蓝牙耳机（预算 300 元以内，跑步场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
           "degraded": true,
           "products": [
+            {
+              "id": "p_headphone_01",
+              "name": "声屿 Beat 3 运动版",
+              "price": 199,
+              "reason": "售价 199 元，续航 18h、防水等级 IPX5，更贴合跑步场景。",
+              "fallback": true
+            },
             {
               "id": "p_headphone_02",
               "name": "澎湃 Wave 4 运动版",
               "price": 279,
-              "reason": "售价 279 元，续航 24h、防水等级 IPX6，参数与价格比较均衡。",
+              "reason": "售价 279 元，续航 24h、防水等级 IPX6，更贴合跑步场景。",
               "fallback": true
             },
             {
               "id": "p_headphone_03",
               "name": "律动 Liberty 5 轻盈版",
               "price": 299,
-              "reason": "售价 299 元，续航 30h、防水等级 IPX4，参数与价格比较均衡。",
-              "fallback": true
-            },
-            {
-              "id": "p_headphone_01",
-              "name": "声屿 Beat 3 运动版",
-              "price": 199,
-              "reason": "售价 199 元，续航 18h、防水等级 IPX5，参数与价格比较均衡。",
+              "reason": "售价 299 元，续航 30h、防水等级 IPX4，更贴合跑步场景。",
               "fallback": true
             }
           ],
           "slots": {
             "categoryId": "cat_headphone",
             "categoryName": "蓝牙耳机",
+            "brand": "声屿",
+            "scene": "跑步",
             "maxPrice": 300,
             "features": [],
             "budgetUnlimited": false,
             "askedBudget": true,
             "lastProductIds": [
+              "p_headphone_01",
               "p_headphone_02",
-              "p_headphone_03",
-              "p_headphone_01"
+              "p_headphone_03"
             ],
             "lastProductNames": [
+              "声屿 Beat 3 运动版",
               "澎湃 Wave 4 运动版",
-              "律动 Liberty 5 轻盈版",
-              "声屿 Beat 3 运动版"
+              "律动 Liberty 5 轻盈版"
             ]
           },
           "compare": null,
@@ -476,8 +486,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 43,
-      "conversationId": "68b6a954c49c4aa9aa17f7dc8de003a1",
+      "latencyMs": 57,
+      "conversationId": "94e44cee520040e694ff7eef7205d0be",
       "final": {
         "intent": "search_product",
         "reply": "按你的需求，为你筛选出 3 款蓝牙耳机（预算 300 元以内，偏好 防水，跑步场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
@@ -486,6 +496,7 @@
           "categoryId": "cat_headphone",
           "categoryName": "蓝牙耳机",
           "keyword": "要防水",
+          "brand": "声屿",
           "scene": "跑步",
           "maxPrice": 300,
           "features": [
@@ -494,17 +505,24 @@
           "budgetUnlimited": false,
           "askedBudget": true,
           "lastProductIds": [
+            "p_headphone_01",
             "p_headphone_02",
-            "p_headphone_03",
-            "p_headphone_01"
+            "p_headphone_03"
           ],
           "lastProductNames": [
+            "声屿 Beat 3 运动版",
             "澎湃 Wave 4 运动版",
-            "律动 Liberty 5 轻盈版",
-            "声屿 Beat 3 运动版"
+            "律动 Liberty 5 轻盈版"
           ]
         },
         "products": [
+          {
+            "id": "p_headphone_01",
+            "name": "声屿 Beat 3 运动版",
+            "price": 199,
+            "reason": "售价 199 元，防水等级 IPX5、续航 18h，更贴合跑步场景。",
+            "fallback": true
+          },
           {
             "id": "p_headphone_02",
             "name": "澎湃 Wave 4 运动版",
@@ -518,13 +536,6 @@
             "price": 299,
             "reason": "售价 299 元，防水等级 IPX4、续航 30h，更贴合跑步场景。",
             "fallback": true
-          },
-          {
-            "id": "p_headphone_01",
-            "name": "声屿 Beat 3 运动版",
-            "price": 199,
-            "reason": "售价 199 元，防水等级 IPX5、续航 18h，更贴合跑步场景。",
-            "fallback": true
           }
         ],
         "orders": []
@@ -532,7 +543,7 @@
       "turnDetails": [
         {
           "message": "我想买耳机，跑步用",
-          "latencyMs": 14,
+          "latencyMs": 19,
           "intent": "clarify",
           "reply": "你的预算大概是多少？我可以在预算范围内按防水、续航、评分等维度帮你筛选。",
           "degraded": true,
@@ -540,6 +551,7 @@
           "slots": {
             "categoryId": "cat_headphone",
             "categoryName": "蓝牙耳机",
+            "brand": "声屿",
             "scene": "跑步",
             "features": [],
             "budgetUnlimited": false,
@@ -553,11 +565,18 @@
         },
         {
           "message": "300以内，要防水",
-          "latencyMs": 29,
+          "latencyMs": 37,
           "intent": "search_product",
           "reply": "按你的需求，为你筛选出 3 款蓝牙耳机（预算 300 元以内，偏好 防水，跑步场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
           "degraded": true,
           "products": [
+            {
+              "id": "p_headphone_01",
+              "name": "声屿 Beat 3 运动版",
+              "price": 199,
+              "reason": "售价 199 元，防水等级 IPX5、续航 18h，更贴合跑步场景。",
+              "fallback": true
+            },
             {
               "id": "p_headphone_02",
               "name": "澎湃 Wave 4 运动版",
@@ -571,19 +590,13 @@
               "price": 299,
               "reason": "售价 299 元，防水等级 IPX4、续航 30h，更贴合跑步场景。",
               "fallback": true
-            },
-            {
-              "id": "p_headphone_01",
-              "name": "声屿 Beat 3 运动版",
-              "price": 199,
-              "reason": "售价 199 元，防水等级 IPX5、续航 18h，更贴合跑步场景。",
-              "fallback": true
             }
           ],
           "slots": {
             "categoryId": "cat_headphone",
             "categoryName": "蓝牙耳机",
             "keyword": "要防水",
+            "brand": "声屿",
             "scene": "跑步",
             "maxPrice": 300,
             "features": [
@@ -592,14 +605,14 @@
             "budgetUnlimited": false,
             "askedBudget": true,
             "lastProductIds": [
+              "p_headphone_01",
               "p_headphone_02",
-              "p_headphone_03",
-              "p_headphone_01"
+              "p_headphone_03"
             ],
             "lastProductNames": [
+              "声屿 Beat 3 运动版",
               "澎湃 Wave 4 运动版",
-              "律动 Liberty 5 轻盈版",
-              "声屿 Beat 3 运动版"
+              "律动 Liberty 5 轻盈版"
             ]
           },
           "compare": null,
@@ -641,15 +654,17 @@
         }
       ],
       "error": null,
-      "latencyMs": 20,
-      "conversationId": "dc642ff7eb5e45f997853579e6414744",
+      "latencyMs": 24,
+      "conversationId": "24cc314b783e4abe9c663ada4290202a",
       "final": {
         "intent": "search_product",
-        "reply": "按你的需求，为你筛选出 3 款蓝牙耳机（预算 500 元以内，300 元以上），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
+        "reply": "按你的需求，为你筛选出 3 款蓝牙耳机（预算 500 元以内，300 元以上，跑步场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
         "degraded": true,
         "slots": {
           "categoryId": "cat_headphone",
           "categoryName": "蓝牙耳机",
+          "brand": "声屿",
+          "scene": "跑步",
           "minPrice": 300,
           "maxPrice": 500,
           "features": [],
@@ -671,21 +686,21 @@
             "id": "p_headphone_05",
             "name": "声屿 Air Max 运动版",
             "price": 399,
-            "reason": "售价 399 元，续航 40h、防水等级 IPX7，参数与价格比较均衡。",
+            "reason": "售价 399 元，续航 40h、防水等级 IPX7，更贴合跑步场景。",
             "fallback": true
           },
           {
             "id": "p_headphone_06",
             "name": "澎湃 Wave 3 运动版",
             "price": 459,
-            "reason": "售价 459 元，续航 48h、防水等级 IPX5，参数与价格比较均衡。",
+            "reason": "售价 459 元，续航 48h、防水等级 IPX5，更贴合跑步场景。",
             "fallback": true
           },
           {
             "id": "p_headphone_04",
             "name": "澎湃 Beat Pro 运动版",
             "price": 349,
-            "reason": "售价 349 元，续航 36h、防水等级 IPX5，参数与价格比较均衡。",
+            "reason": "售价 349 元，续航 36h、防水等级 IPX5，更贴合跑步场景。",
             "fallback": true
           }
         ],
@@ -694,36 +709,38 @@
       "turnDetails": [
         {
           "message": "300到500元的蓝牙耳机",
-          "latencyMs": 20,
+          "latencyMs": 24,
           "intent": "search_product",
-          "reply": "按你的需求，为你筛选出 3 款蓝牙耳机（预算 500 元以内，300 元以上），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
+          "reply": "按你的需求，为你筛选出 3 款蓝牙耳机（预算 500 元以内，300 元以上，跑步场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
           "degraded": true,
           "products": [
             {
               "id": "p_headphone_05",
               "name": "声屿 Air Max 运动版",
               "price": 399,
-              "reason": "售价 399 元，续航 40h、防水等级 IPX7，参数与价格比较均衡。",
+              "reason": "售价 399 元，续航 40h、防水等级 IPX7，更贴合跑步场景。",
               "fallback": true
             },
             {
               "id": "p_headphone_06",
               "name": "澎湃 Wave 3 运动版",
               "price": 459,
-              "reason": "售价 459 元，续航 48h、防水等级 IPX5，参数与价格比较均衡。",
+              "reason": "售价 459 元，续航 48h、防水等级 IPX5，更贴合跑步场景。",
               "fallback": true
             },
             {
               "id": "p_headphone_04",
               "name": "澎湃 Beat Pro 运动版",
               "price": 349,
-              "reason": "售价 349 元，续航 36h、防水等级 IPX5，参数与价格比较均衡。",
+              "reason": "售价 349 元，续航 36h、防水等级 IPX5，更贴合跑步场景。",
               "fallback": true
             }
           ],
           "slots": {
             "categoryId": "cat_headphone",
             "categoryName": "蓝牙耳机",
+            "brand": "声屿",
+            "scene": "跑步",
             "minPrice": 300,
             "maxPrice": 500,
             "features": [],
@@ -773,50 +790,52 @@
         }
       ],
       "error": null,
-      "latencyMs": 32,
-      "conversationId": "d5badbc5a52d4590aa8d857d93634ffe",
+      "latencyMs": 29,
+      "conversationId": "4e035b78aca44967a512f8610489b4f8",
       "final": {
         "intent": "search_product",
-        "reply": "按你的需求，为你筛选出 3 款蓝牙耳机（预算 300 元以内），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
+        "reply": "按你的需求，为你筛选出 3 款蓝牙耳机（预算 300 元以内，跑步场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
         "degraded": true,
         "slots": {
           "categoryId": "cat_headphone",
           "categoryName": "蓝牙耳机",
+          "brand": "声屿",
+          "scene": "跑步",
           "maxPrice": 300,
           "features": [],
           "budgetUnlimited": false,
           "askedBudget": false,
           "lastProductIds": [
+            "p_headphone_01",
             "p_headphone_02",
-            "p_headphone_03",
-            "p_headphone_01"
+            "p_headphone_03"
           ],
           "lastProductNames": [
+            "声屿 Beat 3 运动版",
             "澎湃 Wave 4 运动版",
-            "律动 Liberty 5 轻盈版",
-            "声屿 Beat 3 运动版"
+            "律动 Liberty 5 轻盈版"
           ]
         },
         "products": [
           {
+            "id": "p_headphone_01",
+            "name": "声屿 Beat 3 运动版",
+            "price": 199,
+            "reason": "售价 199 元，续航 18h、防水等级 IPX5，更贴合跑步场景。",
+            "fallback": true
+          },
+          {
             "id": "p_headphone_02",
             "name": "澎湃 Wave 4 运动版",
             "price": 279,
-            "reason": "售价 279 元，续航 24h、防水等级 IPX6，参数与价格比较均衡。",
+            "reason": "售价 279 元，续航 24h、防水等级 IPX6，更贴合跑步场景。",
             "fallback": true
           },
           {
             "id": "p_headphone_03",
             "name": "律动 Liberty 5 轻盈版",
             "price": 299,
-            "reason": "售价 299 元，续航 30h、防水等级 IPX4，参数与价格比较均衡。",
-            "fallback": true
-          },
-          {
-            "id": "p_headphone_01",
-            "name": "声屿 Beat 3 运动版",
-            "price": 199,
-            "reason": "售价 199 元，续航 18h、防水等级 IPX5，参数与价格比较均衡。",
+            "reason": "售价 299 元，续航 30h、防水等级 IPX4，更贴合跑步场景。",
             "fallback": true
           }
         ],
@@ -825,49 +844,51 @@
       "turnDetails": [
         {
           "message": "三百元以内的蓝牙耳机",
-          "latencyMs": 32,
+          "latencyMs": 29,
           "intent": "search_product",
-          "reply": "按你的需求，为你筛选出 3 款蓝牙耳机（预算 300 元以内），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
+          "reply": "按你的需求，为你筛选出 3 款蓝牙耳机（预算 300 元以内，跑步场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
           "degraded": true,
           "products": [
+            {
+              "id": "p_headphone_01",
+              "name": "声屿 Beat 3 运动版",
+              "price": 199,
+              "reason": "售价 199 元，续航 18h、防水等级 IPX5，更贴合跑步场景。",
+              "fallback": true
+            },
             {
               "id": "p_headphone_02",
               "name": "澎湃 Wave 4 运动版",
               "price": 279,
-              "reason": "售价 279 元，续航 24h、防水等级 IPX6，参数与价格比较均衡。",
+              "reason": "售价 279 元，续航 24h、防水等级 IPX6，更贴合跑步场景。",
               "fallback": true
             },
             {
               "id": "p_headphone_03",
               "name": "律动 Liberty 5 轻盈版",
               "price": 299,
-              "reason": "售价 299 元，续航 30h、防水等级 IPX4，参数与价格比较均衡。",
-              "fallback": true
-            },
-            {
-              "id": "p_headphone_01",
-              "name": "声屿 Beat 3 运动版",
-              "price": 199,
-              "reason": "售价 199 元，续航 18h、防水等级 IPX5，参数与价格比较均衡。",
+              "reason": "售价 299 元，续航 30h、防水等级 IPX4，更贴合跑步场景。",
               "fallback": true
             }
           ],
           "slots": {
             "categoryId": "cat_headphone",
             "categoryName": "蓝牙耳机",
+            "brand": "声屿",
+            "scene": "跑步",
             "maxPrice": 300,
             "features": [],
             "budgetUnlimited": false,
             "askedBudget": false,
             "lastProductIds": [
+              "p_headphone_01",
               "p_headphone_02",
-              "p_headphone_03",
-              "p_headphone_01"
+              "p_headphone_03"
             ],
             "lastProductNames": [
+              "声屿 Beat 3 运动版",
               "澎湃 Wave 4 运动版",
-              "律动 Liberty 5 轻盈版",
-              "声屿 Beat 3 运动版"
+              "律动 Liberty 5 轻盈版"
             ]
           },
           "compare": null,
@@ -903,31 +924,33 @@
         }
       ],
       "error": null,
-      "latencyMs": 21,
-      "conversationId": "c16a1bf4cdda4218a8732029af73e0db",
+      "latencyMs": 24,
+      "conversationId": "7315e2f3ef154d81b774261325680928",
       "final": {
         "intent": "search_product",
-        "reply": "按你的需求，为你筛选出 5 款蓝牙耳机，已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
+        "reply": "按你的需求，为你筛选出 5 款蓝牙耳机（跑步场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
         "degraded": true,
         "slots": {
           "categoryId": "cat_headphone",
           "categoryName": "蓝牙耳机",
+          "brand": "声屿",
+          "scene": "跑步",
           "features": [],
           "budgetUnlimited": true,
           "askedBudget": false,
           "lastProductIds": [
             "p_headphone_05",
-            "p_headphone_02",
             "p_headphone_10",
-            "p_headphone_06",
-            "p_headphone_09"
+            "p_headphone_01",
+            "p_headphone_08",
+            "p_headphone_02"
           ],
           "lastProductNames": [
             "声屿 Air Max 运动版",
-            "澎湃 Wave 4 运动版",
             "声屿 Liberty Max 运动版",
-            "澎湃 Wave 3 运动版",
-            "云听 Liberty Pro 运动版"
+            "声屿 Beat 3 运动版",
+            "声屿 Beat 5 运动版",
+            "澎湃 Wave 4 运动版"
           ]
         },
         "products": [
@@ -935,35 +958,35 @@
             "id": "p_headphone_05",
             "name": "声屿 Air Max 运动版",
             "price": 399,
-            "reason": "售价 399 元，续航 40h、防水等级 IPX7，参数与价格比较均衡。",
-            "fallback": true
-          },
-          {
-            "id": "p_headphone_02",
-            "name": "澎湃 Wave 4 运动版",
-            "price": 279,
-            "reason": "售价 279 元，续航 24h、防水等级 IPX6，参数与价格比较均衡。",
+            "reason": "售价 399 元，续航 40h、防水等级 IPX7，更贴合跑步场景。",
             "fallback": true
           },
           {
             "id": "p_headphone_10",
             "name": "声屿 Liberty Max 运动版",
             "price": 899,
-            "reason": "售价 899 元，续航 36h、防水等级 IPX7，参数与价格比较均衡。",
+            "reason": "售价 899 元，续航 36h、防水等级 IPX7，更贴合跑步场景。",
             "fallback": true
           },
           {
-            "id": "p_headphone_06",
-            "name": "澎湃 Wave 3 运动版",
-            "price": 459,
-            "reason": "售价 459 元，续航 48h、防水等级 IPX5，参数与价格比较均衡。",
+            "id": "p_headphone_01",
+            "name": "声屿 Beat 3 运动版",
+            "price": 199,
+            "reason": "售价 199 元，续航 18h、防水等级 IPX5，更贴合跑步场景。",
             "fallback": true
           },
           {
-            "id": "p_headphone_09",
-            "name": "云听 Liberty Pro 运动版",
-            "price": 699,
-            "reason": "售价 699 元，续航 30h、防水等级 IPX5，参数与价格比较均衡。",
+            "id": "p_headphone_08",
+            "name": "声屿 Beat 5 运动版",
+            "price": 599,
+            "reason": "售价 599 元，续航 24h、防水等级 IPX6，更贴合跑步场景。",
+            "fallback": true
+          },
+          {
+            "id": "p_headphone_02",
+            "name": "澎湃 Wave 4 运动版",
+            "price": 279,
+            "reason": "售价 279 元，续航 24h、防水等级 IPX6，更贴合跑步场景。",
             "fallback": true
           }
         ],
@@ -972,66 +995,68 @@
       "turnDetails": [
         {
           "message": "蓝牙耳机预算不限",
-          "latencyMs": 21,
+          "latencyMs": 24,
           "intent": "search_product",
-          "reply": "按你的需求，为你筛选出 5 款蓝牙耳机，已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
+          "reply": "按你的需求，为你筛选出 5 款蓝牙耳机（跑步场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
           "degraded": true,
           "products": [
             {
               "id": "p_headphone_05",
               "name": "声屿 Air Max 运动版",
               "price": 399,
-              "reason": "售价 399 元，续航 40h、防水等级 IPX7，参数与价格比较均衡。",
-              "fallback": true
-            },
-            {
-              "id": "p_headphone_02",
-              "name": "澎湃 Wave 4 运动版",
-              "price": 279,
-              "reason": "售价 279 元，续航 24h、防水等级 IPX6，参数与价格比较均衡。",
+              "reason": "售价 399 元，续航 40h、防水等级 IPX7，更贴合跑步场景。",
               "fallback": true
             },
             {
               "id": "p_headphone_10",
               "name": "声屿 Liberty Max 运动版",
               "price": 899,
-              "reason": "售价 899 元，续航 36h、防水等级 IPX7，参数与价格比较均衡。",
+              "reason": "售价 899 元，续航 36h、防水等级 IPX7，更贴合跑步场景。",
               "fallback": true
             },
             {
-              "id": "p_headphone_06",
-              "name": "澎湃 Wave 3 运动版",
-              "price": 459,
-              "reason": "售价 459 元，续航 48h、防水等级 IPX5，参数与价格比较均衡。",
+              "id": "p_headphone_01",
+              "name": "声屿 Beat 3 运动版",
+              "price": 199,
+              "reason": "售价 199 元，续航 18h、防水等级 IPX5，更贴合跑步场景。",
               "fallback": true
             },
             {
-              "id": "p_headphone_09",
-              "name": "云听 Liberty Pro 运动版",
-              "price": 699,
-              "reason": "售价 699 元，续航 30h、防水等级 IPX5，参数与价格比较均衡。",
+              "id": "p_headphone_08",
+              "name": "声屿 Beat 5 运动版",
+              "price": 599,
+              "reason": "售价 599 元，续航 24h、防水等级 IPX6，更贴合跑步场景。",
+              "fallback": true
+            },
+            {
+              "id": "p_headphone_02",
+              "name": "澎湃 Wave 4 运动版",
+              "price": 279,
+              "reason": "售价 279 元，续航 24h、防水等级 IPX6，更贴合跑步场景。",
               "fallback": true
             }
           ],
           "slots": {
             "categoryId": "cat_headphone",
             "categoryName": "蓝牙耳机",
+            "brand": "声屿",
+            "scene": "跑步",
             "features": [],
             "budgetUnlimited": true,
             "askedBudget": false,
             "lastProductIds": [
               "p_headphone_05",
-              "p_headphone_02",
               "p_headphone_10",
-              "p_headphone_06",
-              "p_headphone_09"
+              "p_headphone_01",
+              "p_headphone_08",
+              "p_headphone_02"
             ],
             "lastProductNames": [
               "声屿 Air Max 运动版",
-              "澎湃 Wave 4 运动版",
               "声屿 Liberty Max 运动版",
-              "澎湃 Wave 3 运动版",
-              "云听 Liberty Pro 运动版"
+              "声屿 Beat 3 运动版",
+              "声屿 Beat 5 运动版",
+              "澎湃 Wave 4 运动版"
             ]
           },
           "compare": null,
@@ -1073,16 +1098,17 @@
         }
       ],
       "error": null,
-      "latencyMs": 19,
-      "conversationId": "b2ec02314c5a456486066fbb69a01937",
+      "latencyMs": 21,
+      "conversationId": "46dafc69772f4d18be01b808ca6b606d",
       "final": {
         "intent": "search_product",
-        "reply": "按你的需求，为你筛选出 5 款蓝牙耳机（预算 500 元以内），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
+        "reply": "按你的需求，为你筛选出 5 款蓝牙耳机（预算 500 元以内，跑步场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
         "degraded": true,
         "slots": {
           "categoryId": "cat_headphone",
           "categoryName": "蓝牙耳机",
           "brand": "声屿",
+          "scene": "跑步",
           "maxPrice": 500,
           "features": [],
           "budgetUnlimited": false,
@@ -1107,35 +1133,35 @@
             "id": "p_headphone_05",
             "name": "声屿 Air Max 运动版",
             "price": 399,
-            "reason": "售价 399 元，续航 40h、防水等级 IPX7，参数与价格比较均衡。",
+            "reason": "售价 399 元，续航 40h、防水等级 IPX7，更贴合跑步场景。",
             "fallback": true
           },
           {
             "id": "p_headphone_01",
             "name": "声屿 Beat 3 运动版",
             "price": 199,
-            "reason": "售价 199 元，续航 18h、防水等级 IPX5，参数与价格比较均衡。",
+            "reason": "售价 199 元，续航 18h、防水等级 IPX5，更贴合跑步场景。",
             "fallback": true
           },
           {
             "id": "p_headphone_02",
             "name": "澎湃 Wave 4 运动版",
             "price": 279,
-            "reason": "售价 279 元，续航 24h、防水等级 IPX6，参数与价格比较均衡。",
+            "reason": "售价 279 元，续航 24h、防水等级 IPX6，更贴合跑步场景。",
             "fallback": true
           },
           {
             "id": "p_headphone_06",
             "name": "澎湃 Wave 3 运动版",
             "price": 459,
-            "reason": "售价 459 元，续航 48h、防水等级 IPX5，参数与价格比较均衡。",
+            "reason": "售价 459 元，续航 48h、防水等级 IPX5，更贴合跑步场景。",
             "fallback": true
           },
           {
             "id": "p_headphone_04",
             "name": "澎湃 Beat Pro 运动版",
             "price": 349,
-            "reason": "售价 349 元，续航 36h、防水等级 IPX5，参数与价格比较均衡。",
+            "reason": "售价 349 元，续航 36h、防水等级 IPX5，更贴合跑步场景。",
             "fallback": true
           }
         ],
@@ -1144,44 +1170,44 @@
       "turnDetails": [
         {
           "message": "声屿的蓝牙耳机，500以内",
-          "latencyMs": 19,
+          "latencyMs": 21,
           "intent": "search_product",
-          "reply": "按你的需求，为你筛选出 5 款蓝牙耳机（预算 500 元以内），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
+          "reply": "按你的需求，为你筛选出 5 款蓝牙耳机（预算 500 元以内，跑步场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
           "degraded": true,
           "products": [
             {
               "id": "p_headphone_05",
               "name": "声屿 Air Max 运动版",
               "price": 399,
-              "reason": "售价 399 元，续航 40h、防水等级 IPX7，参数与价格比较均衡。",
+              "reason": "售价 399 元，续航 40h、防水等级 IPX7，更贴合跑步场景。",
               "fallback": true
             },
             {
               "id": "p_headphone_01",
               "name": "声屿 Beat 3 运动版",
               "price": 199,
-              "reason": "售价 199 元，续航 18h、防水等级 IPX5，参数与价格比较均衡。",
+              "reason": "售价 199 元，续航 18h、防水等级 IPX5，更贴合跑步场景。",
               "fallback": true
             },
             {
               "id": "p_headphone_02",
               "name": "澎湃 Wave 4 运动版",
               "price": 279,
-              "reason": "售价 279 元，续航 24h、防水等级 IPX6，参数与价格比较均衡。",
+              "reason": "售价 279 元，续航 24h、防水等级 IPX6，更贴合跑步场景。",
               "fallback": true
             },
             {
               "id": "p_headphone_06",
               "name": "澎湃 Wave 3 运动版",
               "price": 459,
-              "reason": "售价 459 元，续航 48h、防水等级 IPX5，参数与价格比较均衡。",
+              "reason": "售价 459 元，续航 48h、防水等级 IPX5，更贴合跑步场景。",
               "fallback": true
             },
             {
               "id": "p_headphone_04",
               "name": "澎湃 Beat Pro 运动版",
               "price": 349,
-              "reason": "售价 349 元，续航 36h、防水等级 IPX5，参数与价格比较均衡。",
+              "reason": "售价 349 元，续航 36h、防水等级 IPX5，更贴合跑步场景。",
               "fallback": true
             }
           ],
@@ -1189,6 +1215,7 @@
             "categoryId": "cat_headphone",
             "categoryName": "蓝牙耳机",
             "brand": "声屿",
+            "scene": "跑步",
             "maxPrice": 500,
             "features": [],
             "budgetUnlimited": false,
@@ -1249,8 +1276,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 22,
-      "conversationId": "52512c4969ce4cd8bc41f46090776c75",
+      "latencyMs": 21,
+      "conversationId": "7c30286bc45a48e38a860fee27997545",
       "final": {
         "intent": "search_product",
         "reply": "按你的需求，为你筛选出 5 款蓝牙耳机（预算 500 元以内，偏好 降噪，通勤场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
@@ -1258,6 +1285,7 @@
         "slots": {
           "categoryId": "cat_headphone",
           "categoryName": "蓝牙耳机",
+          "brand": "声屿",
           "scene": "通勤",
           "maxPrice": 500,
           "features": [
@@ -1266,28 +1294,21 @@
           "budgetUnlimited": false,
           "askedBudget": false,
           "lastProductIds": [
-            "p_headphone_04",
             "p_headphone_01",
             "p_headphone_05",
+            "p_headphone_04",
             "p_headphone_02",
             "p_headphone_06"
           ],
           "lastProductNames": [
-            "澎湃 Beat Pro 运动版",
             "声屿 Beat 3 运动版",
             "声屿 Air Max 运动版",
+            "澎湃 Beat Pro 运动版",
             "澎湃 Wave 4 运动版",
             "澎湃 Wave 3 运动版"
           ]
         },
         "products": [
-          {
-            "id": "p_headphone_04",
-            "name": "澎湃 Beat Pro 运动版",
-            "price": 349,
-            "reason": "售价 349 元，降噪 主动降噪、续航 36h，更贴合通勤场景。",
-            "fallback": true
-          },
           {
             "id": "p_headphone_01",
             "name": "声屿 Beat 3 运动版",
@@ -1300,6 +1321,13 @@
             "name": "声屿 Air Max 运动版",
             "price": 399,
             "reason": "售价 399 元，降噪 通话降噪、续航 40h，更贴合通勤场景。",
+            "fallback": true
+          },
+          {
+            "id": "p_headphone_04",
+            "name": "澎湃 Beat Pro 运动版",
+            "price": 349,
+            "reason": "售价 349 元，降噪 主动降噪、续航 36h，更贴合通勤场景。",
             "fallback": true
           },
           {
@@ -1328,13 +1356,6 @@
           "degraded": true,
           "products": [
             {
-              "id": "p_headphone_04",
-              "name": "澎湃 Beat Pro 运动版",
-              "price": 349,
-              "reason": "售价 349 元，降噪 主动降噪、续航 36h，更贴合通勤场景。",
-              "fallback": true
-            },
-            {
               "id": "p_headphone_01",
               "name": "声屿 Beat 3 运动版",
               "price": 199,
@@ -1346,6 +1367,13 @@
               "name": "声屿 Air Max 运动版",
               "price": 399,
               "reason": "售价 399 元，降噪 通话降噪、续航 40h，更贴合通勤场景。",
+              "fallback": true
+            },
+            {
+              "id": "p_headphone_04",
+              "name": "澎湃 Beat Pro 运动版",
+              "price": 349,
+              "reason": "售价 349 元，降噪 主动降噪、续航 36h，更贴合通勤场景。",
               "fallback": true
             },
             {
@@ -1366,6 +1394,7 @@
           "slots": {
             "categoryId": "cat_headphone",
             "categoryName": "蓝牙耳机",
+            "brand": "声屿",
             "scene": "通勤",
             "maxPrice": 500,
             "features": [
@@ -1374,16 +1403,16 @@
             "budgetUnlimited": false,
             "askedBudget": false,
             "lastProductIds": [
-              "p_headphone_04",
               "p_headphone_01",
               "p_headphone_05",
+              "p_headphone_04",
               "p_headphone_02",
               "p_headphone_06"
             ],
             "lastProductNames": [
-              "澎湃 Beat Pro 运动版",
               "声屿 Beat 3 运动版",
               "声屿 Air Max 运动版",
+              "澎湃 Beat Pro 运动版",
               "澎湃 Wave 4 运动版",
               "澎湃 Wave 3 运动版"
             ]
@@ -1428,15 +1457,16 @@
         }
       ],
       "error": null,
-      "latencyMs": 30,
-      "conversationId": "1d14bbb7d49344adafe59cc60d1d44da",
+      "latencyMs": 37,
+      "conversationId": "f6980a1d396145c99cc076f35dcaacb3",
       "final": {
         "intent": "search_product",
-        "reply": "按你的需求，为你筛选出 3 款咖啡机（预算 1000 元以内），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
+        "reply": "按你的需求，为你筛选出 3 款咖啡机（预算 1000 元以内，通勤场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
         "degraded": true,
         "slots": {
           "categoryId": "cat_coffee",
           "categoryName": "咖啡机",
+          "scene": "通勤",
           "maxPrice": 1000,
           "features": [],
           "budgetUnlimited": false,
@@ -1457,21 +1487,21 @@
             "id": "p_coffee_02",
             "name": "晨光 Pro 2 半自动咖啡机",
             "price": 699,
-            "reason": "售价 699 元，容量 1.2L、功率 1200W，参数与价格比较均衡。",
+            "reason": "售价 699 元，容量 1.2L、功率 1200W，更贴合通勤场景。",
             "fallback": true
           },
           {
             "id": "p_coffee_01",
             "name": "晨光 Home 1 半自动咖啡机",
             "price": 499,
-            "reason": "售价 499 元，容量 0.6L、功率 800W，参数与价格比较均衡。",
+            "reason": "售价 499 元，容量 0.6L、功率 800W，更贴合通勤场景。",
             "fallback": true
           },
           {
             "id": "p_coffee_03",
             "name": "岩咖 Home 3 半自动咖啡机",
             "price": 899,
-            "reason": "售价 899 元，容量 1.8L、功率 1450W，参数与价格比较均衡。",
+            "reason": "售价 899 元，容量 1.8L、功率 1450W，更贴合通勤场景。",
             "fallback": true
           }
         ],
@@ -1480,7 +1510,7 @@
       "turnDetails": [
         {
           "message": "想买耳机",
-          "latencyMs": 10,
+          "latencyMs": 12,
           "intent": "clarify",
           "reply": "你的预算大概是多少？我可以在预算范围内按防水、续航、评分等维度帮你筛选。",
           "degraded": true,
@@ -1488,6 +1518,8 @@
           "slots": {
             "categoryId": "cat_headphone",
             "categoryName": "蓝牙耳机",
+            "brand": "声屿",
+            "scene": "通勤",
             "features": [],
             "budgetUnlimited": false,
             "askedBudget": true,
@@ -1500,36 +1532,37 @@
         },
         {
           "message": "算了看看咖啡机，预算1000",
-          "latencyMs": 20,
+          "latencyMs": 25,
           "intent": "search_product",
-          "reply": "按你的需求，为你筛选出 3 款咖啡机（预算 1000 元以内），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
+          "reply": "按你的需求，为你筛选出 3 款咖啡机（预算 1000 元以内，通勤场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
           "degraded": true,
           "products": [
             {
               "id": "p_coffee_02",
               "name": "晨光 Pro 2 半自动咖啡机",
               "price": 699,
-              "reason": "售价 699 元，容量 1.2L、功率 1200W，参数与价格比较均衡。",
+              "reason": "售价 699 元，容量 1.2L、功率 1200W，更贴合通勤场景。",
               "fallback": true
             },
             {
               "id": "p_coffee_01",
               "name": "晨光 Home 1 半自动咖啡机",
               "price": 499,
-              "reason": "售价 499 元，容量 0.6L、功率 800W，参数与价格比较均衡。",
+              "reason": "售价 499 元，容量 0.6L、功率 800W，更贴合通勤场景。",
               "fallback": true
             },
             {
               "id": "p_coffee_03",
               "name": "岩咖 Home 3 半自动咖啡机",
               "price": 899,
-              "reason": "售价 899 元，容量 1.8L、功率 1450W，参数与价格比较均衡。",
+              "reason": "售价 899 元，容量 1.8L、功率 1450W，更贴合通勤场景。",
               "fallback": true
             }
           ],
           "slots": {
             "categoryId": "cat_coffee",
             "categoryName": "咖啡机",
+            "scene": "通勤",
             "maxPrice": 1000,
             "features": [],
             "budgetUnlimited": false,
@@ -1592,8 +1625,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 18,
-      "conversationId": "699b8cb87caf47d78aae353968737153",
+      "latencyMs": 26,
+      "conversationId": "ca01c6f047d347d8b1b1c36e2c2caa1c",
       "final": {
         "intent": "search_product",
         "reply": "按你的需求，为你筛选出 5 款护肤品（预算 300 元以内，偏好 保湿），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
@@ -1664,7 +1697,7 @@
       "turnDetails": [
         {
           "message": "敏感肌适合的保湿护肤品，预算300左右",
-          "latencyMs": 18,
+          "latencyMs": 26,
           "intent": "search_product",
           "reply": "按你的需求，为你筛选出 5 款护肤品（预算 300 元以内，偏好 保湿），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
           "degraded": true,
@@ -1776,8 +1809,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 18,
-      "conversationId": "e178c3311e644b0189214019eb3dd75b",
+      "latencyMs": 19,
+      "conversationId": "79aecc36cce04aa1be8138adf0e13188",
       "final": {
         "intent": "search_product",
         "reply": "按你的需求，为你筛选出 5 款跑步鞋（预算 800 元以内，偏好 缓震，跑步场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
@@ -1849,7 +1882,7 @@
       "turnDetails": [
         {
           "message": "缓震好的跑步鞋，800以内",
-          "latencyMs": 18,
+          "latencyMs": 19,
           "intent": "search_product",
           "reply": "按你的需求，为你筛选出 5 款跑步鞋（预算 800 元以内，偏好 缓震，跑步场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
           "degraded": true,
@@ -1954,8 +1987,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 18,
-      "conversationId": "4156ecaa8e514bf4b9cbf4f7ab5fbd77",
+      "latencyMs": 19,
+      "conversationId": "6f696160460247099439e8b92dd83da2",
       "final": {
         "intent": "search_product",
         "reply": "没有找到完全符合条件的商品。可以适当提高预算、换个关键词，或看看这些品类：",
@@ -1976,7 +2009,7 @@
       "turnDetails": [
         {
           "message": "10元以内的蓝牙耳机",
-          "latencyMs": 18,
+          "latencyMs": 19,
           "intent": "search_product",
           "reply": "没有找到完全符合条件的商品。可以适当提高预算、换个关键词，或看看这些品类：",
           "degraded": true,
@@ -2030,8 +2063,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 19,
-      "conversationId": "f7f7cc2dfbc544c6b89e0ebc0be229dd",
+      "latencyMs": 18,
+      "conversationId": "d516c60c18d64e1a870f8537def44e30",
       "final": {
         "intent": "search_product",
         "reply": "按你的需求，为你筛选出 4 款笔记本电脑（预算 6000 元以内），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
@@ -2091,7 +2124,7 @@
       "turnDetails": [
         {
           "message": "16G内存的轻薄笔记本，预算6000",
-          "latencyMs": 19,
+          "latencyMs": 18,
           "intent": "search_product",
           "reply": "按你的需求，为你筛选出 4 款笔记本电脑（预算 6000 元以内），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
           "degraded": true,
@@ -2190,8 +2223,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 24,
-      "conversationId": "94f9b3bd8f884c648a0d7dda5b6fcb74",
+      "latencyMs": 16,
+      "conversationId": "0e8cb5e5266c4dcaa1db2c5e61f51686",
       "final": {
         "intent": "search_product",
         "reply": "按你的需求，为你筛选出 3 款扫地机器人（预算 4000 元以内，3000 元以上），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
@@ -2243,7 +2276,7 @@
       "turnDetails": [
         {
           "message": "3000到4000的扫地机器人",
-          "latencyMs": 24,
+          "latencyMs": 16,
           "intent": "search_product",
           "reply": "按你的需求，为你筛选出 3 款扫地机器人（预算 4000 元以内，3000 元以上），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
           "degraded": true,
@@ -2322,8 +2355,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 18,
-      "conversationId": "d83a741385ca4673b26d6bf365432586",
+      "latencyMs": 13,
+      "conversationId": "cfe7362ff16941a9897f312bd896dfac",
       "final": {
         "intent": "search_product",
         "reply": "按你的需求，为你筛选出 4 款蓝牙耳机（500 元以上），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
@@ -2383,7 +2416,7 @@
       "turnDetails": [
         {
           "message": "500元以上的蓝牙耳机",
-          "latencyMs": 18,
+          "latencyMs": 13,
           "intent": "search_product",
           "reply": "按你的需求，为你筛选出 4 款蓝牙耳机（500 元以上），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
           "degraded": true,
@@ -2476,8 +2509,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 17,
-      "conversationId": "f2bb60d9969c411fa4dd090059b09bd9",
+      "latencyMs": 14,
+      "conversationId": "8d3141f4b49342158f50372578c21af2",
       "final": {
         "intent": "search_product",
         "reply": "按你的需求，为你筛选出 5 款咖啡机（预算 1500 元以内），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
@@ -2546,7 +2579,7 @@
       "turnDetails": [
         {
           "message": "预算一千五的咖啡机",
-          "latencyMs": 17,
+          "latencyMs": 14,
           "intent": "search_product",
           "reply": "按你的需求，为你筛选出 5 款咖啡机（预算 1500 元以内），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
           "degraded": true,
@@ -2648,8 +2681,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 20,
-      "conversationId": "93e7f023edce48659ea883dcdf670e35",
+      "latencyMs": 16,
+      "conversationId": "abc50d84c90c4d65ac7056f432384466",
       "final": {
         "intent": "search_product",
         "reply": "按你的需求，为你筛选出 5 款蓝牙耳机（预算 800 元以内，送礼场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
@@ -2719,7 +2752,7 @@
       "turnDetails": [
         {
           "message": "有没有适合送礼的蓝牙耳机，预算800",
-          "latencyMs": 20,
+          "latencyMs": 16,
           "intent": "search_product",
           "reply": "按你的需求，为你筛选出 5 款蓝牙耳机（预算 800 元以内，送礼场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
           "degraded": true,
@@ -2813,39 +2846,41 @@
           "name": "reply:续航",
           "ok": true,
           "expected": "包含「续航」",
-          "actual": "「澎湃 Wave 4 运动版」当前售价 279 元，库存 69 件，综合评分 4.8。核心参数：续航 24、防水等级 IPX6、重量 4.2、降噪 通话降噪、蓝牙版本 5.4。如果你想和其他商品对比，可以告诉我商品名称。"
+          "actual": "「声屿 Beat 3 运动版」当前售价 199 元，库存 380 件，综合评分 4.5。核心参数：续航 18、防水等级 IPX5、重量 3.8、降噪 主动降噪、蓝牙版本 5.3。如果你想和其他商品对比，可以告诉我商品名称。"
         }
       ],
       "error": null,
-      "latencyMs": 38,
-      "conversationId": "3967a36ee42e4df38ad82552cf6b77dd",
+      "latencyMs": 35,
+      "conversationId": "8eaaa561e7b54badb2f9d1f7598de01d",
       "final": {
         "intent": "ask_detail",
-        "reply": "「澎湃 Wave 4 运动版」当前售价 279 元，库存 69 件，综合评分 4.8。核心参数：续航 24、防水等级 IPX6、重量 4.2、降噪 通话降噪、蓝牙版本 5.4。如果你想和其他商品对比，可以告诉我商品名称。",
+        "reply": "「声屿 Beat 3 运动版」当前售价 199 元，库存 380 件，综合评分 4.5。核心参数：续航 18、防水等级 IPX5、重量 3.8、降噪 主动降噪、蓝牙版本 5.3。如果你想和其他商品对比，可以告诉我商品名称。",
         "degraded": true,
         "slots": {
           "categoryId": "cat_headphone",
           "categoryName": "蓝牙耳机",
+          "brand": "声屿",
+          "scene": "送礼",
           "maxPrice": 300,
           "features": [],
           "budgetUnlimited": false,
           "askedBudget": false,
           "lastProductIds": [
+            "p_headphone_01",
             "p_headphone_02",
-            "p_headphone_03",
-            "p_headphone_01"
+            "p_headphone_03"
           ],
           "lastProductNames": [
+            "声屿 Beat 3 运动版",
             "澎湃 Wave 4 运动版",
-            "律动 Liberty 5 轻盈版",
-            "声屿 Beat 3 运动版"
+            "律动 Liberty 5 轻盈版"
           ]
         },
         "products": [
           {
-            "id": "p_headphone_02",
-            "name": "澎湃 Wave 4 运动版",
-            "price": 279,
+            "id": "p_headphone_01",
+            "name": "声屿 Beat 3 运动版",
+            "price": 199,
             "reason": "商品详情",
             "fallback": false
           }
@@ -2855,49 +2890,51 @@
       "turnDetails": [
         {
           "message": "推荐300以内的蓝牙耳机",
-          "latencyMs": 13,
+          "latencyMs": 18,
           "intent": "search_product",
-          "reply": "按你的需求，为你筛选出 3 款蓝牙耳机（预算 300 元以内），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
+          "reply": "按你的需求，为你筛选出 3 款蓝牙耳机（预算 300 元以内，送礼场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
           "degraded": true,
           "products": [
+            {
+              "id": "p_headphone_01",
+              "name": "声屿 Beat 3 运动版",
+              "price": 199,
+              "reason": "售价 199 元，续航 18h、防水等级 IPX5，更贴合送礼场景。",
+              "fallback": true
+            },
             {
               "id": "p_headphone_02",
               "name": "澎湃 Wave 4 运动版",
               "price": 279,
-              "reason": "售价 279 元，续航 24h、防水等级 IPX6，参数与价格比较均衡。",
+              "reason": "售价 279 元，续航 24h、防水等级 IPX6，更贴合送礼场景。",
               "fallback": true
             },
             {
               "id": "p_headphone_03",
               "name": "律动 Liberty 5 轻盈版",
               "price": 299,
-              "reason": "售价 299 元，续航 30h、防水等级 IPX4，参数与价格比较均衡。",
-              "fallback": true
-            },
-            {
-              "id": "p_headphone_01",
-              "name": "声屿 Beat 3 运动版",
-              "price": 199,
-              "reason": "售价 199 元，续航 18h、防水等级 IPX5，参数与价格比较均衡。",
+              "reason": "售价 299 元，续航 30h、防水等级 IPX4，更贴合送礼场景。",
               "fallback": true
             }
           ],
           "slots": {
             "categoryId": "cat_headphone",
             "categoryName": "蓝牙耳机",
+            "brand": "声屿",
+            "scene": "送礼",
             "maxPrice": 300,
             "features": [],
             "budgetUnlimited": false,
             "askedBudget": false,
             "lastProductIds": [
+              "p_headphone_01",
               "p_headphone_02",
-              "p_headphone_03",
-              "p_headphone_01"
+              "p_headphone_03"
             ],
             "lastProductNames": [
+              "声屿 Beat 3 运动版",
               "澎湃 Wave 4 运动版",
-              "律动 Liberty 5 轻盈版",
-              "声屿 Beat 3 运动版"
+              "律动 Liberty 5 轻盈版"
             ]
           },
           "compare": null,
@@ -2905,15 +2942,15 @@
         },
         {
           "message": "第一款续航多久",
-          "latencyMs": 25,
+          "latencyMs": 17,
           "intent": "ask_detail",
-          "reply": "「澎湃 Wave 4 运动版」当前售价 279 元，库存 69 件，综合评分 4.8。核心参数：续航 24、防水等级 IPX6、重量 4.2、降噪 通话降噪、蓝牙版本 5.4。如果你想和其他商品对比，可以告诉我商品名称。",
+          "reply": "「声屿 Beat 3 运动版」当前售价 199 元，库存 380 件，综合评分 4.5。核心参数：续航 18、防水等级 IPX5、重量 3.8、降噪 主动降噪、蓝牙版本 5.3。如果你想和其他商品对比，可以告诉我商品名称。",
           "degraded": true,
           "products": [
             {
-              "id": "p_headphone_02",
-              "name": "澎湃 Wave 4 运动版",
-              "price": 279,
+              "id": "p_headphone_01",
+              "name": "声屿 Beat 3 运动版",
+              "price": 199,
               "reason": "商品详情",
               "fallback": false
             }
@@ -2921,19 +2958,21 @@
           "slots": {
             "categoryId": "cat_headphone",
             "categoryName": "蓝牙耳机",
+            "brand": "声屿",
+            "scene": "送礼",
             "maxPrice": 300,
             "features": [],
             "budgetUnlimited": false,
             "askedBudget": false,
             "lastProductIds": [
+              "p_headphone_01",
               "p_headphone_02",
-              "p_headphone_03",
-              "p_headphone_01"
+              "p_headphone_03"
             ],
             "lastProductNames": [
+              "声屿 Beat 3 运动版",
               "澎湃 Wave 4 运动版",
-              "律动 Liberty 5 轻盈版",
-              "声屿 Beat 3 运动版"
+              "律动 Liberty 5 轻盈版"
             ]
           },
           "compare": null,
@@ -2966,39 +3005,41 @@
           "name": "reply:库存",
           "ok": true,
           "expected": "包含「库存」",
-          "actual": "「澎湃 Wave 4 运动版」当前售价 279 元，库存 69 件，综合评分 4.8。核心参数：续航 24、防水等级 IPX6、重量 4.2、降噪 通话降噪、蓝牙版本 5.4。如果你想和其他商品对比，可以告诉我商品名称。"
+          "actual": "「声屿 Beat 3 运动版」当前售价 199 元，库存 380 件，综合评分 4.5。核心参数：续航 18、防水等级 IPX5、重量 3.8、降噪 主动降噪、蓝牙版本 5.3。如果你想和其他商品对比，可以告诉我商品名称。"
         }
       ],
       "error": null,
       "latencyMs": 27,
-      "conversationId": "4fa2cbf0dc6d4ef882e4b07b30207271",
+      "conversationId": "71eb952b41b348298d6fc344e9987fb9",
       "final": {
         "intent": "ask_detail",
-        "reply": "「澎湃 Wave 4 运动版」当前售价 279 元，库存 69 件，综合评分 4.8。核心参数：续航 24、防水等级 IPX6、重量 4.2、降噪 通话降噪、蓝牙版本 5.4。如果你想和其他商品对比，可以告诉我商品名称。",
+        "reply": "「声屿 Beat 3 运动版」当前售价 199 元，库存 380 件，综合评分 4.5。核心参数：续航 18、防水等级 IPX5、重量 3.8、降噪 主动降噪、蓝牙版本 5.3。如果你想和其他商品对比，可以告诉我商品名称。",
         "degraded": true,
         "slots": {
           "categoryId": "cat_headphone",
           "categoryName": "蓝牙耳机",
+          "brand": "声屿",
+          "scene": "送礼",
           "maxPrice": 300,
           "features": [],
           "budgetUnlimited": false,
           "askedBudget": false,
           "lastProductIds": [
+            "p_headphone_01",
             "p_headphone_02",
-            "p_headphone_03",
-            "p_headphone_01"
+            "p_headphone_03"
           ],
           "lastProductNames": [
+            "声屿 Beat 3 运动版",
             "澎湃 Wave 4 运动版",
-            "律动 Liberty 5 轻盈版",
-            "声屿 Beat 3 运动版"
+            "律动 Liberty 5 轻盈版"
           ]
         },
         "products": [
           {
-            "id": "p_headphone_02",
-            "name": "澎湃 Wave 4 运动版",
-            "price": 279,
+            "id": "p_headphone_01",
+            "name": "声屿 Beat 3 运动版",
+            "price": 199,
             "reason": "商品详情",
             "fallback": false
           }
@@ -3010,47 +3051,49 @@
           "message": "推荐300以内的蓝牙耳机",
           "latencyMs": 16,
           "intent": "search_product",
-          "reply": "按你的需求，为你筛选出 3 款蓝牙耳机（预算 300 元以内），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
+          "reply": "按你的需求，为你筛选出 3 款蓝牙耳机（预算 300 元以内，送礼场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
           "degraded": true,
           "products": [
+            {
+              "id": "p_headphone_01",
+              "name": "声屿 Beat 3 运动版",
+              "price": 199,
+              "reason": "售价 199 元，续航 18h、防水等级 IPX5，更贴合送礼场景。",
+              "fallback": true
+            },
             {
               "id": "p_headphone_02",
               "name": "澎湃 Wave 4 运动版",
               "price": 279,
-              "reason": "售价 279 元，续航 24h、防水等级 IPX6，参数与价格比较均衡。",
+              "reason": "售价 279 元，续航 24h、防水等级 IPX6，更贴合送礼场景。",
               "fallback": true
             },
             {
               "id": "p_headphone_03",
               "name": "律动 Liberty 5 轻盈版",
               "price": 299,
-              "reason": "售价 299 元，续航 30h、防水等级 IPX4，参数与价格比较均衡。",
-              "fallback": true
-            },
-            {
-              "id": "p_headphone_01",
-              "name": "声屿 Beat 3 运动版",
-              "price": 199,
-              "reason": "售价 199 元，续航 18h、防水等级 IPX5，参数与价格比较均衡。",
+              "reason": "售价 299 元，续航 30h、防水等级 IPX4，更贴合送礼场景。",
               "fallback": true
             }
           ],
           "slots": {
             "categoryId": "cat_headphone",
             "categoryName": "蓝牙耳机",
+            "brand": "声屿",
+            "scene": "送礼",
             "maxPrice": 300,
             "features": [],
             "budgetUnlimited": false,
             "askedBudget": false,
             "lastProductIds": [
+              "p_headphone_01",
               "p_headphone_02",
-              "p_headphone_03",
-              "p_headphone_01"
+              "p_headphone_03"
             ],
             "lastProductNames": [
+              "声屿 Beat 3 运动版",
               "澎湃 Wave 4 运动版",
-              "律动 Liberty 5 轻盈版",
-              "声屿 Beat 3 运动版"
+              "律动 Liberty 5 轻盈版"
             ]
           },
           "compare": null,
@@ -3058,15 +3101,15 @@
         },
         {
           "message": "第一个多少钱，库存多少",
-          "latencyMs": 11,
+          "latencyMs": 10,
           "intent": "ask_detail",
-          "reply": "「澎湃 Wave 4 运动版」当前售价 279 元，库存 69 件，综合评分 4.8。核心参数：续航 24、防水等级 IPX6、重量 4.2、降噪 通话降噪、蓝牙版本 5.4。如果你想和其他商品对比，可以告诉我商品名称。",
+          "reply": "「声屿 Beat 3 运动版」当前售价 199 元，库存 380 件，综合评分 4.5。核心参数：续航 18、防水等级 IPX5、重量 3.8、降噪 主动降噪、蓝牙版本 5.3。如果你想和其他商品对比，可以告诉我商品名称。",
           "degraded": true,
           "products": [
             {
-              "id": "p_headphone_02",
-              "name": "澎湃 Wave 4 运动版",
-              "price": 279,
+              "id": "p_headphone_01",
+              "name": "声屿 Beat 3 运动版",
+              "price": 199,
               "reason": "商品详情",
               "fallback": false
             }
@@ -3074,19 +3117,21 @@
           "slots": {
             "categoryId": "cat_headphone",
             "categoryName": "蓝牙耳机",
+            "brand": "声屿",
+            "scene": "送礼",
             "maxPrice": 300,
             "features": [],
             "budgetUnlimited": false,
             "askedBudget": false,
             "lastProductIds": [
+              "p_headphone_01",
               "p_headphone_02",
-              "p_headphone_03",
-              "p_headphone_01"
+              "p_headphone_03"
             ],
             "lastProductNames": [
+              "声屿 Beat 3 运动版",
               "澎湃 Wave 4 运动版",
-              "律动 Liberty 5 轻盈版",
-              "声屿 Beat 3 运动版"
+              "律动 Liberty 5 轻盈版"
             ]
           },
           "compare": null,
@@ -3113,39 +3158,41 @@
           "name": "reply:购物车",
           "ok": true,
           "expected": "包含「购物车」",
-          "actual": "已把「澎湃 Wave 4 运动版」加入购物车，数量 1。购物车当前共 3 件商品，合计 417 元。需要我帮你一起结算吗？"
+          "actual": "已把「声屿 Beat 3 运动版」加入购物车，数量 1。购物车当前共 3 件商品，合计 337 元。需要我帮你一起结算吗？"
         }
       ],
       "error": null,
-      "latencyMs": 60,
-      "conversationId": "390b0d31939d4a05ad4eb109effd4d36",
+      "latencyMs": 44,
+      "conversationId": "6f9c7f1dec8c47c4a5a0be216f9d739d",
       "final": {
         "intent": "add_to_cart",
-        "reply": "已把「澎湃 Wave 4 运动版」加入购物车，数量 1。购物车当前共 3 件商品，合计 417 元。需要我帮你一起结算吗？",
+        "reply": "已把「声屿 Beat 3 运动版」加入购物车，数量 1。购物车当前共 3 件商品，合计 337 元。需要我帮你一起结算吗？",
         "degraded": true,
         "slots": {
           "categoryId": "cat_headphone",
           "categoryName": "蓝牙耳机",
+          "brand": "声屿",
+          "scene": "送礼",
           "maxPrice": 300,
           "features": [],
           "budgetUnlimited": false,
           "askedBudget": false,
           "lastProductIds": [
+            "p_headphone_01",
             "p_headphone_02",
-            "p_headphone_03",
-            "p_headphone_01"
+            "p_headphone_03"
           ],
           "lastProductNames": [
+            "声屿 Beat 3 运动版",
             "澎湃 Wave 4 运动版",
-            "律动 Liberty 5 轻盈版",
-            "声屿 Beat 3 运动版"
+            "律动 Liberty 5 轻盈版"
           ]
         },
         "products": [
           {
-            "id": "p_headphone_02",
-            "name": "澎湃 Wave 4 运动版",
-            "price": 279,
+            "id": "p_headphone_01",
+            "name": "声屿 Beat 3 运动版",
+            "price": 199,
             "reason": "已加入购物车",
             "fallback": false
           }
@@ -3157,47 +3204,49 @@
           "message": "推荐300以内的蓝牙耳机",
           "latencyMs": 16,
           "intent": "search_product",
-          "reply": "按你的需求，为你筛选出 3 款蓝牙耳机（预算 300 元以内），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
+          "reply": "按你的需求，为你筛选出 3 款蓝牙耳机（预算 300 元以内，送礼场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
           "degraded": true,
           "products": [
+            {
+              "id": "p_headphone_01",
+              "name": "声屿 Beat 3 运动版",
+              "price": 199,
+              "reason": "售价 199 元，续航 18h、防水等级 IPX5，更贴合送礼场景。",
+              "fallback": true
+            },
             {
               "id": "p_headphone_02",
               "name": "澎湃 Wave 4 运动版",
               "price": 279,
-              "reason": "售价 279 元，续航 24h、防水等级 IPX6，参数与价格比较均衡。",
+              "reason": "售价 279 元，续航 24h、防水等级 IPX6，更贴合送礼场景。",
               "fallback": true
             },
             {
               "id": "p_headphone_03",
               "name": "律动 Liberty 5 轻盈版",
               "price": 299,
-              "reason": "售价 299 元，续航 30h、防水等级 IPX4，参数与价格比较均衡。",
-              "fallback": true
-            },
-            {
-              "id": "p_headphone_01",
-              "name": "声屿 Beat 3 运动版",
-              "price": 199,
-              "reason": "售价 199 元，续航 18h、防水等级 IPX5，参数与价格比较均衡。",
+              "reason": "售价 299 元，续航 30h、防水等级 IPX4，更贴合送礼场景。",
               "fallback": true
             }
           ],
           "slots": {
             "categoryId": "cat_headphone",
             "categoryName": "蓝牙耳机",
+            "brand": "声屿",
+            "scene": "送礼",
             "maxPrice": 300,
             "features": [],
             "budgetUnlimited": false,
             "askedBudget": false,
             "lastProductIds": [
+              "p_headphone_01",
               "p_headphone_02",
-              "p_headphone_03",
-              "p_headphone_01"
+              "p_headphone_03"
             ],
             "lastProductNames": [
+              "声屿 Beat 3 运动版",
               "澎湃 Wave 4 运动版",
-              "律动 Liberty 5 轻盈版",
-              "声屿 Beat 3 运动版"
+              "律动 Liberty 5 轻盈版"
             ]
           },
           "compare": null,
@@ -3205,15 +3254,15 @@
         },
         {
           "message": "把第一款加入购物车",
-          "latencyMs": 44,
+          "latencyMs": 28,
           "intent": "add_to_cart",
-          "reply": "已把「澎湃 Wave 4 运动版」加入购物车，数量 1。购物车当前共 3 件商品，合计 417 元。需要我帮你一起结算吗？",
+          "reply": "已把「声屿 Beat 3 运动版」加入购物车，数量 1。购物车当前共 3 件商品，合计 337 元。需要我帮你一起结算吗？",
           "degraded": true,
           "products": [
             {
-              "id": "p_headphone_02",
-              "name": "澎湃 Wave 4 运动版",
-              "price": 279,
+              "id": "p_headphone_01",
+              "name": "声屿 Beat 3 运动版",
+              "price": 199,
               "reason": "已加入购物车",
               "fallback": false
             }
@@ -3221,19 +3270,21 @@
           "slots": {
             "categoryId": "cat_headphone",
             "categoryName": "蓝牙耳机",
+            "brand": "声屿",
+            "scene": "送礼",
             "maxPrice": 300,
             "features": [],
             "budgetUnlimited": false,
             "askedBudget": false,
             "lastProductIds": [
+              "p_headphone_01",
               "p_headphone_02",
-              "p_headphone_03",
-              "p_headphone_01"
+              "p_headphone_03"
             ],
             "lastProductNames": [
+              "声屿 Beat 3 运动版",
               "澎湃 Wave 4 运动版",
-              "律动 Liberty 5 轻盈版",
-              "声屿 Beat 3 运动版"
+              "律动 Liberty 5 轻盈版"
             ]
           },
           "compare": null,
@@ -3260,39 +3311,41 @@
           "name": "reply:2",
           "ok": true,
           "expected": "包含「2」",
-          "actual": "已把「律动 Liberty 5 轻盈版」加入购物车，数量 2。购物车当前共 5 件商品，合计 1015 元。需要我帮你一起结算吗？"
+          "actual": "已把「澎湃 Wave 4 运动版」加入购物车，数量 2。购物车当前共 5 件商品，合计 895 元。需要我帮你一起结算吗？"
         }
       ],
       "error": null,
-      "latencyMs": 33,
-      "conversationId": "dc3aba0070344e1bac5b1a1532ed6b59",
+      "latencyMs": 29,
+      "conversationId": "93fed353d04843f987e03f73f72898a2",
       "final": {
         "intent": "add_to_cart",
-        "reply": "已把「律动 Liberty 5 轻盈版」加入购物车，数量 2。购物车当前共 5 件商品，合计 1015 元。需要我帮你一起结算吗？",
+        "reply": "已把「澎湃 Wave 4 运动版」加入购物车，数量 2。购物车当前共 5 件商品，合计 895 元。需要我帮你一起结算吗？",
         "degraded": true,
         "slots": {
           "categoryId": "cat_headphone",
           "categoryName": "蓝牙耳机",
+          "brand": "声屿",
+          "scene": "送礼",
           "maxPrice": 300,
           "features": [],
           "budgetUnlimited": false,
           "askedBudget": false,
           "lastProductIds": [
+            "p_headphone_01",
             "p_headphone_02",
-            "p_headphone_03",
-            "p_headphone_01"
+            "p_headphone_03"
           ],
           "lastProductNames": [
+            "声屿 Beat 3 运动版",
             "澎湃 Wave 4 运动版",
-            "律动 Liberty 5 轻盈版",
-            "声屿 Beat 3 运动版"
+            "律动 Liberty 5 轻盈版"
           ]
         },
         "products": [
           {
-            "id": "p_headphone_03",
-            "name": "律动 Liberty 5 轻盈版",
-            "price": 299,
+            "id": "p_headphone_02",
+            "name": "澎湃 Wave 4 运动版",
+            "price": 279,
             "reason": "已加入购物车",
             "fallback": false
           }
@@ -3302,49 +3355,51 @@
       "turnDetails": [
         {
           "message": "推荐300以内的蓝牙耳机",
-          "latencyMs": 21,
+          "latencyMs": 15,
           "intent": "search_product",
-          "reply": "按你的需求，为你筛选出 3 款蓝牙耳机（预算 300 元以内），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
+          "reply": "按你的需求，为你筛选出 3 款蓝牙耳机（预算 300 元以内，送礼场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
           "degraded": true,
           "products": [
+            {
+              "id": "p_headphone_01",
+              "name": "声屿 Beat 3 运动版",
+              "price": 199,
+              "reason": "售价 199 元，续航 18h、防水等级 IPX5，更贴合送礼场景。",
+              "fallback": true
+            },
             {
               "id": "p_headphone_02",
               "name": "澎湃 Wave 4 运动版",
               "price": 279,
-              "reason": "售价 279 元，续航 24h、防水等级 IPX6，参数与价格比较均衡。",
+              "reason": "售价 279 元，续航 24h、防水等级 IPX6，更贴合送礼场景。",
               "fallback": true
             },
             {
               "id": "p_headphone_03",
               "name": "律动 Liberty 5 轻盈版",
               "price": 299,
-              "reason": "售价 299 元，续航 30h、防水等级 IPX4，参数与价格比较均衡。",
-              "fallback": true
-            },
-            {
-              "id": "p_headphone_01",
-              "name": "声屿 Beat 3 运动版",
-              "price": 199,
-              "reason": "售价 199 元，续航 18h、防水等级 IPX5，参数与价格比较均衡。",
+              "reason": "售价 299 元，续航 30h、防水等级 IPX4，更贴合送礼场景。",
               "fallback": true
             }
           ],
           "slots": {
             "categoryId": "cat_headphone",
             "categoryName": "蓝牙耳机",
+            "brand": "声屿",
+            "scene": "送礼",
             "maxPrice": 300,
             "features": [],
             "budgetUnlimited": false,
             "askedBudget": false,
             "lastProductIds": [
+              "p_headphone_01",
               "p_headphone_02",
-              "p_headphone_03",
-              "p_headphone_01"
+              "p_headphone_03"
             ],
             "lastProductNames": [
+              "声屿 Beat 3 运动版",
               "澎湃 Wave 4 运动版",
-              "律动 Liberty 5 轻盈版",
-              "声屿 Beat 3 运动版"
+              "律动 Liberty 5 轻盈版"
             ]
           },
           "compare": null,
@@ -3352,15 +3407,15 @@
         },
         {
           "message": "把第二个加购2件",
-          "latencyMs": 12,
+          "latencyMs": 14,
           "intent": "add_to_cart",
-          "reply": "已把「律动 Liberty 5 轻盈版」加入购物车，数量 2。购物车当前共 5 件商品，合计 1015 元。需要我帮你一起结算吗？",
+          "reply": "已把「澎湃 Wave 4 运动版」加入购物车，数量 2。购物车当前共 5 件商品，合计 895 元。需要我帮你一起结算吗？",
           "degraded": true,
           "products": [
             {
-              "id": "p_headphone_03",
-              "name": "律动 Liberty 5 轻盈版",
-              "price": 299,
+              "id": "p_headphone_02",
+              "name": "澎湃 Wave 4 运动版",
+              "price": 279,
               "reason": "已加入购物车",
               "fallback": false
             }
@@ -3368,19 +3423,21 @@
           "slots": {
             "categoryId": "cat_headphone",
             "categoryName": "蓝牙耳机",
+            "brand": "声屿",
+            "scene": "送礼",
             "maxPrice": 300,
             "features": [],
             "budgetUnlimited": false,
             "askedBudget": false,
             "lastProductIds": [
+              "p_headphone_01",
               "p_headphone_02",
-              "p_headphone_03",
-              "p_headphone_01"
+              "p_headphone_03"
             ],
             "lastProductNames": [
+              "声屿 Beat 3 运动版",
               "澎湃 Wave 4 运动版",
-              "律动 Liberty 5 轻盈版",
-              "声屿 Beat 3 运动版"
+              "律动 Liberty 5 轻盈版"
             ]
           },
           "compare": null,
@@ -3416,8 +3473,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 18,
-      "conversationId": "a194ff989db74f08b41b2c060e537bc9",
+      "latencyMs": 19,
+      "conversationId": "d7263f6c4d414ff8b12dfa14e66ae02f",
       "final": {
         "intent": "query_order",
         "reply": "找到 2 个订单。最近一个订单 SG2026041710150002 当前状态：已支付，共 2 件商品，金额 138 元。",
@@ -3441,9 +3498,9 @@
             "phone": "13800138000",
             "addressText": "江苏省南京市栖霞区文苑路 1 号 智能导购实验室",
             "remark": "演示订单",
-            "createdAt": "2026-10-20T19:36:50.332966",
-            "paidAt": "2026-10-20T19:36:50.332966",
-            "expiredAt": "2026-10-20T20:06:50.332966",
+            "createdAt": "2026-10-20T19:52:51.743956",
+            "paidAt": "2026-10-20T19:52:51.743956",
+            "expiredAt": "2026-10-20T20:22:51.743956",
             "items": [
               {
                 "id": 2,
@@ -3467,11 +3524,13 @@
             "phone": "13800138000",
             "addressText": "江苏省南京市栖霞区文苑路 1 号 智能导购实验室",
             "remark": "演示订单",
-            "createdAt": "2026-10-04T19:36:50.332966",
-            "paidAt": "2026-10-04T19:36:50.332966",
-            "shippedAt": "2026-10-05T19:36:50.332966",
-            "finishedAt": "2026-10-08T19:36:50.332966",
-            "expiredAt": "2026-10-04T20:06:50.332966",
+            "carrier": "顺丰速运",
+            "trackingNo": "SF1722491932",
+            "createdAt": "2026-10-04T19:52:51.743956",
+            "paidAt": "2026-10-04T19:52:51.743956",
+            "shippedAt": "2026-10-05T19:52:51.743956",
+            "finishedAt": "2026-10-08T19:52:51.743956",
+            "expiredAt": "2026-10-04T20:22:51.743956",
             "items": [
               {
                 "id": 1,
@@ -3490,7 +3549,7 @@
       "turnDetails": [
         {
           "message": "我的订单到哪了",
-          "latencyMs": 18,
+          "latencyMs": 19,
           "intent": "query_order",
           "reply": "找到 2 个订单。最近一个订单 SG2026041710150002 当前状态：已支付，共 2 件商品，金额 138 元。",
           "degraded": true,
@@ -3546,8 +3605,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 12,
-      "conversationId": "363df44e77ca4978a39ae99476f19794",
+      "latencyMs": 13,
+      "conversationId": "71a345b327f24bf8b5081ccee08a428f",
       "final": {
         "intent": "query_order",
         "reply": "找到 1 个订单。最近一个订单 SG2026041710150002 当前状态：已支付，共 2 件商品，金额 138 元。",
@@ -3571,9 +3630,9 @@
             "phone": "13800138000",
             "addressText": "江苏省南京市栖霞区文苑路 1 号 智能导购实验室",
             "remark": "演示订单",
-            "createdAt": "2026-10-20T19:36:50.332966",
-            "paidAt": "2026-10-20T19:36:50.332966",
-            "expiredAt": "2026-10-20T20:06:50.332966",
+            "createdAt": "2026-10-20T19:52:51.743956",
+            "paidAt": "2026-10-20T19:52:51.743956",
+            "expiredAt": "2026-10-20T20:22:51.743956",
             "items": [
               {
                 "id": 2,
@@ -3592,7 +3651,7 @@
       "turnDetails": [
         {
           "message": "查一下订单 SG2026041710150002",
-          "latencyMs": 12,
+          "latencyMs": 13,
           "intent": "query_order",
           "reply": "找到 1 个订单。最近一个订单 SG2026041710150002 当前状态：已支付，共 2 件商品，金额 138 元。",
           "degraded": true,
@@ -3644,7 +3703,7 @@
       ],
       "error": null,
       "latencyMs": 9,
-      "conversationId": "c71891c70a7647779640bf16f84bbb9b",
+      "conversationId": "cf9b5a1274c94559b87de083d7408009",
       "final": {
         "intent": "add_to_cart",
         "reply": "要加入购物车的是哪件商品？你可以说“把第一款加入购物车”，或直接点击商品卡片上的加购按钮。",
@@ -3708,8 +3767,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 49,
-      "conversationId": "ac3f9e32b7b84f5b8b15254167a800c1",
+      "latencyMs": 51,
+      "conversationId": "3b6cb44e53bd41f198e7dd89e3d5d18d",
       "final": {
         "intent": "compare",
         "reply": "已完成 2 款商品的对比，综合评分与决策建议见下方卡片。想改变结论？可以打开对比面板调整权重。",
@@ -3717,24 +3776,35 @@
         "slots": {
           "categoryId": "cat_headphone",
           "categoryName": "蓝牙耳机",
+          "brand": "声屿",
+          "scene": "送礼",
           "maxPrice": 300,
           "features": [],
           "budgetUnlimited": false,
           "askedBudget": false,
           "lastProductIds": [
+            "p_headphone_01",
             "p_headphone_02",
-            "p_headphone_03",
-            "p_headphone_01"
+            "p_headphone_03"
           ],
           "lastProductNames": [
+            "声屿 Beat 3 运动版",
             "澎湃 Wave 4 运动版",
-            "律动 Liberty 5 轻盈版",
-            "声屿 Beat 3 运动版"
+            "律动 Liberty 5 轻盈版"
           ]
         },
         "products": [],
         "compare": {
           "products": [
+            {
+              "id": "p_headphone_01",
+              "name": "声屿 Beat 3 运动版",
+              "image": "/img/headphone.svg",
+              "price": 199,
+              "rating": 4.5,
+              "stock": 380,
+              "brand": "声屿"
+            },
             {
               "id": "p_headphone_02",
               "name": "澎湃 Wave 4 运动版",
@@ -3743,15 +3813,6 @@
               "rating": 4.8,
               "stock": 69,
               "brand": "澎湃"
-            },
-            {
-              "id": "p_headphone_03",
-              "name": "律动 Liberty 5 轻盈版",
-              "image": "/img/headphone.svg",
-              "price": 299,
-              "rating": 4.6,
-              "stock": 244,
-              "brand": "律动"
             }
           ],
           "dimensions": [
@@ -3762,14 +3823,14 @@
               "higherBetter": false,
               "weight": 1,
               "displayValues": {
-                "p_headphone_02": "279",
-                "p_headphone_03": "299"
+                "p_headphone_01": "199",
+                "p_headphone_02": "279"
               },
               "normalizedValues": {
-                "p_headphone_02": 1,
-                "p_headphone_03": 0
+                "p_headphone_01": 1,
+                "p_headphone_02": 0
               },
-              "bestProductId": "p_headphone_02"
+              "bestProductId": "p_headphone_01"
             },
             {
               "key": "评分",
@@ -3778,12 +3839,12 @@
               "higherBetter": true,
               "weight": 0.6,
               "displayValues": {
-                "p_headphone_02": "4.8",
-                "p_headphone_03": "4.6"
+                "p_headphone_01": "4.5",
+                "p_headphone_02": "4.8"
               },
               "normalizedValues": {
-                "p_headphone_02": 1,
-                "p_headphone_03": 0
+                "p_headphone_01": 0,
+                "p_headphone_02": 1
               },
               "bestProductId": "p_headphone_02"
             },
@@ -3794,14 +3855,14 @@
               "higherBetter": true,
               "weight": 1,
               "displayValues": {
-                "p_headphone_02": "24",
-                "p_headphone_03": "30"
+                "p_headphone_01": "18",
+                "p_headphone_02": "24"
               },
               "normalizedValues": {
-                "p_headphone_02": 0,
-                "p_headphone_03": 1
+                "p_headphone_01": 0,
+                "p_headphone_02": 1
               },
-              "bestProductId": "p_headphone_03"
+              "bestProductId": "p_headphone_02"
             },
             {
               "key": "防水等级",
@@ -3809,12 +3870,12 @@
               "higherBetter": true,
               "weight": 1,
               "displayValues": {
-                "p_headphone_02": "IPX6",
-                "p_headphone_03": "IPX4"
+                "p_headphone_01": "IPX5",
+                "p_headphone_02": "IPX6"
               },
               "normalizedValues": {
-                "p_headphone_02": 0.6666666666666666,
-                "p_headphone_03": 0
+                "p_headphone_01": 0.3333333333333333,
+                "p_headphone_02": 0.6666666666666666
               },
               "bestProductId": "p_headphone_02"
             },
@@ -3825,14 +3886,14 @@
               "higherBetter": false,
               "weight": 0.8,
               "displayValues": {
-                "p_headphone_02": "4.2",
-                "p_headphone_03": "4.6"
+                "p_headphone_01": "3.8",
+                "p_headphone_02": "4.2"
               },
               "normalizedValues": {
-                "p_headphone_02": 1,
-                "p_headphone_03": 0
+                "p_headphone_01": 1,
+                "p_headphone_02": 0
               },
-              "bestProductId": "p_headphone_02"
+              "bestProductId": "p_headphone_01"
             },
             {
               "key": "降噪",
@@ -3840,14 +3901,14 @@
               "higherBetter": true,
               "weight": 1.2,
               "displayValues": {
-                "p_headphone_02": "通话降噪",
-                "p_headphone_03": "通话降噪"
+                "p_headphone_01": "主动降噪",
+                "p_headphone_02": "通话降噪"
               },
               "normalizedValues": {
-                "p_headphone_02": 0.5,
-                "p_headphone_03": 0.5
+                "p_headphone_01": 1,
+                "p_headphone_02": 0.5
               },
-              "bestProductId": "p_headphone_02"
+              "bestProductId": "p_headphone_01"
             },
             {
               "key": "蓝牙版本",
@@ -3855,106 +3916,107 @@
               "higherBetter": true,
               "weight": 0.5,
               "displayValues": {
-                "p_headphone_02": "5.4",
-                "p_headphone_03": "5.2"
+                "p_headphone_01": "5.3",
+                "p_headphone_02": "5.4"
               },
               "normalizedValues": {
-                "p_headphone_02": 1,
-                "p_headphone_03": 0
+                "p_headphone_01": 0.5,
+                "p_headphone_02": 1
               },
               "bestProductId": "p_headphone_02"
             }
           ],
           "scores": [
             {
-              "productId": "p_headphone_02",
-              "totalScore": 68.3,
+              "productId": "p_headphone_01",
+              "totalScore": 58.7,
               "contributions": {
                 "价格": 16.4,
-                "评分": 9.8,
+                "评分": 0,
                 "续航": 0,
-                "防水等级": 10.9,
+                "防水等级": 5.5,
                 "重量": 13.1,
-                "降噪": 9.8,
-                "蓝牙版本": 8.2
+                "降噪": 19.7,
+                "蓝牙版本": 4.1
               },
               "rank": 1
             },
             {
-              "productId": "p_headphone_03",
-              "totalScore": 26.2,
+              "productId": "p_headphone_02",
+              "totalScore": 55.2,
               "contributions": {
                 "价格": 0,
-                "评分": 0,
+                "评分": 9.8,
                 "续航": 16.4,
-                "防水等级": 0,
+                "防水等级": 10.9,
                 "重量": 0,
                 "降噪": 9.8,
-                "蓝牙版本": 0
+                "蓝牙版本": 8.2
               },
               "rank": 2
             }
           ],
-          "recommendedId": "p_headphone_02",
-          "recommendedName": "澎湃 Wave 4 运动版",
-          "advice": "综合 7 个维度加权评分，最推荐「澎湃 Wave 4 运动版」（68.3 分）。它在价格、评分上更占优；「律动 Liberty 5 轻盈版」（26.2 分）仅在续航上略强，综合得分低 42.1 分。如果更看重某一维度，可以在对比面板调整权重后再决策。",
+          "recommendedId": "p_headphone_01",
+          "recommendedName": "声屿 Beat 3 运动版",
+          "advice": "综合 7 个维度加权评分，最推荐「声屿 Beat 3 运动版」（58.7 分）。它在价格、重量上更占优；「澎湃 Wave 4 运动版」（55.2 分）仅在评分、续航上略强，综合得分低 3.5 分。如果更看重某一维度，可以在对比面板调整权重后再决策。",
           "highlights": [
-            "价格 279元",
-            "评分 4.8分",
-            "防水等级 IPX6",
-            "重量 4.2g"
+            "价格 199元",
+            "重量 3.8g",
+            "降噪 主动降噪"
           ],
           "degraded": true,
-          "taskId": "527a64158fef49f29786af0935fdad71"
+          "taskId": "58259d585d0d42aea321d4b81f688e64"
         },
         "orders": []
       },
       "turnDetails": [
         {
           "message": "推荐300以内的蓝牙耳机",
-          "latencyMs": 17,
+          "latencyMs": 15,
           "intent": "search_product",
-          "reply": "按你的需求，为你筛选出 3 款蓝牙耳机（预算 300 元以内），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
+          "reply": "按你的需求，为你筛选出 3 款蓝牙耳机（预算 300 元以内，送礼场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
           "degraded": true,
           "products": [
+            {
+              "id": "p_headphone_01",
+              "name": "声屿 Beat 3 运动版",
+              "price": 199,
+              "reason": "售价 199 元，续航 18h、防水等级 IPX5，更贴合送礼场景。",
+              "fallback": true
+            },
             {
               "id": "p_headphone_02",
               "name": "澎湃 Wave 4 运动版",
               "price": 279,
-              "reason": "售价 279 元，续航 24h、防水等级 IPX6，参数与价格比较均衡。",
+              "reason": "售价 279 元，续航 24h、防水等级 IPX6，更贴合送礼场景。",
               "fallback": true
             },
             {
               "id": "p_headphone_03",
               "name": "律动 Liberty 5 轻盈版",
               "price": 299,
-              "reason": "售价 299 元，续航 30h、防水等级 IPX4，参数与价格比较均衡。",
-              "fallback": true
-            },
-            {
-              "id": "p_headphone_01",
-              "name": "声屿 Beat 3 运动版",
-              "price": 199,
-              "reason": "售价 199 元，续航 18h、防水等级 IPX5，参数与价格比较均衡。",
+              "reason": "售价 299 元，续航 30h、防水等级 IPX4，更贴合送礼场景。",
               "fallback": true
             }
           ],
           "slots": {
             "categoryId": "cat_headphone",
             "categoryName": "蓝牙耳机",
+            "brand": "声屿",
+            "scene": "送礼",
             "maxPrice": 300,
             "features": [],
             "budgetUnlimited": false,
             "askedBudget": false,
             "lastProductIds": [
+              "p_headphone_01",
               "p_headphone_02",
-              "p_headphone_03",
-              "p_headphone_01"
+              "p_headphone_03"
             ],
             "lastProductNames": [
+              "声屿 Beat 3 运动版",
               "澎湃 Wave 4 运动版",
-              "律动 Liberty 5 轻盈版",
-              "声屿 Beat 3 运动版"
+              "律动 Liberty 5 轻盈版"
             ]
           },
           "compare": null,
@@ -3962,7 +4024,7 @@
         },
         {
           "message": "帮我对比前两个",
-          "latencyMs": 32,
+          "latencyMs": 36,
           "intent": "compare",
           "reply": "已完成 2 款商品的对比，综合评分与决策建议见下方卡片。想改变结论？可以打开对比面板调整权重。",
           "degraded": true,
@@ -3970,50 +4032,52 @@
           "slots": {
             "categoryId": "cat_headphone",
             "categoryName": "蓝牙耳机",
+            "brand": "声屿",
+            "scene": "送礼",
             "maxPrice": 300,
             "features": [],
             "budgetUnlimited": false,
             "askedBudget": false,
             "lastProductIds": [
+              "p_headphone_01",
               "p_headphone_02",
-              "p_headphone_03",
-              "p_headphone_01"
+              "p_headphone_03"
             ],
             "lastProductNames": [
+              "声屿 Beat 3 运动版",
               "澎湃 Wave 4 运动版",
-              "律动 Liberty 5 轻盈版",
-              "声屿 Beat 3 运动版"
+              "律动 Liberty 5 轻盈版"
             ]
           },
           "compare": {
-            "recommendedId": "p_headphone_02",
-            "recommendedName": "澎湃 Wave 4 运动版",
+            "recommendedId": "p_headphone_01",
+            "recommendedName": "声屿 Beat 3 运动版",
             "scores": [
               {
-                "productId": "p_headphone_02",
-                "totalScore": 68.3,
+                "productId": "p_headphone_01",
+                "totalScore": 58.7,
                 "contributions": {
                   "价格": 16.4,
-                  "评分": 9.8,
+                  "评分": 0,
                   "续航": 0,
-                  "防水等级": 10.9,
+                  "防水等级": 5.5,
                   "重量": 13.1,
-                  "降噪": 9.8,
-                  "蓝牙版本": 8.2
+                  "降噪": 19.7,
+                  "蓝牙版本": 4.1
                 },
                 "rank": 1
               },
               {
-                "productId": "p_headphone_03",
-                "totalScore": 26.2,
+                "productId": "p_headphone_02",
+                "totalScore": 55.2,
                 "contributions": {
                   "价格": 0,
-                  "评分": 0,
+                  "评分": 9.8,
                   "续航": 16.4,
-                  "防水等级": 0,
+                  "防水等级": 10.9,
                   "重量": 0,
                   "降噪": 9.8,
-                  "蓝牙版本": 0
+                  "蓝牙版本": 8.2
                 },
                 "rank": 2
               }
@@ -4051,8 +4115,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 7,
-      "conversationId": "6a0d7134863a45cc89325052cf5e8394",
+      "latencyMs": 8,
+      "conversationId": "ca2ad0650cff4e82b396c1e5bdf8d386",
       "final": {
         "intent": "compare",
         "reply": "我需要至少两件商品才能对比。你可以先描述需求让我推荐，再说“对比前两个”；也可以从商品列表勾选后进入对比页。",
@@ -4070,7 +4134,7 @@
       "turnDetails": [
         {
           "message": "帮我对比一下A和B",
-          "latencyMs": 7,
+          "latencyMs": 8,
           "intent": "compare",
           "reply": "我需要至少两件商品才能对比。你可以先描述需求让我推荐，再说“对比前两个”；也可以从商品列表勾选后进入对比页。",
           "degraded": true,
@@ -4110,7 +4174,7 @@
       ],
       "error": null,
       "latencyMs": 7,
-      "conversationId": "90e3cf0ed62b4297893ff5302dd79f79",
+      "conversationId": "93a24dd501f14cd7814fda084376dede",
       "final": {
         "intent": "chitchat",
         "reply": "你好，我是智选商城的智能导购助手。你可以直接描述需求，比如“想买跑步用的蓝牙耳机，预算 300 以内”，我也可以帮你对比商品、查询订单或加入购物车。",
@@ -4168,7 +4232,7 @@
       ],
       "error": null,
       "latencyMs": 7,
-      "conversationId": "58521bc436c44a0b97e50a1bb19aa37e",
+      "conversationId": "0918018f4e9a4c48b319d59b1da8d874",
       "final": {
         "intent": "chitchat",
         "reply": "你好，我是智选商城的智能导购助手。你可以直接描述需求，比如“想买跑步用的蓝牙耳机，预算 300 以内”，我也可以帮你对比商品、查询订单或加入购物车。",
@@ -4225,8 +4289,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 5,
-      "conversationId": "efd24002d37e4bd8a8e9e9d7d350fd4a",
+      "latencyMs": 6,
+      "conversationId": "0e41bf7fc1c1429cbdfdaff55b7246b2",
       "final": {
         "intent": "chitchat",
         "reply": "你好，我是智选商城的智能导购助手。你可以直接描述需求，比如“想买跑步用的蓝牙耳机，预算 300 以内”，我也可以帮你对比商品、查询订单或加入购物车。",
@@ -4244,7 +4308,7 @@
       "turnDetails": [
         {
           "message": "你能做什么",
-          "latencyMs": 4,
+          "latencyMs": 6,
           "intent": "chitchat",
           "reply": "你好，我是智选商城的智能导购助手。你可以直接描述需求，比如“想买跑步用的蓝牙耳机，预算 300 以内”，我也可以帮你对比商品、查询订单或加入购物车。",
           "degraded": true,
@@ -4283,8 +4347,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 6,
-      "conversationId": "441e94ec104d433b88bef39203864e00",
+      "latencyMs": 7,
+      "conversationId": "f6406bdd44304e548f979477c73d0e9e",
       "final": {
         "intent": "clarify",
         "reply": "你的预算大概是多少？我可以在预算范围内按防水、续航、评分等维度帮你筛选。",
@@ -4292,6 +4356,8 @@
         "slots": {
           "categoryId": "cat_headphone",
           "categoryName": "蓝牙耳机",
+          "brand": "声屿",
+          "scene": "送礼",
           "features": [],
           "budgetUnlimited": false,
           "askedBudget": true,
@@ -4305,7 +4371,7 @@
       "turnDetails": [
         {
           "message": "推荐蓝牙耳机",
-          "latencyMs": 6,
+          "latencyMs": 7,
           "intent": "clarify",
           "reply": "你的预算大概是多少？我可以在预算范围内按防水、续航、评分等维度帮你筛选。",
           "degraded": true,
@@ -4313,6 +4379,8 @@
           "slots": {
             "categoryId": "cat_headphone",
             "categoryName": "蓝牙耳机",
+            "brand": "声屿",
+            "scene": "送礼",
             "features": [],
             "budgetUnlimited": false,
             "askedBudget": true,
@@ -4353,31 +4421,33 @@
         }
       ],
       "error": null,
-      "latencyMs": 15,
-      "conversationId": "01c6a308ca4b41f7a9a8a25d9495db54",
+      "latencyMs": 13,
+      "conversationId": "668d6c13161540628e5459bf6fc54dfe",
       "final": {
         "intent": "search_product",
-        "reply": "按你的需求，为你筛选出 5 款蓝牙耳机，已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
+        "reply": "按你的需求，为你筛选出 5 款蓝牙耳机（送礼场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
         "degraded": true,
         "slots": {
           "categoryId": "cat_headphone",
           "categoryName": "蓝牙耳机",
+          "brand": "声屿",
+          "scene": "送礼",
           "features": [],
           "budgetUnlimited": true,
           "askedBudget": false,
           "lastProductIds": [
             "p_headphone_05",
-            "p_headphone_02",
             "p_headphone_10",
-            "p_headphone_06",
-            "p_headphone_09"
+            "p_headphone_01",
+            "p_headphone_08",
+            "p_headphone_02"
           ],
           "lastProductNames": [
             "声屿 Air Max 运动版",
-            "澎湃 Wave 4 运动版",
             "声屿 Liberty Max 运动版",
-            "澎湃 Wave 3 运动版",
-            "云听 Liberty Pro 运动版"
+            "声屿 Beat 3 运动版",
+            "声屿 Beat 5 运动版",
+            "澎湃 Wave 4 运动版"
           ]
         },
         "products": [
@@ -4385,35 +4455,35 @@
             "id": "p_headphone_05",
             "name": "声屿 Air Max 运动版",
             "price": 399,
-            "reason": "售价 399 元，续航 40h、防水等级 IPX7，参数与价格比较均衡。",
-            "fallback": true
-          },
-          {
-            "id": "p_headphone_02",
-            "name": "澎湃 Wave 4 运动版",
-            "price": 279,
-            "reason": "售价 279 元，续航 24h、防水等级 IPX6，参数与价格比较均衡。",
+            "reason": "售价 399 元，续航 40h、防水等级 IPX7，更贴合送礼场景。",
             "fallback": true
           },
           {
             "id": "p_headphone_10",
             "name": "声屿 Liberty Max 运动版",
             "price": 899,
-            "reason": "售价 899 元，续航 36h、防水等级 IPX7，参数与价格比较均衡。",
+            "reason": "售价 899 元，续航 36h、防水等级 IPX7，更贴合送礼场景。",
             "fallback": true
           },
           {
-            "id": "p_headphone_06",
-            "name": "澎湃 Wave 3 运动版",
-            "price": 459,
-            "reason": "售价 459 元，续航 48h、防水等级 IPX5，参数与价格比较均衡。",
+            "id": "p_headphone_01",
+            "name": "声屿 Beat 3 运动版",
+            "price": 199,
+            "reason": "售价 199 元，续航 18h、防水等级 IPX5，更贴合送礼场景。",
             "fallback": true
           },
           {
-            "id": "p_headphone_09",
-            "name": "云听 Liberty Pro 运动版",
-            "price": 699,
-            "reason": "售价 699 元，续航 30h、防水等级 IPX5，参数与价格比较均衡。",
+            "id": "p_headphone_08",
+            "name": "声屿 Beat 5 运动版",
+            "price": 599,
+            "reason": "售价 599 元，续航 24h、防水等级 IPX6，更贴合送礼场景。",
+            "fallback": true
+          },
+          {
+            "id": "p_headphone_02",
+            "name": "澎湃 Wave 4 运动版",
+            "price": 279,
+            "reason": "售价 279 元，续航 24h、防水等级 IPX6，更贴合送礼场景。",
             "fallback": true
           }
         ],
@@ -4422,66 +4492,68 @@
       "turnDetails": [
         {
           "message": "预算不限，推荐蓝牙耳机",
-          "latencyMs": 15,
+          "latencyMs": 12,
           "intent": "search_product",
-          "reply": "按你的需求，为你筛选出 5 款蓝牙耳机，已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
+          "reply": "按你的需求，为你筛选出 5 款蓝牙耳机（送礼场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
           "degraded": true,
           "products": [
             {
               "id": "p_headphone_05",
               "name": "声屿 Air Max 运动版",
               "price": 399,
-              "reason": "售价 399 元，续航 40h、防水等级 IPX7，参数与价格比较均衡。",
-              "fallback": true
-            },
-            {
-              "id": "p_headphone_02",
-              "name": "澎湃 Wave 4 运动版",
-              "price": 279,
-              "reason": "售价 279 元，续航 24h、防水等级 IPX6，参数与价格比较均衡。",
+              "reason": "售价 399 元，续航 40h、防水等级 IPX7，更贴合送礼场景。",
               "fallback": true
             },
             {
               "id": "p_headphone_10",
               "name": "声屿 Liberty Max 运动版",
               "price": 899,
-              "reason": "售价 899 元，续航 36h、防水等级 IPX7，参数与价格比较均衡。",
+              "reason": "售价 899 元，续航 36h、防水等级 IPX7，更贴合送礼场景。",
               "fallback": true
             },
             {
-              "id": "p_headphone_06",
-              "name": "澎湃 Wave 3 运动版",
-              "price": 459,
-              "reason": "售价 459 元，续航 48h、防水等级 IPX5，参数与价格比较均衡。",
+              "id": "p_headphone_01",
+              "name": "声屿 Beat 3 运动版",
+              "price": 199,
+              "reason": "售价 199 元，续航 18h、防水等级 IPX5，更贴合送礼场景。",
               "fallback": true
             },
             {
-              "id": "p_headphone_09",
-              "name": "云听 Liberty Pro 运动版",
-              "price": 699,
-              "reason": "售价 699 元，续航 30h、防水等级 IPX5，参数与价格比较均衡。",
+              "id": "p_headphone_08",
+              "name": "声屿 Beat 5 运动版",
+              "price": 599,
+              "reason": "售价 599 元，续航 24h、防水等级 IPX6，更贴合送礼场景。",
+              "fallback": true
+            },
+            {
+              "id": "p_headphone_02",
+              "name": "澎湃 Wave 4 运动版",
+              "price": 279,
+              "reason": "售价 279 元，续航 24h、防水等级 IPX6，更贴合送礼场景。",
               "fallback": true
             }
           ],
           "slots": {
             "categoryId": "cat_headphone",
             "categoryName": "蓝牙耳机",
+            "brand": "声屿",
+            "scene": "送礼",
             "features": [],
             "budgetUnlimited": true,
             "askedBudget": false,
             "lastProductIds": [
               "p_headphone_05",
-              "p_headphone_02",
               "p_headphone_10",
-              "p_headphone_06",
-              "p_headphone_09"
+              "p_headphone_01",
+              "p_headphone_08",
+              "p_headphone_02"
             ],
             "lastProductNames": [
               "声屿 Air Max 运动版",
-              "澎湃 Wave 4 运动版",
               "声屿 Liberty Max 运动版",
-              "澎湃 Wave 3 运动版",
-              "云听 Liberty Pro 运动版"
+              "声屿 Beat 3 运动版",
+              "声屿 Beat 5 运动版",
+              "澎湃 Wave 4 运动版"
             ]
           },
           "compare": null,
@@ -4518,8 +4590,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 23,
-      "conversationId": "31d3898e80b544139e1b8b9abaaec59d",
+      "latencyMs": 21,
+      "conversationId": "036fb2e132374ab18e16950922f48cc7",
       "final": {
         "intent": "search_product",
         "reply": "按你的需求，为你筛选出 5 款跑步鞋（跑步场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
@@ -4588,7 +4660,7 @@
       "turnDetails": [
         {
           "message": "推荐蓝牙耳机",
-          "latencyMs": 9,
+          "latencyMs": 8,
           "intent": "clarify",
           "reply": "你的预算大概是多少？我可以在预算范围内按防水、续航、评分等维度帮你筛选。",
           "degraded": true,
@@ -4596,6 +4668,8 @@
           "slots": {
             "categoryId": "cat_headphone",
             "categoryName": "蓝牙耳机",
+            "brand": "声屿",
+            "scene": "送礼",
             "features": [],
             "budgetUnlimited": false,
             "askedBudget": true,
@@ -4608,7 +4682,7 @@
         },
         {
           "message": "换成跑步鞋",
-          "latencyMs": 14,
+          "latencyMs": 13,
           "intent": "search_product",
           "reply": "按你的需求，为你筛选出 5 款跑步鞋（跑步场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
           "degraded": true,
@@ -4700,15 +4774,15 @@
           "name": "reply:购物车",
           "ok": true,
           "expected": "包含「购物车」",
-          "actual": "你的购物车里有 「律动 Liberty 5 轻盈版」×2、「澎湃 Wave 4 运动版」×1、「晨光 哥伦比亚 中烘 咖啡豆 500g」×2，共 5 件，合计 1015 元。需要我帮你结算吗？"
+          "actual": "你的购物车里有 「澎湃 Wave 4 运动版」×2、「声屿 Beat 3 运动版」×1、「晨光 哥伦比亚 中烘 咖啡豆 500g」×2，共 5 件，合计 895 元。需要我帮你结算吗？"
         }
       ],
       "error": null,
-      "latencyMs": 8,
-      "conversationId": "01103cba496b4af0a9f289aa58f443d6",
+      "latencyMs": 9,
+      "conversationId": "2a6fde3bd0114d4099b066396a1648cd",
       "final": {
         "intent": "add_to_cart",
-        "reply": "你的购物车里有 「律动 Liberty 5 轻盈版」×2、「澎湃 Wave 4 运动版」×1、「晨光 哥伦比亚 中烘 咖啡豆 500g」×2，共 5 件，合计 1015 元。需要我帮你结算吗？",
+        "reply": "你的购物车里有 「澎湃 Wave 4 运动版」×2、「声屿 Beat 3 运动版」×1、「晨光 哥伦比亚 中烘 咖啡豆 500g」×2，共 5 件，合计 895 元。需要我帮你结算吗？",
         "degraded": true,
         "slots": {
           "features": [],
@@ -4723,9 +4797,9 @@
       "turnDetails": [
         {
           "message": "我的购物车里有什么",
-          "latencyMs": 8,
+          "latencyMs": 9,
           "intent": "add_to_cart",
-          "reply": "你的购物车里有 「律动 Liberty 5 轻盈版」×2、「澎湃 Wave 4 运动版」×1、「晨光 哥伦比亚 中烘 咖啡豆 500g」×2，共 5 件，合计 1015 元。需要我帮你结算吗？",
+          "reply": "你的购物车里有 「澎湃 Wave 4 运动版」×2、「声屿 Beat 3 运动版」×1、「晨光 哥伦比亚 中烘 咖啡豆 500g」×2，共 5 件，合计 895 元。需要我帮你结算吗？",
           "degraded": true,
           "products": [],
           "slots": {
@@ -4762,8 +4836,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 8,
-      "conversationId": "0e9c1c47ee9548a2ba2abb502aad8de9",
+      "latencyMs": 10,
+      "conversationId": "aec656b105eb4558979283f87693d257",
       "final": {
         "intent": "query_order",
         "reply": "找到 2 个订单。最近一个订单 SG2026041710150002 当前状态：已支付，共 2 件商品，金额 138 元。",
@@ -4787,9 +4861,9 @@
             "phone": "13800138000",
             "addressText": "江苏省南京市栖霞区文苑路 1 号 智能导购实验室",
             "remark": "演示订单",
-            "createdAt": "2026-10-20T19:36:50.332966",
-            "paidAt": "2026-10-20T19:36:50.332966",
-            "expiredAt": "2026-10-20T20:06:50.332966",
+            "createdAt": "2026-10-20T19:52:51.743956",
+            "paidAt": "2026-10-20T19:52:51.743956",
+            "expiredAt": "2026-10-20T20:22:51.743956",
             "items": [
               {
                 "id": 2,
@@ -4813,11 +4887,13 @@
             "phone": "13800138000",
             "addressText": "江苏省南京市栖霞区文苑路 1 号 智能导购实验室",
             "remark": "演示订单",
-            "createdAt": "2026-10-04T19:36:50.332966",
-            "paidAt": "2026-10-04T19:36:50.332966",
-            "shippedAt": "2026-10-05T19:36:50.332966",
-            "finishedAt": "2026-10-08T19:36:50.332966",
-            "expiredAt": "2026-10-04T20:06:50.332966",
+            "carrier": "顺丰速运",
+            "trackingNo": "SF1722491932",
+            "createdAt": "2026-10-04T19:52:51.743956",
+            "paidAt": "2026-10-04T19:52:51.743956",
+            "shippedAt": "2026-10-05T19:52:51.743956",
+            "finishedAt": "2026-10-08T19:52:51.743956",
+            "expiredAt": "2026-10-04T20:22:51.743956",
             "items": [
               {
                 "id": 1,
@@ -4836,7 +4912,7 @@
       "turnDetails": [
         {
           "message": "我的订单",
-          "latencyMs": 8,
+          "latencyMs": 9,
           "intent": "query_order",
           "reply": "找到 2 个订单。最近一个订单 SG2026041710150002 当前状态：已支付，共 2 件商品，金额 138 元。",
           "degraded": true,
@@ -4892,8 +4968,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 8,
-      "conversationId": "5ebdfe4836104f78bc8674dd366d6f1e",
+      "latencyMs": 6,
+      "conversationId": "b326fdd6de944f3999fd052f9199f8e8",
       "final": {
         "intent": "ask_detail",
         "reply": "你想了解哪件商品的详情？可以告诉商品名称，或先描述需求让我推荐几款。",
@@ -4911,7 +4987,7 @@
       "turnDetails": [
         {
           "message": "这款耳机怎么样",
-          "latencyMs": 8,
+          "latencyMs": 6,
           "intent": "ask_detail",
           "reply": "你想了解哪件商品的详情？可以告诉商品名称，或先描述需求让我推荐几款。",
           "degraded": true,
@@ -4956,8 +5032,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 14,
-      "conversationId": "9ddb255213b440fab3b0b9df7df3fcd9",
+      "latencyMs": 13,
+      "conversationId": "ce336640e19a403aafe20fed73c9876b",
       "final": {
         "intent": "search_product",
         "reply": "按你的需求，为你筛选出 4 款蓝牙耳机（预算 350 元以内），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
@@ -5017,7 +5093,7 @@
       "turnDetails": [
         {
           "message": "三百五十元以内的蓝牙耳机",
-          "latencyMs": 14,
+          "latencyMs": 13,
           "intent": "search_product",
           "reply": "按你的需求，为你筛选出 4 款蓝牙耳机（预算 350 元以内），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
           "degraded": true,
@@ -5110,8 +5186,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 11,
-      "conversationId": "ad3dcbb830eb41adad62cf818589738a",
+      "latencyMs": 15,
+      "conversationId": "f1224f5a54974f1293471277a8114b4f",
       "final": {
         "intent": "search_product",
         "reply": "按你的需求，为你筛选出 3 款笔记本电脑（预算 5000 元以内），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
@@ -5162,7 +5238,7 @@
       "turnDetails": [
         {
           "message": "预算五千的笔记本",
-          "latencyMs": 11,
+          "latencyMs": 14,
           "intent": "search_product",
           "reply": "按你的需求，为你筛选出 3 款笔记本电脑（预算 5000 元以内），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
           "degraded": true,
@@ -5246,8 +5322,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 14,
-      "conversationId": "51aae7c7c35c448cb7833c54a428b015",
+      "latencyMs": 13,
+      "conversationId": "c97f61931c484381a349eda8f4d708ab",
       "final": {
         "intent": "search_product",
         "reply": "按你的需求，为你筛选出 3 款咖啡机（预算 1000 元以内），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
@@ -5298,7 +5374,7 @@
       "turnDetails": [
         {
           "message": "推荐一千元以内的咖啡机",
-          "latencyMs": 14,
+          "latencyMs": 13,
           "intent": "search_product",
           "reply": "按你的需求，为你筛选出 3 款咖啡机（预算 1000 元以内），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
           "degraded": true,
@@ -5382,8 +5458,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 12,
-      "conversationId": "d86ae5ba05de48c295538e54e22f9826",
+      "latencyMs": 14,
+      "conversationId": "83d1d3ac8dbd4f24863d9d0866f857ec",
       "final": {
         "intent": "search_product",
         "reply": "按你的需求，为你筛选出 1 款机械键盘（预算 200 元以内），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
@@ -5416,7 +5492,7 @@
       "turnDetails": [
         {
           "message": "有没有200元以内的机械键盘",
-          "latencyMs": 12,
+          "latencyMs": 14,
           "intent": "search_product",
           "reply": "按你的需求，为你筛选出 1 款机械键盘（预算 200 元以内），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
           "degraded": true,

@@ -48,8 +48,12 @@ const router = createRouter({
       children: [
         { path: '', name: 'admin-dashboard', component: () => import('@/views/admin/DashboardView.vue') },
         { path: 'products', name: 'admin-products', component: () => import('@/views/admin/AdminProductsView.vue') },
+        { path: 'categories', name: 'admin-categories', component: () => import('@/views/admin/AdminCategoriesView.vue') },
         { path: 'orders', name: 'admin-orders', component: () => import('@/views/admin/AdminOrdersView.vue') },
+        { path: 'after-sales', name: 'admin-after-sales', component: () => import('@/views/admin/AdminAfterSalesView.vue') },
+        { path: 'reviews', name: 'admin-reviews', component: () => import('@/views/admin/AdminReviewsView.vue') },
         { path: 'users', name: 'admin-users', component: () => import('@/views/admin/AdminUsersView.vue') },
+        { path: 'conversations', name: 'admin-conversations', component: () => import('@/views/admin/AdminConversationsView.vue') },
         { path: 'agent-logs', name: 'admin-logs', component: () => import('@/views/admin/AdminLogsView.vue') }
       ]
     },

@@ -11,8 +11,12 @@ const drawer = ref(false)
 const navItems = [
   { name: 'admin-dashboard', path: '/admin', label: '仪表盘', icon: 'DataBoard' },
   { name: 'admin-products', path: '/admin/products', label: '商品管理', icon: 'Goods' },
+  { name: 'admin-categories', path: '/admin/categories', label: '分类管理', icon: 'Collection' },
   { name: 'admin-orders', path: '/admin/orders', label: '订单管理', icon: 'Tickets' },
+  { name: 'admin-after-sales', path: '/admin/after-sales', label: '售后管理', icon: 'Service' },
+  { name: 'admin-reviews', path: '/admin/reviews', label: '评价管理', icon: 'ChatLineSquare' },
   { name: 'admin-users', path: '/admin/users', label: '用户管理', icon: 'User' },
+  { name: 'admin-conversations', path: '/admin/conversations', label: '会话审查', icon: 'ChatDotRound' },
   { name: 'admin-logs', path: '/admin/agent-logs', label: 'Agent 日志', icon: 'DataLine' }
 ]
 

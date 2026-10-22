@@ -287,6 +287,10 @@ public class DataSeeder implements ApplicationRunner {
         order.setPaidAt(paidAt);
         order.setShippedAt(shippedAt);
         order.setFinishedAt(finishedAt);
+        if (shippedAt != null) {
+            order.setCarrier("顺丰速运");
+            order.setTrackingNo("SF" + Math.abs(orderNo.hashCode()));
+        }
         order.setExpiredAt(createdAt.plusMinutes(30));
         orderMapper.insert(order);
 

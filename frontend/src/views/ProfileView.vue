@@ -18,6 +18,9 @@ const history = ref<Product[]>([])
 const preferences = ref<Preference[]>([])
 const saving = ref(false)
 const addressDialog = ref(false)
+const passwordDialog = ref(false)
+const passwordSaving = ref(false)
+const passwordForm = reactive({ oldPassword: '', newPassword: '', confirm: '' })
 const addressSaving = ref(false)
 const editingAddressId = ref('')
 const profileForm = reactive({ nickname: '', email: '', phone: '' })
@@ -64,6 +67,41 @@ async function load() {
     history.value = historyList
   } finally {
     loading.value = false
+  }
+}
+
+function openPassword() {
+  passwordForm.oldPassword = ''
+  passwordForm.newPassword = ''
+  passwordForm.confirm = ''
+  passwordDialog.value = true
+}
+
+async function savePassword() {
+  if (!passwordForm.oldPassword || !passwordForm.newPassword) {
+    ElMessage.warning('请填写原密码和新密码')
+    return
+  }
+  if (passwordForm.newPassword.length < 6) {
+    ElMessage.warning('新密码至少 6 位')
+    return
+  }
+  if (passwordForm.newPassword !== passwordForm.confirm) {
+    ElMessage.warning('两次输入的新密码不一致')
+    return
+  }
+  passwordSaving.value = true
+  try {
+    await userApi.changePassword({
+      oldPassword: passwordForm.oldPassword,
+      newPassword: passwordForm.newPassword
+    })
+    ElMessage.success('密码已修改，请重新登录')
+    passwordDialog.value = false
+    auth.logout()
+    router.push('/login')
+  } finally {
+    passwordSaving.value = false
   }
 }
 
@@ -211,7 +249,10 @@ async function savePreferences() {
                   <el-input v-model="profileForm.phone" maxlength="20" />
                 </el-form-item>
               </div>
-              <el-button type="primary" round :loading="saving" @click="saveProfile">保存修改</el-button>
+              <div class="profile-actions">
+                <el-button type="primary" round :loading="saving" @click="saveProfile">保存修改</el-button>
+                <el-button round @click="openPassword">修改密码</el-button>
+              </div>
             </el-form>
           </div>
 
@@ -347,6 +388,24 @@ async function savePreferences() {
         </template>
       </section>
     </div>
+
+    <el-dialog v-model="passwordDialog" title="修改密码" width="420px">
+      <el-form label-position="top">
+        <el-form-item label="原密码">
+          <el-input v-model="passwordForm.oldPassword" type="password" show-password />
+        </el-form-item>
+        <el-form-item label="新密码">
+          <el-input v-model="passwordForm.newPassword" type="password" show-password placeholder="至少 6 位" />
+        </el-form-item>
+        <el-form-item label="确认新密码">
+          <el-input v-model="passwordForm.confirm" type="password" show-password />
+        </el-form-item>
+      </el-form>
+      <template #footer>
+        <el-button @click="passwordDialog = false">取消</el-button>
+        <el-button type="primary" :loading="passwordSaving" @click="savePassword">确认修改</el-button>
+      </template>
+    </el-dialog>
 
     <el-dialog v-model="addressDialog" :title="editingAddressId ? '编辑地址' : '新增地址'" width="520px">
       <el-form label-position="top">
@@ -516,6 +575,11 @@ async function savePreferences() {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0 16px;
+}
+
+.profile-actions {
+  display: flex;
+  gap: 8px;
 }
 
 .quick-grid {
@@ -734,7 +798,12 @@ async function savePreferences() {
     margin-right: auto;
   }
 
-  .quick-grid {
+  .profile-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.quick-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 

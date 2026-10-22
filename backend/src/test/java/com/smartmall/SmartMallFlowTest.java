@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -105,6 +106,38 @@ class SmartMallFlowTest {
         assertThat(orderChat.path("orders").size()).isGreaterThan(0);
         assertThat(orderChat.path("reply").asText()).contains("已支付");
 
+        var shipBody = objectMapper.createObjectNode();
+        shipBody.put("carrier", "顺丰速运");
+        shipBody.put("trackingNo", "SF1234567890");
+        JsonNode shipped = putJson("/api/admin/order/" + orderId + "/ship", shipBody, adminToken);
+        assertThat(shipped.path("status").asText()).isEqualTo("SHIPPED");
+        assertThat(shipped.path("carrier").asText()).isEqualTo("顺丰速运");
+        assertThat(shipped.path("trackingNo").asText()).isEqualTo("SF1234567890");
+
+        JsonNode completed = putJson("/api/order/" + orderId + "/confirm", null, token);
+        assertThat(completed.path("status").asText()).isEqualTo("COMPLETED");
+
+        var afterSaleBody = objectMapper.createObjectNode();
+        afterSaleBody.put("orderId", orderId);
+        afterSaleBody.put("type", "RETURN");
+        afterSaleBody.put("reason", "商品与描述不符，申请退货");
+        JsonNode afterSale = postJson("/api/after-sale", afterSaleBody, token);
+        assertThat(afterSale.path("status").asText()).isEqualTo("PENDING");
+        JsonNode adminAfterSales = getJson("/api/admin/after-sales?page=1&size=10", adminToken);
+        assertThat(adminAfterSales.path("total").asLong()).isGreaterThan(0);
+        var handleBody = objectMapper.createObjectNode();
+        handleBody.put("status", "APPROVED");
+        handleBody.put("adminNote", "同意退货，请寄回商品");
+        JsonNode handled = putJson("/api/admin/after-sale/" + afterSale.path("id").asText() + "/handle",
+                handleBody, adminToken);
+        assertThat(handled.path("status").asText()).isEqualTo("APPROVED");
+
+        JsonNode adminConversations = getJson("/api/admin/conversations?page=1&size=10", adminToken);
+        assertThat(adminConversations.path("total").asLong()).isGreaterThan(0);
+        String adminConversationId = adminConversations.path("records").get(0).path("id").asText();
+        assertThat(getJson("/api/admin/conversations/" + adminConversationId + "/turns", adminToken).size())
+                .isGreaterThan(0);
+
         JsonNode logs = getJson("/api/agent/logs?taskId=" + firstChat.path("taskId").asText(), token);
         assertThat(logs.size()).isGreaterThan(3);
         assertThat(logs.get(0).path("agentId").asText()).isEqualTo("guide-agent");
@@ -113,6 +146,10 @@ class SmartMallFlowTest {
         assertThat(stats.path("orderCount").asLong()).isGreaterThan(0);
         assertThat(stats.path("agentLogCount").asLong()).isGreaterThan(0);
         assertThat(stats.path("topProducts").size()).isGreaterThan(0);
+
+        JsonNode preferenceChat = chat(token, "推荐蓝牙耳机，预算500以内", null);
+        assertThat(preferenceChat.path("appliedPreferences").size()).isGreaterThan(0);
+        assertThat(preferenceChat.path("slots").path("scene").asText()).isEqualTo("跑步");
 
         JsonNode chineseChat = chat(token, "三百元以内的蓝牙耳机", null);
         assertThat(chineseChat.path("intent").asText()).isEqualTo("search_product");
@@ -148,6 +185,39 @@ class SmartMallFlowTest {
         JsonNode importResult = postJson("/api/admin/products/import", importBody, adminToken);
         assertThat(importResult.path("success").asInt()).isEqualTo(1);
         assertThat(importResult.path("failed").asInt()).isZero();
+
+        JsonNode reviews = getJson("/api/admin/reviews?page=1&size=10", adminToken);
+        assertThat(reviews.path("total").asLong()).isGreaterThan(0);
+        long reviewId = reviews.path("records").get(0).path("id").asLong();
+        mvc.perform(put("/api/admin/review/" + reviewId + "/status?status=0")
+                        .header("Authorization", "Bearer " + adminToken))
+                .andExpect(status().isOk());
+        mvc.perform(put("/api/admin/review/" + reviewId + "/status?status=1")
+                        .header("Authorization", "Bearer " + adminToken))
+                .andExpect(status().isOk());
+
+        JsonNode categories = getJson("/api/admin/categories", adminToken);
+        assertThat(categories.size()).isGreaterThanOrEqualTo(21);
+        var categoryBody = objectMapper.createObjectNode();
+        categoryBody.put("name", "临时测试分类");
+        categoryBody.put("icon", "🧪");
+        categoryBody.put("sortOrder", 99);
+        JsonNode category = postJson("/api/admin/category", categoryBody, adminToken);
+        assertThat(category.path("name").asText()).isEqualTo("临时测试分类");
+        mvc.perform(delete("/api/admin/category/" + category.path("id").asText())
+                        .header("Authorization", "Bearer " + adminToken))
+                .andExpect(status().isOk());
+
+        var passwordBody = objectMapper.createObjectNode();
+        passwordBody.put("oldPassword", "Demo@123");
+        passwordBody.put("newPassword", "Demo@1234");
+        mvc.perform(put("/api/user/password")
+                        .header("Authorization", "Bearer " + token)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(passwordBody)))
+                .andExpect(status().isOk());
+        String reloginToken = login("demo", "Demo@1234");
+        assertThat(reloginToken).isNotBlank();
     }
 
     private String login(String username, String password) throws Exception {

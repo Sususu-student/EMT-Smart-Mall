@@ -1,15 +1,26 @@
 <script setup lang="ts">
-import { computed, onMounted, ref, watch } from 'vue'
+import { computed, onMounted, reactive, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { ElMessage, ElMessageBox } from 'element-plus'
-import { orderApi } from '@/api'
-import type { Order } from '@/types'
+import { afterSaleApi, orderApi } from '@/api'
+import type { AfterSale, Order } from '@/types'
 import { dateTime, money, orderStatusType } from '@/utils/format'
 
 const route = useRoute()
 const router = useRouter()
 const order = ref<Order | null>(null)
 const loading = ref(true)
+const afterSales = ref<AfterSale[]>([])
+const afterSaleDialog = ref(false)
+const submittingAfterSale = ref(false)
+const afterSaleForm = reactive({ type: 'REFUND', reason: '' })
+
+const canApplyAfterSale = computed(() => {
+  if (!order.value || afterSales.value.length) return false
+  return ['PAID', 'SHIPPED', 'COMPLETED'].includes(order.value.status)
+})
+
+const hasLogistics = computed(() => Boolean(order.value?.trackingNo || order.value?.carrier))
 
 const steps = computed(() => {
   if (!order.value) return []
@@ -39,6 +50,11 @@ async function load() {
   loading.value = true
   try {
     order.value = await orderApi.detail(route.params.id as string)
+    try {
+      afterSales.value = await afterSaleApi.byOrder(order.value.id)
+    } catch {
+      afterSales.value = []
+    }
   } finally {
     loading.value = false
   }
@@ -76,6 +92,33 @@ async function confirmReceipt() {
   ElMessage.success('订单已完成')
 }
 
+function openAfterSale() {
+  afterSaleForm.type = 'REFUND'
+  afterSaleForm.reason = ''
+  afterSaleDialog.value = true
+}
+
+async function submitAfterSale() {
+  if (!order.value) return
+  if (afterSaleForm.reason.trim().length < 5) {
+    ElMessage.warning('请至少填写 5 个字的售后原因')
+    return
+  }
+  submittingAfterSale.value = true
+  try {
+    await afterSaleApi.create({
+      orderId: order.value.id,
+      type: afterSaleForm.type,
+      reason: afterSaleForm.reason
+    })
+    ElMessage.success('售后申请已提交，等待管理员处理')
+    afterSaleDialog.value = false
+    afterSales.value = await afterSaleApi.byOrder(order.value.id)
+  } finally {
+    submittingAfterSale.value = false
+  }
+}
+
 async function copyOrderNo() {
   if (!order.value) return
   try {
@@ -111,6 +154,7 @@ async function copyOrderNo() {
             <el-button type="primary" round @click="pay">立即支付</el-button>
           </template>
           <el-button v-else-if="order.status === 'SHIPPED'" type="primary" round @click="confirmReceipt">确认收货</el-button>
+          <el-button v-if="canApplyAfterSale" round @click="openAfterSale">申请售后</el-button>
         </div>
       </section>
 
@@ -184,6 +228,27 @@ async function copyOrderNo() {
             <div class="info-line"><span>完成时间</span><strong>{{ dateTime(order.finishedAt) }}</strong></div>
           </section>
 
+          <section v-if="hasLogistics" class="panel">
+            <div class="panel-head"><h3>物流信息</h3></div>
+            <div class="info-line"><span>承运商</span><strong>{{ order.carrier || '—' }}</strong></div>
+            <div class="info-line"><span>运单号</span><strong class="order-no">{{ order.trackingNo || '—' }}</strong></div>
+          </section>
+
+          <section v-if="afterSales.length" class="panel">
+            <div class="panel-head"><h3>售后申请</h3></div>
+            <div v-for="item in afterSales" :key="item.id" class="after-sale-item">
+              <div class="info-line">
+                <span>{{ item.typeLabel }}</span>
+                <el-tag :type="item.status === 'APPROVED' ? 'success' : item.status === 'REJECTED' ? 'danger' : 'warning'" size="small" round>
+                  {{ item.statusLabel }}
+                </el-tag>
+              </div>
+              <p class="after-sale-reason">{{ item.reason }}</p>
+              <p v-if="item.adminNote" class="after-sale-note">处理备注：{{ item.adminNote }}</p>
+              <span class="after-sale-time">{{ dateTime(item.createdAt) }}</span>
+            </div>
+          </section>
+
           <button class="agent-help" @click="router.push({ name: 'chat', query: { q: `帮我查一下订单 ${order.orderNo} 到哪了` } })">
             <el-icon><ChatDotRound /></el-icon>
             让 Agent 查询这笔订单
@@ -191,6 +256,26 @@ async function copyOrderNo() {
         </aside>
       </div>
     </div>
+
+    <el-dialog v-model="afterSaleDialog" title="申请售后" width="460px">
+      <p class="after-sale-tip">演示环境支持退款、退货退款、换货申请，提交后由管理员审核，不产生真实退款。</p>
+      <el-form label-position="top">
+        <el-form-item label="售后类型">
+          <el-select v-model="afterSaleForm.type" style="width: 100%">
+            <el-option label="仅退款" value="REFUND" />
+            <el-option label="退货退款" value="RETURN" />
+            <el-option label="换货" value="EXCHANGE" />
+          </el-select>
+        </el-form-item>
+        <el-form-item label="售后原因">
+          <el-input v-model="afterSaleForm.reason" type="textarea" :rows="4" maxlength="500" show-word-limit placeholder="请描述遇到的问题，例如：商品与描述不符" />
+        </el-form-item>
+      </el-form>
+      <template #footer>
+        <el-button @click="afterSaleDialog = false">取消</el-button>
+        <el-button type="primary" :loading="submittingAfterSale" @click="submitAfterSale">提交申请</el-button>
+      </template>
+    </el-dialog>
   </div>
 </template>
 
@@ -491,6 +576,40 @@ async function copyOrderNo() {
   align-items: center;
   gap: 4px;
   color: var(--brand-deep);
+}
+
+.after-sale-item {
+  border-bottom: 1px dashed var(--line);
+  padding: 8px 0;
+}
+
+.after-sale-item:last-child {
+  border-bottom: none;
+}
+
+.after-sale-reason {
+  font-size: 11px;
+  color: var(--ink-soft);
+  line-height: 1.7;
+  margin: 7px 0 4px;
+}
+
+.after-sale-note {
+  font-size: 10px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.after-sale-time {
+  font-size: 9px;
+  color: var(--muted-light);
+}
+
+.after-sale-tip {
+  font-size: 10px;
+  line-height: 1.8;
+  color: var(--muted);
+  margin-bottom: 14px;
 }
 
 .agent-help {

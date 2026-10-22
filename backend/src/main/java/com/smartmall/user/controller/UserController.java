@@ -4,6 +4,7 @@ import com.smartmall.auth.PublicApi;
 import com.smartmall.common.ApiResponse;
 import com.smartmall.product.dto.ProductVO;
 import com.smartmall.user.dto.AddressRequest;
+import com.smartmall.user.dto.ChangePasswordRequest;
 import com.smartmall.user.dto.LoginRequest;
 import com.smartmall.user.dto.LoginResponse;
 import com.smartmall.user.dto.PreferenceUpdateRequest;
@@ -55,6 +56,12 @@ public class UserController {
     @PutMapping("/profile")
     public ApiResponse<UserVO> updateProfile(@Valid @RequestBody UpdateProfileRequest request) {
         return ApiResponse.ok(userService.updateProfile(request));
+    }
+
+    @PutMapping("/password")
+    public ApiResponse<Void> changePassword(@Valid @RequestBody ChangePasswordRequest request) {
+        userService.changePassword(request);
+        return ApiResponse.ok();
     }
 
     @GetMapping("/address")

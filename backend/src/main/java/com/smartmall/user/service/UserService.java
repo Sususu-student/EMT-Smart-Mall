@@ -11,6 +11,7 @@ import com.smartmall.order.mapper.OrderMapper;
 import com.smartmall.product.dto.ProductVO;
 import com.smartmall.product.service.ProductService;
 import com.smartmall.user.dto.AddressRequest;
+import com.smartmall.user.dto.ChangePasswordRequest;
 import com.smartmall.user.dto.LoginRequest;
 import com.smartmall.user.dto.LoginResponse;
 import com.smartmall.user.dto.PreferenceItem;
@@ -126,6 +127,23 @@ public class UserService {
         user.setUpdatedAt(LocalDateTime.now());
         userMapper.updateById(user);
         return UserVO.from(user);
+    }
+
+    @Transactional
+    public void changePassword(ChangePasswordRequest request) {
+        SysUser user = userMapper.selectById(AuthContext.userId());
+        if (user == null) {
+            throw BizException.unauthorized("用户不存在");
+        }
+        if (!passwordEncoder.matches(request.getOldPassword(), user.getPassword())) {
+            throw new BizException("原密码不正确");
+        }
+        if (passwordEncoder.matches(request.getNewPassword(), user.getPassword())) {
+            throw new BizException("新密码不能与原密码相同");
+        }
+        user.setPassword(passwordEncoder.encode(request.getNewPassword()));
+        user.setUpdatedAt(LocalDateTime.now());
+        userMapper.updateById(user);
     }
 
     public List<UserAddress> addresses() {

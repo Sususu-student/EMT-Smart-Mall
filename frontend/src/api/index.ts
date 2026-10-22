@@ -2,7 +2,10 @@ import { request } from './http'
 import type {
   Address,
   AddressPayload,
+  AdminConversation,
   AdminProductPayload,
+  AfterSale,
+  ReviewAdmin,
   CartSummary,
   Category,
   ChatResponse,
@@ -44,6 +47,8 @@ export const userApi = {
   favorites: () => request<Product[]>({ url: '/user/favorites' }),
   toggleFavorite: (productId: string) =>
     request<boolean>({ url: `/user/favorite/${productId}`, method: 'post' }),
+  changePassword: (data: { oldPassword: string; newPassword: string }) =>
+    request<void>({ url: '/user/password', method: 'put', data }),
   history: (limit = 12) => request<Product[]>({ url: '/user/history', params: { limit } })
 }
 
@@ -69,6 +74,13 @@ export const cartApi = {
   remove: (id: number) => request<void>({ url: `/cart/${id}`, method: 'delete' }),
   select: (ids: number[] | null, selected: boolean) =>
     request<void>({ url: '/cart/select', method: 'put', data: { ids, selected } })
+}
+
+export const afterSaleApi = {
+  create: (data: { orderId: string; type: string; reason: string }) =>
+    request<AfterSale>({ url: '/after-sale', method: 'post', data }),
+  mine: () => request<AfterSale[]>({ url: '/after-sale' }),
+  byOrder: (orderId: string) => request<AfterSale[]>({ url: `/after-sale/order/${orderId}` })
 }
 
 export const orderApi = {
@@ -104,6 +116,12 @@ export const adminApi = {
   stats: () => request<Dashboard>({ url: '/admin/stats' }),
   products: (params: Record<string, unknown>) =>
     request<PageResult<Product>>({ url: '/admin/products', params }),
+  categories: () => request<Category[]>({ url: '/admin/categories' }),
+  createCategory: (data: Record<string, unknown>) =>
+    request<Category>({ url: '/admin/category', method: 'post', data }),
+  updateCategory: (id: string, data: Record<string, unknown>) =>
+    request<Category>({ url: `/admin/category/${id}`, method: 'put', data }),
+  deleteCategory: (id: string) => request<void>({ url: `/admin/category/${id}`, method: 'delete' }),
   createProduct: (data: AdminProductPayload) =>
     request<Product>({ url: '/admin/product', method: 'post', data }),
   importProducts: (items: AdminProductPayload[]) =>
@@ -118,7 +136,20 @@ export const adminApi = {
   updateProductStatus: (id: string, status: number) =>
     request<void>({ url: `/admin/product/${id}/status`, method: 'put', params: { status } }),
   orders: (params: Record<string, unknown>) => request<PageResult<Order>>({ url: '/admin/orders', params }),
-  ship: (id: string) => request<Order>({ url: `/admin/order/${id}/ship`, method: 'put' }),
+  ship: (id: string, data?: { carrier?: string; trackingNo?: string }) =>
+    request<Order>({ url: `/admin/order/${id}/ship`, method: 'put', data }),
+  reviews: (params: Record<string, unknown>) =>
+    request<PageResult<ReviewAdmin>>({ url: '/admin/reviews', params }),
+  updateReviewStatus: (id: number, status: number) =>
+    request<void>({ url: `/admin/review/${id}/status`, method: 'put', params: { status } }),
+  afterSales: (params: Record<string, unknown>) =>
+    request<PageResult<AfterSale>>({ url: '/admin/after-sales', params }),
+  handleAfterSale: (id: string, data: { status: string; adminNote?: string }) =>
+    request<AfterSale>({ url: `/admin/after-sale/${id}/handle`, method: 'put', data }),
+  conversations: (params: Record<string, unknown>) =>
+    request<PageResult<AdminConversation>>({ url: '/admin/conversations', params }),
+  conversationTurns: (id: string) =>
+    request<Turn[]>({ url: `/admin/conversations/${id}/turns` }),
   users: (params: Record<string, unknown>) => request<PageResult<User>>({ url: '/admin/users', params }),
   updateUserStatus: (id: string, status: number) =>
     request<void>({ url: `/admin/user/${id}/status`, method: 'put', params: { status } }),

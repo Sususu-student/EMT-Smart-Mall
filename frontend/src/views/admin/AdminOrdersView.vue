@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { adminApi } from '@/api'
 import type { Order } from '@/types'
@@ -13,6 +13,10 @@ const keyword = ref('')
 const status = ref('')
 const detailVisible = ref(false)
 const current = ref<Order | null>(null)
+const shipDialog = ref(false)
+const shipTarget = ref<Order | null>(null)
+const shipping = ref(false)
+const shipForm = reactive({ carrier: '顺丰速运', trackingNo: '' })
 
 const statusOptions = [
   { label: '待支付', value: 'PENDING_PAYMENT' },
@@ -51,14 +55,25 @@ function openDetail(order: Order) {
   detailVisible.value = true
 }
 
-async function ship(order: Order) {
-  await ElMessageBox.confirm(`确认为订单 ${order.orderNo} 发货？`, '发货确认', {
-    confirmButtonText: '确认发货',
-    cancelButtonText: '取消'
-  })
-  await adminApi.ship(order.id)
-  ElMessage.success('已标记为已发货')
-  await load()
+function openShip(order: Order) {
+  shipTarget.value = order
+  shipForm.carrier = '顺丰速运'
+  shipForm.trackingNo = ''
+  detailVisible.value = false
+  shipDialog.value = true
+}
+
+async function confirmShip() {
+  if (!shipTarget.value) return
+  shipping.value = true
+  try {
+    await adminApi.ship(shipTarget.value.id, { ...shipForm })
+    ElMessage.success('已标记为已发货')
+    shipDialog.value = false
+    await load()
+  } finally {
+    shipping.value = false
+  }
 }
 
 function changePage(value: number) {
@@ -115,7 +130,7 @@ function changePage(value: number) {
         <el-table-column label="操作" width="140" fixed="right">
           <template #default="{ row }">
             <el-button link type="primary" @click="openDetail(row)">详情</el-button>
-            <el-button v-if="row.status === 'PAID'" link type="success" @click="ship(row)">发货</el-button>
+            <el-button v-if="row.status === 'PAID'" link type="success" @click="openShip(row)">发货</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -163,15 +178,43 @@ function changePage(value: number) {
           <div class="amount-line"><span>商品合计</span><b>{{ money(current.totalAmount) }}</b></div>
           <div class="amount-line total"><span>实付</span><b>{{ money(current.totalAmount) }}</b></div>
         </div>
-        <el-button v-if="current.status === 'PAID'" type="primary" round style="width: 100%" @click="ship(current); detailVisible = false">
+        <el-button v-if="current.status === 'PAID'" type="primary" round style="width: 100%" @click="openShip(current)">
           标记为已发货
         </el-button>
       </div>
     </el-drawer>
+
+    <el-dialog v-model="shipDialog" title="订单发货" width="420px">
+      <p class="ship-tip">填写承运商与运单号，用户可在订单详情中查看物流信息。</p>
+      <el-form label-position="top">
+        <el-form-item label="承运商">
+          <el-select v-model="shipForm.carrier" style="width: 100%">
+            <el-option label="顺丰速运" value="顺丰速运" />
+            <el-option label="京东物流" value="京东物流" />
+            <el-option label="中通快递" value="中通快递" />
+            <el-option label="圆通速递" value="圆通速递" />
+          </el-select>
+        </el-form-item>
+        <el-form-item label="运单号">
+          <el-input v-model="shipForm.trackingNo" placeholder="不填则自动生成演示运单号" maxlength="64" />
+        </el-form-item>
+      </el-form>
+      <template #footer>
+        <el-button @click="shipDialog = false">取消</el-button>
+        <el-button type="primary" :loading="shipping" @click="confirmShip">确认发货</el-button>
+      </template>
+    </el-dialog>
   </div>
 </template>
 
 <style scoped>
+.ship-tip {
+  font-size: 10px;
+  color: var(--muted);
+  line-height: 1.7;
+  margin-bottom: 14px;
+}
+
 .panel {
   background: #fff;
   border: 1px solid var(--line);

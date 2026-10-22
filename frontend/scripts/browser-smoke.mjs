@@ -94,6 +94,13 @@ await page.locator('.order-body').first().click()
 await page.waitForURL(/\/order\//, { timeout: 10000 })
 await page.waitForTimeout(1200)
 await page.screenshot({ path: `${OUT}/09b-order-detail.png` })
+const afterSaleButton = page.locator('button:has-text("申请售后")').first()
+if (await afterSaleButton.count()) {
+  await afterSaleButton.click()
+  await page.waitForTimeout(500)
+  await page.screenshot({ path: `${OUT}/09c-after-sale-dialog.png` })
+  await page.keyboard.press('Escape')
+}
 
 const adminContext = await browser.newContext({ viewport: { width: 1440, height: 1000 } })
 const adminPage = await adminContext.newPage()
@@ -113,6 +120,22 @@ await adminPage.screenshot({ path: `${OUT}/11-admin-logs.png` })
 await adminPage.goto(`${BASE}/admin/products`, { waitUntil: 'domcontentloaded' })
 await adminPage.waitForTimeout(1400)
 await adminPage.screenshot({ path: `${OUT}/12-admin-products.png` })
+
+await adminPage.goto(`${BASE}/admin/categories`, { waitUntil: 'domcontentloaded' })
+await adminPage.waitForTimeout(1200)
+await adminPage.screenshot({ path: `${OUT}/12b-admin-categories.png` })
+
+await adminPage.goto(`${BASE}/admin/reviews`, { waitUntil: 'domcontentloaded' })
+await adminPage.waitForTimeout(1200)
+await adminPage.screenshot({ path: `${OUT}/12c-admin-reviews.png` })
+
+await adminPage.goto(`${BASE}/admin/after-sales`, { waitUntil: 'domcontentloaded' })
+await adminPage.waitForTimeout(1200)
+await adminPage.screenshot({ path: `${OUT}/12d-admin-after-sales.png` })
+
+await adminPage.goto(`${BASE}/admin/conversations`, { waitUntil: 'domcontentloaded' })
+await adminPage.waitForTimeout(1200)
+await adminPage.screenshot({ path: `${OUT}/12e-admin-conversations.png` })
 
 await adminPage.goto(`${BASE}/admin/orders`, { waitUntil: 'domcontentloaded' })
 await adminPage.waitForTimeout(1200)
