@@ -23,6 +23,7 @@ import java.util.regex.Pattern;
 public class IntentService {
 
     private final LlmService llmService;
+    private final PromptService promptService;
 
     private static final Pattern COMPARE = Pattern.compile("对比|比较|哪个好|哪款好|选哪个|怎么选|差别|区别|vs|VS");
     private static final Pattern ORDER = Pattern.compile("订单|物流|发货|到货|快递|签收|退款|售后|买的东西|支付状态");
@@ -40,17 +41,7 @@ public class IntentService {
         if (!llmService.isAvailable()) {
             return rule;
         }
-        String system = """
-                你是电商智能导购系统的意图分类器。只输出一个 JSON 对象，不要输出 Markdown。
-                可选意图：
-                - search_product: 用户想找/买某类商品，描述需求、预算、场景
-                - compare: 用户要求对比两个或多个商品
-                - ask_detail: 用户询问某个已推荐商品的具体参数或细节
-                - query_order: 用户询问订单、物流、发货状态
-                - add_to_cart: 用户要求把某个商品加入购物车
-                - chitchat: 打招呼、感谢、询问助手能力等
-                只输出: {"intent":"search_product","confidence":0.0-1.0}
-                """;
+        String system = promptService.text("intent.system");
         String user = "对话上下文：\n" + String.join("\n", context) + "\n\n当前用户消息：" + text;
         String answer = llmService.complete(system, user);
         if (answer == null) {

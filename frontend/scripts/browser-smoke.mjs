@@ -137,6 +137,10 @@ await adminPage.goto(`${BASE}/admin/conversations`, { waitUntil: 'domcontentload
 await adminPage.waitForTimeout(1200)
 await adminPage.screenshot({ path: `${OUT}/12e-admin-conversations.png` })
 
+await adminPage.goto(`${BASE}/admin/agent-config`, { waitUntil: 'domcontentloaded' })
+await adminPage.waitForTimeout(1400)
+await adminPage.screenshot({ path: `${OUT}/12f-admin-agent-config.png` })
+
 await adminPage.goto(`${BASE}/admin/orders`, { waitUntil: 'domcontentloaded' })
 await adminPage.waitForTimeout(1200)
 await adminPage.screenshot({ path: `${OUT}/13-admin-orders.png` })

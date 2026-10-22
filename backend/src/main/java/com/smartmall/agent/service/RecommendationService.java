@@ -28,6 +28,7 @@ public class RecommendationService {
     private final LlmService llmService;
     private final ProductService productService;
     private final FieldValidator fieldValidator;
+    private final PromptService promptService;
 
     public Result generate(List<ScoredProduct> scored, Slots slots) {
         List<String> issues = new ArrayList<>();
@@ -84,16 +85,7 @@ public class RecommendationService {
             fact.put("attributes", JsonUtils.toMap(p.getAttributes()));
             facts.add(fact);
         }
-        String system = """
-                你是严谨的电商导购。请为每个商品生成一句中文推荐理由。
-                硬性要求：
-                1. 只能使用输入 JSON 中的真实参数，禁止编造价格、库存、评分、功能；
-                2. 价格只能写输入中的 price，格式为“售价 X 元”；
-                3. 理由必须引用至少一个 attributes 中的键或值；
-                4. 不要提原价、不要使用“100%”“绝对”等绝对化表述；
-                5. 每条 20-60 字，结合用户场景，说明推荐与取舍。
-                只输出 JSON：{"reasons":{"商品ID":"推荐理由"}}
-                """;
+        String system = promptService.text("recommend.system");
         String user = "用户需求: " + JsonUtils.toJson(slots)
                 + "\n商品事实: " + JsonUtils.toJson(facts);
         String answer = llmService.complete(system, user);

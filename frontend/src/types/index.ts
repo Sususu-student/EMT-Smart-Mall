@@ -325,9 +325,27 @@ export interface LlmStatus {
   available: boolean
   mode: string
   model: string
+  temperature?: number
   callCount: number
   failCount: number
   lastError?: string
+}
+
+export interface AgentPrompt {
+  key: string
+  name: string
+  description: string
+  content: string
+  customized: boolean
+  updatedAt?: string
+}
+
+export interface AgentTool {
+  name: string
+  description: string
+  parameters: string[]
+  usedBy: string
+  type: string
 }
 
 export interface Dashboard {

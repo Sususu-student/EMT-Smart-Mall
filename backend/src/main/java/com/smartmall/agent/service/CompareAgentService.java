@@ -42,6 +42,7 @@ public class CompareAgentService {
     private final CompareRecordMapper compareRecordMapper;
     private final LlmService llmService;
     private final AgentLogService logService;
+    private final PromptService promptService;
 
     private static final Pattern MONEY = Pattern.compile("(\\d+(?:\\.\\d+)?)\\s*元");
 
@@ -222,14 +223,7 @@ public class CompareAgentService {
                     .map(CompareResponse.ProductScore::getTotalScore).orElse(0.0));
             facts.add(fact);
         }
-        String system = """
-                你是电商对比决策 Agent。基于给定的对比矩阵与评分写一段中文建议（80-120 字）：
-                1. 明确推荐综合得分最高的商品；
-                2. 指出它最占优的 1-2 个维度，以及第二名在哪个维度更强；
-                3. 只使用输入中的参数与价格，禁止编造；
-                4. 不要使用 Markdown，不要罗列全部维度。
-                只输出建议正文。
-                """;
+        String system = promptService.text("compare.system");
         String user = "对比矩阵: " + JsonUtils.toJson(response.getDimensions())
                 + "\n商品事实: " + JsonUtils.toJson(facts)
                 + "\n加权得分: " + JsonUtils.toJson(response.getScores())

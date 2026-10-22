@@ -17,6 +17,7 @@ const navItems = [
   { name: 'admin-reviews', path: '/admin/reviews', label: '评价管理', icon: 'ChatLineSquare' },
   { name: 'admin-users', path: '/admin/users', label: '用户管理', icon: 'User' },
   { name: 'admin-conversations', path: '/admin/conversations', label: '会话审查', icon: 'ChatDotRound' },
+  { name: 'admin-agent-config', path: '/admin/agent-config', label: 'Agent 配置', icon: 'Setting' },
   { name: 'admin-logs', path: '/admin/agent-logs', label: 'Agent 日志', icon: 'DataLine' }
 ]
 

@@ -1,5 +1,6 @@
 package com.smartmall.agent.llm;
 
+import com.smartmall.common.BizException;
 import dev.langchain4j.model.openai.OpenAiChatModel;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
@@ -45,6 +46,8 @@ public class LlmService {
     private long cooldownSeconds;
 
     private OpenAiChatModel model;
+    private volatile String activeModel;
+    private volatile Double activeTemperature;
     private final AtomicInteger consecutiveFailures = new AtomicInteger();
     private final AtomicLong blockedUntil = new AtomicLong();
     private final AtomicLong callCount = new AtomicLong();
@@ -53,6 +56,8 @@ public class LlmService {
 
     @PostConstruct
     public void init() {
+        this.activeModel = modelName;
+        this.activeTemperature = temperature;
         if (!enabled) {
             log.info("LLM 已通过配置关闭，Agent 将使用规则引擎");
             return;
@@ -62,20 +67,49 @@ public class LlmService {
             return;
         }
         try {
-            this.model = OpenAiChatModel.builder()
-                    .baseUrl(baseUrl)
-                    .apiKey(apiKey)
-                    .modelName(modelName)
-                    .temperature(temperature)
-                    .timeout(Duration.ofSeconds(timeoutSeconds))
-                    .maxRetries(1)
-                    .build();
+            this.model = buildModel(modelName, temperature);
             log.info("DeepSeek 已接入：model={}, baseUrl={}", modelName, baseUrl);
         } catch (Exception e) {
             log.warn("LLM 初始化失败，降级为规则引擎: {}", e.getMessage());
             this.model = null;
             this.lastError = e.getMessage();
         }
+    }
+
+    private OpenAiChatModel buildModel(String name, Double temp) {
+        return OpenAiChatModel.builder()
+                .baseUrl(baseUrl)
+                .apiKey(apiKey)
+                .modelName(name)
+                .temperature(temp)
+                .timeout(Duration.ofSeconds(timeoutSeconds))
+                .maxRetries(1)
+                .build();
+    }
+
+    /**
+     * 运行时切换模型/温度。API Key 始终只从环境变量读取，不落库。
+     * 未配置 Key 时保存配置但不创建模型，配置 Key 并重启后生效。
+     */
+    public synchronized void reconfigure(String name, Double temp) {
+        if (!enabled) {
+            throw new BizException("LLM 已在配置中关闭");
+        }
+        String nextModel = StringUtils.hasText(name) ? name.trim() : activeModel;
+        Double nextTemp = temp == null ? activeTemperature : temp;
+        if (nextTemp < 0 || nextTemp > 2) {
+            throw new BizException("温度必须在 0 到 2 之间");
+        }
+        activeModel = nextModel;
+        activeTemperature = nextTemp;
+        if (!StringUtils.hasText(apiKey)) {
+            log.info("模型配置已更新为 {}，但未配置 API Key，暂不创建模型连接", nextModel);
+            return;
+        }
+        this.model = buildModel(nextModel, nextTemp);
+        consecutiveFailures.set(0);
+        blockedUntil.set(0);
+        log.info("LLM 已切换：model={}, temperature={}", nextModel, nextTemp);
     }
 
     public boolean isConfigured() {
@@ -119,7 +153,8 @@ public class LlmService {
         LlmStatus status = new LlmStatus();
         status.setConfigured(model != null);
         status.setAvailable(isAvailable());
-        status.setModel(modelName);
+        status.setModel(activeModel);
+        status.setTemperature(activeTemperature);
         status.setCallCount(callCount.get());
         status.setFailCount(failCount.get());
         status.setLastError(lastError);
@@ -133,6 +168,7 @@ public class LlmService {
         private boolean available;
         private String mode;
         private String model;
+        private Double temperature;
         private long callCount;
         private long failCount;
         private String lastError;

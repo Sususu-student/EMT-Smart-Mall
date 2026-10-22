@@ -12,6 +12,8 @@
 
 ![后台仪表盘](docs/screenshots/admin.png)
 
+![Agent 配置](docs/screenshots/agent-config.png)
+
 ---
 
 ## 1. 项目亮点
@@ -29,6 +31,7 @@
 | 执行过程可视化 | 每一步写入 `agent_execution_log`，WebSocket 实时推送 |
 | 完整电商闭环 | 注册登录、改密、商品、收藏、购物车、地址、订单、模拟支付、物流单号、评价、售后、后台管理 |
 | 后台运营 | 商品/分类/订单/售后/评价/用户/会话审查/Agent 日志/统计 |
+| Agent 配置后台 | Prompt 模板在线编辑与恢复默认、模型/温度切换、工具清单、模型运行状态 |
 | 无 Key 可运行 | 未配置 DeepSeek API Key 时自动切换规则引擎，全部功能可演示 |
 
 ---
@@ -146,7 +149,7 @@ llm:
 5. 调整对比权重 → 重新计算得分。
 6. 商品卡片「加购」→ 购物车结算 → 提交订单 → 模拟支付。
 7. 对 Agent 说 `我的订单到哪了` → 返回最近订单状态。
-8. 用 `admin / Admin@123` 登录 → 后台仪表盘、商品/分类/订单/售后/评价/用户管理、会话审查、Agent 执行日志。
+8. 用 `admin / Admin@123` 登录 → 后台仪表盘、商品/分类/订单/售后/评价/用户管理、会话审查、Agent 配置、Agent 执行日志。
 
 ---
 
@@ -252,6 +255,7 @@ G:\EMT
 | WebSocket | `ws://localhost:8080/ws/agent?token=JWT&conversationId=...` |
 | 售后 | `POST /api/after-sale`、`GET /api/after-sale`、`GET /api/after-sale/order/{orderId}` |
 | 后台 | `GET /api/admin/stats`、`/products`、`/categories`、`/orders`、`/after-sales`、`/reviews`、`/users`、`/conversations`、`/agent-logs` |
+| Agent 配置 | `GET/PUT /api/admin/agent/prompts`、`GET /api/admin/agent/tools`、`GET/PUT /api/admin/agent/model` |
 
 完整参数与响应以 Swagger 为准。
 
@@ -259,7 +263,7 @@ G:\EMT
 
 ## 8. 数据模型
 
-`sys_user`、`user_address`、`user_preference`、`browse_history`、`user_favorite`、`category`、`product`、`product_image`、`product_review`、`cart_item`、`orders`、`order_item`、`after_sale`、`conversation`、`dialogue_turn`、`agent_execution_log`、`compare_record`。
+`sys_user`、`user_address`、`user_preference`、`browse_history`、`user_favorite`、`category`、`product`、`product_image`、`product_review`、`cart_item`、`orders`、`order_item`、`after_sale`、`conversation`、`dialogue_turn`、`agent_execution_log`、`agent_prompt`、`compare_record`。
 
 商品参数以 JSON 文本存储在 `product.attributes`，品类维度定义在 `category.attribute_schema`，因此同一套对比算法可适配不同品类。
 

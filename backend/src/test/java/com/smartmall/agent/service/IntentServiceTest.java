@@ -6,7 +6,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class IntentServiceTest {
 
-    private final IntentService intentService = new IntentService(null);
+    private final IntentService intentService = new IntentService(null, new PromptService(null));
 
     @Test
     void detectsCompareIntent() {

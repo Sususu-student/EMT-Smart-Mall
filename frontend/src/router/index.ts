@@ -54,6 +54,7 @@ const router = createRouter({
         { path: 'reviews', name: 'admin-reviews', component: () => import('@/views/admin/AdminReviewsView.vue') },
         { path: 'users', name: 'admin-users', component: () => import('@/views/admin/AdminUsersView.vue') },
         { path: 'conversations', name: 'admin-conversations', component: () => import('@/views/admin/AdminConversationsView.vue') },
+        { path: 'agent-config', name: 'admin-agent-config', component: () => import('@/views/admin/AdminAgentConfigView.vue') },
         { path: 'agent-logs', name: 'admin-logs', component: () => import('@/views/admin/AdminLogsView.vue') }
       ]
     },

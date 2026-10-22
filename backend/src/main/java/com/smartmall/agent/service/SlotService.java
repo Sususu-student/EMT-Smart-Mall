@@ -31,6 +31,7 @@ public class SlotService {
     private final CategoryMapper categoryMapper;
     private final ProductMapper productMapper;
     private final LlmService llmService;
+    private final PromptService promptService;
 
     private static final Map<String, List<String>> ALIASES = Map.ofEntries(
             Map.entry("蓝牙耳机", List.of("蓝牙耳机", "耳机", "耳麦", "降噪耳机", "运动耳机", "tws")),
@@ -366,13 +367,8 @@ public class SlotService {
         List<String> categories = categoryMapper.selectList(new LambdaQueryWrapper<Category>()
                         .eq(Category::getStatus, 1).isNotNull(Category::getParentId))
                 .stream().map(Category::getName).toList();
-        String system = """
-                你是电商导购的需求解析器。从用户消息中抽取购物条件，只输出 JSON，不要解释。
-                字段: category(品类，必须是给定品类之一), keyword(搜索词), minPrice(数字), maxPrice(数字),
-                brand(品牌), scene(使用场景), features(功能偏好数组)。
-                用户没提到的字段输出 null，不要臆造。价格单位是元。
-                可选品类: %s
-                """.formatted(String.join("、", categories));
+        String system = promptService.render("slot.system",
+                java.util.Map.of("categories", String.join("、", categories)));
         String user = "已有槽位: " + JsonUtils.toJson(current)
                 + "\n近期对话:\n" + String.join("\n", context)
                 + "\n当前消息: " + text

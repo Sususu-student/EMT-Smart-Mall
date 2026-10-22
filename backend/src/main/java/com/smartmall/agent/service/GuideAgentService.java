@@ -66,6 +66,7 @@ public class GuideAgentService {
     private final CategoryMapper categoryMapper;
     private final ProductMapper productMapper;
     private final AgentWebSocketHandler webSocketHandler;
+    private final PromptService promptService;
 
     private static final Pattern ORDER_NO = Pattern.compile("SG\\d{10,}");
     private static final Pattern QUANTITY = Pattern.compile("(\\d+)\\s*(?:件|个|只|双|台|盒|瓶)");
@@ -390,11 +391,7 @@ public class GuideAgentService {
         var trace = logService.start(taskId, conversationId, "guide-agent", "chitchat", "闲聊回复", message);
         String reply = null;
         if (llmService.isAvailable()) {
-            reply = llmService.complete("""
-                    你是「智选商城」的智能导购助手，回答简洁友好，不超过 80 字。
-                    你可以帮用户：按需求找商品、对比商品、查订单、加入购物车。
-                    不要编造商品和订单信息。
-                    """, message);
+            reply = llmService.complete(promptService.text("chitchat.system"), message);
         }
         if (reply == null) {
             reply = "你好，我是智选商城的智能导购助手。你可以直接描述需求，比如“想买跑步用的蓝牙耳机，预算 300 以内”，"

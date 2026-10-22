@@ -201,3 +201,11 @@ CREATE TABLE IF NOT EXISTS after_sale (
     created_at   DATETIME,
     handled_at   DATETIME
 );
+
+CREATE TABLE IF NOT EXISTS agent_prompt (
+    prompt_key   VARCHAR(50) PRIMARY KEY,
+    name         VARCHAR(100),
+    description  VARCHAR(300),
+    content      TEXT,
+    updated_at   DATETIME
+);

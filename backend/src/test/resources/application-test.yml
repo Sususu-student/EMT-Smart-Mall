@@ -17,7 +17,7 @@ app:
     unpaid-timeout-minutes: 30
 
 llm:
-  enabled: false
+  enabled: true
 
 logging:
   level:

@@ -3,6 +3,8 @@ import type {
   Address,
   AddressPayload,
   AdminConversation,
+  AgentPrompt,
+  AgentTool,
   AdminProductPayload,
   AfterSale,
   ReviewAdmin,
@@ -148,6 +150,15 @@ export const adminApi = {
     request<AfterSale>({ url: `/admin/after-sale/${id}/handle`, method: 'put', data }),
   conversations: (params: Record<string, unknown>) =>
     request<PageResult<AdminConversation>>({ url: '/admin/conversations', params }),
+  agentPrompts: () => request<AgentPrompt[]>({ url: '/admin/agent/prompts' }),
+  updateAgentPrompt: (key: string, content: string) =>
+    request<AgentPrompt>({ url: `/admin/agent/prompts/${key}`, method: 'put', data: { content } }),
+  resetAgentPrompt: (key: string) =>
+    request<void>({ url: `/admin/agent/prompts/${key}/reset`, method: 'post' }),
+  agentTools: () => request<AgentTool[]>({ url: '/admin/agent/tools' }),
+  agentModel: () => request<LlmStatus>({ url: '/admin/agent/model' }),
+  updateAgentModel: (data: { model: string; temperature: number }) =>
+    request<LlmStatus>({ url: '/admin/agent/model', method: 'put', data }),
   conversationTurns: (id: string) =>
     request<Turn[]>({ url: `/admin/conversations/${id}/turns` }),
   users: (params: Record<string, unknown>) => request<PageResult<User>>({ url: '/admin/users', params }),

@@ -1,6 +1,8 @@
 package com.smartmall.admin.controller;
 
 import com.smartmall.admin.dto.AdminCategoryRequest;
+import com.smartmall.admin.dto.UpdateAgentPromptRequest;
+import com.smartmall.admin.dto.UpdateModelConfigRequest;
 import com.smartmall.admin.dto.AdminConversationVO;
 import com.smartmall.admin.dto.AdminProductRequest;
 import com.smartmall.admin.dto.ReviewAdminVO;
@@ -10,9 +12,14 @@ import com.smartmall.aftersale.dto.AfterSaleVO;
 import com.smartmall.aftersale.dto.HandleAfterSaleRequest;
 import com.smartmall.aftersale.service.AfterSaleService;
 import com.smartmall.agent.dto.ExecutionLogVO;
+import com.smartmall.agent.dto.AgentPromptVO;
+import com.smartmall.agent.dto.AgentToolVO;
 import com.smartmall.agent.dto.TurnVO;
 import com.smartmall.agent.service.AgentLogService;
 import com.smartmall.agent.service.ConversationService;
+import com.smartmall.agent.service.PromptService;
+import com.smartmall.agent.llm.LlmService;
+import com.smartmall.agent.tool.AgentToolService;
 import com.smartmall.auth.AdminOnly;
 import com.smartmall.common.ApiResponse;
 import com.smartmall.common.PageResult;
@@ -46,6 +53,9 @@ public class AdminController {
     private final AgentLogService agentLogService;
     private final AfterSaleService afterSaleService;
     private final ConversationService conversationService;
+    private final PromptService promptService;
+    private final LlmService llmService;
+    private final AgentToolService agentToolService;
 
     @GetMapping("/stats")
     public ApiResponse<DashboardVO> stats() {
@@ -179,6 +189,39 @@ public class AdminController {
     public ApiResponse<AfterSaleVO> handleAfterSale(@PathVariable String id,
                                                     @Valid @RequestBody HandleAfterSaleRequest request) {
         return ApiResponse.ok(afterSaleService.handle(id, request));
+    }
+
+    @GetMapping("/agent/prompts")
+    public ApiResponse<List<AgentPromptVO>> prompts() {
+        return ApiResponse.ok(promptService.list());
+    }
+
+    @PutMapping("/agent/prompts/{key}")
+    public ApiResponse<AgentPromptVO> updatePrompt(@PathVariable String key,
+                                                   @Valid @RequestBody UpdateAgentPromptRequest request) {
+        return ApiResponse.ok(promptService.save(key, request.getContent()));
+    }
+
+    @PostMapping("/agent/prompts/{key}/reset")
+    public ApiResponse<Void> resetPrompt(@PathVariable String key) {
+        promptService.reset(key);
+        return ApiResponse.ok();
+    }
+
+    @GetMapping("/agent/tools")
+    public ApiResponse<List<AgentToolVO>> tools() {
+        return ApiResponse.ok(agentToolService.list());
+    }
+
+    @GetMapping("/agent/model")
+    public ApiResponse<LlmService.LlmStatus> model() {
+        return ApiResponse.ok(llmService.status());
+    }
+
+    @PutMapping("/agent/model")
+    public ApiResponse<LlmService.LlmStatus> updateModel(@Valid @RequestBody UpdateModelConfigRequest request) {
+        llmService.reconfigure(request.getModel(), request.getTemperature());
+        return ApiResponse.ok(llmService.status());
     }
 
     @GetMapping("/conversations")

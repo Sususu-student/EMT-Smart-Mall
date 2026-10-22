@@ -208,6 +208,25 @@ class SmartMallFlowTest {
                         .header("Authorization", "Bearer " + adminToken))
                 .andExpect(status().isOk());
 
+        JsonNode agentPrompts = getJson("/api/admin/agent/prompts", adminToken);
+        assertThat(agentPrompts.size()).isGreaterThanOrEqualTo(5);
+        String promptKey = agentPrompts.get(0).path("key").asText();
+        var promptBody = objectMapper.createObjectNode();
+        promptBody.put("content", "你是测试用 Prompt，只输出 JSON。");
+        JsonNode updatedPrompt = putJson("/api/admin/agent/prompts/" + promptKey, promptBody, adminToken);
+        assertThat(updatedPrompt.path("customized").asBoolean()).isTrue();
+        mvc.perform(post("/api/admin/agent/prompts/" + promptKey + "/reset")
+                        .header("Authorization", "Bearer " + adminToken))
+                .andExpect(status().isOk());
+        assertThat(getJson("/api/admin/agent/tools", adminToken).size()).isGreaterThanOrEqualTo(8);
+        JsonNode modelStatus = getJson("/api/admin/agent/model", adminToken);
+        assertThat(modelStatus.path("model").asText()).isEqualTo("deepseek-flash");
+        var modelBody = objectMapper.createObjectNode();
+        modelBody.put("model", "deepseek-flash");
+        modelBody.put("temperature", 0.5);
+        JsonNode changedModel = putJson("/api/admin/agent/model", modelBody, adminToken);
+        assertThat(changedModel.path("temperature").asDouble()).isEqualTo(0.5);
+
         var passwordBody = objectMapper.createObjectNode();
         passwordBody.put("oldPassword", "Demo@123");
         passwordBody.put("newPassword", "Demo@1234");
