@@ -1,0 +1,633 @@
+{
+  "version": 1,
+  "description": "智能导购 Agent 评测集：40 条对话用例 + 5 项接口检查",
+  "cases": [
+    {
+      "id": "S01",
+      "group": "search",
+      "turns": [
+        "我想买跑步用的蓝牙耳机，预算300以内，要防水"
+      ],
+      "expect": {
+        "intent": "search_product",
+        "minProducts": 2,
+        "slots": {
+          "categoryName": "蓝牙耳机",
+          "maxPrice": 300,
+          "features": [
+            "防水"
+          ],
+          "scene": "跑步"
+        }
+      }
+    },
+    {
+      "id": "S02",
+      "group": "clarify",
+      "turns": [
+        "我想买个耳机，跑步用"
+      ],
+      "expect": {
+        "intent": "clarify",
+        "replyContains": [
+          "预算"
+        ]
+      }
+    },
+    {
+      "id": "S03",
+      "group": "multi-turn",
+      "turns": [
+        "我想买耳机",
+        "300以内"
+      ],
+      "expect": {
+        "intent": "search_product",
+        "minProducts": 2,
+        "slots": {
+          "maxPrice": 300
+        }
+      }
+    },
+    {
+      "id": "S04",
+      "group": "multi-turn",
+      "turns": [
+        "我想买耳机，跑步用",
+        "300以内，要防水"
+      ],
+      "expect": {
+        "intent": "search_product",
+        "minProducts": 2,
+        "slots": {
+          "maxPrice": 300,
+          "features": [
+            "防水"
+          ]
+        }
+      }
+    },
+    {
+      "id": "S05",
+      "group": "slots",
+      "turns": [
+        "300到500元的蓝牙耳机"
+      ],
+      "expect": {
+        "intent": "search_product",
+        "minProducts": 1,
+        "slots": {
+          "minPrice": 300,
+          "maxPrice": 500
+        }
+      }
+    },
+    {
+      "id": "S06",
+      "group": "slots",
+      "turns": [
+        "三百元以内的蓝牙耳机"
+      ],
+      "expect": {
+        "intent": "search_product",
+        "minProducts": 1,
+        "slots": {
+          "maxPrice": 300
+        }
+      }
+    },
+    {
+      "id": "S07",
+      "group": "slots",
+      "turns": [
+        "蓝牙耳机预算不限"
+      ],
+      "expect": {
+        "intent": "search_product",
+        "minProducts": 1,
+        "slots": {
+          "budgetUnlimited": true
+        }
+      }
+    },
+    {
+      "id": "S08",
+      "group": "slots",
+      "turns": [
+        "声屿的蓝牙耳机，500以内"
+      ],
+      "expect": {
+        "intent": "search_product",
+        "minProducts": 1,
+        "slots": {
+          "brand": "声屿",
+          "maxPrice": 500
+        }
+      }
+    },
+    {
+      "id": "S09",
+      "group": "slots",
+      "turns": [
+        "通勤用的降噪耳机，500以内"
+      ],
+      "expect": {
+        "intent": "search_product",
+        "minProducts": 1,
+        "slots": {
+          "features": [
+            "降噪"
+          ],
+          "scene": "通勤"
+        }
+      }
+    },
+    {
+      "id": "S10",
+      "group": "multi-turn",
+      "turns": [
+        "想买耳机",
+        "算了看看咖啡机，预算1000"
+      ],
+      "expect": {
+        "intent": "search_product",
+        "minProducts": 1,
+        "slots": {
+          "categoryName": "咖啡机",
+          "maxPrice": 1000
+        }
+      }
+    },
+    {
+      "id": "S11",
+      "group": "slots",
+      "turns": [
+        "敏感肌适合的保湿护肤品，预算300左右"
+      ],
+      "expect": {
+        "intent": "search_product",
+        "minProducts": 1,
+        "slots": {
+          "categoryName": "护肤品",
+          "features": [
+            "保湿"
+          ],
+          "maxPrice": 300
+        }
+      }
+    },
+    {
+      "id": "S12",
+      "group": "slots",
+      "turns": [
+        "缓震好的跑步鞋，800以内"
+      ],
+      "expect": {
+        "intent": "search_product",
+        "minProducts": 1,
+        "slots": {
+          "categoryName": "跑步鞋",
+          "features": [
+            "缓震"
+          ],
+          "maxPrice": 800
+        }
+      }
+    },
+    {
+      "id": "S13",
+      "group": "edge",
+      "turns": [
+        "10元以内的蓝牙耳机"
+      ],
+      "expect": {
+        "intent": "search_product",
+        "minProducts": 0,
+        "slots": {
+          "maxPrice": 10
+        },
+        "replyContains": [
+          "没有找到"
+        ]
+      }
+    },
+    {
+      "id": "S14",
+      "group": "slots",
+      "turns": [
+        "16G内存的轻薄笔记本，预算6000"
+      ],
+      "expect": {
+        "intent": "search_product",
+        "minProducts": 1,
+        "slots": {
+          "categoryName": "笔记本电脑",
+          "maxPrice": 6000
+        }
+      }
+    },
+    {
+      "id": "S15",
+      "group": "slots",
+      "turns": [
+        "3000到4000的扫地机器人"
+      ],
+      "expect": {
+        "intent": "search_product",
+        "minProducts": 1,
+        "slots": {
+          "categoryName": "扫地机器人",
+          "minPrice": 3000,
+          "maxPrice": 4000
+        }
+      }
+    },
+    {
+      "id": "S16",
+      "group": "slots",
+      "turns": [
+        "500元以上的蓝牙耳机"
+      ],
+      "expect": {
+        "intent": "search_product",
+        "minProducts": 1,
+        "slots": {
+          "minPrice": 500
+        }
+      }
+    },
+    {
+      "id": "S17",
+      "group": "slots",
+      "turns": [
+        "预算一千五的咖啡机"
+      ],
+      "expect": {
+        "intent": "search_product",
+        "minProducts": 1,
+        "slots": {
+          "categoryName": "咖啡机",
+          "maxPrice": 1500
+        }
+      }
+    },
+    {
+      "id": "S18",
+      "group": "slots",
+      "turns": [
+        "有没有适合送礼的蓝牙耳机，预算800"
+      ],
+      "expect": {
+        "intent": "search_product",
+        "minProducts": 1,
+        "slots": {
+          "scene": "送礼",
+          "maxPrice": 800
+        }
+      }
+    },
+    {
+      "id": "D01",
+      "group": "detail",
+      "turns": [
+        "推荐300以内的蓝牙耳机",
+        "第一款续航多久"
+      ],
+      "expect": {
+        "intent": "ask_detail",
+        "minProducts": 1,
+        "replyContains": [
+          "续航"
+        ]
+      }
+    },
+    {
+      "id": "D02",
+      "group": "detail",
+      "turns": [
+        "推荐300以内的蓝牙耳机",
+        "第一个多少钱，库存多少"
+      ],
+      "expect": {
+        "intent": "ask_detail",
+        "minProducts": 1,
+        "replyContains": [
+          "库存"
+        ]
+      }
+    },
+    {
+      "id": "D03",
+      "group": "cart",
+      "turns": [
+        "推荐300以内的蓝牙耳机",
+        "把第一款加入购物车"
+      ],
+      "expect": {
+        "intent": "add_to_cart",
+        "replyContains": [
+          "购物车"
+        ]
+      }
+    },
+    {
+      "id": "D04",
+      "group": "cart",
+      "turns": [
+        "推荐300以内的蓝牙耳机",
+        "把第二个加购2件"
+      ],
+      "expect": {
+        "intent": "add_to_cart",
+        "replyContains": [
+          "2"
+        ]
+      }
+    },
+    {
+      "id": "D05",
+      "group": "order",
+      "turns": [
+        "我的订单到哪了"
+      ],
+      "expect": {
+        "intent": "query_order",
+        "ordersMin": 1,
+        "replyContains": [
+          "订单"
+        ]
+      }
+    },
+    {
+      "id": "D06",
+      "group": "order",
+      "turns": [
+        "查一下订单 SG2026041710150002"
+      ],
+      "expect": {
+        "intent": "query_order",
+        "ordersMin": 1,
+        "replyContains": [
+          "已支付"
+        ]
+      }
+    },
+    {
+      "id": "D07",
+      "group": "cart",
+      "turns": [
+        "加入购物车"
+      ],
+      "expect": {
+        "intent": "add_to_cart",
+        "minProducts": 0,
+        "replyContains": [
+          "哪件"
+        ]
+      }
+    },
+    {
+      "id": "D08",
+      "group": "compare",
+      "turns": [
+        "推荐300以内的蓝牙耳机",
+        "帮我对比前两个"
+      ],
+      "expect": {
+        "intent": "compare",
+        "compare": true,
+        "compareProducts": 2
+      }
+    },
+    {
+      "id": "D09",
+      "group": "compare",
+      "turns": [
+        "帮我对比一下A和B"
+      ],
+      "expect": {
+        "intent": "compare",
+        "compare": false,
+        "replyContains": [
+          "至少两件"
+        ]
+      }
+    },
+    {
+      "id": "D10",
+      "group": "chitchat",
+      "turns": [
+        "你好"
+      ],
+      "expect": {
+        "intent": "chitchat",
+        "replyContains": [
+          "导购"
+        ]
+      }
+    },
+    {
+      "id": "D11",
+      "group": "chitchat",
+      "turns": [
+        "谢谢你"
+      ],
+      "expect": {
+        "intent": "chitchat",
+        "replyContains": [
+          "导购"
+        ]
+      }
+    },
+    {
+      "id": "D12",
+      "group": "chitchat",
+      "turns": [
+        "你能做什么"
+      ],
+      "expect": {
+        "intent": "chitchat",
+        "replyContains": [
+          "对比"
+        ]
+      }
+    },
+    {
+      "id": "D13",
+      "group": "clarify",
+      "turns": [
+        "推荐蓝牙耳机"
+      ],
+      "expect": {
+        "intent": "clarify",
+        "replyContains": [
+          "预算"
+        ]
+      }
+    },
+    {
+      "id": "D14",
+      "group": "slots",
+      "turns": [
+        "预算不限，推荐蓝牙耳机"
+      ],
+      "expect": {
+        "intent": "search_product",
+        "minProducts": 1,
+        "slots": {
+          "budgetUnlimited": true
+        }
+      }
+    },
+    {
+      "id": "D15",
+      "group": "multi-turn",
+      "turns": [
+        "推荐蓝牙耳机",
+        "换成跑步鞋"
+      ],
+      "expect": {
+        "intent": "search_product",
+        "minProducts": 1,
+        "slots": {
+          "categoryName": "跑步鞋"
+        }
+      }
+    },
+    {
+      "id": "D16",
+      "group": "cart",
+      "turns": [
+        "我的购物车里有什么"
+      ],
+      "expect": {
+        "intent": "add_to_cart",
+        "minProducts": 0,
+        "replyContains": [
+          "购物车"
+        ]
+      }
+    },
+    {
+      "id": "D17",
+      "group": "order",
+      "turns": [
+        "我的订单"
+      ],
+      "expect": {
+        "intent": "query_order",
+        "ordersMin": 1
+      }
+    },
+    {
+      "id": "D18",
+      "group": "detail",
+      "turns": [
+        "这款耳机怎么样"
+      ],
+      "expect": {
+        "intent": "ask_detail",
+        "minProducts": 0,
+        "replyContains": [
+          "哪件"
+        ]
+      }
+    },
+    {
+      "id": "E01",
+      "group": "edge",
+      "turns": [
+        "三百五十元以内的蓝牙耳机"
+      ],
+      "expect": {
+        "intent": "search_product",
+        "minProducts": 1,
+        "slots": {
+          "maxPrice": 350
+        }
+      }
+    },
+    {
+      "id": "E02",
+      "group": "edge",
+      "turns": [
+        "预算五千的笔记本"
+      ],
+      "expect": {
+        "intent": "search_product",
+        "minProducts": 1,
+        "slots": {
+          "categoryName": "笔记本电脑",
+          "maxPrice": 5000
+        }
+      }
+    },
+    {
+      "id": "E03",
+      "group": "edge",
+      "turns": [
+        "推荐一千元以内的咖啡机"
+      ],
+      "expect": {
+        "intent": "search_product",
+        "minProducts": 1,
+        "slots": {
+          "categoryName": "咖啡机",
+          "maxPrice": 1000
+        }
+      }
+    },
+    {
+      "id": "E04",
+      "group": "edge",
+      "turns": [
+        "有没有200元以内的机械键盘"
+      ],
+      "expect": {
+        "intent": "search_product",
+        "minProducts": 1,
+        "slots": {
+          "categoryName": "机械键盘",
+          "maxPrice": 200
+        }
+      }
+    }
+  ],
+  "apiChecks": [
+    {
+      "id": "A01",
+      "type": "productTotal",
+      "label": "商品库总量 >= 130"
+    },
+    {
+      "id": "A02",
+      "type": "compareSameCategory",
+      "label": "同品类对比应成功",
+      "ids": [
+        "p_headphone_01",
+        "p_headphone_02"
+      ]
+    },
+    {
+      "id": "A03",
+      "type": "compareCrossCategory",
+      "label": "跨品类对比应被拦截",
+      "ids": [
+        "p_headphone_01",
+        "p_coffee_01"
+      ],
+      "expectStatus": 400
+    },
+    {
+      "id": "A04",
+      "type": "ratingConsistency",
+      "label": "商品评分与评价均分一致",
+      "productId": "p_yoga_05"
+    },
+    {
+      "id": "A05",
+      "type": "llmStatus",
+      "label": "LLM 状态可读取"
+    }
+  ]
+}

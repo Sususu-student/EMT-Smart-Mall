@@ -35,15 +35,9 @@ public class ProductSearchTool {
         if (slots == null || (!slots.hasCategory() && !StringUtils.hasText(slots.getKeyword()))) {
             return new SearchOutcome(List.of(), 0, false, "缺少品类或关键词");
         }
-        SearchOutcome outcome = doSearch(slots, limit, true);
-        if (outcome.products().isEmpty()) {
-            outcome = doSearch(slots, limit, false);
-            if (!outcome.products().isEmpty()) {
-                return new SearchOutcome(outcome.products(), outcome.total(), true,
-                        "放宽价格条件后找到 " + outcome.products().size() + " 件商品");
-            }
-        }
-        return outcome;
+        // 不自动放宽价格：预算 10 元却推荐 399 元商品会破坏可解释性。
+        // 没有匹配结果时，由导购 Agent 明确提示用户提高预算或更换条件。
+        return doSearch(slots, limit, true);
     }
 
     private SearchOutcome doSearch(Slots slots, int limit, boolean applyPrice) {

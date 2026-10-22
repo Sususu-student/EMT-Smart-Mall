@@ -28,7 +28,9 @@ public class IntentService {
     private static final Pattern ORDER = Pattern.compile("订单|物流|发货|到货|快递|签收|退款|售后|买的东西|支付状态");
     private static final Pattern CART = Pattern.compile("加入购物车|加购|加到购物车|放进购物车|购物车|买这个|就要这个|下单");
     private static final Pattern DETAIL = Pattern.compile("详情|参数|配置|怎么样|好用吗|续航多久|多少钱|什么价格|介绍一下|看看|具体|值得买吗|优缺点");
-    private static final Pattern CHITCHAT = Pattern.compile("^(你好|您好|hi|hello|嗨|在吗|谢谢|感谢|再见|拜拜|你是谁|你能做什么|怎么用|help)[!！。,.，\\s]*$",
+    private static final Pattern STRONG_DETAIL = Pattern.compile("详情|参数|配置|续航多久|多少钱|什么价格|库存|值得买吗|优缺点|介绍一下|具体");
+    private static final Pattern PRODUCT_REFERENCE = Pattern.compile("这款|这个|它|该商品|第一个|第二个|第三个|第[一二三四]款|p_[a-z_]+_\\d{2}");
+    private static final Pattern CHITCHAT = Pattern.compile("^(你好|您好|hi|hello|嗨|在吗|谢谢(你|您)?|感谢(你|您)?|多谢|再见|拜拜|你是谁|你能做什么|怎么用|help)[!！。,.，\\s]*$",
             Pattern.CASE_INSENSITIVE);
     private static final Pattern GREETING_PREFIX = Pattern.compile("^(你好|您好|hi|hello|嗨)[!！。,.，\\s]");
 
@@ -87,6 +89,12 @@ public class IntentService {
             return IntentResult.of(Intents.CHITCHAT, 0.95, "rule", "命中寒暄/能力询问");
         }
         if (DETAIL.matcher(text).find()) {
+            boolean browseCategory = (text.contains("看看") || text.contains("看一下"))
+                    && !STRONG_DETAIL.matcher(text).find()
+                    && !PRODUCT_REFERENCE.matcher(text).find();
+            if (browseCategory) {
+                return IntentResult.of(Intents.SEARCH, 0.8, "rule", "浏览品类，按商品检索处理");
+            }
             return IntentResult.of(Intents.DETAIL, 0.8, "rule", "命中详情询问关键词");
         }
         return IntentResult.of(Intents.SEARCH, 0.7, "rule", "默认按商品检索处理");

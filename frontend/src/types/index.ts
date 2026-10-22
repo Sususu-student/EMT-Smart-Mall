@@ -217,6 +217,19 @@ export interface CompareResult {
   taskId: string
 }
 
+export interface ChatSlots {
+  categoryId?: string
+  categoryName?: string
+  keyword?: string
+  brand?: string
+  scene?: string
+  minPrice?: number
+  maxPrice?: number
+  features?: string[]
+  budgetUnlimited?: boolean
+  askedBudget?: boolean
+}
+
 export interface ChatResponse {
   conversationId: string
   taskId: string
@@ -229,6 +242,7 @@ export interface ChatResponse {
   steps: AgentStep[]
   degraded: boolean
   memorySummary?: string
+  slots?: ChatSlots
 }
 
 export interface Conversation {

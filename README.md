@@ -61,7 +61,7 @@ mvn spring-boot:run
 
 - 创建 `backend/data/smartmall.mv.db`
 - 执行 `db/schema.sql`
-- 导入 21 个分类（13 个叶子品类）、130 件商品、650 条评价、演示用户/地址/订单
+- 导入 21 个分类（13 个叶子品类）、130 件商品、1300 条评价、演示用户/地址/订单
 
 后端：<http://localhost:8080>  
 Swagger：<http://localhost:8080/swagger-ui.html>  
@@ -124,10 +124,12 @@ $env:DEEPSEEK_API_KEY="sk-xxxx"
 llm:
   api-key: ${DEEPSEEK_API_KEY:}
   base-url: ${DEEPSEEK_BASE_URL:https://api.deepseek.com/v1}
-  model: ${DEEPSEEK_MODEL:deepseek-chat}
+  model: ${DEEPSEEK_MODEL:deepseek-flash}
   max-consecutive-failures: 3
   cooldown-seconds: 60
 ```
+
+当前 DeepSeek 官方模型名为 `deepseek-flash`（推荐，便宜且支持 JSON/Tool Calls）和 `deepseek-v4-pro`（更强、更贵）。本项目默认使用 `deepseek-flash`；旧名 `deepseek-chat` 不再建议依赖。
 
 未配置 Key 时，意图、槽位、理由和对比建议全部走规则/模板引擎，前端会显示“规则引擎模式”。
 
@@ -260,7 +262,26 @@ G:\EMT
 
 ---
 
-## 9. 测试与构建
+## 9. Agent 评测
+
+`evaluation/cases.json` 包含 40 条对话用例（7 类意图、槽位组合、多轮澄清、指代、订单/加购/对比、边界场景）和 5 项接口检查。
+
+```bash
+# 先启动后端，再运行
+node evaluation/run-eval.mjs
+```
+
+输出在 `evaluation/reports/`：
+
+- `report-*.json`：完整结果
+- `report-*.md`：通过率、分组结果、失败明细
+- `manual-review-*.csv`：推荐相关性人工评分表（1-5 分）
+
+同一套用例可以在规则引擎和 DeepSeek 模式下各跑一遍，作为论文的对比实验。可用 `--limit=10`、`--only=S01,D08` 做快速调试，`--strict` 让失败用例返回非零退出码。
+
+本次规则引擎基线（2026-10-22，本机 H2）：40/40 通过，意图 100%、槽位 100%、接口检查 5/5，平均 23ms、P95 60ms。该结果只代表规则基线；仓库未配置 DeepSeek Key，因此没有真实 LLM 准确率数据。按 Flash 当前公开价格，50 条多轮评测通常只需几元，具体以官方价格为准。
+
+## 10. 测试与构建
 
 ```bash
 # 后端：编译 + 全链路集成测试
@@ -291,7 +312,7 @@ node scripts/browser-smoke.mjs
 
 ---
 
-## 10. 边界说明
+## 11. 边界说明
 
 - 支付为模拟支付，不接入真实支付渠道
 - 不对接真实电商 API，商品数据为演示数据
@@ -300,7 +321,7 @@ node scripts/browser-smoke.mjs
 
 ---
 
-## 11. 后续可扩展
+## 12. 后续可扩展
 
 - Redis 缓存会话与热点商品
 - Chroma / 向量检索做语义召回，与关键词检索做对比实验

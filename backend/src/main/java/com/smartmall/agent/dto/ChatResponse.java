@@ -21,4 +21,5 @@ public class ChatResponse {
     private List<AgentStep> steps = new ArrayList<>();
     private boolean degraded;
     private String memorySummary;
+    private Slots slots;
 }

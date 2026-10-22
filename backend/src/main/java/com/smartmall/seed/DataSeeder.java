@@ -41,6 +41,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.InputStream;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -138,19 +139,21 @@ public class DataSeeder implements ApplicationRunner {
             image.setSortOrder(0);
             productImageMapper.insert(image);
 
-            int reviewCount = 0;
-            for (int i = 0; i < 5; i++) {
+            int reviewCount = 10;
+            int target = sp.getRating() == null ? 46
+                    : sp.getRating().multiply(BigDecimal.TEN).setScale(0, RoundingMode.HALF_UP).intValue();
+            int fiveStar = Math.max(0, Math.min(reviewCount, target - 40));
+            for (int i = 0; i < reviewCount; i++) {
                 ProductReview review = new ProductReview();
                 review.setProductId(product.getId());
                 review.setUserId("seed_reviewer_" + i);
                 review.setUsername(REVIEW_USERS[(i + product.getId().length()) % REVIEW_USERS.length]);
-                review.setRating(i == 0 ? 5 : 4 + (i % 2));
+                review.setRating(i < fiveStar ? 5 : 4);
                 review.setContent(REVIEW_TEXTS[(i + product.getId().length()) % REVIEW_TEXTS.length]);
                 review.setCreatedAt(now.minusDays(ThreadLocalRandom.current().nextInt(1, 90)));
                 reviewMapper.insert(review);
-                reviewCount++;
             }
-            // 保留商品数据里的评分分布，评价列表展示 5 条代表性评价
+            // 10 条评价的均分与商品评分一致，避免列表与详情页数据矛盾
             product.setReviewCount(reviewCount);
             productMapper.updateById(product);
         }

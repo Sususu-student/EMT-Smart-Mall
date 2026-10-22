@@ -58,6 +58,8 @@ class SmartMallFlowTest {
         assertThat(firstChat.path("steps").size()).isGreaterThan(2);
 
         JsonNode secondChat = chat(token, "300以内，要防水", conversationId);
+        assertThat(secondChat.path("slots").path("maxPrice").asInt()).isEqualTo(300);
+        assertThat(secondChat.path("slots").path("categoryName").asText()).isEqualTo("蓝牙耳机");
         JsonNode products = secondChat.path("products");
         assertThat(products.size()).isGreaterThanOrEqualTo(2);
         List<String> ids = new ArrayList<>();
@@ -111,6 +113,28 @@ class SmartMallFlowTest {
         assertThat(stats.path("orderCount").asLong()).isGreaterThan(0);
         assertThat(stats.path("agentLogCount").asLong()).isGreaterThan(0);
         assertThat(stats.path("topProducts").size()).isGreaterThan(0);
+
+        JsonNode chineseChat = chat(token, "三百元以内的蓝牙耳机", null);
+        assertThat(chineseChat.path("intent").asText()).isEqualTo("search_product");
+        assertThat(chineseChat.path("slots").path("maxPrice").asInt()).isEqualTo(300);
+        assertThat(chineseChat.path("products").size()).isGreaterThanOrEqualTo(1);
+
+        JsonNode ratingProduct = getJson("/api/product/p_yoga_05", token);
+        JsonNode ratingReviews = getJson("/api/product/p_yoga_05/reviews?page=1&size=50", token);
+        double reviewAverage = 0;
+        for (JsonNode review : ratingReviews.path("records")) {
+            reviewAverage += review.path("rating").asDouble();
+        }
+        reviewAverage /= ratingReviews.path("records").size();
+        assertThat(reviewAverage).isCloseTo(ratingProduct.path("rating").asDouble(),
+                org.assertj.core.data.Offset.offset(0.05));
+
+        var crossCategory = objectMapper.createObjectNode();
+        crossCategory.set("productIds", objectMapper.valueToTree(List.of("p_headphone_01", "p_coffee_01")));
+        mvc.perform(post("/api/agent/compare")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(crossCategory)))
+                .andExpect(status().isBadRequest());
 
         JsonNode adminLogs = getJson("/api/admin/agent-logs?page=1&size=20", adminToken);
         assertThat(adminLogs.path("total").asLong()).isGreaterThan(3);

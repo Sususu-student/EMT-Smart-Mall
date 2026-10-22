@@ -26,7 +26,7 @@ public class LlmService {
     @Value("${llm.base-url:https://api.deepseek.com/v1}")
     private String baseUrl;
 
-    @Value("${llm.model:deepseek-chat}")
+    @Value("${llm.model:deepseek-flash}")
     private String modelName;
 
     @Value("${llm.temperature:0.3}")

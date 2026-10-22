@@ -68,6 +68,12 @@ public class CompareAgentService {
             throw BizException.notFound("部分商品不存在或已下架");
         }
 
+        long categoryCount = ordered.stream().map(Product::getCategoryId).distinct().count();
+        if (categoryCount > 1) {
+            matrixTrace.failed("跨品类对比被拦截");
+            throw new BizException("只能对比同一品类的商品，请选择同品类商品后再试");
+        }
+
         CompareResponse response = new CompareResponse();
         response.setTaskId(traceId);
         for (Product product : ordered) {

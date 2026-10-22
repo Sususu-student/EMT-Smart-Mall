@@ -110,7 +110,13 @@ async function openPicker() {
 async function searchPicker() {
   pickerLoading.value = true
   try {
-    const params = { page: 1, size: 8, keyword: pickerKeyword.value || undefined, sort: 'sales' }
+    const params = {
+      page: 1,
+      size: 8,
+      keyword: pickerKeyword.value || undefined,
+      categoryId: selected.value[0]?.categoryId || undefined,
+      sort: 'sales'
+    }
     const data = pickerKeyword.value.trim()
       ? await productApi.search(params)
       : await productApi.list(params)
@@ -358,7 +364,7 @@ function dimensionDisplay(key: string, productId: string) {
           <p>试试其他关键词，或先去商品列表收藏。</p>
         </div>
       </div>
-      <div class="picker-tip">提示：对比商品最好属于同一品类，参数维度才具有可比性。</div>
+      <div class="picker-tip">提示：为保证维度可比，选择首件商品后，候选列表只展示同品类商品。</div>
     </el-drawer>
   </div>
 </template>

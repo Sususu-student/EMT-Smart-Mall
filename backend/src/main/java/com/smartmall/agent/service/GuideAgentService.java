@@ -119,6 +119,7 @@ public class GuideAgentService {
         }
 
         response.setSteps(steps);
+        response.setSlots(slots);
         conversationService.appendTurn(conversation.getId(), "assistant", response.getReply(),
                 response.getIntent(), JsonUtils.toJson(slots), JsonUtils.toJson(response.getProducts()), taskId);
         conversationService.saveSlots(conversation.getId(), JsonUtils.toJson(slots));
@@ -306,6 +307,27 @@ public class GuideAgentService {
     private void handleAddToCart(String message, Slots slots, String conversationId, String taskId,
                                  ChatResponse response, List<AgentStep> steps) {
         response.setIntent(Intents.ADD_TO_CART);
+        boolean queryCart = (message.contains("有什么") || message.contains("查看") || message.contains("看看")
+                || message.contains("清单") || message.trim().equals("购物车"))
+                && !message.contains("加入") && !message.contains("加购") && !message.contains("放进");
+        if (queryCart) {
+            var cartTrace = logService.start(taskId, conversationId, "guide-agent", "query_cart",
+                    "查询购物车", message);
+            CartSummaryVO summary = cartService.summary();
+            if (summary.getItems().isEmpty()) {
+                response.setReply("你的购物车还是空的。可以告诉我想买什么，我先帮你推荐几款。");
+            } else {
+                String items = summary.getItems().stream().limit(5)
+                        .map(item -> "「" + item.getName() + "」×" + item.getQuantity())
+                        .collect(java.util.stream.Collectors.joining("、"));
+                response.setReply("你的购物车里有 " + items + "，共 " + summary.getTotalQuantity()
+                        + " 件，合计 " + summary.getTotalAmount().stripTrailingZeros().toPlainString()
+                        + " 元。需要我帮你结算吗？");
+            }
+            response.getClarifyOptions().addAll(List.of("去购物车结算", "继续推荐"));
+            steps.add(cartTrace.success("购物车共 " + summary.getTotalQuantity() + " 件"));
+            return;
+        }
         String productId = slotService.referencedId(message, slots);
         if (productId == null) {
             response.setReply("要加入购物车的是哪件商品？你可以说“把第一款加入购物车”，或直接点击商品卡片上的加购按钮。");

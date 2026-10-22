@@ -70,6 +70,7 @@ public class SlotService {
     private static final Pattern YUAN = Pattern.compile("(\\d+(?:\\.\\d+)?)\\s*(?:元|块)");
     private static final Pattern QIAN = Pattern.compile("(\\d+(?:\\.\\d+)?)\\s*千元");
     private static final Pattern PRODUCT_ID = Pattern.compile("p_[a-z_]+_\\d{2}");
+    private static final Pattern CHINESE_NUMBER = Pattern.compile("[零〇一二两三四五六七八九十百千万]+");
 
     public Slots extract(String message, Slots current, List<String> context) {
         String text = message == null ? "" : message.trim();
@@ -192,7 +193,8 @@ public class SlotService {
     }
 
     private void extractPrice(String text, Slots slots) {
-        Matcher range = RANGE.matcher(text);
+        String normalized = normalizeChineseNumbers(text);
+        Matcher range = RANGE.matcher(normalized);
         if (range.find()) {
             BigDecimal low = new BigDecimal(range.group(1));
             BigDecimal high = new BigDecimal(range.group(2));
@@ -200,30 +202,119 @@ public class SlotService {
             slots.setMaxPrice(low.max(high));
             return;
         }
-        Matcher maxWord = MAX_WORD.matcher(text);
+        Matcher maxWord = MAX_WORD.matcher(normalized);
         if (maxWord.find()) {
             slots.setMaxPrice(scale(new BigDecimal(maxWord.group(1)), maxWord.group(2)));
             return;
         }
-        Matcher maxSuffix = MAX_SUFFIX.matcher(text);
+        Matcher maxSuffix = MAX_SUFFIX.matcher(normalized);
         if (maxSuffix.find()) {
             slots.setMaxPrice(new BigDecimal(maxSuffix.group(1)));
             return;
         }
-        Matcher minSuffix = MIN_SUFFIX.matcher(text);
+        Matcher minSuffix = MIN_SUFFIX.matcher(normalized);
         if (minSuffix.find()) {
             slots.setMinPrice(new BigDecimal(minSuffix.group(1)));
             return;
         }
-        Matcher qian = QIAN.matcher(text);
+        Matcher qian = QIAN.matcher(normalized);
         if (qian.find()) {
             slots.setMaxPrice(new BigDecimal(qian.group(1)).multiply(BigDecimal.valueOf(1000)));
             return;
         }
-        Matcher yuan = YUAN.matcher(text);
+        Matcher yuan = YUAN.matcher(normalized);
         if (yuan.find()) {
             slots.setMaxPrice(new BigDecimal(yuan.group(1)));
         }
+    }
+
+    /**
+     * 将“三百五”“一千五”“两千”等中文金额转换为阿拉伯数字，
+     * 只用于价格抽取，不改变原始消息与关键词。
+     */
+    private String normalizeChineseNumbers(String text) {
+        Matcher matcher = CHINESE_NUMBER.matcher(text);
+        StringBuffer buffer = new StringBuffer();
+        while (matcher.find()) {
+            Integer value = parseChineseNumber(matcher.group());
+            matcher.appendReplacement(buffer, value == null ? matcher.group() : String.valueOf(value));
+        }
+        matcher.appendTail(buffer);
+        return buffer.toString();
+    }
+
+    static Integer parseChineseNumber(String text) {
+        if (text == null || text.isBlank()) {
+            return null;
+        }
+        int total = 0;
+        int section = 0;
+        int number = 0;
+        int lastUnit = 0;
+        boolean hasZero = text.contains("零") || text.contains("〇");
+        for (char ch : text.toCharArray()) {
+            int digit = chineseDigit(ch);
+            if (digit >= 0) {
+                number = digit;
+                continue;
+            }
+            int unit = chineseUnit(ch);
+            if (unit == 0) {
+                return null;
+            }
+            if (unit == 10000) {
+                section += number;
+                if (section == 0) {
+                    section = 1;
+                }
+                total += section * 10000;
+                section = 0;
+                number = 0;
+                lastUnit = 10000;
+            } else {
+                if (number == 0) {
+                    number = 1;
+                }
+                section += number * unit;
+                number = 0;
+                lastUnit = unit;
+            }
+        }
+        if (number > 0) {
+            if (!hasZero && lastUnit >= 100) {
+                section += number * (lastUnit / 10);
+            } else {
+                section += number;
+            }
+        }
+        int result = total + section;
+        return result > 0 ? result : null;
+    }
+
+    private static int chineseDigit(char ch) {
+        return switch (ch) {
+            case '零', '〇' -> 0;
+            case '一' -> 1;
+            case '二', '两' -> 2;
+            case '三' -> 3;
+            case '四' -> 4;
+            case '五' -> 5;
+            case '六' -> 6;
+            case '七' -> 7;
+            case '八' -> 8;
+            case '九' -> 9;
+            default -> -1;
+        };
+    }
+
+    private static int chineseUnit(char ch) {
+        return switch (ch) {
+            case '十' -> 10;
+            case '百' -> 100;
+            case '千' -> 1000;
+            case '万' -> 10000;
+            default -> 0;
+        };
     }
 
     private BigDecimal scale(BigDecimal value, String unit) {
@@ -390,6 +481,12 @@ public class SlotService {
             return ids;
         }
         String text = message == null ? "" : message;
+        if (text.contains("前两个") || text.contains("前两款") || text.contains("前 2 个")) {
+            return candidates.stream().limit(2).toList();
+        }
+        if (text.contains("前三个") || text.contains("前三款") || text.contains("前 3 个")) {
+            return candidates.stream().limit(3).toList();
+        }
         String[] marks = {"a", "b", "c", "d"};
         String[] cn = {"一", "二", "三", "四"};
         for (int i = 0; i < candidates.size() && i < 4; i++) {
@@ -398,6 +495,7 @@ public class SlotService {
                     || text.contains(marks[i].toLowerCase(Locale.ROOT) + "款")
                     || text.contains("第" + (i + 1) + "个")
                     || text.contains("第" + cn[i] + "个")
+                    || text.contains("第" + cn[i] + "款")
                     || text.contains((i + 1) + "号");
             if (hit && !ids.contains(candidates.get(i))) {
                 ids.add(candidates.get(i));
