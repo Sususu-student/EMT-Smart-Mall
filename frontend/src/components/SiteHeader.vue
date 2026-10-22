@@ -4,6 +4,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 import { useCartStore } from '@/stores/cart'
 import { useCompareStore } from '@/stores/compare'
+import NotificationBell from './NotificationBell.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -72,6 +73,8 @@ function onCommand(command: string) {
             <input v-model="keyword" type="search" placeholder="搜索耳机、跑鞋、咖啡机…" aria-label="搜索商品" />
             <button type="submit" class="search-btn">搜索</button>
           </form>
+
+          <NotificationBell />
 
           <button class="icon-btn compare-btn" aria-label="商品对比" @click="go('/compare')">
             <el-icon><DataAnalysis /></el-icon>

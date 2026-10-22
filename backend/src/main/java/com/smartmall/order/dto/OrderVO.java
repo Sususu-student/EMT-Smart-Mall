@@ -21,6 +21,8 @@ public class OrderVO {
     private String remark;
     private String carrier;
     private String trackingNo;
+    private String paymentNo;
+    private String paymentChannel;
     private LocalDateTime createdAt;
     private LocalDateTime paidAt;
     private LocalDateTime shippedAt;

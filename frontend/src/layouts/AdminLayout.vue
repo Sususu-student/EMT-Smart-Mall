@@ -2,6 +2,7 @@
 import { computed, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
+import NotificationBell from '@/components/NotificationBell.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -92,6 +93,7 @@ function logout() {
         </div>
         <div class="top-right">
           <span class="agent-pill"><span class="dot"></span> Agent 运行中</span>
+          <NotificationBell />
           <button class="top-icon" aria-label="前台" @click="router.push('/')"><el-icon><Monitor /></el-icon></button>
           <button class="top-avatar" @click="logout">{{ (auth.user?.nickname || auth.user?.username || '管').slice(0, 1) }}</button>
         </div>

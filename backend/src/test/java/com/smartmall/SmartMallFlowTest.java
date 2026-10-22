@@ -93,12 +93,27 @@ class SmartMallFlowTest {
         String orderId = order.path("id").asText();
         assertThat(order.path("status").asText()).isEqualTo("PENDING_PAYMENT");
 
-        JsonNode paid = putJson("/api/order/" + orderId + "/pay", null, token);
-        assertThat(paid.path("status").asText()).isEqualTo("PAID");
-        assertThat(paid.path("totalAmount").asDouble()).isGreaterThan(0);
+        var paymentRequest = objectMapper.createObjectNode();
+        paymentRequest.put("channel", "ALIPAY");
+        JsonNode payment = postJson("/api/payment/orders/" + orderId, paymentRequest, token);
+        assertThat(payment.path("status").asText()).isEqualTo("PENDING");
+        assertThat(payment.path("paymentNo").asText()).isNotBlank();
+        var callbackBody = objectMapper.createObjectNode();
+        callbackBody.put("paymentNo", payment.path("paymentNo").asText());
+        callbackBody.put("success", true);
+        JsonNode paymentCallback = postJson("/api/payment/callback", callbackBody, null);
+        assertThat(paymentCallback.path("status").asText()).isEqualTo("SUCCESS");
+        JsonNode duplicateCallback = postJson("/api/payment/callback", callbackBody, null);
+        assertThat(duplicateCallback.path("status").asText()).isEqualTo("SUCCESS");
 
         JsonNode detail = getJson("/api/order/" + orderId, token);
+        assertThat(detail.path("status").asText()).isEqualTo("PAID");
         assertThat(detail.path("statusLabel").asText()).isEqualTo("已支付");
+        assertThat(detail.path("paymentNo").asText()).isEqualTo(payment.path("paymentNo").asText());
+        assertThat(detail.path("paymentChannel").asText()).isEqualTo("ALIPAY");
+
+        JsonNode unread = getJson("/api/notification/unread-count", token);
+        assertThat(unread.asLong()).isGreaterThan(0);
         assertThat(detail.path("items").size()).isGreaterThan(0);
 
         JsonNode orderChat = chat(token, "我的订单到哪了", conversationId);
@@ -137,6 +152,17 @@ class SmartMallFlowTest {
         String adminConversationId = adminConversations.path("records").get(0).path("id").asText();
         assertThat(getJson("/api/admin/conversations/" + adminConversationId + "/turns", adminToken).size())
                 .isGreaterThan(0);
+
+        JsonNode notifications = getJson("/api/notification?page=1&size=20", token);
+        assertThat(notifications.path("total").asLong()).isGreaterThan(0);
+        assertThat(notifications.path("records").size()).isGreaterThan(0);
+        long notificationId = notifications.path("records").get(0).path("id").asLong();
+        mvc.perform(put("/api/notification/" + notificationId + "/read")
+                        .header("Authorization", "Bearer " + token))
+                .andExpect(status().isOk());
+        mvc.perform(put("/api/notification/read-all")
+                        .header("Authorization", "Bearer " + token))
+                .andExpect(status().isOk());
 
         JsonNode logs = getJson("/api/agent/logs?taskId=" + firstChat.path("taskId").asText(), token);
         assertThat(logs.size()).isGreaterThan(3);

@@ -13,6 +13,7 @@ import com.smartmall.common.BizException;
 import com.smartmall.common.Ids;
 import com.smartmall.common.PageResult;
 import com.smartmall.order.entity.Order;
+import com.smartmall.notification.service.NotificationService;
 import com.smartmall.order.mapper.OrderMapper;
 import com.smartmall.user.entity.SysUser;
 import com.smartmall.user.mapper.SysUserMapper;
@@ -34,6 +35,7 @@ public class AfterSaleService {
     private final AfterSaleMapper afterSaleMapper;
     private final OrderMapper orderMapper;
     private final SysUserMapper userMapper;
+    private final NotificationService notificationService;
 
     @Transactional
     public AfterSaleVO create(CreateAfterSaleRequest request) {
@@ -59,6 +61,10 @@ public class AfterSaleService {
         afterSale.setStatus(AfterSaleStatus.PENDING);
         afterSale.setCreatedAt(LocalDateTime.now());
         afterSaleMapper.insert(afterSale);
+        notificationService.notifyAdmins("AFTER_SALE_CREATED", "新的售后申请",
+                "订单 " + order.getOrderNo() + " 提交了" + AfterSaleStatus.typeLabel(afterSale.getType())
+                        + "申请，请及时处理。",
+                "/admin/after-sales");
         return toVO(afterSale, order, userMapper.selectById(userId));
     }
 
@@ -123,8 +129,13 @@ public class AfterSaleService {
         afterSale.setAdminNote(request.getAdminNote());
         afterSale.setHandledAt(LocalDateTime.now());
         afterSaleMapper.updateById(afterSale);
-        return toVO(afterSale, orderMapper.selectById(afterSale.getOrderId()),
-                userMapper.selectById(afterSale.getUserId()));
+        Order order = orderMapper.selectById(afterSale.getOrderId());
+        notificationService.notify(afterSale.getUserId(), "AFTER_SALE_HANDLED", "售后申请已处理",
+                "订单 " + (order == null ? afterSale.getOrderId() : order.getOrderNo())
+                        + " 的售后申请：" + AfterSaleStatus.label(afterSale.getStatus())
+                        + (StringUtils.hasText(afterSale.getAdminNote()) ? "，备注：" + afterSale.getAdminNote() : "。"),
+                "/order/" + afterSale.getOrderId());
+        return toVO(afterSale, order, userMapper.selectById(afterSale.getUserId()));
     }
 
     private AfterSaleVO toVO(AfterSale afterSale, Order order, SysUser user) {

@@ -129,6 +129,8 @@ CREATE TABLE IF NOT EXISTS orders (
     remark        VARCHAR(200),
     carrier       VARCHAR(50),
     tracking_no   VARCHAR(64),
+    payment_no     VARCHAR(40),
+    payment_channel VARCHAR(20),
     created_at    DATETIME,
     paid_at       DATETIME,
     shipped_at    DATETIME,
@@ -208,4 +210,27 @@ CREATE TABLE IF NOT EXISTS agent_prompt (
     description  VARCHAR(300),
     content      TEXT,
     updated_at   DATETIME
+);
+
+CREATE TABLE IF NOT EXISTS notification (
+    id          BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_id     VARCHAR(32) NOT NULL,
+    type        VARCHAR(30),
+    title       VARCHAR(100),
+    content     VARCHAR(500),
+    link        VARCHAR(200),
+    read_status TINYINT DEFAULT 0,
+    created_at  DATETIME
+);
+
+CREATE TABLE IF NOT EXISTS payment_record (
+    id          VARCHAR(32) PRIMARY KEY,
+    payment_no  VARCHAR(40) NOT NULL UNIQUE,
+    order_id    VARCHAR(32) NOT NULL,
+    user_id     VARCHAR(32) NOT NULL,
+    amount      DECIMAL(10,2),
+    channel     VARCHAR(20),
+    status      VARCHAR(20),
+    created_at  DATETIME,
+    paid_at     DATETIME
 );

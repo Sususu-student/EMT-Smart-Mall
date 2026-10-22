@@ -45,15 +45,8 @@ async function switchTab(name: string) {
   await load()
 }
 
-async function pay(order: Order) {
-  await ElMessageBox.confirm(`确认支付 ${money(order.totalAmount)}？`, '模拟支付', {
-    confirmButtonText: '确认支付',
-    cancelButtonText: '取消',
-    type: 'success'
-  })
-  await orderApi.pay(order.id)
-  ElMessage.success('支付成功')
-  await load()
+function pay(order: Order) {
+  router.push(`/order/${order.id}`)
 }
 
 async function cancel(order: Order) {

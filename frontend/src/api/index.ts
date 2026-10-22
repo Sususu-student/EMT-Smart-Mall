@@ -7,6 +7,8 @@ import type {
   AgentTool,
   AdminProductPayload,
   AfterSale,
+  NotificationItem,
+  PaymentRecord,
   ReviewAdmin,
   CartSummary,
   Category,
@@ -83,6 +85,22 @@ export const afterSaleApi = {
     request<AfterSale>({ url: '/after-sale', method: 'post', data }),
   mine: () => request<AfterSale[]>({ url: '/after-sale' }),
   byOrder: (orderId: string) => request<AfterSale[]>({ url: `/after-sale/order/${orderId}` })
+}
+
+export const notificationApi = {
+  list: (params: { page?: number; size?: number }) =>
+    request<PageResult<NotificationItem>>({ url: '/notification', params }),
+  unreadCount: () => request<number>({ url: '/notification/unread-count' }),
+  markRead: (id: number) => request<void>({ url: `/notification/${id}/read`, method: 'put' }),
+  markAllRead: () => request<void>({ url: '/notification/read-all', method: 'put' })
+}
+
+export const paymentApi = {
+  create: (orderId: string, channel = 'ALIPAY') =>
+    request<PaymentRecord>({ url: `/payment/orders/${orderId}`, method: 'post', data: { channel } }),
+  callback: (paymentNo: string, success = true) =>
+    request<PaymentRecord>({ url: '/payment/callback', method: 'post', data: { paymentNo, success } }),
+  byOrder: (orderId: string) => request<PaymentRecord[]>({ url: `/payment/order/${orderId}` })
 }
 
 export const orderApi = {

@@ -2,7 +2,7 @@
 import { computed, onMounted, reactive, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { ElMessage, ElMessageBox } from 'element-plus'
-import { afterSaleApi, orderApi } from '@/api'
+import { afterSaleApi, orderApi, paymentApi } from '@/api'
 import type { AfterSale, Order } from '@/types'
 import { dateTime, money, orderStatusType } from '@/utils/format'
 
@@ -14,6 +14,10 @@ const afterSales = ref<AfterSale[]>([])
 const afterSaleDialog = ref(false)
 const submittingAfterSale = ref(false)
 const afterSaleForm = reactive({ type: 'REFUND', reason: '' })
+
+const payDialog = ref(false)
+const paying = ref(false)
+const payChannel = ref('ALIPAY')
 
 const canApplyAfterSale = computed(() => {
   if (!order.value || afterSales.value.length) return false
@@ -60,15 +64,23 @@ async function load() {
   }
 }
 
-async function pay() {
+function openPayment() {
+  payChannel.value = 'ALIPAY'
+  payDialog.value = true
+}
+
+async function submitPayment() {
   if (!order.value) return
-  await ElMessageBox.confirm(`确认支付 ${money(order.value.totalAmount)}？`, '模拟支付', {
-    confirmButtonText: '确认支付',
-    cancelButtonText: '取消',
-    type: 'success'
-  })
-  order.value = await orderApi.pay(order.value.id)
-  ElMessage.success('支付成功')
+  paying.value = true
+  try {
+    const payment = await paymentApi.create(order.value.id, payChannel.value)
+    await paymentApi.callback(payment.paymentNo, true)
+    order.value = await orderApi.detail(order.value.id)
+    payDialog.value = false
+    ElMessage.success('支付成功，订单已进入备货')
+  } finally {
+    paying.value = false
+  }
 }
 
 async function cancel() {
@@ -151,7 +163,7 @@ async function copyOrderNo() {
         <div class="status-actions">
           <template v-if="order.status === 'PENDING_PAYMENT'">
             <el-button round @click="cancel">取消订单</el-button>
-            <el-button type="primary" round @click="pay">立即支付</el-button>
+            <el-button type="primary" round @click="openPayment">立即支付</el-button>
           </template>
           <el-button v-else-if="order.status === 'SHIPPED'" type="primary" round @click="confirmReceipt">确认收货</el-button>
           <el-button v-if="canApplyAfterSale" round @click="openAfterSale">申请售后</el-button>
@@ -228,6 +240,13 @@ async function copyOrderNo() {
             <div class="info-line"><span>完成时间</span><strong>{{ dateTime(order.finishedAt) }}</strong></div>
           </section>
 
+          <section v-if="order.paymentNo" class="panel">
+            <div class="panel-head"><h3>支付信息</h3></div>
+            <div class="info-line"><span>支付单号</span><strong class="order-no">{{ order.paymentNo }}</strong></div>
+            <div class="info-line"><span>支付方式</span><strong>{{ order.paymentChannel || '—' }}</strong></div>
+            <div class="info-line"><span>支付时间</span><strong>{{ dateTime(order.paidAt) }}</strong></div>
+          </section>
+
           <section v-if="hasLogistics" class="panel">
             <div class="panel-head"><h3>物流信息</h3></div>
             <div class="info-line"><span>承运商</span><strong>{{ order.carrier || '—' }}</strong></div>
@@ -256,6 +275,23 @@ async function copyOrderNo() {
         </aside>
       </div>
     </div>
+
+    <el-dialog v-model="payDialog" title="模拟支付" width="420px">
+      <div class="pay-amount">
+        <span>应付金额</span>
+        <strong>{{ money(order?.totalAmount) }}</strong>
+      </div>
+      <p class="after-sale-tip">这是模拟支付：不会产生真实扣款，提交后由系统模拟支付网关回调。</p>
+      <el-radio-group v-model="payChannel" class="pay-channels">
+        <el-radio-button value="ALIPAY">支付宝</el-radio-button>
+        <el-radio-button value="WECHAT">微信支付</el-radio-button>
+        <el-radio-button value="CARD">银行卡</el-radio-button>
+      </el-radio-group>
+      <template #footer>
+        <el-button @click="payDialog = false">取消</el-button>
+        <el-button type="primary" :loading="paying" @click="submitPayment">确认支付</el-button>
+      </template>
+    </el-dialog>
 
     <el-dialog v-model="afterSaleDialog" title="申请售后" width="460px">
       <p class="after-sale-tip">演示环境支持退款、退货退款、换货申请，提交后由管理员审核，不产生真实退款。</p>
@@ -576,6 +612,32 @@ async function copyOrderNo() {
   align-items: center;
   gap: 4px;
   color: var(--brand-deep);
+}
+
+.pay-amount {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  background: #fbf8f1;
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-bottom: 12px;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.pay-amount strong {
+  font-size: 28px;
+  color: var(--ink);
+}
+
+.pay-channels {
+  width: 100%;
+  display: flex;
+}
+
+.pay-channels :deep(.el-radio-button) {
+  flex: 1;
 }
 
 .after-sale-item {

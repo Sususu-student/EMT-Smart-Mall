@@ -50,6 +50,7 @@ public class OrderService {
     private final CartService cartService;
     private final ProductMapper productMapper;
     private final UserAddressMapper addressMapper;
+    private final com.smartmall.notification.service.NotificationService notificationService;
 
     @Value("${app.order.unpaid-timeout-minutes:30}")
     private long unpaidTimeoutMinutes;
@@ -166,12 +167,17 @@ public class OrderService {
         }
         order.setStatus(OrderStatus.PAID);
         order.setPaidAt(LocalDateTime.now());
+        order.setPaymentNo("MOCK-" + order.getOrderNo());
+        order.setPaymentChannel("MOCK");
         orderMapper.updateById(order);
         for (OrderItem item : itemsOf(order.getId())) {
             productMapper.update(null, new LambdaUpdateWrapper<Product>()
                     .eq(Product::getId, item.getProductId())
                     .setSql("sales = sales + " + item.getQuantity()));
         }
+        notificationService.notify(order.getUserId(), "PAYMENT_SUCCESS", "支付成功",
+                "订单 " + order.getOrderNo() + " 已支付 " + order.getTotalAmount() + " 元，商家正在备货。",
+                "/order/" + order.getId());
         return toVO(order, itemsOf(order.getId()));
     }
 
@@ -309,6 +315,8 @@ public class OrderService {
         vo.setRemark(order.getRemark());
         vo.setCarrier(order.getCarrier());
         vo.setTrackingNo(order.getTrackingNo());
+        vo.setPaymentNo(order.getPaymentNo());
+        vo.setPaymentChannel(order.getPaymentChannel());
         vo.setCreatedAt(order.getCreatedAt());
         vo.setPaidAt(order.getPaidAt());
         vo.setShippedAt(order.getShippedAt());
@@ -355,6 +363,10 @@ public class OrderService {
             order.setTrackingNo("SF" + System.currentTimeMillis());
         }
         orderMapper.updateById(order);
+        notificationService.notify(order.getUserId(), "ORDER_SHIPPED", "订单已发货",
+                "订单 " + order.getOrderNo() + " 已由 " + order.getCarrier() + " 发出，运单号 "
+                        + order.getTrackingNo() + "。",
+                "/order/" + order.getId());
         return toVO(order, itemsOf(order.getId()));
     }
 }

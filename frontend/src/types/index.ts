@@ -144,6 +144,8 @@ export interface Order {
   remark?: string
   carrier?: string
   trackingNo?: string
+  paymentNo?: string
+  paymentChannel?: string
   createdAt: string
   paidAt?: string
   shippedAt?: string
@@ -160,6 +162,29 @@ export interface Review {
   rating: number
   content: string
   createdAt: string
+}
+
+export interface NotificationItem {
+  id: number
+  userId: string
+  type: string
+  title: string
+  content: string
+  link?: string
+  readStatus: number
+  createdAt: string
+}
+
+export interface PaymentRecord {
+  id: string
+  paymentNo: string
+  orderId: string
+  userId: string
+  amount: number
+  channel: string
+  status: string
+  createdAt: string
+  paidAt?: string
 }
 
 export interface ReviewAdmin {

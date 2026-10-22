@@ -32,6 +32,8 @@
 | 完整电商闭环 | 注册登录、改密、商品、收藏、购物车、地址、订单、模拟支付、物流单号、评价、售后、后台管理 |
 | 后台运营 | 商品/分类/订单/售后/评价/用户/会话审查/Agent 日志/统计 |
 | Agent 配置后台 | Prompt 模板在线编辑与恢复默认、模型/温度切换、工具清单、模型运行状态 |
+| 消息通知 | 支付成功、订单发货、售后处理、新售后申请（管理员）站内通知与未读数 |
+| 模拟支付闭环 | 创建支付单 → 支付网关回调 → 订单已支付 → 通知用户，支持幂等回调 |
 | 无 Key 可运行 | 未配置 DeepSeek API Key 时自动切换规则引擎，全部功能可演示 |
 
 ---
@@ -147,9 +149,9 @@ llm:
 3. 输入 `300以内，要防水` → 返回 3 款商品卡片，右侧执行轨迹实时更新。
 4. 点击 `帮我对比前两个` → 返回对比结论，可进入对比页看矩阵和雷达图。
 5. 调整对比权重 → 重新计算得分。
-6. 商品卡片「加购」→ 购物车结算 → 提交订单 → 模拟支付。
+6. 商品卡片「加购」→ 购物车结算 → 提交订单 → 选择支付宝/微信/银行卡模拟支付 → 支付回调成功。
 7. 对 Agent 说 `我的订单到哪了` → 返回最近订单状态。
-8. 用 `admin / Admin@123` 登录 → 后台仪表盘、商品/分类/订单/售后/评价/用户管理、会话审查、Agent 配置、Agent 执行日志。
+8. 用 `admin / Admin@123` 登录 → 后台仪表盘、商品/分类/订单/售后/评价/用户管理、会话审查、Agent 配置、Agent 执行日志；发货后用户会收到站内通知。
 
 ---
 
@@ -254,6 +256,8 @@ G:\EMT
 | Agent | `POST /api/agent/chat`、`POST /api/agent/compare`、`GET /api/agent/conversations`、`GET /api/agent/logs` |
 | WebSocket | `ws://localhost:8080/ws/agent?token=JWT&conversationId=...` |
 | 售后 | `POST /api/after-sale`、`GET /api/after-sale`、`GET /api/after-sale/order/{orderId}` |
+| 支付 | `POST /api/payment/orders/{orderId}`、`POST /api/payment/callback`、`GET /api/payment/{paymentNo}` |
+| 通知 | `GET /api/notification`、`GET /api/notification/unread-count`、`PUT /api/notification/{id}/read`、`PUT /api/notification/read-all` |
 | 后台 | `GET /api/admin/stats`、`/products`、`/categories`、`/orders`、`/after-sales`、`/reviews`、`/users`、`/conversations`、`/agent-logs` |
 | Agent 配置 | `GET/PUT /api/admin/agent/prompts`、`GET /api/admin/agent/tools`、`GET/PUT /api/admin/agent/model` |
 
@@ -263,7 +267,7 @@ G:\EMT
 
 ## 8. 数据模型
 
-`sys_user`、`user_address`、`user_preference`、`browse_history`、`user_favorite`、`category`、`product`、`product_image`、`product_review`、`cart_item`、`orders`、`order_item`、`after_sale`、`conversation`、`dialogue_turn`、`agent_execution_log`、`agent_prompt`、`compare_record`。
+`sys_user`、`user_address`、`user_preference`、`browse_history`、`user_favorite`、`category`、`product`、`product_image`、`product_review`、`cart_item`、`orders`、`order_item`、`after_sale`、`payment_record`、`notification`、`conversation`、`dialogue_turn`、`agent_execution_log`、`agent_prompt`、`compare_record`。
 
 商品参数以 JSON 文本存储在 `product.attributes`，品类维度定义在 `category.attribute_schema`，因此同一套对比算法可适配不同品类。
 
