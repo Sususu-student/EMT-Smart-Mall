@@ -19,4 +19,7 @@ public class CreateOrderRequest {
     private String addressId;
 
     private String remark;
+
+    /** STANDARD / EXPRESS */
+    private String deliveryMethod = "STANDARD";
 }

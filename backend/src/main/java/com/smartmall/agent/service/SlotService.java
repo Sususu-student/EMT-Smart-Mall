@@ -102,6 +102,8 @@ public class SlotService {
         merged.setLastProductIds(new ArrayList<>(current.getLastProductIds()));
         merged.setLastProductNames(new ArrayList<>(current.getLastProductNames()));
         merged.setPending(current.getPending());
+        merged.setPendingCheckout(current.isPendingCheckout());
+        merged.setDeliveryMethod(current.getDeliveryMethod());
 
         if (extracted.getCategoryId() != null) {
             if (!extracted.getCategoryId().equals(merged.getCategoryId())) {

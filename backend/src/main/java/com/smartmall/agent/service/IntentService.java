@@ -27,7 +27,8 @@ public class IntentService {
 
     private static final Pattern COMPARE = Pattern.compile("对比|比较|哪个好|哪款好|选哪个|怎么选|差别|区别|vs|VS");
     private static final Pattern ORDER = Pattern.compile("订单|物流|发货|到货|快递|签收|退款|售后|买的东西|支付状态");
-    private static final Pattern CART = Pattern.compile("加入购物车|加购|加到购物车|放进购物车|购物车|买这个|就要这个|下单");
+    private static final Pattern CART = Pattern.compile("加入购物车|加购|加到购物车|放进购物车|购物车|买这个|就要这个");
+    private static final Pattern CHECKOUT = Pattern.compile("确认下单|提交订单|帮我下单|去结算|结算吧|下单吧|就下单|下单|确认支付并下单");
     private static final Pattern DETAIL = Pattern.compile("详情|参数|配置|怎么样|好用吗|续航多久|多少钱|什么价格|介绍一下|看看|具体|值得买吗|优缺点");
     private static final Pattern STRONG_DETAIL = Pattern.compile("详情|参数|配置|续航多久|多少钱|什么价格|库存|值得买吗|优缺点|介绍一下|具体");
     private static final Pattern PRODUCT_REFERENCE = Pattern.compile("这款|这个|它|该商品|第一个|第二个|第三个|第[一二三四]款|p_[a-z_]+_\\d{2}");
@@ -72,6 +73,9 @@ public class IntentService {
         }
         if (ORDER.matcher(text).find()) {
             return IntentResult.of(Intents.ORDER, 0.95, "rule", "命中订单/物流关键词");
+        }
+        if (CHECKOUT.matcher(text).find()) {
+            return IntentResult.of(Intents.CHECKOUT, 0.95, "rule", "命中下单/结算关键词");
         }
         if (CART.matcher(text).find()) {
             return IntentResult.of(Intents.ADD_TO_CART, 0.9, "rule", "命中加购关键词");

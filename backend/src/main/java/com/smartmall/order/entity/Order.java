@@ -27,6 +27,8 @@ public class Order {
     private String trackingNo;
     private String paymentNo;
     private String paymentChannel;
+    private String deliveryMethod;
+    private BigDecimal deliveryFee;
     private LocalDateTime createdAt;
     private LocalDateTime paidAt;
     private LocalDateTime shippedAt;

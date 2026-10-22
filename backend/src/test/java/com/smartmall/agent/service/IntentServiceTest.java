@@ -26,6 +26,12 @@ class IntentServiceTest {
     }
 
     @Test
+    void detectsCheckoutIntent() {
+        assertThat(intentService.ruleDetect("帮我下单").getIntent()).isEqualTo("checkout");
+        assertThat(intentService.ruleDetect("确认下单").getIntent()).isEqualTo("checkout");
+    }
+
+    @Test
     void detectsChitchatIntent() {
         assertThat(intentService.ruleDetect("你好").getIntent()).isEqualTo("chitchat");
     }

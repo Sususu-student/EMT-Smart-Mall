@@ -109,6 +109,7 @@ export const orderApi = {
     quantity?: number
     cartItemIds?: number[]
     addressId: string
+    deliveryMethod?: string
     remark?: string
   }) => request<Order>({ url: '/order', method: 'post', data }),
   list: (params: { status?: string; page?: number; size?: number }) =>

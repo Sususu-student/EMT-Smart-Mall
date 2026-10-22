@@ -20,6 +20,8 @@ public class Slots {
     private boolean budgetUnlimited;
     private boolean askedBudget;
     private String pending;
+    private boolean pendingCheckout;
+    private String deliveryMethod;
     private List<String> lastProductIds = new ArrayList<>();
     private List<String> lastProductNames = new ArrayList<>();
 

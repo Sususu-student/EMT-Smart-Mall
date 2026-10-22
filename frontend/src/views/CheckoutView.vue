@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, reactive, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { ElMessage, ElMessageBox } from 'element-plus'
+import { ElMessage } from 'element-plus'
 import { orderApi, productApi, userApi } from '@/api'
 import type { Address, Product } from '@/types'
 import { money } from '@/utils/format'
@@ -16,6 +16,7 @@ const addresses = ref<Address[]>([])
 const selectedAddressId = ref('')
 const buyProduct = ref<Product | null>(null)
 const buyQuantity = ref(1)
+const deliveryMethod = ref('STANDARD')
 const remark = ref('')
 const loading = ref(true)
 const submitting = ref(false)
@@ -56,7 +57,9 @@ const items = computed(() => {
     }))
 })
 
-const total = computed(() => items.value.reduce((sum, item) => sum + item.price * item.quantity, 0))
+const goodsTotal = computed(() => items.value.reduce((sum, item) => sum + item.price * item.quantity, 0))
+const deliveryFee = computed(() => (deliveryMethod.value === 'EXPRESS' ? 12 : 0))
+const total = computed(() => goodsTotal.value + deliveryFee.value)
 const selectedAddress = computed(() => addresses.value.find((item) => item.id === selectedAddressId.value))
 
 onMounted(load)
@@ -124,21 +127,12 @@ async function submitOrder() {
       productId: isBuyNow.value ? buyProduct.value?.id : undefined,
       quantity: isBuyNow.value ? buyQuantity.value : undefined,
       addressId: selectedAddressId.value,
+      deliveryMethod: deliveryMethod.value,
       remark: remark.value
     })
     await cart.refresh()
-    try {
-      await ElMessageBox.confirm(`订单 ${order.orderNo} 已创建，应付 ${money(order.totalAmount)}。是否立即模拟支付？`, '订单已创建', {
-        confirmButtonText: '立即支付',
-        cancelButtonText: '稍后支付',
-        type: 'success'
-      })
-      await orderApi.pay(order.id)
-      ElMessage.success('支付成功')
-    } catch {
-      ElMessage.info('订单已创建，可在订单列表继续支付')
-    }
-    router.replace(`/order/${order.id}`)
+    ElMessage.success(`订单 ${order.orderNo} 已创建，请完成支付`)
+    router.replace({ path: `/order/${order.id}`, query: { pay: '1' } })
   } finally {
     submitting.value = false
   }
@@ -190,6 +184,25 @@ async function submitOrder() {
 
         <section class="card">
           <div class="card-head">
+            <h3>配送方式</h3>
+            <span class="muted">模拟配送，不产生真实物流费用</span>
+          </div>
+          <div class="delivery-options">
+            <button class="delivery-option" :class="{ active: deliveryMethod === 'STANDARD' }" @click="deliveryMethod = 'STANDARD'">
+              <el-icon><Van /></el-icon>
+              <div><strong>标准配送</strong><span>预计 3-5 天送达 · 免运费</span></div>
+              <el-icon v-if="deliveryMethod === 'STANDARD'" class="check"><Check /></el-icon>
+            </button>
+            <button class="delivery-option" :class="{ active: deliveryMethod === 'EXPRESS' }" @click="deliveryMethod = 'EXPRESS'">
+              <el-icon><Promotion /></el-icon>
+              <div><strong>加急配送</strong><span>预计 1-2 天送达 · ¥12</span></div>
+              <el-icon v-if="deliveryMethod === 'EXPRESS'" class="check"><Check /></el-icon>
+            </button>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="card-head">
             <h3>商品清单</h3>
             <span class="muted">{{ items.length }} 种商品</span>
           </div>
@@ -215,8 +228,8 @@ async function submitOrder() {
 
       <aside class="summary">
         <h3>支付明细</h3>
-        <div class="summary-row"><span>商品金额</span><strong>{{ money(total) }}</strong></div>
-        <div class="summary-row"><span>运费</span><strong>免运费</strong></div>
+        <div class="summary-row"><span>商品金额</span><strong>{{ money(goodsTotal) }}</strong></div>
+        <div class="summary-row"><span>配送费</span><strong>{{ deliveryFee ? money(deliveryFee) : '免运费' }}</strong></div>
         <div class="summary-row"><span>优惠</span><strong>—</strong></div>
         <div class="summary-total"><span>应付</span><b>{{ money(total) }}</b></div>
 
@@ -492,6 +505,60 @@ async function submitOrder() {
   font-size: 9px;
   color: var(--muted-light);
   margin-top: 10px;
+}
+
+.delivery-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.delivery-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid var(--line);
+  background: #fff;
+  border-radius: 11px;
+  padding: 13px;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.delivery-option:hover {
+  border-color: var(--line-strong);
+}
+
+.delivery-option.active {
+  border-color: var(--brand);
+  background: #fff8f3;
+}
+
+.delivery-option .el-icon {
+  color: var(--brand);
+  font-size: 18px;
+}
+
+.delivery-option div {
+  flex: 1;
+}
+
+.delivery-option strong {
+  display: block;
+  font-size: 11px;
+}
+
+.delivery-option span {
+  display: block;
+  font-size: 9px;
+  color: var(--muted);
+  margin-top: 3px;
+}
+
+.delivery-option .check {
+  color: var(--brand);
+  font-size: 14px;
 }
 
 .no-address {

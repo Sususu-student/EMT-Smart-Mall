@@ -89,9 +89,12 @@ class SmartMallFlowTest {
         var orderBody = objectMapper.createObjectNode();
         orderBody.put("addressId", addressId);
         orderBody.put("remark", "集成测试订单");
+        orderBody.put("deliveryMethod", "EXPRESS");
         JsonNode order = postJson("/api/order", orderBody, token);
         String orderId = order.path("id").asText();
         assertThat(order.path("status").asText()).isEqualTo("PENDING_PAYMENT");
+        assertThat(order.path("deliveryMethod").asText()).isEqualTo("EXPRESS");
+        assertThat(order.path("deliveryFee").asDouble()).isEqualTo(12.0);
 
         var paymentRequest = objectMapper.createObjectNode();
         paymentRequest.put("channel", "ALIPAY");
@@ -252,6 +255,20 @@ class SmartMallFlowTest {
         modelBody.put("temperature", 0.5);
         JsonNode changedModel = putJson("/api/admin/agent/model", modelBody, adminToken);
         assertThat(changedModel.path("temperature").asDouble()).isEqualTo(0.5);
+
+        var addCartBody = objectMapper.createObjectNode();
+        addCartBody.put("productId", "p_headphone_02");
+        addCartBody.put("quantity", 1);
+        postJson("/api/cart", addCartBody, token);
+        JsonNode checkoutPreview = chat(token, "帮我下单", null);
+        assertThat(checkoutPreview.path("intent").asText()).isEqualTo("checkout");
+        assertThat(checkoutPreview.path("reply").asText()).contains("确认下单");
+        String checkoutConversation = checkoutPreview.path("conversationId").asText();
+        JsonNode checkoutConfirmed = chat(token, "确认下单", checkoutConversation);
+        assertThat(checkoutConfirmed.path("intent").asText()).isEqualTo("checkout");
+        assertThat(checkoutConfirmed.path("orders").size()).isGreaterThanOrEqualTo(1);
+        assertThat(checkoutConfirmed.path("orders").get(0).path("orderNo").asText()).isNotBlank();
+        assertThat(checkoutConfirmed.path("orders").get(0).path("deliveryMethod").asText()).isEqualTo("STANDARD");
 
         var passwordBody = objectMapper.createObjectNode();
         passwordBody.put("oldPassword", "Demo@123");

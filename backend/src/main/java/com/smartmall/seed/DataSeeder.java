@@ -283,6 +283,8 @@ public class DataSeeder implements ApplicationRunner {
         order.setPhone("13800138000");
         order.setAddressText("江苏省南京市栖霞区文苑路 1 号 智能导购实验室");
         order.setRemark("演示订单");
+        order.setDeliveryMethod("STANDARD");
+        order.setDeliveryFee(BigDecimal.ZERO);
         order.setCreatedAt(createdAt);
         order.setPaidAt(paidAt);
         order.setShippedAt(shippedAt);

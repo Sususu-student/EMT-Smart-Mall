@@ -22,6 +22,7 @@ import com.smartmall.cart.service.CartService;
 import com.smartmall.common.BizException;
 import com.smartmall.common.Ids;
 import com.smartmall.common.JsonUtils;
+import com.smartmall.order.dto.CreateOrderRequest;
 import com.smartmall.order.dto.OrderVO;
 import com.smartmall.order.entity.Order;
 import com.smartmall.order.service.OrderService;
@@ -32,6 +33,7 @@ import com.smartmall.product.mapper.ProductMapper;
 import com.smartmall.product.dto.ProductVO;
 import com.smartmall.product.service.ProductService;
 import com.smartmall.user.dto.PreferenceVO;
+import com.smartmall.user.entity.UserAddress;
 import com.smartmall.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -105,6 +107,7 @@ public class GuideAgentService {
                 case Intents.COMPARE -> handleCompare(message, slots, conversation.getId(), taskId, userId, response, steps);
                 case Intents.ORDER -> handleOrder(message, conversation.getId(), taskId, userId, response, steps);
                 case Intents.ADD_TO_CART -> handleAddToCart(message, slots, conversation.getId(), taskId, response, steps);
+                case Intents.CHECKOUT -> handleCheckout(message, slots, conversation.getId(), taskId, response, steps);
                 case Intents.DETAIL -> handleDetail(message, slots, conversation.getId(), taskId, userId, response, steps);
                 case Intents.CHITCHAT -> handleChitchat(message, conversation.getId(), taskId, response, steps);
                 default -> handleSearch(message, slots, context, conversation.getId(), taskId, userId, response, steps);
@@ -385,6 +388,78 @@ public class GuideAgentService {
         }
     }
 
+    private void handleCheckout(String message, Slots slots, String conversationId, String taskId,
+                                ChatResponse response, List<AgentStep> steps) {
+        response.setIntent(Intents.CHECKOUT);
+        if (slots.isPendingCheckout() && (message.contains("取消") || message.contains("算了"))) {
+            slots.setPendingCheckout(false);
+            response.setReply("已取消本次下单。购物车商品会保留，你可以继续挑选或直接去购物车结算。");
+            response.getClarifyOptions().addAll(List.of("继续推荐", "去购物车结算"));
+            steps.add(logService.start(taskId, conversationId, "guide-agent", "cancel_checkout",
+                    "取消下单", message).success("已取消待确认订单"));
+            return;
+        }
+
+        CartSummaryVO summary = cartService.summary();
+        List<com.smartmall.cart.dto.CartItemVO> selected = summary.getItems().stream()
+                .filter(item -> item.getSelected() != null && item.getSelected() == 1 && item.getAvailable())
+                .toList();
+        if (selected.isEmpty()) {
+            slots.setPendingCheckout(false);
+            response.setReply("购物车里还没有勾选商品。可以先去购物车勾选，或告诉我想买什么，我先帮你推荐。");
+            response.getClarifyOptions().addAll(List.of("去购物车", "继续推荐"));
+            steps.add(logService.start(taskId, conversationId, "guide-agent", "checkout_preview",
+                    "下单前检查", "购物车无选中商品").failed("没有可结算商品"));
+            return;
+        }
+        List<UserAddress> addresses = userService.addresses();
+        if (addresses.isEmpty()) {
+            slots.setPendingCheckout(false);
+            response.setReply("你还没有收货地址。请先在个人中心添加地址，再回来让我协助下单。");
+            response.getClarifyOptions().addAll(List.of("去个人中心", "查看购物车"));
+            steps.add(logService.start(taskId, conversationId, "guide-agent", "checkout_preview",
+                    "下单前检查", "无收货地址").failed("缺少收货地址"));
+            return;
+        }
+        UserAddress address = addresses.stream().filter(item -> item.getIsDefault() != null && item.getIsDefault() == 1)
+                .findFirst().orElse(addresses.get(0));
+
+        String method = (message.contains("加急") || message.contains("顺丰") || message.contains("尽快"))
+                ? "EXPRESS" : (slots.getDeliveryMethod() == null ? "STANDARD" : slots.getDeliveryMethod());
+        slots.setDeliveryMethod(method);
+        BigDecimal fee = "EXPRESS".equals(method) ? BigDecimal.valueOf(12) : BigDecimal.ZERO;
+        BigDecimal payable = summary.getTotalAmount().add(fee);
+        boolean confirm = message.contains("确认") || message.contains("提交") || message.contains("就这个")
+                || message.contains("可以下单") || message.contains("下单吧");
+        if (!slots.isPendingCheckout() || !confirm) {
+            slots.setPendingCheckout(true);
+            response.setReply("已为你准备订单：" + selected.size() + " 种商品，共 " + summary.getTotalQuantity()
+                    + " 件，商品金额 " + summary.getTotalAmount().stripTrailingZeros().toPlainString()
+                    + " 元，配送方式 " + ("EXPRESS".equals(method) ? "加急配送（12 元）" : "标准配送（免运费）")
+                    + "，应付 " + payable.stripTrailingZeros().toPlainString() + " 元。收货地址：" + address.getReceiver()
+                    + "，" + address.fullAddress() + "。回复「确认下单」后我会创建订单，支付仍在订单详情完成。");
+            response.getClarifyOptions().addAll(List.of("确认下单", "取消"));
+            steps.add(logService.start(taskId, conversationId, "guide-agent", "checkout_preview",
+                    "下单预览", "待确认").success("已生成订单预览，等待用户确认"));
+            return;
+        }
+
+        var createTrace = logService.start(taskId, conversationId, "guide-agent", "create_order",
+                "协助创建订单", "地址 " + address.getId() + "，配送 " + method);
+        CreateOrderRequest request = new CreateOrderRequest();
+        request.setAddressId(address.getId());
+        request.setDeliveryMethod(method);
+        request.setRemark("由导购 Agent 协助创建");
+        OrderVO order = orderService.create(request);
+        slots.setPendingCheckout(false);
+        response.getOrders().add(order);
+        response.setReply("订单已创建：" + order.getOrderNo() + "，共 " + order.getTotalQuantity() + " 件，应付 "
+                + order.getTotalAmount().stripTrailingZeros().toPlainString()
+                + " 元。请点击订单卡片去订单详情完成支付。");
+        response.getClarifyOptions().addAll(List.of("去支付", "查看订单"));
+        steps.add(createTrace.success("订单 " + order.getOrderNo() + " 已创建"));
+    }
+
     private void handleChitchat(String message, String conversationId, String taskId,
                                 ChatResponse response, List<AgentStep> steps) {
         response.setIntent(Intents.CHITCHAT);
@@ -504,6 +579,8 @@ public class GuideAgentService {
         target.setBudgetUnlimited(source.isBudgetUnlimited());
         target.setAskedBudget(source.isAskedBudget());
         target.setPending(source.getPending());
+        target.setPendingCheckout(source.isPendingCheckout());
+        target.setDeliveryMethod(source.getDeliveryMethod());
         target.setLastProductIds(new ArrayList<>(source.getLastProductIds()));
         target.setLastProductNames(new ArrayList<>(source.getLastProductNames()));
     }

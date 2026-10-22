@@ -25,6 +25,11 @@ const canApplyAfterSale = computed(() => {
 })
 
 const hasLogistics = computed(() => Boolean(order.value?.trackingNo || order.value?.carrier))
+const deliveryLabel = computed(() => (order.value?.deliveryMethod === 'EXPRESS' ? '加急配送' : '标准配送'))
+const paymentLabel = computed(() => {
+  const map: Record<string, string> = { ALIPAY: '支付宝', WECHAT: '微信支付', CARD: '银行卡', MOCK: '模拟支付' }
+  return map[order.value?.paymentChannel || ''] || order.value?.paymentChannel || '—'
+})
 
 const steps = computed(() => {
   if (!order.value) return []
@@ -61,6 +66,10 @@ async function load() {
     }
   } finally {
     loading.value = false
+  }
+  if (route.query.pay === '1' && order.value?.status === 'PENDING_PAYMENT') {
+    openPayment()
+    router.replace({ path: route.path, query: {} })
   }
 }
 
@@ -210,7 +219,11 @@ async function copyOrderNo() {
             </div>
             <div class="amount-row">
               <span>商品合计</span>
-              <strong>{{ money(order.totalAmount) }}</strong>
+              <strong>{{ money(order.totalAmount - (order.deliveryFee || 0)) }}</strong>
+            </div>
+            <div class="amount-row">
+              <span>配送费（{{ deliveryLabel }}）</span>
+              <strong>{{ order.deliveryFee ? money(order.deliveryFee) : '免运费' }}</strong>
             </div>
             <div class="amount-row total">
               <span>实付金额</span>
@@ -235,6 +248,7 @@ async function copyOrderNo() {
               <strong class="order-no" @click="copyOrderNo">{{ order.orderNo }} <el-icon><CopyDocument /></el-icon></strong>
             </div>
             <div class="info-line"><span>下单时间</span><strong>{{ dateTime(order.createdAt) }}</strong></div>
+            <div class="info-line"><span>配送方式</span><strong>{{ deliveryLabel }}</strong></div>
             <div class="info-line"><span>支付时间</span><strong>{{ dateTime(order.paidAt) }}</strong></div>
             <div class="info-line"><span>发货时间</span><strong>{{ dateTime(order.shippedAt) }}</strong></div>
             <div class="info-line"><span>完成时间</span><strong>{{ dateTime(order.finishedAt) }}</strong></div>
@@ -243,7 +257,7 @@ async function copyOrderNo() {
           <section v-if="order.paymentNo" class="panel">
             <div class="panel-head"><h3>支付信息</h3></div>
             <div class="info-line"><span>支付单号</span><strong class="order-no">{{ order.paymentNo }}</strong></div>
-            <div class="info-line"><span>支付方式</span><strong>{{ order.paymentChannel || '—' }}</strong></div>
+            <div class="info-line"><span>支付方式</span><strong>{{ paymentLabel }}</strong></div>
             <div class="info-line"><span>支付时间</span><strong>{{ dateTime(order.paidAt) }}</strong></div>
           </section>
 

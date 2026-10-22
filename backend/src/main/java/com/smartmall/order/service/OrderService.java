@@ -82,9 +82,13 @@ public class OrderService {
             }
         }
 
-        BigDecimal total = items.stream()
+        BigDecimal goodsTotal = items.stream()
                 .map(i -> i.getProductPrice().multiply(BigDecimal.valueOf(i.getQuantity())))
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
+        String deliveryMethod = "EXPRESS".equalsIgnoreCase(request.getDeliveryMethod())
+                ? "EXPRESS" : "STANDARD";
+        BigDecimal deliveryFee = "EXPRESS".equals(deliveryMethod) ? BigDecimal.valueOf(12) : BigDecimal.ZERO;
+        BigDecimal total = goodsTotal.add(deliveryFee);
 
         // 先锁库存，避免超卖
         for (OrderItem item : items) {
@@ -102,6 +106,8 @@ public class OrderService {
         order.setPhone(address.getPhone());
         order.setAddressText(address.fullAddress());
         order.setRemark(request.getRemark());
+        order.setDeliveryMethod(deliveryMethod);
+        order.setDeliveryFee(deliveryFee);
         order.setCreatedAt(LocalDateTime.now());
         order.setExpiredAt(LocalDateTime.now().plusMinutes(unpaidTimeoutMinutes));
         orderMapper.insert(order);
@@ -317,6 +323,8 @@ public class OrderService {
         vo.setTrackingNo(order.getTrackingNo());
         vo.setPaymentNo(order.getPaymentNo());
         vo.setPaymentChannel(order.getPaymentChannel());
+        vo.setDeliveryMethod(order.getDeliveryMethod());
+        vo.setDeliveryFee(order.getDeliveryFee());
         vo.setCreatedAt(order.getCreatedAt());
         vo.setPaidAt(order.getPaidAt());
         vo.setShippedAt(order.getShippedAt());

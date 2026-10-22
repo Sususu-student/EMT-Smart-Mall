@@ -131,6 +131,8 @@ CREATE TABLE IF NOT EXISTS orders (
     tracking_no   VARCHAR(64),
     payment_no     VARCHAR(40),
     payment_channel VARCHAR(20),
+    delivery_method VARCHAR(20),
+    delivery_fee  DECIMAL(10,2) DEFAULT 0,
     created_at    DATETIME,
     paid_at       DATETIME,
     shipped_at    DATETIME,

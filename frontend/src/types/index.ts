@@ -146,6 +146,8 @@ export interface Order {
   trackingNo?: string
   paymentNo?: string
   paymentChannel?: string
+  deliveryMethod?: string
+  deliveryFee?: number
   createdAt: string
   paidAt?: string
   shippedAt?: string

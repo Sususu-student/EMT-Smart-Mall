@@ -47,6 +47,7 @@ export function intentLabel(intent?: string): string {
     ask_detail: '商品详情',
     query_order: '订单查询',
     add_to_cart: '加入购物车',
+    checkout: '协助下单',
     chitchat: '闲聊',
     clarify: '澄清需求'
   }
