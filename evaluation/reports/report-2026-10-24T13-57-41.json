@@ -1,7 +1,7 @@
 {
   "summary": {
-    "startedAt": "2026-10-22T11:53:03.852Z",
-    "finishedAt": "2026-10-22T11:53:04.915Z",
+    "startedAt": "2026-10-24T13:57:41.782Z",
+    "finishedAt": "2026-10-24T13:57:43.941Z",
     "base": "http://127.0.0.1:8080",
     "mode": "rule-engine",
     "model": "deepseek-flash",
@@ -18,8 +18,8 @@
     "productCompliance": 100,
     "replyCompliance": 100,
     "degradedCases": 40,
-    "avgLatencyMs": 23,
-    "p95LatencyMs": 57,
+    "avgLatencyMs": 51,
+    "p95LatencyMs": 112,
     "apiChecksPassed": 5,
     "apiChecksTotal": 5
   },
@@ -114,8 +114,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 116,
-      "conversationId": "2f5e81bd7db14dafa4d8566b9330c7e8",
+      "latencyMs": 209,
+      "conversationId": "1c880acb1ae8491e903f99c64d2f7c31",
       "final": {
         "intent": "search_product",
         "reply": "按你的需求，为你筛选出 3 款蓝牙耳机（预算 300 元以内，偏好 防水，跑步场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
@@ -131,6 +131,7 @@
           ],
           "budgetUnlimited": false,
           "askedBudget": false,
+          "pendingCheckout": false,
           "lastProductIds": [
             "p_headphone_01",
             "p_headphone_02",
@@ -170,7 +171,7 @@
       "turnDetails": [
         {
           "message": "我想买跑步用的蓝牙耳机，预算300以内，要防水",
-          "latencyMs": 116,
+          "latencyMs": 209,
           "intent": "search_product",
           "reply": "按你的需求，为你筛选出 3 款蓝牙耳机（预算 300 元以内，偏好 防水，跑步场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
           "degraded": true,
@@ -208,6 +209,7 @@
             ],
             "budgetUnlimited": false,
             "askedBudget": false,
+            "pendingCheckout": false,
             "lastProductIds": [
               "p_headphone_01",
               "p_headphone_02",
@@ -246,8 +248,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 14,
-      "conversationId": "f1f8083c6a21486f97db5085d7f9a393",
+      "latencyMs": 44,
+      "conversationId": "3e23637e05764fe5b8515539448b0754",
       "final": {
         "intent": "clarify",
         "reply": "你的预算大概是多少？我可以在预算范围内按防水、续航、评分等维度帮你筛选。",
@@ -261,6 +263,7 @@
           "budgetUnlimited": false,
           "askedBudget": true,
           "pending": "budget",
+          "pendingCheckout": false,
           "lastProductIds": [],
           "lastProductNames": []
         },
@@ -270,7 +273,7 @@
       "turnDetails": [
         {
           "message": "我想买个耳机，跑步用",
-          "latencyMs": 14,
+          "latencyMs": 44,
           "intent": "clarify",
           "reply": "你的预算大概是多少？我可以在预算范围内按防水、续航、评分等维度帮你筛选。",
           "degraded": true,
@@ -284,6 +287,7 @@
             "budgetUnlimited": false,
             "askedBudget": true,
             "pending": "budget",
+            "pendingCheckout": false,
             "lastProductIds": [],
             "lastProductNames": []
           },
@@ -321,8 +325,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 50,
-      "conversationId": "afe172e12b9e4da994ca447c70cc4c8e",
+      "latencyMs": 112,
+      "conversationId": "ad05c58f80814887a477b565f33224dc",
       "final": {
         "intent": "search_product",
         "reply": "按你的需求，为你筛选出 3 款蓝牙耳机（预算 300 元以内，跑步场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
@@ -336,6 +340,7 @@
           "features": [],
           "budgetUnlimited": false,
           "askedBudget": true,
+          "pendingCheckout": false,
           "lastProductIds": [
             "p_headphone_01",
             "p_headphone_02",
@@ -375,7 +380,7 @@
       "turnDetails": [
         {
           "message": "我想买耳机",
-          "latencyMs": 19,
+          "latencyMs": 45,
           "intent": "clarify",
           "reply": "你的预算大概是多少？我可以在预算范围内按防水、续航、评分等维度帮你筛选。",
           "degraded": true,
@@ -389,6 +394,7 @@
             "budgetUnlimited": false,
             "askedBudget": true,
             "pending": "budget",
+            "pendingCheckout": false,
             "lastProductIds": [],
             "lastProductNames": []
           },
@@ -397,7 +403,7 @@
         },
         {
           "message": "300以内",
-          "latencyMs": 30,
+          "latencyMs": 67,
           "intent": "search_product",
           "reply": "按你的需求，为你筛选出 3 款蓝牙耳机（预算 300 元以内，跑步场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
           "degraded": true,
@@ -433,6 +439,7 @@
             "features": [],
             "budgetUnlimited": false,
             "askedBudget": true,
+            "pendingCheckout": false,
             "lastProductIds": [
               "p_headphone_01",
               "p_headphone_02",
@@ -486,8 +493,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 57,
-      "conversationId": "94e44cee520040e694ff7eef7205d0be",
+      "latencyMs": 85,
+      "conversationId": "fc57df2b0061405580ff09567a1ff304",
       "final": {
         "intent": "search_product",
         "reply": "按你的需求，为你筛选出 3 款蓝牙耳机（预算 300 元以内，偏好 防水，跑步场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
@@ -504,6 +511,7 @@
           ],
           "budgetUnlimited": false,
           "askedBudget": true,
+          "pendingCheckout": false,
           "lastProductIds": [
             "p_headphone_01",
             "p_headphone_02",
@@ -543,7 +551,7 @@
       "turnDetails": [
         {
           "message": "我想买耳机，跑步用",
-          "latencyMs": 19,
+          "latencyMs": 33,
           "intent": "clarify",
           "reply": "你的预算大概是多少？我可以在预算范围内按防水、续航、评分等维度帮你筛选。",
           "degraded": true,
@@ -557,6 +565,7 @@
             "budgetUnlimited": false,
             "askedBudget": true,
             "pending": "budget",
+            "pendingCheckout": false,
             "lastProductIds": [],
             "lastProductNames": []
           },
@@ -565,7 +574,7 @@
         },
         {
           "message": "300以内，要防水",
-          "latencyMs": 37,
+          "latencyMs": 52,
           "intent": "search_product",
           "reply": "按你的需求，为你筛选出 3 款蓝牙耳机（预算 300 元以内，偏好 防水，跑步场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
           "degraded": true,
@@ -604,6 +613,7 @@
             ],
             "budgetUnlimited": false,
             "askedBudget": true,
+            "pendingCheckout": false,
             "lastProductIds": [
               "p_headphone_01",
               "p_headphone_02",
@@ -654,8 +664,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 24,
-      "conversationId": "24cc314b783e4abe9c663ada4290202a",
+      "latencyMs": 49,
+      "conversationId": "ce8a04a8e32b43a8ae24c8d09395d750",
       "final": {
         "intent": "search_product",
         "reply": "按你的需求，为你筛选出 3 款蓝牙耳机（预算 500 元以内，300 元以上，跑步场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
@@ -670,6 +680,7 @@
           "features": [],
           "budgetUnlimited": false,
           "askedBudget": false,
+          "pendingCheckout": false,
           "lastProductIds": [
             "p_headphone_05",
             "p_headphone_06",
@@ -709,7 +720,7 @@
       "turnDetails": [
         {
           "message": "300到500元的蓝牙耳机",
-          "latencyMs": 24,
+          "latencyMs": 49,
           "intent": "search_product",
           "reply": "按你的需求，为你筛选出 3 款蓝牙耳机（预算 500 元以内，300 元以上，跑步场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
           "degraded": true,
@@ -746,6 +757,7 @@
             "features": [],
             "budgetUnlimited": false,
             "askedBudget": false,
+            "pendingCheckout": false,
             "lastProductIds": [
               "p_headphone_05",
               "p_headphone_06",
@@ -790,8 +802,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 29,
-      "conversationId": "4e035b78aca44967a512f8610489b4f8",
+      "latencyMs": 52,
+      "conversationId": "d4b881e44d334b3d8436252194ba7166",
       "final": {
         "intent": "search_product",
         "reply": "按你的需求，为你筛选出 3 款蓝牙耳机（预算 300 元以内，跑步场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
@@ -805,6 +817,7 @@
           "features": [],
           "budgetUnlimited": false,
           "askedBudget": false,
+          "pendingCheckout": false,
           "lastProductIds": [
             "p_headphone_01",
             "p_headphone_02",
@@ -844,7 +857,7 @@
       "turnDetails": [
         {
           "message": "三百元以内的蓝牙耳机",
-          "latencyMs": 29,
+          "latencyMs": 52,
           "intent": "search_product",
           "reply": "按你的需求，为你筛选出 3 款蓝牙耳机（预算 300 元以内，跑步场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
           "degraded": true,
@@ -880,6 +893,7 @@
             "features": [],
             "budgetUnlimited": false,
             "askedBudget": false,
+            "pendingCheckout": false,
             "lastProductIds": [
               "p_headphone_01",
               "p_headphone_02",
@@ -924,8 +938,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 24,
-      "conversationId": "7315e2f3ef154d81b774261325680928",
+      "latencyMs": 51,
+      "conversationId": "84dc6e81a93e48659e6cee85d9923b5b",
       "final": {
         "intent": "search_product",
         "reply": "按你的需求，为你筛选出 5 款蓝牙耳机（跑步场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
@@ -938,6 +952,7 @@
           "features": [],
           "budgetUnlimited": true,
           "askedBudget": false,
+          "pendingCheckout": false,
           "lastProductIds": [
             "p_headphone_05",
             "p_headphone_10",
@@ -995,7 +1010,7 @@
       "turnDetails": [
         {
           "message": "蓝牙耳机预算不限",
-          "latencyMs": 24,
+          "latencyMs": 51,
           "intent": "search_product",
           "reply": "按你的需求，为你筛选出 5 款蓝牙耳机（跑步场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
           "degraded": true,
@@ -1044,6 +1059,7 @@
             "features": [],
             "budgetUnlimited": true,
             "askedBudget": false,
+            "pendingCheckout": false,
             "lastProductIds": [
               "p_headphone_05",
               "p_headphone_10",
@@ -1098,8 +1114,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 21,
-      "conversationId": "46dafc69772f4d18be01b808ca6b606d",
+      "latencyMs": 48,
+      "conversationId": "8ea4a40f05954972b4aaeb644e8606e8",
       "final": {
         "intent": "search_product",
         "reply": "按你的需求，为你筛选出 5 款蓝牙耳机（预算 500 元以内，跑步场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
@@ -1113,6 +1129,7 @@
           "features": [],
           "budgetUnlimited": false,
           "askedBudget": false,
+          "pendingCheckout": false,
           "lastProductIds": [
             "p_headphone_05",
             "p_headphone_01",
@@ -1170,7 +1187,7 @@
       "turnDetails": [
         {
           "message": "声屿的蓝牙耳机，500以内",
-          "latencyMs": 21,
+          "latencyMs": 48,
           "intent": "search_product",
           "reply": "按你的需求，为你筛选出 5 款蓝牙耳机（预算 500 元以内，跑步场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
           "degraded": true,
@@ -1220,6 +1237,7 @@
             "features": [],
             "budgetUnlimited": false,
             "askedBudget": false,
+            "pendingCheckout": false,
             "lastProductIds": [
               "p_headphone_05",
               "p_headphone_01",
@@ -1276,8 +1294,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 21,
-      "conversationId": "7c30286bc45a48e38a860fee27997545",
+      "latencyMs": 42,
+      "conversationId": "45f82e90828a4da89d09d7329268fdbb",
       "final": {
         "intent": "search_product",
         "reply": "按你的需求，为你筛选出 5 款蓝牙耳机（预算 500 元以内，偏好 降噪，通勤场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
@@ -1293,6 +1311,7 @@
           ],
           "budgetUnlimited": false,
           "askedBudget": false,
+          "pendingCheckout": false,
           "lastProductIds": [
             "p_headphone_01",
             "p_headphone_05",
@@ -1350,7 +1369,7 @@
       "turnDetails": [
         {
           "message": "通勤用的降噪耳机，500以内",
-          "latencyMs": 21,
+          "latencyMs": 42,
           "intent": "search_product",
           "reply": "按你的需求，为你筛选出 5 款蓝牙耳机（预算 500 元以内，偏好 降噪，通勤场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
           "degraded": true,
@@ -1402,6 +1421,7 @@
             ],
             "budgetUnlimited": false,
             "askedBudget": false,
+            "pendingCheckout": false,
             "lastProductIds": [
               "p_headphone_01",
               "p_headphone_05",
@@ -1457,8 +1477,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 37,
-      "conversationId": "f6980a1d396145c99cc076f35dcaacb3",
+      "latencyMs": 64,
+      "conversationId": "a8e3826326ac429799ea7a612b161835",
       "final": {
         "intent": "search_product",
         "reply": "按你的需求，为你筛选出 3 款咖啡机（预算 1000 元以内，通勤场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
@@ -1471,6 +1491,7 @@
           "features": [],
           "budgetUnlimited": false,
           "askedBudget": true,
+          "pendingCheckout": false,
           "lastProductIds": [
             "p_coffee_02",
             "p_coffee_01",
@@ -1510,7 +1531,7 @@
       "turnDetails": [
         {
           "message": "想买耳机",
-          "latencyMs": 12,
+          "latencyMs": 26,
           "intent": "clarify",
           "reply": "你的预算大概是多少？我可以在预算范围内按防水、续航、评分等维度帮你筛选。",
           "degraded": true,
@@ -1524,6 +1545,7 @@
             "budgetUnlimited": false,
             "askedBudget": true,
             "pending": "budget",
+            "pendingCheckout": false,
             "lastProductIds": [],
             "lastProductNames": []
           },
@@ -1532,7 +1554,7 @@
         },
         {
           "message": "算了看看咖啡机，预算1000",
-          "latencyMs": 25,
+          "latencyMs": 38,
           "intent": "search_product",
           "reply": "按你的需求，为你筛选出 3 款咖啡机（预算 1000 元以内，通勤场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
           "degraded": true,
@@ -1567,6 +1589,7 @@
             "features": [],
             "budgetUnlimited": false,
             "askedBudget": true,
+            "pendingCheckout": false,
             "lastProductIds": [
               "p_coffee_02",
               "p_coffee_01",
@@ -1625,8 +1648,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 26,
-      "conversationId": "ca01c6f047d347d8b1b1c36e2c2caa1c",
+      "latencyMs": 40,
+      "conversationId": "e2cfc950583f491c8a0c1ffa6b8375d3",
       "final": {
         "intent": "search_product",
         "reply": "按你的需求，为你筛选出 5 款护肤品（预算 300 元以内，偏好 保湿），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
@@ -1640,6 +1663,7 @@
           ],
           "budgetUnlimited": false,
           "askedBudget": false,
+          "pendingCheckout": false,
           "lastProductIds": [
             "p_skincare_05",
             "p_skincare_01",
@@ -1697,7 +1721,7 @@
       "turnDetails": [
         {
           "message": "敏感肌适合的保湿护肤品，预算300左右",
-          "latencyMs": 26,
+          "latencyMs": 40,
           "intent": "search_product",
           "reply": "按你的需求，为你筛选出 5 款护肤品（预算 300 元以内，偏好 保湿），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
           "degraded": true,
@@ -1747,6 +1771,7 @@
             ],
             "budgetUnlimited": false,
             "askedBudget": false,
+            "pendingCheckout": false,
             "lastProductIds": [
               "p_skincare_05",
               "p_skincare_01",
@@ -1809,8 +1834,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 19,
-      "conversationId": "79aecc36cce04aa1be8138adf0e13188",
+      "latencyMs": 55,
+      "conversationId": "eb2ad8fd05eb420aaee9138094af43c9",
       "final": {
         "intent": "search_product",
         "reply": "按你的需求，为你筛选出 5 款跑步鞋（预算 800 元以内，偏好 缓震，跑步场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
@@ -1825,6 +1850,7 @@
           ],
           "budgetUnlimited": false,
           "askedBudget": false,
+          "pendingCheckout": false,
           "lastProductIds": [
             "p_running_03",
             "p_running_06",
@@ -1882,7 +1908,7 @@
       "turnDetails": [
         {
           "message": "缓震好的跑步鞋，800以内",
-          "latencyMs": 19,
+          "latencyMs": 55,
           "intent": "search_product",
           "reply": "按你的需求，为你筛选出 5 款跑步鞋（预算 800 元以内，偏好 缓震，跑步场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
           "degraded": true,
@@ -1933,6 +1959,7 @@
             ],
             "budgetUnlimited": false,
             "askedBudget": false,
+            "pendingCheckout": false,
             "lastProductIds": [
               "p_running_03",
               "p_running_06",
@@ -1987,8 +2014,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 19,
-      "conversationId": "6f696160460247099439e8b92dd83da2",
+      "latencyMs": 41,
+      "conversationId": "5bf3bfe57cab433582a0f693cecf58e8",
       "final": {
         "intent": "search_product",
         "reply": "没有找到完全符合条件的商品。可以适当提高预算、换个关键词，或看看这些品类：",
@@ -2000,6 +2027,7 @@
           "features": [],
           "budgetUnlimited": false,
           "askedBudget": false,
+          "pendingCheckout": false,
           "lastProductIds": [],
           "lastProductNames": []
         },
@@ -2009,7 +2037,7 @@
       "turnDetails": [
         {
           "message": "10元以内的蓝牙耳机",
-          "latencyMs": 19,
+          "latencyMs": 41,
           "intent": "search_product",
           "reply": "没有找到完全符合条件的商品。可以适当提高预算、换个关键词，或看看这些品类：",
           "degraded": true,
@@ -2021,6 +2049,7 @@
             "features": [],
             "budgetUnlimited": false,
             "askedBudget": false,
+            "pendingCheckout": false,
             "lastProductIds": [],
             "lastProductNames": []
           },
@@ -2063,8 +2092,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 18,
-      "conversationId": "d516c60c18d64e1a870f8537def44e30",
+      "latencyMs": 50,
+      "conversationId": "69026fb61c62487398f8aeccd3732cda",
       "final": {
         "intent": "search_product",
         "reply": "按你的需求，为你筛选出 4 款笔记本电脑（预算 6000 元以内），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
@@ -2076,6 +2105,7 @@
           "features": [],
           "budgetUnlimited": false,
           "askedBudget": false,
+          "pendingCheckout": false,
           "lastProductIds": [
             "p_laptop_04",
             "p_laptop_01",
@@ -2124,7 +2154,7 @@
       "turnDetails": [
         {
           "message": "16G内存的轻薄笔记本，预算6000",
-          "latencyMs": 18,
+          "latencyMs": 50,
           "intent": "search_product",
           "reply": "按你的需求，为你筛选出 4 款笔记本电脑（预算 6000 元以内），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
           "degraded": true,
@@ -2165,6 +2195,7 @@
             "features": [],
             "budgetUnlimited": false,
             "askedBudget": false,
+            "pendingCheckout": false,
             "lastProductIds": [
               "p_laptop_04",
               "p_laptop_01",
@@ -2223,8 +2254,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 16,
-      "conversationId": "0e8cb5e5266c4dcaa1db2c5e61f51686",
+      "latencyMs": 56,
+      "conversationId": "23ef944d6549492584bbe46a771f0516",
       "final": {
         "intent": "search_product",
         "reply": "按你的需求，为你筛选出 3 款扫地机器人（预算 4000 元以内，3000 元以上），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
@@ -2237,6 +2268,7 @@
           "features": [],
           "budgetUnlimited": false,
           "askedBudget": false,
+          "pendingCheckout": false,
           "lastProductIds": [
             "p_robot_08",
             "p_robot_09",
@@ -2276,7 +2308,7 @@
       "turnDetails": [
         {
           "message": "3000到4000的扫地机器人",
-          "latencyMs": 16,
+          "latencyMs": 56,
           "intent": "search_product",
           "reply": "按你的需求，为你筛选出 3 款扫地机器人（预算 4000 元以内，3000 元以上），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
           "degraded": true,
@@ -2311,6 +2343,7 @@
             "features": [],
             "budgetUnlimited": false,
             "askedBudget": false,
+            "pendingCheckout": false,
             "lastProductIds": [
               "p_robot_08",
               "p_robot_09",
@@ -2355,8 +2388,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 13,
-      "conversationId": "cfe7362ff16941a9897f312bd896dfac",
+      "latencyMs": 47,
+      "conversationId": "f58e7d0a87064084a32354426115444c",
       "final": {
         "intent": "search_product",
         "reply": "按你的需求，为你筛选出 4 款蓝牙耳机（500 元以上），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
@@ -2368,6 +2401,7 @@
           "features": [],
           "budgetUnlimited": false,
           "askedBudget": false,
+          "pendingCheckout": false,
           "lastProductIds": [
             "p_headphone_10",
             "p_headphone_09",
@@ -2416,7 +2450,7 @@
       "turnDetails": [
         {
           "message": "500元以上的蓝牙耳机",
-          "latencyMs": 13,
+          "latencyMs": 47,
           "intent": "search_product",
           "reply": "按你的需求，为你筛选出 4 款蓝牙耳机（500 元以上），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
           "degraded": true,
@@ -2457,6 +2491,7 @@
             "features": [],
             "budgetUnlimited": false,
             "askedBudget": false,
+            "pendingCheckout": false,
             "lastProductIds": [
               "p_headphone_10",
               "p_headphone_09",
@@ -2509,8 +2544,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 14,
-      "conversationId": "8d3141f4b49342158f50372578c21af2",
+      "latencyMs": 51,
+      "conversationId": "02685831d637401db8d37108e832d752",
       "final": {
         "intent": "search_product",
         "reply": "按你的需求，为你筛选出 5 款咖啡机（预算 1500 元以内），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
@@ -2522,6 +2557,7 @@
           "features": [],
           "budgetUnlimited": false,
           "askedBudget": false,
+          "pendingCheckout": false,
           "lastProductIds": [
             "p_coffee_02",
             "p_coffee_05",
@@ -2579,7 +2615,7 @@
       "turnDetails": [
         {
           "message": "预算一千五的咖啡机",
-          "latencyMs": 14,
+          "latencyMs": 51,
           "intent": "search_product",
           "reply": "按你的需求，为你筛选出 5 款咖啡机（预算 1500 元以内），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
           "degraded": true,
@@ -2627,6 +2663,7 @@
             "features": [],
             "budgetUnlimited": false,
             "askedBudget": false,
+            "pendingCheckout": false,
             "lastProductIds": [
               "p_coffee_02",
               "p_coffee_05",
@@ -2681,8 +2718,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 16,
-      "conversationId": "abc50d84c90c4d65ac7056f432384466",
+      "latencyMs": 50,
+      "conversationId": "14a7e17cd5304830bab4c7d704932a58",
       "final": {
         "intent": "search_product",
         "reply": "按你的需求，为你筛选出 5 款蓝牙耳机（预算 800 元以内，送礼场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
@@ -2695,6 +2732,7 @@
           "features": [],
           "budgetUnlimited": false,
           "askedBudget": false,
+          "pendingCheckout": false,
           "lastProductIds": [
             "p_headphone_05",
             "p_headphone_02",
@@ -2752,7 +2790,7 @@
       "turnDetails": [
         {
           "message": "有没有适合送礼的蓝牙耳机，预算800",
-          "latencyMs": 16,
+          "latencyMs": 50,
           "intent": "search_product",
           "reply": "按你的需求，为你筛选出 5 款蓝牙耳机（预算 800 元以内，送礼场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
           "degraded": true,
@@ -2801,6 +2839,7 @@
             "features": [],
             "budgetUnlimited": false,
             "askedBudget": false,
+            "pendingCheckout": false,
             "lastProductIds": [
               "p_headphone_05",
               "p_headphone_02",
@@ -2850,8 +2889,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 35,
-      "conversationId": "8eaaa561e7b54badb2f9d1f7598de01d",
+      "latencyMs": 86,
+      "conversationId": "849cdacef6c54a7099dcb3b2b843601b",
       "final": {
         "intent": "ask_detail",
         "reply": "「声屿 Beat 3 运动版」当前售价 199 元，库存 380 件，综合评分 4.5。核心参数：续航 18、防水等级 IPX5、重量 3.8、降噪 主动降噪、蓝牙版本 5.3。如果你想和其他商品对比，可以告诉我商品名称。",
@@ -2865,6 +2904,7 @@
           "features": [],
           "budgetUnlimited": false,
           "askedBudget": false,
+          "pendingCheckout": false,
           "lastProductIds": [
             "p_headphone_01",
             "p_headphone_02",
@@ -2890,7 +2930,7 @@
       "turnDetails": [
         {
           "message": "推荐300以内的蓝牙耳机",
-          "latencyMs": 18,
+          "latencyMs": 46,
           "intent": "search_product",
           "reply": "按你的需求，为你筛选出 3 款蓝牙耳机（预算 300 元以内，送礼场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
           "degraded": true,
@@ -2926,6 +2966,7 @@
             "features": [],
             "budgetUnlimited": false,
             "askedBudget": false,
+            "pendingCheckout": false,
             "lastProductIds": [
               "p_headphone_01",
               "p_headphone_02",
@@ -2942,7 +2983,7 @@
         },
         {
           "message": "第一款续航多久",
-          "latencyMs": 17,
+          "latencyMs": 40,
           "intent": "ask_detail",
           "reply": "「声屿 Beat 3 运动版」当前售价 199 元，库存 380 件，综合评分 4.5。核心参数：续航 18、防水等级 IPX5、重量 3.8、降噪 主动降噪、蓝牙版本 5.3。如果你想和其他商品对比，可以告诉我商品名称。",
           "degraded": true,
@@ -2964,6 +3005,7 @@
             "features": [],
             "budgetUnlimited": false,
             "askedBudget": false,
+            "pendingCheckout": false,
             "lastProductIds": [
               "p_headphone_01",
               "p_headphone_02",
@@ -3009,8 +3051,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 27,
-      "conversationId": "71eb952b41b348298d6fc344e9987fb9",
+      "latencyMs": 72,
+      "conversationId": "4471b8ff53624765b69b1a05a7179b7b",
       "final": {
         "intent": "ask_detail",
         "reply": "「声屿 Beat 3 运动版」当前售价 199 元，库存 380 件，综合评分 4.5。核心参数：续航 18、防水等级 IPX5、重量 3.8、降噪 主动降噪、蓝牙版本 5.3。如果你想和其他商品对比，可以告诉我商品名称。",
@@ -3024,6 +3066,7 @@
           "features": [],
           "budgetUnlimited": false,
           "askedBudget": false,
+          "pendingCheckout": false,
           "lastProductIds": [
             "p_headphone_01",
             "p_headphone_02",
@@ -3049,7 +3092,7 @@
       "turnDetails": [
         {
           "message": "推荐300以内的蓝牙耳机",
-          "latencyMs": 16,
+          "latencyMs": 44,
           "intent": "search_product",
           "reply": "按你的需求，为你筛选出 3 款蓝牙耳机（预算 300 元以内，送礼场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
           "degraded": true,
@@ -3085,6 +3128,7 @@
             "features": [],
             "budgetUnlimited": false,
             "askedBudget": false,
+            "pendingCheckout": false,
             "lastProductIds": [
               "p_headphone_01",
               "p_headphone_02",
@@ -3101,7 +3145,7 @@
         },
         {
           "message": "第一个多少钱，库存多少",
-          "latencyMs": 10,
+          "latencyMs": 27,
           "intent": "ask_detail",
           "reply": "「声屿 Beat 3 运动版」当前售价 199 元，库存 380 件，综合评分 4.5。核心参数：续航 18、防水等级 IPX5、重量 3.8、降噪 主动降噪、蓝牙版本 5.3。如果你想和其他商品对比，可以告诉我商品名称。",
           "degraded": true,
@@ -3123,6 +3167,7 @@
             "features": [],
             "budgetUnlimited": false,
             "askedBudget": false,
+            "pendingCheckout": false,
             "lastProductIds": [
               "p_headphone_01",
               "p_headphone_02",
@@ -3162,8 +3207,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 44,
-      "conversationId": "6f9c7f1dec8c47c4a5a0be216f9d739d",
+      "latencyMs": 85,
+      "conversationId": "9d7c7c80c455409093cb9dc295807d08",
       "final": {
         "intent": "add_to_cart",
         "reply": "已把「声屿 Beat 3 运动版」加入购物车，数量 1。购物车当前共 3 件商品，合计 337 元。需要我帮你一起结算吗？",
@@ -3177,6 +3222,7 @@
           "features": [],
           "budgetUnlimited": false,
           "askedBudget": false,
+          "pendingCheckout": false,
           "lastProductIds": [
             "p_headphone_01",
             "p_headphone_02",
@@ -3202,7 +3248,7 @@
       "turnDetails": [
         {
           "message": "推荐300以内的蓝牙耳机",
-          "latencyMs": 16,
+          "latencyMs": 45,
           "intent": "search_product",
           "reply": "按你的需求，为你筛选出 3 款蓝牙耳机（预算 300 元以内，送礼场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
           "degraded": true,
@@ -3238,6 +3284,7 @@
             "features": [],
             "budgetUnlimited": false,
             "askedBudget": false,
+            "pendingCheckout": false,
             "lastProductIds": [
               "p_headphone_01",
               "p_headphone_02",
@@ -3254,7 +3301,7 @@
         },
         {
           "message": "把第一款加入购物车",
-          "latencyMs": 28,
+          "latencyMs": 40,
           "intent": "add_to_cart",
           "reply": "已把「声屿 Beat 3 运动版」加入购物车，数量 1。购物车当前共 3 件商品，合计 337 元。需要我帮你一起结算吗？",
           "degraded": true,
@@ -3276,6 +3323,7 @@
             "features": [],
             "budgetUnlimited": false,
             "askedBudget": false,
+            "pendingCheckout": false,
             "lastProductIds": [
               "p_headphone_01",
               "p_headphone_02",
@@ -3315,8 +3363,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 29,
-      "conversationId": "93fed353d04843f987e03f73f72898a2",
+      "latencyMs": 73,
+      "conversationId": "94d578cd0cfd45bba9469952ad1ea8c8",
       "final": {
         "intent": "add_to_cart",
         "reply": "已把「澎湃 Wave 4 运动版」加入购物车，数量 2。购物车当前共 5 件商品，合计 895 元。需要我帮你一起结算吗？",
@@ -3330,6 +3378,7 @@
           "features": [],
           "budgetUnlimited": false,
           "askedBudget": false,
+          "pendingCheckout": false,
           "lastProductIds": [
             "p_headphone_01",
             "p_headphone_02",
@@ -3355,7 +3404,7 @@
       "turnDetails": [
         {
           "message": "推荐300以内的蓝牙耳机",
-          "latencyMs": 15,
+          "latencyMs": 44,
           "intent": "search_product",
           "reply": "按你的需求，为你筛选出 3 款蓝牙耳机（预算 300 元以内，送礼场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
           "degraded": true,
@@ -3391,6 +3440,7 @@
             "features": [],
             "budgetUnlimited": false,
             "askedBudget": false,
+            "pendingCheckout": false,
             "lastProductIds": [
               "p_headphone_01",
               "p_headphone_02",
@@ -3407,7 +3457,7 @@
         },
         {
           "message": "把第二个加购2件",
-          "latencyMs": 14,
+          "latencyMs": 29,
           "intent": "add_to_cart",
           "reply": "已把「澎湃 Wave 4 运动版」加入购物车，数量 2。购物车当前共 5 件商品，合计 895 元。需要我帮你一起结算吗？",
           "degraded": true,
@@ -3429,6 +3479,7 @@
             "features": [],
             "budgetUnlimited": false,
             "askedBudget": false,
+            "pendingCheckout": false,
             "lastProductIds": [
               "p_headphone_01",
               "p_headphone_02",
@@ -3473,8 +3524,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 19,
-      "conversationId": "d7263f6c4d414ff8b12dfa14e66ae02f",
+      "latencyMs": 36,
+      "conversationId": "5452ef99123e4782b60247574e18def4",
       "final": {
         "intent": "query_order",
         "reply": "找到 2 个订单。最近一个订单 SG2026041710150002 当前状态：已支付，共 2 件商品，金额 138 元。",
@@ -3483,6 +3534,7 @@
           "features": [],
           "budgetUnlimited": false,
           "askedBudget": false,
+          "pendingCheckout": false,
           "lastProductIds": [],
           "lastProductNames": []
         },
@@ -3498,9 +3550,11 @@
             "phone": "13800138000",
             "addressText": "江苏省南京市栖霞区文苑路 1 号 智能导购实验室",
             "remark": "演示订单",
-            "createdAt": "2026-10-20T19:52:51.743956",
-            "paidAt": "2026-10-20T19:52:51.743956",
-            "expiredAt": "2026-10-20T20:22:51.743956",
+            "deliveryMethod": "STANDARD",
+            "deliveryFee": 0,
+            "createdAt": "2026-10-22T21:56:09",
+            "paidAt": "2026-10-22T21:56:09",
+            "expiredAt": "2026-10-22T22:26:09",
             "items": [
               {
                 "id": 2,
@@ -3526,11 +3580,13 @@
             "remark": "演示订单",
             "carrier": "顺丰速运",
             "trackingNo": "SF1722491932",
-            "createdAt": "2026-10-04T19:52:51.743956",
-            "paidAt": "2026-10-04T19:52:51.743956",
-            "shippedAt": "2026-10-05T19:52:51.743956",
-            "finishedAt": "2026-10-08T19:52:51.743956",
-            "expiredAt": "2026-10-04T20:22:51.743956",
+            "deliveryMethod": "STANDARD",
+            "deliveryFee": 0,
+            "createdAt": "2026-10-06T21:56:09",
+            "paidAt": "2026-10-06T21:56:09",
+            "shippedAt": "2026-10-07T21:56:09",
+            "finishedAt": "2026-10-10T21:56:09",
+            "expiredAt": "2026-10-06T22:26:09",
             "items": [
               {
                 "id": 1,
@@ -3549,7 +3605,7 @@
       "turnDetails": [
         {
           "message": "我的订单到哪了",
-          "latencyMs": 19,
+          "latencyMs": 36,
           "intent": "query_order",
           "reply": "找到 2 个订单。最近一个订单 SG2026041710150002 当前状态：已支付，共 2 件商品，金额 138 元。",
           "degraded": true,
@@ -3558,6 +3614,7 @@
             "features": [],
             "budgetUnlimited": false,
             "askedBudget": false,
+            "pendingCheckout": false,
             "lastProductIds": [],
             "lastProductNames": []
           },
@@ -3605,8 +3662,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 13,
-      "conversationId": "71a345b327f24bf8b5081ccee08a428f",
+      "latencyMs": 22,
+      "conversationId": "48fcae5b90f6437d84d99dca4184285f",
       "final": {
         "intent": "query_order",
         "reply": "找到 1 个订单。最近一个订单 SG2026041710150002 当前状态：已支付，共 2 件商品，金额 138 元。",
@@ -3615,6 +3672,7 @@
           "features": [],
           "budgetUnlimited": false,
           "askedBudget": false,
+          "pendingCheckout": false,
           "lastProductIds": [],
           "lastProductNames": []
         },
@@ -3630,9 +3688,11 @@
             "phone": "13800138000",
             "addressText": "江苏省南京市栖霞区文苑路 1 号 智能导购实验室",
             "remark": "演示订单",
-            "createdAt": "2026-10-20T19:52:51.743956",
-            "paidAt": "2026-10-20T19:52:51.743956",
-            "expiredAt": "2026-10-20T20:22:51.743956",
+            "deliveryMethod": "STANDARD",
+            "deliveryFee": 0,
+            "createdAt": "2026-10-22T21:56:09",
+            "paidAt": "2026-10-22T21:56:09",
+            "expiredAt": "2026-10-22T22:26:09",
             "items": [
               {
                 "id": 2,
@@ -3651,7 +3711,7 @@
       "turnDetails": [
         {
           "message": "查一下订单 SG2026041710150002",
-          "latencyMs": 13,
+          "latencyMs": 22,
           "intent": "query_order",
           "reply": "找到 1 个订单。最近一个订单 SG2026041710150002 当前状态：已支付，共 2 件商品，金额 138 元。",
           "degraded": true,
@@ -3660,6 +3720,7 @@
             "features": [],
             "budgetUnlimited": false,
             "askedBudget": false,
+            "pendingCheckout": false,
             "lastProductIds": [],
             "lastProductNames": []
           },
@@ -3702,8 +3763,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 9,
-      "conversationId": "cf9b5a1274c94559b87de083d7408009",
+      "latencyMs": 22,
+      "conversationId": "84655d47abaa4e1ca679202d792618c7",
       "final": {
         "intent": "add_to_cart",
         "reply": "要加入购物车的是哪件商品？你可以说“把第一款加入购物车”，或直接点击商品卡片上的加购按钮。",
@@ -3712,6 +3773,7 @@
           "features": [],
           "budgetUnlimited": false,
           "askedBudget": false,
+          "pendingCheckout": false,
           "lastProductIds": [],
           "lastProductNames": []
         },
@@ -3721,7 +3783,7 @@
       "turnDetails": [
         {
           "message": "加入购物车",
-          "latencyMs": 9,
+          "latencyMs": 22,
           "intent": "add_to_cart",
           "reply": "要加入购物车的是哪件商品？你可以说“把第一款加入购物车”，或直接点击商品卡片上的加购按钮。",
           "degraded": true,
@@ -3730,6 +3792,7 @@
             "features": [],
             "budgetUnlimited": false,
             "askedBudget": false,
+            "pendingCheckout": false,
             "lastProductIds": [],
             "lastProductNames": []
           },
@@ -3767,8 +3830,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 51,
-      "conversationId": "3b6cb44e53bd41f198e7dd89e3d5d18d",
+      "latencyMs": 85,
+      "conversationId": "41757e8b04ab4e8db1e66ca7a9bb490a",
       "final": {
         "intent": "compare",
         "reply": "已完成 2 款商品的对比，综合评分与决策建议见下方卡片。想改变结论？可以打开对比面板调整权重。",
@@ -3782,6 +3845,7 @@
           "features": [],
           "budgetUnlimited": false,
           "askedBudget": false,
+          "pendingCheckout": false,
           "lastProductIds": [
             "p_headphone_01",
             "p_headphone_02",
@@ -3965,14 +4029,14 @@
             "降噪 主动降噪"
           ],
           "degraded": true,
-          "taskId": "58259d585d0d42aea321d4b81f688e64"
+          "taskId": "7c2c249b8fe34723878c7430cfc7e0ee"
         },
         "orders": []
       },
       "turnDetails": [
         {
           "message": "推荐300以内的蓝牙耳机",
-          "latencyMs": 15,
+          "latencyMs": 38,
           "intent": "search_product",
           "reply": "按你的需求，为你筛选出 3 款蓝牙耳机（预算 300 元以内，送礼场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
           "degraded": true,
@@ -4008,6 +4072,7 @@
             "features": [],
             "budgetUnlimited": false,
             "askedBudget": false,
+            "pendingCheckout": false,
             "lastProductIds": [
               "p_headphone_01",
               "p_headphone_02",
@@ -4024,7 +4089,7 @@
         },
         {
           "message": "帮我对比前两个",
-          "latencyMs": 36,
+          "latencyMs": 47,
           "intent": "compare",
           "reply": "已完成 2 款商品的对比，综合评分与决策建议见下方卡片。想改变结论？可以打开对比面板调整权重。",
           "degraded": true,
@@ -4038,6 +4103,7 @@
             "features": [],
             "budgetUnlimited": false,
             "askedBudget": false,
+            "pendingCheckout": false,
             "lastProductIds": [
               "p_headphone_01",
               "p_headphone_02",
@@ -4115,8 +4181,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 8,
-      "conversationId": "ca2ad0650cff4e82b396c1e5bdf8d386",
+      "latencyMs": 17,
+      "conversationId": "2795bc1ff34f495b9b56694bb698f675",
       "final": {
         "intent": "compare",
         "reply": "我需要至少两件商品才能对比。你可以先描述需求让我推荐，再说“对比前两个”；也可以从商品列表勾选后进入对比页。",
@@ -4125,6 +4191,7 @@
           "features": [],
           "budgetUnlimited": false,
           "askedBudget": false,
+          "pendingCheckout": false,
           "lastProductIds": [],
           "lastProductNames": []
         },
@@ -4134,7 +4201,7 @@
       "turnDetails": [
         {
           "message": "帮我对比一下A和B",
-          "latencyMs": 8,
+          "latencyMs": 17,
           "intent": "compare",
           "reply": "我需要至少两件商品才能对比。你可以先描述需求让我推荐，再说“对比前两个”；也可以从商品列表勾选后进入对比页。",
           "degraded": true,
@@ -4143,6 +4210,7 @@
             "features": [],
             "budgetUnlimited": false,
             "askedBudget": false,
+            "pendingCheckout": false,
             "lastProductIds": [],
             "lastProductNames": []
           },
@@ -4173,8 +4241,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 7,
-      "conversationId": "93a24dd501f14cd7814fda084376dede",
+      "latencyMs": 18,
+      "conversationId": "527f5550061b44658b77e481775dfc94",
       "final": {
         "intent": "chitchat",
         "reply": "你好，我是智选商城的智能导购助手。你可以直接描述需求，比如“想买跑步用的蓝牙耳机，预算 300 以内”，我也可以帮你对比商品、查询订单或加入购物车。",
@@ -4183,6 +4251,7 @@
           "features": [],
           "budgetUnlimited": false,
           "askedBudget": false,
+          "pendingCheckout": false,
           "lastProductIds": [],
           "lastProductNames": []
         },
@@ -4192,7 +4261,7 @@
       "turnDetails": [
         {
           "message": "你好",
-          "latencyMs": 7,
+          "latencyMs": 18,
           "intent": "chitchat",
           "reply": "你好，我是智选商城的智能导购助手。你可以直接描述需求，比如“想买跑步用的蓝牙耳机，预算 300 以内”，我也可以帮你对比商品、查询订单或加入购物车。",
           "degraded": true,
@@ -4201,6 +4270,7 @@
             "features": [],
             "budgetUnlimited": false,
             "askedBudget": false,
+            "pendingCheckout": false,
             "lastProductIds": [],
             "lastProductNames": []
           },
@@ -4231,8 +4301,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 7,
-      "conversationId": "0918018f4e9a4c48b319d59b1da8d874",
+      "latencyMs": 20,
+      "conversationId": "b9e7f6e2e93245ef8f505fd886f6c684",
       "final": {
         "intent": "chitchat",
         "reply": "你好，我是智选商城的智能导购助手。你可以直接描述需求，比如“想买跑步用的蓝牙耳机，预算 300 以内”，我也可以帮你对比商品、查询订单或加入购物车。",
@@ -4241,6 +4311,7 @@
           "features": [],
           "budgetUnlimited": false,
           "askedBudget": false,
+          "pendingCheckout": false,
           "lastProductIds": [],
           "lastProductNames": []
         },
@@ -4250,7 +4321,7 @@
       "turnDetails": [
         {
           "message": "谢谢你",
-          "latencyMs": 7,
+          "latencyMs": 20,
           "intent": "chitchat",
           "reply": "你好，我是智选商城的智能导购助手。你可以直接描述需求，比如“想买跑步用的蓝牙耳机，预算 300 以内”，我也可以帮你对比商品、查询订单或加入购物车。",
           "degraded": true,
@@ -4259,6 +4330,7 @@
             "features": [],
             "budgetUnlimited": false,
             "askedBudget": false,
+            "pendingCheckout": false,
             "lastProductIds": [],
             "lastProductNames": []
           },
@@ -4289,8 +4361,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 6,
-      "conversationId": "0e41bf7fc1c1429cbdfdaff55b7246b2",
+      "latencyMs": 18,
+      "conversationId": "7351a0030e9e4a2db5d91ec52981a806",
       "final": {
         "intent": "chitchat",
         "reply": "你好，我是智选商城的智能导购助手。你可以直接描述需求，比如“想买跑步用的蓝牙耳机，预算 300 以内”，我也可以帮你对比商品、查询订单或加入购物车。",
@@ -4299,6 +4371,7 @@
           "features": [],
           "budgetUnlimited": false,
           "askedBudget": false,
+          "pendingCheckout": false,
           "lastProductIds": [],
           "lastProductNames": []
         },
@@ -4308,7 +4381,7 @@
       "turnDetails": [
         {
           "message": "你能做什么",
-          "latencyMs": 6,
+          "latencyMs": 18,
           "intent": "chitchat",
           "reply": "你好，我是智选商城的智能导购助手。你可以直接描述需求，比如“想买跑步用的蓝牙耳机，预算 300 以内”，我也可以帮你对比商品、查询订单或加入购物车。",
           "degraded": true,
@@ -4317,6 +4390,7 @@
             "features": [],
             "budgetUnlimited": false,
             "askedBudget": false,
+            "pendingCheckout": false,
             "lastProductIds": [],
             "lastProductNames": []
           },
@@ -4347,8 +4421,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 7,
-      "conversationId": "f6406bdd44304e548f979477c73d0e9e",
+      "latencyMs": 20,
+      "conversationId": "3cadd282204c44b99cf8702c9757db92",
       "final": {
         "intent": "clarify",
         "reply": "你的预算大概是多少？我可以在预算范围内按防水、续航、评分等维度帮你筛选。",
@@ -4362,6 +4436,7 @@
           "budgetUnlimited": false,
           "askedBudget": true,
           "pending": "budget",
+          "pendingCheckout": false,
           "lastProductIds": [],
           "lastProductNames": []
         },
@@ -4371,7 +4446,7 @@
       "turnDetails": [
         {
           "message": "推荐蓝牙耳机",
-          "latencyMs": 7,
+          "latencyMs": 20,
           "intent": "clarify",
           "reply": "你的预算大概是多少？我可以在预算范围内按防水、续航、评分等维度帮你筛选。",
           "degraded": true,
@@ -4385,6 +4460,7 @@
             "budgetUnlimited": false,
             "askedBudget": true,
             "pending": "budget",
+            "pendingCheckout": false,
             "lastProductIds": [],
             "lastProductNames": []
           },
@@ -4421,8 +4497,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 13,
-      "conversationId": "668d6c13161540628e5459bf6fc54dfe",
+      "latencyMs": 33,
+      "conversationId": "b923a6c099f549c883876277a3fb0825",
       "final": {
         "intent": "search_product",
         "reply": "按你的需求，为你筛选出 5 款蓝牙耳机（送礼场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
@@ -4435,6 +4511,7 @@
           "features": [],
           "budgetUnlimited": true,
           "askedBudget": false,
+          "pendingCheckout": false,
           "lastProductIds": [
             "p_headphone_05",
             "p_headphone_10",
@@ -4492,7 +4569,7 @@
       "turnDetails": [
         {
           "message": "预算不限，推荐蓝牙耳机",
-          "latencyMs": 12,
+          "latencyMs": 33,
           "intent": "search_product",
           "reply": "按你的需求，为你筛选出 5 款蓝牙耳机（送礼场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
           "degraded": true,
@@ -4541,6 +4618,7 @@
             "features": [],
             "budgetUnlimited": true,
             "askedBudget": false,
+            "pendingCheckout": false,
             "lastProductIds": [
               "p_headphone_05",
               "p_headphone_10",
@@ -4590,8 +4668,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 21,
-      "conversationId": "036fb2e132374ab18e16950922f48cc7",
+      "latencyMs": 56,
+      "conversationId": "01d9aa7bb39b467d9065f661c1791bf4",
       "final": {
         "intent": "search_product",
         "reply": "按你的需求，为你筛选出 5 款跑步鞋（跑步场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
@@ -4603,6 +4681,7 @@
           "features": [],
           "budgetUnlimited": false,
           "askedBudget": true,
+          "pendingCheckout": false,
           "lastProductIds": [
             "p_running_03",
             "p_running_06",
@@ -4660,7 +4739,7 @@
       "turnDetails": [
         {
           "message": "推荐蓝牙耳机",
-          "latencyMs": 8,
+          "latencyMs": 22,
           "intent": "clarify",
           "reply": "你的预算大概是多少？我可以在预算范围内按防水、续航、评分等维度帮你筛选。",
           "degraded": true,
@@ -4674,6 +4753,7 @@
             "budgetUnlimited": false,
             "askedBudget": true,
             "pending": "budget",
+            "pendingCheckout": false,
             "lastProductIds": [],
             "lastProductNames": []
           },
@@ -4682,7 +4762,7 @@
         },
         {
           "message": "换成跑步鞋",
-          "latencyMs": 13,
+          "latencyMs": 34,
           "intent": "search_product",
           "reply": "按你的需求，为你筛选出 5 款跑步鞋（跑步场景），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
           "degraded": true,
@@ -4730,6 +4810,7 @@
             "features": [],
             "budgetUnlimited": false,
             "askedBudget": true,
+            "pendingCheckout": false,
             "lastProductIds": [
               "p_running_03",
               "p_running_06",
@@ -4774,20 +4855,21 @@
           "name": "reply:购物车",
           "ok": true,
           "expected": "包含「购物车」",
-          "actual": "你的购物车里有 「澎湃 Wave 4 运动版」×2、「声屿 Beat 3 运动版」×1、「晨光 哥伦比亚 中烘 咖啡豆 500g」×2，共 5 件，合计 895 元。需要我帮你结算吗？"
+          "actual": "你的购物车里有 「声屿 Beat 3 运动版」×1、「澎湃 Wave 4 运动版」×2、「晨光 哥伦比亚 中烘 咖啡豆 500g」×2，共 5 件，合计 895 元。需要我帮你结算吗？"
         }
       ],
       "error": null,
-      "latencyMs": 9,
-      "conversationId": "2a6fde3bd0114d4099b066396a1648cd",
+      "latencyMs": 24,
+      "conversationId": "375daf5d29134dec9e19ad72a9a11b7d",
       "final": {
         "intent": "add_to_cart",
-        "reply": "你的购物车里有 「澎湃 Wave 4 运动版」×2、「声屿 Beat 3 运动版」×1、「晨光 哥伦比亚 中烘 咖啡豆 500g」×2，共 5 件，合计 895 元。需要我帮你结算吗？",
+        "reply": "你的购物车里有 「声屿 Beat 3 运动版」×1、「澎湃 Wave 4 运动版」×2、「晨光 哥伦比亚 中烘 咖啡豆 500g」×2，共 5 件，合计 895 元。需要我帮你结算吗？",
         "degraded": true,
         "slots": {
           "features": [],
           "budgetUnlimited": false,
           "askedBudget": false,
+          "pendingCheckout": false,
           "lastProductIds": [],
           "lastProductNames": []
         },
@@ -4797,15 +4879,16 @@
       "turnDetails": [
         {
           "message": "我的购物车里有什么",
-          "latencyMs": 9,
+          "latencyMs": 24,
           "intent": "add_to_cart",
-          "reply": "你的购物车里有 「澎湃 Wave 4 运动版」×2、「声屿 Beat 3 运动版」×1、「晨光 哥伦比亚 中烘 咖啡豆 500g」×2，共 5 件，合计 895 元。需要我帮你结算吗？",
+          "reply": "你的购物车里有 「声屿 Beat 3 运动版」×1、「澎湃 Wave 4 运动版」×2、「晨光 哥伦比亚 中烘 咖啡豆 500g」×2，共 5 件，合计 895 元。需要我帮你结算吗？",
           "degraded": true,
           "products": [],
           "slots": {
             "features": [],
             "budgetUnlimited": false,
             "askedBudget": false,
+            "pendingCheckout": false,
             "lastProductIds": [],
             "lastProductNames": []
           },
@@ -4836,8 +4919,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 10,
-      "conversationId": "aec656b105eb4558979283f87693d257",
+      "latencyMs": 21,
+      "conversationId": "512966c0d49e427cbebefff0cb1471b2",
       "final": {
         "intent": "query_order",
         "reply": "找到 2 个订单。最近一个订单 SG2026041710150002 当前状态：已支付，共 2 件商品，金额 138 元。",
@@ -4846,6 +4929,7 @@
           "features": [],
           "budgetUnlimited": false,
           "askedBudget": false,
+          "pendingCheckout": false,
           "lastProductIds": [],
           "lastProductNames": []
         },
@@ -4861,9 +4945,11 @@
             "phone": "13800138000",
             "addressText": "江苏省南京市栖霞区文苑路 1 号 智能导购实验室",
             "remark": "演示订单",
-            "createdAt": "2026-10-20T19:52:51.743956",
-            "paidAt": "2026-10-20T19:52:51.743956",
-            "expiredAt": "2026-10-20T20:22:51.743956",
+            "deliveryMethod": "STANDARD",
+            "deliveryFee": 0,
+            "createdAt": "2026-10-22T21:56:09",
+            "paidAt": "2026-10-22T21:56:09",
+            "expiredAt": "2026-10-22T22:26:09",
             "items": [
               {
                 "id": 2,
@@ -4889,11 +4975,13 @@
             "remark": "演示订单",
             "carrier": "顺丰速运",
             "trackingNo": "SF1722491932",
-            "createdAt": "2026-10-04T19:52:51.743956",
-            "paidAt": "2026-10-04T19:52:51.743956",
-            "shippedAt": "2026-10-05T19:52:51.743956",
-            "finishedAt": "2026-10-08T19:52:51.743956",
-            "expiredAt": "2026-10-04T20:22:51.743956",
+            "deliveryMethod": "STANDARD",
+            "deliveryFee": 0,
+            "createdAt": "2026-10-06T21:56:09",
+            "paidAt": "2026-10-06T21:56:09",
+            "shippedAt": "2026-10-07T21:56:09",
+            "finishedAt": "2026-10-10T21:56:09",
+            "expiredAt": "2026-10-06T22:26:09",
             "items": [
               {
                 "id": 1,
@@ -4912,7 +5000,7 @@
       "turnDetails": [
         {
           "message": "我的订单",
-          "latencyMs": 9,
+          "latencyMs": 21,
           "intent": "query_order",
           "reply": "找到 2 个订单。最近一个订单 SG2026041710150002 当前状态：已支付，共 2 件商品，金额 138 元。",
           "degraded": true,
@@ -4921,6 +5009,7 @@
             "features": [],
             "budgetUnlimited": false,
             "askedBudget": false,
+            "pendingCheckout": false,
             "lastProductIds": [],
             "lastProductNames": []
           },
@@ -4968,8 +5057,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 6,
-      "conversationId": "b326fdd6de944f3999fd052f9199f8e8",
+      "latencyMs": 18,
+      "conversationId": "ee2719858bbe4a5386b4eb909964b32c",
       "final": {
         "intent": "ask_detail",
         "reply": "你想了解哪件商品的详情？可以告诉商品名称，或先描述需求让我推荐几款。",
@@ -4978,6 +5067,7 @@
           "features": [],
           "budgetUnlimited": false,
           "askedBudget": false,
+          "pendingCheckout": false,
           "lastProductIds": [],
           "lastProductNames": []
         },
@@ -4987,7 +5077,7 @@
       "turnDetails": [
         {
           "message": "这款耳机怎么样",
-          "latencyMs": 6,
+          "latencyMs": 18,
           "intent": "ask_detail",
           "reply": "你想了解哪件商品的详情？可以告诉商品名称，或先描述需求让我推荐几款。",
           "degraded": true,
@@ -4996,6 +5086,7 @@
             "features": [],
             "budgetUnlimited": false,
             "askedBudget": false,
+            "pendingCheckout": false,
             "lastProductIds": [],
             "lastProductNames": []
           },
@@ -5032,8 +5123,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 13,
-      "conversationId": "ce336640e19a403aafe20fed73c9876b",
+      "latencyMs": 37,
+      "conversationId": "fb9facfa206a4617bf5e9a2527e60b7a",
       "final": {
         "intent": "search_product",
         "reply": "按你的需求，为你筛选出 4 款蓝牙耳机（预算 350 元以内），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
@@ -5045,6 +5136,7 @@
           "features": [],
           "budgetUnlimited": false,
           "askedBudget": false,
+          "pendingCheckout": false,
           "lastProductIds": [
             "p_headphone_02",
             "p_headphone_04",
@@ -5093,7 +5185,7 @@
       "turnDetails": [
         {
           "message": "三百五十元以内的蓝牙耳机",
-          "latencyMs": 13,
+          "latencyMs": 37,
           "intent": "search_product",
           "reply": "按你的需求，为你筛选出 4 款蓝牙耳机（预算 350 元以内），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
           "degraded": true,
@@ -5134,6 +5226,7 @@
             "features": [],
             "budgetUnlimited": false,
             "askedBudget": false,
+            "pendingCheckout": false,
             "lastProductIds": [
               "p_headphone_02",
               "p_headphone_04",
@@ -5186,8 +5279,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 15,
-      "conversationId": "f1224f5a54974f1293471277a8114b4f",
+      "latencyMs": 34,
+      "conversationId": "0235a769b28941c7b9a7cf1f9f56ca12",
       "final": {
         "intent": "search_product",
         "reply": "按你的需求，为你筛选出 3 款笔记本电脑（预算 5000 元以内），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
@@ -5199,6 +5292,7 @@
           "features": [],
           "budgetUnlimited": false,
           "askedBudget": false,
+          "pendingCheckout": false,
           "lastProductIds": [
             "p_laptop_01",
             "p_laptop_03",
@@ -5238,7 +5332,7 @@
       "turnDetails": [
         {
           "message": "预算五千的笔记本",
-          "latencyMs": 14,
+          "latencyMs": 34,
           "intent": "search_product",
           "reply": "按你的需求，为你筛选出 3 款笔记本电脑（预算 5000 元以内），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
           "degraded": true,
@@ -5272,6 +5366,7 @@
             "features": [],
             "budgetUnlimited": false,
             "askedBudget": false,
+            "pendingCheckout": false,
             "lastProductIds": [
               "p_laptop_01",
               "p_laptop_03",
@@ -5322,8 +5417,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 13,
-      "conversationId": "c97f61931c484381a349eda8f4d708ab",
+      "latencyMs": 39,
+      "conversationId": "279730371431496b9f854ba7338cd6f9",
       "final": {
         "intent": "search_product",
         "reply": "按你的需求，为你筛选出 3 款咖啡机（预算 1000 元以内），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
@@ -5335,6 +5430,7 @@
           "features": [],
           "budgetUnlimited": false,
           "askedBudget": false,
+          "pendingCheckout": false,
           "lastProductIds": [
             "p_coffee_02",
             "p_coffee_01",
@@ -5374,7 +5470,7 @@
       "turnDetails": [
         {
           "message": "推荐一千元以内的咖啡机",
-          "latencyMs": 13,
+          "latencyMs": 39,
           "intent": "search_product",
           "reply": "按你的需求，为你筛选出 3 款咖啡机（预算 1000 元以内），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
           "degraded": true,
@@ -5408,6 +5504,7 @@
             "features": [],
             "budgetUnlimited": false,
             "askedBudget": false,
+            "pendingCheckout": false,
             "lastProductIds": [
               "p_coffee_02",
               "p_coffee_01",
@@ -5458,8 +5555,8 @@
         }
       ],
       "error": null,
-      "latencyMs": 14,
-      "conversationId": "83d1d3ac8dbd4f24863d9d0866f857ec",
+      "latencyMs": 40,
+      "conversationId": "02a906b0925e4990b633c43478d9d214",
       "final": {
         "intent": "search_product",
         "reply": "按你的需求，为你筛选出 1 款机械键盘（预算 200 元以内），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
@@ -5471,6 +5568,7 @@
           "features": [],
           "budgetUnlimited": false,
           "askedBudget": false,
+          "pendingCheckout": false,
           "lastProductIds": [
             "p_keyboard_01"
           ],
@@ -5492,7 +5590,7 @@
       "turnDetails": [
         {
           "message": "有没有200元以内的机械键盘",
-          "latencyMs": 14,
+          "latencyMs": 40,
           "intent": "search_product",
           "reply": "按你的需求，为你筛选出 1 款机械键盘（预算 200 元以内），已按匹配度与口碑排序。推荐理由均引用商品库真实参数，价格与库存已校验。",
           "degraded": true,
@@ -5512,6 +5610,7 @@
             "features": [],
             "budgetUnlimited": false,
             "askedBudget": false,
+            "pendingCheckout": false,
             "lastProductIds": [
               "p_keyboard_01"
             ],

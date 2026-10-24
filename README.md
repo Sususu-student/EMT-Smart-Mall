@@ -42,11 +42,11 @@
 
 ## 2. 技术栈
 
-**后端**：Java 17 · Spring Boot 3.3 · MyBatis-Plus 3.5 · LangChain4j 1.0（DeepSeek OpenAI 兼容接口）· JWT · WebSocket · SpringDoc · H2 / MySQL 8
+**后端**：Java 17 · Spring Boot 3.3 · MyBatis-Plus 3.5 · LangChain4j 1.0（DeepSeek OpenAI 兼容接口）· JWT · WebSocket · SpringDoc · MySQL 8（默认）/ H2（测试备选）
 
 **前端**：Vue 3.5 · TypeScript 5 · Vite 5 · Element Plus 2 · Pinia · Vue Router 4 · ECharts 5 · Axios
 
-**默认数据库为 H2 文件库**，开箱即用；生产/答辩演示可切换 MySQL 8。
+**默认数据库为本地 MySQL 8**，首次启动自动建表并导入种子数据；H2 仅保留给自动化测试和应急演示。
 
 ---
 
@@ -57,9 +57,29 @@
 - JDK 17+
 - Maven 3.9+
 - Node.js 18+
-- MySQL 8（可选）
+- MySQL 8（默认数据源，需先创建 `smart_mall` 数据库）
 
-### 3.2 启动后端（默认 H2，自动建表并导入 130 件商品）
+### 3.2 创建 MySQL 数据库
+
+用 Navicat 连接本机 MySQL，或执行：
+
+```sql
+CREATE DATABASE smart_mall DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+```
+
+也可以直接运行 `db/mysql-init.sql`。项目默认连接参数：
+
+```text
+host: localhost
+port: 3306
+database: smart_mall
+user: root
+password: 123456
+```
+
+如果密码不是 `123456`，启动前设置 `MYSQL_PASSWORD`。
+
+### 3.3 启动后端（默认 MySQL，自动建表并导入数据）
 
 ```bash
 cd backend
@@ -68,15 +88,24 @@ mvn spring-boot:run
 
 首次启动会自动：
 
-- 创建 `backend/data/smartmall.mv.db`
-- 执行 `db/schema.sql`
+- 连接 `smart_mall`
+- 执行 `db/schema.sql` 建表
+- 按需创建 MySQL 查询索引
 - 导入 21 个分类（13 个叶子品类）、130 件商品、1300 条评价、演示用户/地址/订单
 
 后端：<http://localhost:8080>  
 Swagger：<http://localhost:8080/swagger-ui.html>  
-H2 控制台：<http://localhost:8080/h2-console>（JDBC URL：`jdbc:h2:file:./data/smartmall;MODE=MySQL;DATABASE_TO_LOWER=TRUE;CASE_INSENSITIVE_IDENTIFIERS=TRUE`，用户 `sa`，密码空）
+Navicat 刷新 `smart_mall` 即可看到全部表和数据。
 
-### 3.3 启动前端
+可选 H2 应急模式（不需要 MySQL）：
+
+```powershell
+$env:SPRING_PROFILES_ACTIVE="h2"; mvn spring-boot:run
+```
+
+H2 数据在 `backend/data/smartmall.mv.db`，控制台 <http://localhost:8080/h2-console>。
+
+### 3.4 启动前端
 
 ```bash
 cd frontend
@@ -86,7 +115,7 @@ npm run dev
 
 访问 <http://localhost:5173>。Vite 已配置 `/api` 与 `/ws` 代理到 `8080`。
 
-### 3.4 演示账号
+### 3.5 演示账号
 
 | 角色 | 用户名 | 密码 |
 | --- | --- | --- |
@@ -94,28 +123,6 @@ npm run dev
 | 管理员 | `admin` | `Admin@123` |
 
 `demo` 已预置收货地址、购物车、收藏、偏好和两笔演示订单。
-
-### 3.5 可选：切换 MySQL
-
-```sql
-CREATE DATABASE smart_mall DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-```
-
-```bash
-# Linux / macOS
-SPRING_PROFILES_ACTIVE=mysql MYSQL_PASSWORD=你的密码 mvn spring-boot:run
-
-# Windows PowerShell
-$env:SPRING_PROFILES_ACTIVE="mysql"; $env:MYSQL_PASSWORD="你的密码"; mvn spring-boot:run
-```
-
-连接参数可用 `MYSQL_HOST`、`MYSQL_PORT`、`MYSQL_DB`、`MYSQL_USER`、`MYSQL_PASSWORD` 覆盖。表结构由应用自动创建。
-
-也可直接使用仓库内 `docker-compose.yml` 启动 MySQL：
-
-```bash
-docker compose up -d
-```
 
 ### 3.6 接入 DeepSeek（可选）
 
@@ -182,8 +189,7 @@ G:\EMT
 │   ├── src/views/              商城、对话、对比、订单、后台
 │   └── src/components/         商品卡片、执行轨迹、雷达图等
 ├── db/mysql-init.sql           创建数据库脚本
-├── scripts/generate-catalog.mjs 商品数据生成器
-└── docker-compose.yml          可选 MySQL 8
+└── scripts/generate-catalog.mjs 商品数据生成器
 ```
 
 ---
@@ -292,7 +298,7 @@ node evaluation/run-eval.mjs
 
 同一套用例可以在规则引擎和 DeepSeek 模式下各跑一遍，作为论文的对比实验。可用 `--limit=10`、`--only=S01,D08` 做快速调试，`--strict` 让失败用例返回非零退出码。
 
-本次规则引擎基线（2026-10-22，本机 H2）：40/40 通过，意图 100%、槽位 100%、接口检查 5/5，平均 23ms、P95 57ms。该结果只代表规则基线；仓库未配置 DeepSeek Key，因此没有真实 LLM 准确率数据。按 Flash 当前公开价格，50 条多轮评测通常只需几元，具体以官方价格为准。
+本次规则引擎基线（2026-10-24，本机 MySQL）：40/40 通过，意图 100%、槽位 100%、接口检查 5/5，平均 51ms、P95 112ms。该结果只代表规则基线；仓库未配置 DeepSeek Key，因此没有真实 LLM 准确率数据。按 Flash 当前公开价格，50 条多轮评测通常只需几元，具体以官方价格为准。
 
 ## 10. 测试与构建
 
