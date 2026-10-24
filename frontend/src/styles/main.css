@@ -3,16 +3,33 @@
   --ink-soft: #3d3a33;
   --muted: #7b756a;
   --muted-light: #a49d90;
-  --line: #e8e2d6;
-  --line-strong: #d8d0c0;
-  --bg: #f7f4ed;
-  --bg-deep: #efeae0;
+  --line: #e4ddcd;
+  --line-strong: #d3c9b6;
+  --bg: #f4efe4;
+  --bg-deep: #eae4d6;
   --card: #ffffff;
   --brand: #f05a28;
   --brand-deep: #d64616;
   --brand-soft: #fff0e7;
   --green: #2f7a5c;
   --gold: #b8893d;
+
+  /* 字体 token */
+  --font-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'STSong', serif;
+  --font-sans: 'Inter', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  --font-digit: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+  /* 圆角 token */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 18px;
+  --radius-pill: 99px;
+
+  /* 阴影 token：静止时极浅投影，营造呼吸感 */
+  --shadow-card: 0 4px 20px rgba(38, 33, 25, 0.04);
+  --shadow-card-hover: 0 22px 48px rgba(38, 33, 25, 0.11);
+  --shadow-float: 0 14px 34px rgba(38, 33, 25, 0.08);
 
   --el-color-primary: #f05a28;
   --el-color-primary-light-3: #f47f55;
@@ -23,11 +40,11 @@
   --el-color-primary-dark-2: #cc4517;
   --el-border-radius-base: 10px;
   --el-border-radius-small: 7px;
-  --el-font-family: 'Inter', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  --el-font-family: var(--font-sans);
   --el-text-color-primary: #1b1a17;
   --el-text-color-regular: #4a463e;
-  --el-border-color: #e8e2d6;
-  --el-border-color-light: #eee9df;
+  --el-border-color: #e4ddcd;
+  --el-border-color-light: #ece6da;
   --el-fill-color-blank: #ffffff;
 }
 
@@ -47,7 +64,7 @@ body {
   min-height: 100vh;
   color: var(--ink);
   background: var(--bg);
-  font-family: 'Inter', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -131,8 +148,9 @@ h1, h2, h3, h4, p {
 }
 
 .display {
-  font-family: 'Noto Serif SC', 'Songti SC', 'STSong', 'SimSun', serif;
-  font-weight: 600;
+  /* 拉丁与数字优先走 Inter，中文回退到思源宋体 */
+  font-family: var(--font-digit), var(--font-serif);
+  font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1.15;
 }
@@ -146,9 +164,9 @@ h1, h2, h3, h4, p {
 }
 
 .section-head h2 {
-  font-family: 'Noto Serif SC', 'Songti SC', 'STSong', 'SimSun', serif;
+  font-family: var(--font-digit), var(--font-serif);
   font-size: clamp(26px, 3vw, 38px);
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: -0.02em;
 }
 
@@ -183,17 +201,32 @@ h1, h2, h3, h4, p {
 }
 
 .price-strong {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-digit);
+  font-variant-numeric: tabular-nums;
   font-weight: 700;
   color: var(--ink);
   letter-spacing: -0.02em;
 }
 
 .price-old {
+  font-family: var(--font-digit);
+  font-variant-numeric: tabular-nums;
   color: var(--muted-light);
   text-decoration: line-through;
   font-size: 12px;
   margin-left: 6px;
+}
+
+/* 所有“数字型”文本统一几何字体，避免回退到系统雅黑 */
+.num,
+.discount,
+.meta-count,
+.stat-value,
+.duration,
+.badge-num {
+  font-family: var(--font-digit);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0;
 }
 
 .pill {
@@ -224,7 +257,8 @@ h1, h2, h3, h4, p {
 .surface {
   background: var(--card);
   border: 1px solid var(--line);
-  border-radius: 18px;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-card);
 }
 
 .page-head {
@@ -233,9 +267,9 @@ h1, h2, h3, h4, p {
 }
 
 .page-head h1 {
-  font-family: 'Noto Serif SC', 'Songti SC', 'STSong', 'SimSun', serif;
+  font-family: var(--font-digit), var(--font-serif);
   font-size: clamp(30px, 4vw, 46px);
-  font-weight: 600;
+  font-weight: 700;
   margin-top: 12px;
 }
 
@@ -389,5 +423,34 @@ body.chat-route .store-main {
 @media (max-width: 960px) {
   body.chat-route .store-main {
     min-height: calc(100vh - 104px);
+  }
+}
+
+/* 键盘可达性：统一焦点框 */
+:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* 无障碍：尊重系统的“减少动态效果”设置 */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .product-card:hover,
+  .category-card:hover,
+  .product-card:hover .media img {
+    transform: none !important;
   }
 }

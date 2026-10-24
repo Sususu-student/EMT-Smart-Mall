@@ -5,6 +5,7 @@ import { productApi } from '@/api'
 import type { Category, Product } from '@/types'
 import ProductCard from '@/components/ProductCard.vue'
 import ProductImage from '@/components/ProductImage.vue'
+import CategoryIcon from '@/components/CategoryIcon.vue'
 import { money } from '@/utils/format'
 
 const router = useRouter()
@@ -152,7 +153,7 @@ function ask(text?: string) {
             :to="{ name: 'products', query: { categoryId: category.id } }"
             class="category-card"
           >
-            <span class="cat-icon">{{ category.icon }}</span>
+            <span class="cat-icon"><CategoryIcon :category-id="category.id" :name="category.name" :size="22" /></span>
             <div>
               <strong>{{ category.name }}</strong>
               <span>{{ category.children?.map((c) => c.name).join(' · ') || category.description }}</span>
@@ -286,7 +287,7 @@ function ask(text?: string) {
   padding: 76px 0 64px;
   background:
     radial-gradient(circle at 76% 12%, rgba(240, 90, 40, 0.12), transparent 42%),
-    linear-gradient(180deg, #f7f4ed 0%, #f4f0e7 100%);
+    linear-gradient(180deg, #f4efe4 0%, #eee8db 100%);
 }
 
 .hero-grid {
@@ -297,6 +298,8 @@ function ask(text?: string) {
 }
 
 .hero-copy h1 {
+  font-family: var(--font-digit), var(--font-serif);
+  font-weight: 700;
   font-size: clamp(44px, 5.4vw, 68px);
   margin: 18px 0 22px;
 }
@@ -415,6 +418,8 @@ function ask(text?: string) {
 }
 
 .hero-stats strong {
+  font-family: var(--font-digit);
+  font-variant-numeric: tabular-nums;
   font-size: 24px;
   font-weight: 700;
   letter-spacing: -0.03em;
@@ -614,17 +619,23 @@ function ask(text?: string) {
   border: 1px solid var(--line);
   border-radius: 14px;
   padding: 18px 16px;
-  transition: all 0.24s ease;
+  box-shadow: var(--shadow-card);
+  transition: transform 0.26s cubic-bezier(0.22, 0.61, 0.36, 1), box-shadow 0.26s ease, border-color 0.26s ease;
 }
 
 .category-card:hover {
-  border-color: var(--ink);
+  border-color: var(--line-strong);
   transform: translateY(-3px);
-  box-shadow: 0 14px 30px rgba(38, 33, 25, 0.07);
+  box-shadow: var(--shadow-float);
+}
+
+.category-card:hover .cat-icon,
+.category-card:hover .cat-arrow {
+  color: var(--brand);
 }
 
 .cat-icon {
-  font-size: 24px;
+  color: var(--ink-soft);
   width: 46px;
   height: 46px;
   background: var(--bg);
@@ -632,6 +643,22 @@ function ask(text?: string) {
   display: grid;
   place-items: center;
   flex-shrink: 0;
+  transition: color 0.24s ease, background 0.24s ease;
+}
+
+.category-card:hover .cat-icon {
+  background: var(--brand-soft);
+}
+
+.cat-arrow {
+  margin-left: auto;
+  color: var(--muted-light);
+  font-size: 13px;
+  transition: color 0.24s ease, transform 0.24s ease;
+}
+
+.category-card:hover .cat-arrow {
+  transform: translateX(3px);
 }
 
 .category-card strong {
@@ -648,12 +675,6 @@ function ask(text?: string) {
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 150px;
-}
-
-.cat-arrow {
-  margin-left: auto;
-  color: var(--muted-light);
-  font-size: 13px;
 }
 
 .feature-section {

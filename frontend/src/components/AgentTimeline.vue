@@ -2,12 +2,21 @@
 import { computed } from 'vue'
 import type { AgentStep } from '@/types'
 
-const props = withDefaults(defineProps<{ steps: AgentStep[]; title?: string; emptyText?: string }>(), {
-  title: 'Agent 执行轨迹',
-  emptyText: '发送一条消息，查看 Agent 的思考与工具调用过程'
-})
+const props = withDefaults(
+  defineProps<{ steps: AgentStep[]; title?: string; emptyText?: string; running?: boolean }>(),
+  {
+    title: 'Agent 执行轨迹',
+    emptyText: '发送一条消息，查看 Agent 的思考与工具调用过程',
+    running: false
+  }
+)
 
 const hasSteps = computed(() => props.steps && props.steps.length > 0)
+
+/** 最后一个节点若仍在进行中，则显示呼吸红点 */
+function isActive(index: number) {
+  return props.running && index === props.steps.length - 1
+}
 
 function icon(status: string) {
   if (status === 'failed') return 'CircleCloseFilled'
@@ -23,7 +32,7 @@ function icon(status: string) {
         <span class="eyebrow">EXECUTION TRACE</span>
         <h3>{{ title }}</h3>
       </div>
-      <span class="live-dot" :class="{ active: hasSteps }"></span>
+      <span class="live-dot" :class="{ active: hasSteps, running }"></span>
     </div>
 
     <div v-if="!hasSteps" class="timeline-empty">
@@ -32,10 +41,16 @@ function icon(status: string) {
     </div>
 
     <div v-else class="timeline">
-      <div v-for="(step, index) in steps" :key="`${step.step}-${index}`" class="timeline-item" :class="step.status">
+      <div
+        v-for="(step, index) in steps"
+        :key="`${step.step}-${index}`"
+        class="timeline-item"
+        :class="[step.status, { active: isActive(index) }]"
+      >
         <div class="timeline-rail">
           <span class="timeline-node">
-            <el-icon><component :is="icon(step.status)" /></el-icon>
+            <span v-if="isActive(index)" class="node-pulse"></span>
+            <el-icon v-else><component :is="icon(step.status)" /></el-icon>
           </span>
           <span v-if="index < steps.length - 1" class="timeline-line"></span>
         </div>
@@ -59,6 +74,7 @@ function icon(status: string) {
   border-radius: 16px;
   padding: 20px;
   min-height: 100%;
+  box-shadow: var(--shadow-card);
 }
 
 .timeline-head {
@@ -94,9 +110,26 @@ function icon(status: string) {
   animation: pulse 2.4s infinite;
 }
 
+/* 正在执行时切换成品牌红呼吸点 */
+.live-dot.running {
+  background: var(--brand);
+  animation: pulse-brand 1.4s ease-in-out infinite;
+}
+
 @keyframes pulse {
   0%, 100% { box-shadow: 0 0 0 3px rgba(56, 161, 105, 0.12); }
   50% { box-shadow: 0 0 0 6px rgba(56, 161, 105, 0.05); }
+}
+
+@keyframes pulse-brand {
+  0%, 100% {
+    box-shadow: 0 0 0 3px rgba(240, 90, 40, 0.16);
+    opacity: 1;
+  }
+  50% {
+    box-shadow: 0 0 0 7px rgba(240, 90, 40, 0.05);
+    opacity: 0.72;
+  }
 }
 
 .timeline-empty {
@@ -123,6 +156,18 @@ function icon(status: string) {
 .timeline-item {
   display: flex;
   gap: 12px;
+  animation: node-in 0.32s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+@keyframes node-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .timeline-rail {
@@ -134,6 +179,7 @@ function icon(status: string) {
 }
 
 .timeline-node {
+  position: relative;
   width: 20px;
   height: 20px;
   display: grid;
@@ -142,6 +188,26 @@ function icon(status: string) {
   font-size: 16px;
   background: #fff;
   z-index: 1;
+}
+
+/* 进行中节点的呼吸红点 */
+.node-pulse {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--brand);
+  animation: node-breathe 1.4s ease-in-out infinite;
+}
+
+@keyframes node-breathe {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(240, 90, 40, 0.4);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(240, 90, 40, 0);
+    transform: scale(1.18);
+  }
 }
 
 .timeline-item.failed .timeline-node {
@@ -155,7 +221,7 @@ function icon(status: string) {
 .timeline-line {
   flex: 1;
   width: 1px;
-  background: var(--line);
+  background: linear-gradient(180deg, var(--line-strong), var(--line));
   margin: 4px 0;
   min-height: 22px;
 }
@@ -178,6 +244,7 @@ function icon(status: string) {
 }
 
 .duration {
+  font-family: var(--font-digit);
   font-size: 10px;
   color: var(--muted-light);
   font-variant-numeric: tabular-nums;

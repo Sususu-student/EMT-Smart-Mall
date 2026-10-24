@@ -269,6 +269,8 @@ function renderCharts() {
 }
 
 .stat-card strong {
+  font-family: var(--font-digit);
+  font-variant-numeric: tabular-nums;
   font-size: 28px;
   letter-spacing: -0.03em;
   font-weight: 700;

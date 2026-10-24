@@ -9,8 +9,7 @@
 | 对话导购 | 对比决策 |
 | --- | --- |
 | ![对话导购](docs/screenshots/chat.png) | ![对比决策](docs/screenshots/compare.png) |
-
-![后台仪表盘](docs/screenshots/admin.png)
+| ![商品列表](docs/screenshots/products.png) | ![后台仪表盘](docs/screenshots/admin.png) |
 
 ![Agent 配置](docs/screenshots/agent-config.png)
 
@@ -184,13 +183,34 @@ G:\EMT
 │   │   └── seed/catalog.json   130 件商品数据
 │   └── src/test/               全链路集成测试
 ├── frontend/                   Vue 3 前端
+│   ├── public/fonts/           自托管字体（思源宋体分片 + Inter）
 │   ├── src/api/                接口封装
+│   ├── src/styles/             设计 token、字体、Element Plus 覆盖
 │   ├── src/stores/             auth / cart / compare
 │   ├── src/views/              商城、对话、对比、订单、后台
-│   └── src/components/         商品卡片、执行轨迹、雷达图等
+│   └── src/components/         商品卡片、品类图标、执行轨迹、雷达图等
 ├── db/mysql-init.sql           创建数据库脚本
 └── scripts/generate-catalog.mjs 商品数据生成器
 ```
+
+### 5.1 视觉设计系统
+
+前端 UI 采用「暖白 + 品牌橘」的极简编辑风格，关键约定：
+
+| 维度 | 方案 |
+| --- | --- |
+| 标题/大字 | 思源宋体 Noto Serif SC 700，`--font-serif` |
+| 数字/英文 | Inter 400-700 + 表格数字，`--font-digit`（价格、销量、折扣、统计值） |
+| 正文 | Inter + 系统中文黑体，`--font-sans` |
+| 背景/卡片 | 浅卡其底 `--bg` + 纯白卡片 + 极浅投影 `--shadow-card` |
+| Hover | 卡片上浮 6px、图片放大 1.05、阴影加深，仅 `hover:hover` 设备生效 |
+| 品类图标 | 单色线性 SVG，跟随 `currentColor`，选中态转品牌橘 |
+| 顶部导航 | 吸顶 + `backdrop-filter` 毛玻璃，滚动后公告条收起、背景更透 |
+| AI 气泡 | 品牌色极浅底 + 3px 品牌色左边框，与用户消息强区分 |
+| 执行轨迹 | 进行中节点呼吸红点、渐变连接线、节点淡入 |
+| 无障碍 | 统一焦点框、`prefers-reduced-motion` 降级位移动画 |
+
+字体全部自托管在 `frontend/public/fonts/`，离线可用；思源宋体按 Google Fonts 的 unicode-range 分片存放，浏览器只下载页面实际用到的分片。
 
 ---
 

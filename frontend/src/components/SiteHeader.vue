@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onBeforeUnmount, onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 import { useCartStore } from '@/stores/cart'
@@ -14,6 +14,22 @@ const compare = useCompareStore()
 
 const keyword = ref((route.query.keyword as string) || '')
 const drawer = ref(false)
+
+/** 滚动后导航变磨砂玻璃，并收起顶部公告条 */
+const scrolled = ref(false)
+
+function onScroll() {
+  scrolled.value = window.scrollY > 36
+}
+
+onMounted(() => {
+  onScroll()
+  window.addEventListener('scroll', onScroll, { passive: true })
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('scroll', onScroll)
+})
 
 function submitSearch() {
   const value = keyword.value.trim()
@@ -42,7 +58,7 @@ function onCommand(command: string) {
 </script>
 
 <template>
-  <div class="header-wrap">
+  <div class="header-wrap" :class="{ scrolled }">
     <div class="notice">
       <div class="container notice-inner">
         <span>新用户注册即可体验对话导购 · 从挑选到下单，一句话开始</span>
@@ -142,7 +158,8 @@ function onCommand(command: string) {
 
 <style scoped>
 .header-wrap {
-  position: relative;
+  position: sticky;
+  top: 0;
   z-index: 30;
 }
 
@@ -150,6 +167,16 @@ function onCommand(command: string) {
   background: var(--ink);
   color: #f4efe6;
   font-size: 12px;
+  overflow: hidden;
+  max-height: 40px;
+  opacity: 1;
+  transition: max-height 0.34s cubic-bezier(0.22, 0.61, 0.36, 1), opacity 0.24s ease;
+}
+
+/* 滚动后公告条收起，导航直接贴顶 */
+.header-wrap.scrolled .notice {
+  max-height: 0;
+  opacity: 0;
 }
 
 .notice-inner {
@@ -173,12 +200,32 @@ function onCommand(command: string) {
 }
 
 .header {
-  position: sticky;
-  top: 0;
+  position: relative;
   z-index: 20;
-  background: rgba(247, 244, 237, 0.9);
-  backdrop-filter: blur(18px);
-  border-bottom: 1px solid rgba(232, 226, 214, 0.9);
+  background: rgba(244, 239, 228, 0.82);
+  backdrop-filter: blur(14px) saturate(1.35);
+  -webkit-backdrop-filter: blur(14px) saturate(1.35);
+  border-bottom: 1px solid rgba(228, 221, 205, 0.7);
+  transition: background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+/* 顶部与公告条之间加一条柔和过渡，避免硬切 */
+.header::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -1px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 179, 143, 0.55), transparent);
+}
+
+.header-wrap.scrolled .header {
+  background: rgba(244, 239, 228, 0.68);
+  backdrop-filter: blur(20px) saturate(1.5);
+  -webkit-backdrop-filter: blur(20px) saturate(1.5);
+  border-bottom-color: rgba(228, 221, 205, 0.55);
+  box-shadow: 0 10px 30px rgba(38, 33, 25, 0.06);
 }
 
 .header-inner {
@@ -203,7 +250,8 @@ function onCommand(command: string) {
   color: #fff;
   display: grid;
   place-items: center;
-  font-family: 'Noto Serif SC', 'Songti SC', serif;
+  font-family: var(--font-serif);
+  font-weight: 700;
   font-size: 21px;
   position: relative;
 }

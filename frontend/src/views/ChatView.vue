@@ -18,6 +18,7 @@ import { dateTime, intentLabel, money, orderStatusType } from '@/utils/format'
 import { useAuthStore } from '@/stores/auth'
 import { useCompareStore } from '@/stores/compare'
 import ChatProductCard from '@/components/ChatProductCard.vue'
+import CategoryIcon from '@/components/CategoryIcon.vue'
 import AgentTimeline from '@/components/AgentTimeline.vue'
 
 interface ChatMessage {
@@ -71,10 +72,10 @@ let reconnectTimer: number | undefined
 let destroyed = false
 
 const suggestions = [
-  { icon: '🎧', title: '跑步耳机', text: '想买跑步用的蓝牙耳机，预算 300 以内，要防水' },
-  { icon: '☕', title: '家用咖啡机', text: '推荐一台 1000 元左右的半自动咖啡机' },
-  { icon: '🎒', title: '通勤背包', text: '找一款通勤双肩包，能装 16 寸电脑，最好防水' },
-  { icon: '🧴', title: '敏感肌护肤', text: '敏感肌适合的保湿护肤品，预算 300 左右' }
+  { icon: 'headphone', title: '跑步耳机', text: '想买跑步用的蓝牙耳机，预算 300 以内，要防水' },
+  { icon: 'coffee', title: '家用咖啡机', text: '推荐一台 1000 元左右的半自动咖啡机' },
+  { icon: 'backpack', title: '通勤背包', text: '找一款通勤双肩包，能装 16 寸电脑，最好防水' },
+  { icon: 'skincare', title: '敏感肌护肤', text: '敏感肌适合的保湿护肤品，预算 300 左右' }
 ]
 
 const quickAsks = ['帮我对比前两个', '查询我的订单', '预算不限，再看看', '把第一款加入购物车']
@@ -422,7 +423,7 @@ function goOrder(order: Order) {
             </p>
             <div class="suggestion-grid">
               <button v-for="item in suggestions" :key="item.title" class="suggestion" @click="send(item.text)">
-                <span class="suggestion-icon">{{ item.icon }}</span>
+                <span class="suggestion-icon"><CategoryIcon :category-id="item.icon" :size="20" /></span>
                 <div>
                   <strong>{{ item.title }}</strong>
                   <span>{{ item.text }}</span>
@@ -545,7 +546,7 @@ function goOrder(order: Order) {
           </div>
           <span v-if="liveSteps.length" class="step-count">{{ liveSteps.length }} 步</span>
         </div>
-        <AgentTimeline :steps="latestSteps" title="Agent 执行过程" />
+        <AgentTimeline :steps="latestSteps" :running="sending" title="Agent 执行过程" />
         <div class="insight-note">
           <el-icon><InfoFilled /></el-icon>
           <p>每一步都会写入执行日志，可通过 WebSocket 实时推送。点击消息下方的“执行轨迹”可回看历史。</p>
@@ -575,7 +576,7 @@ function goOrder(order: Order) {
     </el-drawer>
 
     <el-drawer v-model="insightDrawer" title="Agent 执行轨迹" direction="rtl" size="88%">
-      <AgentTimeline :steps="latestSteps" title="Agent 执行过程" />
+      <AgentTimeline :steps="latestSteps" :running="sending" title="Agent 执行过程" />
     </el-drawer>
   </div>
 </template>
@@ -985,7 +986,7 @@ function goOrder(order: Order) {
 }
 
 .suggestion-icon {
-  font-size: 20px;
+  color: var(--ink-soft);
   width: 38px;
   height: 38px;
   border-radius: 10px;
@@ -993,6 +994,12 @@ function goOrder(order: Order) {
   display: grid;
   place-items: center;
   flex-shrink: 0;
+  transition: color 0.22s ease, background 0.22s ease;
+}
+
+.suggestion:hover .suggestion-icon {
+  color: var(--brand);
+  background: var(--brand-soft);
 }
 
 .suggestion div {
@@ -1092,8 +1099,10 @@ function goOrder(order: Order) {
 }
 
 .assistant-bubble {
-  background: #fbf9f4;
-  border: 1px solid var(--line);
+  /* 品牌色极浅底 + 左侧品牌色描边，让 AI 与用户消息一眼可辨 */
+  background: linear-gradient(180deg, #fff7f1 0%, #fdf6ee 100%);
+  border: 1px solid #f6e0d2;
+  border-left: 3px solid var(--brand);
   border-bottom-left-radius: 4px;
 }
 
@@ -1160,8 +1169,8 @@ function goOrder(order: Order) {
 }
 
 .typing span {
-  width: 5px;
-  height: 5px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
   background: var(--brand);
   animation: blink 1.2s infinite;

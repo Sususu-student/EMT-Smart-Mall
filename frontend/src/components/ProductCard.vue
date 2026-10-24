@@ -116,15 +116,27 @@ function toggleCompare() {
   border: 1px solid var(--line);
   border-radius: 16px;
   overflow: hidden;
-  transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+  box-shadow: var(--shadow-card);
+  transition: transform 0.28s cubic-bezier(0.22, 0.61, 0.36, 1), box-shadow 0.28s ease, border-color 0.28s ease;
   display: flex;
   flex-direction: column;
 }
 
-.product-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 20px 44px rgba(38, 33, 25, 0.09);
-  border-color: var(--line-strong);
+@media (hover: hover) {
+  .product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-card-hover);
+    border-color: var(--line-strong);
+  }
+
+  .product-card:hover .media :deep(img) {
+    transform: scale(1.05);
+  }
+
+  .product-card:hover .hover-actions {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .media {
@@ -137,16 +149,14 @@ function toggleCompare() {
   display: block;
 }
 
-.product-card:hover .media :deep(img) {
-  transform: scale(1.045);
-}
-
 .discount {
   position: absolute;
   top: 12px;
   left: 12px;
   background: var(--brand);
   color: #fff;
+  font-family: var(--font-digit);
+  font-variant-numeric: tabular-nums;
   font-size: 11px;
   font-weight: 700;
   padding: 4px 8px;
@@ -186,12 +196,27 @@ function toggleCompare() {
   gap: 6px;
   transform: translateY(10px);
   opacity: 0;
-  transition: all 0.26s ease;
+  transition: transform 0.26s ease, opacity 0.26s ease;
 }
 
-.product-card:hover .hover-actions {
-  transform: translateY(0);
-  opacity: 1;
+/* 悬浮操作条下方加深色渐变，避免盖住图片上的文字 */
+.media::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 76px;
+  background: linear-gradient(180deg, rgba(27, 26, 23, 0) 0%, rgba(27, 26, 23, 0.34) 100%);
+  opacity: 0;
+  transition: opacity 0.26s ease;
+  pointer-events: none;
+}
+
+@media (hover: hover) {
+  .product-card:hover .media::after {
+    opacity: 1;
+  }
 }
 
 .mini-btn {
@@ -231,9 +256,16 @@ function toggleCompare() {
   display: flex;
   justify-content: space-between;
   gap: 8px;
+  font-family: var(--font-digit);
+  font-variant-numeric: tabular-nums;
   font-size: 10px;
   color: var(--muted-light);
   letter-spacing: 0.04em;
+}
+
+.meta > span:first-child {
+  font-family: var(--font-sans);
+  letter-spacing: 0.02em;
 }
 
 .name {

@@ -4,6 +4,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { productApi } from '@/api'
 import type { Category, Product } from '@/types'
 import ProductCard from '@/components/ProductCard.vue'
+import CategoryIcon from '@/components/CategoryIcon.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -156,7 +157,8 @@ function changeSort(value: string) {
           <button class="cat-all" :class="{ active: !activeCategory }" @click="selectCategory('')">全部商品</button>
           <div v-for="root in categories" :key="root.id" class="cat-root">
             <button class="cat-root-name" :class="{ active: activeCategory === root.id }" @click="selectCategory(root.id)">
-              <span>{{ root.icon }}</span>{{ root.name }}
+              <CategoryIcon :category-id="root.id" :name="root.name" :size="16" />
+              <span>{{ root.name }}</span>
             </button>
             <div class="cat-children">
               <button
@@ -322,10 +324,23 @@ function changeSort(value: string) {
   color: var(--ink);
 }
 
+.cat-root-name :deep(.category-icon) {
+  color: var(--muted);
+  transition: color 0.18s ease;
+}
+
+.cat-root-name:hover :deep(.category-icon) {
+  color: var(--ink);
+}
+
 .cat-all.active,
 .cat-root-name.active {
   background: var(--ink);
   color: #fff;
+}
+
+.cat-root-name.active :deep(.category-icon) {
+  color: #ff9c72;
 }
 
 .cat-root {
@@ -335,10 +350,6 @@ function changeSort(value: string) {
 .cat-root-name {
   font-weight: 600;
   font-size: 12.5px;
-}
-
-.cat-root-name span {
-  font-size: 15px;
 }
 
 .cat-children {
