@@ -41,6 +41,7 @@ const items = computed(() => {
         productId: buyProduct.value.id,
         name: buyProduct.value.name,
         image: buyProduct.value.image,
+        imageFallback: buyProduct.value.imageFallback,
         price: buyProduct.value.price,
         quantity: buyQuantity.value
       }
@@ -52,6 +53,7 @@ const items = computed(() => {
       productId: item.productId,
       name: item.name,
       image: item.image,
+      imageFallback: item.imageFallback,
       price: item.price,
       quantity: item.quantity
     }))
@@ -209,7 +211,7 @@ async function submitOrder() {
           <div class="checkout-items">
             <article v-for="item in items" :key="item.productId" class="checkout-item">
               <div class="thumb">
-                <ProductImage :src="item.image" :alt="item.name" ratio="1 / 1" />
+                <ProductImage :src="item.image" :fallback-src="item.imageFallback" :alt="item.name" ratio="1 / 1" />
               </div>
               <div class="item-name">
                 {{ item.name }}

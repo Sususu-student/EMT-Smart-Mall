@@ -174,7 +174,7 @@ function dimensionDisplay(key: string, productId: string) {
         <div class="selected-list">
           <div v-for="product in selected" :key="product.id" class="selected-item">
             <div class="selected-thumb" @click="goProduct(product.id)">
-              <ProductImage :src="product.image" :alt="product.name" ratio="1 / 1" />
+              <ProductImage :src="product.image" :fallback-src="product.imageFallback" :alt="product.name" ratio="1 / 1" />
             </div>
             <div class="selected-copy">
               <strong>{{ product.name }}</strong>
@@ -225,7 +225,7 @@ function dimensionDisplay(key: string, productId: string) {
           <el-button type="primary" round @click="openPicker">继续添加</el-button>
         </div>
         <div class="one-product">
-          <ProductImage :src="selected[0].image" :alt="selected[0].name" ratio="4 / 3" />
+          <ProductImage :src="selected[0].image" :fallback-src="selected[0].imageFallback" :alt="selected[0].name" ratio="4 / 3" />
           <strong>{{ selected[0].name }}</strong>
         </div>
       </section>
@@ -285,7 +285,7 @@ function dimensionDisplay(key: string, productId: string) {
                   <th class="dim-col">维度</th>
                   <th v-for="product in result?.products || []" :key="product.id">
                     <button class="matrix-product" @click="goProduct(product.id)">
-                      <ProductImage :src="product.image" :alt="product.name" ratio="1 / 1" />
+                      <ProductImage :src="product.image" :fallback-src="product.imageFallback" :alt="product.name" ratio="1 / 1" />
                       <strong>{{ product.name }}</strong>
                       <span>{{ money(product.price) }}</span>
                     </button>
@@ -351,7 +351,7 @@ function dimensionDisplay(key: string, productId: string) {
       <div v-loading="pickerLoading" class="picker-list">
         <div v-for="product in pickerResults" :key="product.id" class="picker-item">
           <div class="picker-thumb">
-            <ProductImage :src="product.image" :alt="product.name" ratio="1 / 1" />
+            <ProductImage :src="product.image" :fallback-src="product.imageFallback" :alt="product.name" ratio="1 / 1" />
           </div>
           <div class="picker-copy">
             <strong>{{ product.name }}</strong>

@@ -22,6 +22,7 @@ import com.smartmall.user.entity.BrowseHistory;
 import com.smartmall.user.entity.Favorite;
 import com.smartmall.user.mapper.BrowseHistoryMapper;
 import com.smartmall.user.mapper.FavoriteMapper;
+import com.smartmall.user.mapper.SysUserMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -48,6 +49,7 @@ public class ProductService {
     private final ProductReviewMapper reviewMapper;
     private final FavoriteMapper favoriteMapper;
     private final BrowseHistoryMapper browseHistoryMapper;
+    private final SysUserMapper userMapper;
 
     public PageResult<ProductVO> list(ProductQuery query, String userId) {
         query.normalize();
@@ -233,11 +235,26 @@ public class ProductService {
         vo.setTags(product.getTags() == null ? List.of()
                 : List.of(product.getTags().split(",")).stream().map(String::trim).filter(s -> !s.isEmpty()).toList());
         vo.setImage(product.getImage());
+        vo.setImageFallback(product.getImageFallback());
+        vo.setSellerId(product.getSellerId());
+        vo.setSellerName(resolveSellerName(product.getSellerId()));
         vo.setImages(images == null || images.isEmpty() ? List.of(product.getImage()) : images);
         vo.setFavorited(favorited);
         vo.setStatus(product.getStatus());
         vo.setCreatedAt(product.getCreatedAt());
         return vo;
+    }
+
+    /** 卖家昵称展示；平台自营商品（sellerId 为空）返回固定文案 */
+    private String resolveSellerName(String sellerId) {
+        if (!StringUtils.hasText(sellerId)) {
+            return "智选自营";
+        }
+        var user = userMapper.selectById(sellerId);
+        if (user == null) {
+            return "智选自营";
+        }
+        return StringUtils.hasText(user.getNickname()) ? user.getNickname() : user.getUsername();
     }
 
     private boolean isFavorite(String userId, String productId) {

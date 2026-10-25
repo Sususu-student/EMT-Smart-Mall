@@ -25,6 +25,8 @@ import type {
   Product,
   Profile,
   Review,
+  SellerOrderRow,
+  SellerOverview,
   Turn,
   User
 } from '@/types'
@@ -32,7 +34,7 @@ import type {
 export const authApi = {
   login: (data: { username: string; password: string }) =>
     request<LoginResponse>({ url: '/user/login', method: 'post', data }),
-  register: (data: { username: string; password: string; nickname?: string; email?: string }) =>
+  register: (data: { username: string; password: string; nickname?: string; email?: string; role?: string }) =>
     request<LoginResponse>({ url: '/user/register', method: 'post', data })
 }
 
@@ -85,6 +87,20 @@ export const afterSaleApi = {
     request<AfterSale>({ url: '/after-sale', method: 'post', data }),
   mine: () => request<AfterSale[]>({ url: '/after-sale' }),
   byOrder: (orderId: string) => request<AfterSale[]>({ url: `/after-sale/order/${orderId}` })
+}
+
+export const sellerApi = {
+  overview: () => request<SellerOverview>({ url: '/seller/overview' }),
+  products: (params: { page?: number; size?: number; keyword?: string; status?: number }) =>
+    request<PageResult<Product>>({ url: '/seller/products', params }),
+  publish: (data: Record<string, unknown>) =>
+    request<Product>({ url: '/seller/products', method: 'post', data }),
+  update: (id: string, data: Record<string, unknown>) =>
+    request<Product>({ url: `/seller/products/${id}`, method: 'put', data }),
+  toggleStatus: (id: string, status: number) =>
+    request<Product>({ url: `/seller/products/${id}/status`, method: 'put', params: { status } }),
+  remove: (id: string) => request<void>({ url: `/seller/products/${id}`, method: 'delete' }),
+  orders: (limit = 10) => request<SellerOrderRow[]>({ url: '/seller/orders', params: { limit } })
 }
 
 export const notificationApi = {

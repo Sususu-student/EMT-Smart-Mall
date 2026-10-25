@@ -18,6 +18,7 @@ export const useAuthStore = defineStore('auth', () => {
   const user = ref<User | null>(readUser())
   const isLoggedIn = computed(() => Boolean(token.value))
   const isAdmin = computed(() => user.value?.role === 'ADMIN')
+  const isSeller = computed(() => user.value?.role === 'SELLER')
 
   function persist(nextToken: string, nextUser: User) {
     token.value = nextToken
@@ -32,7 +33,7 @@ export const useAuthStore = defineStore('auth', () => {
     return data.user
   }
 
-  async function register(payload: { username: string; password: string; nickname?: string; email?: string }) {
+  async function register(payload: { username: string; password: string; nickname?: string; email?: string; role?: string }) {
     const data = await authApi.register(payload)
     persist(data.token, data.user)
     return data.user
@@ -56,5 +57,5 @@ export const useAuthStore = defineStore('auth', () => {
     localStorage.removeItem('sg_user')
   }
 
-  return { token, user, isLoggedIn, isAdmin, login, register, refreshProfile, logout }
+  return { token, user, isLoggedIn, isAdmin, isSeller, login, register, refreshProfile, logout }
 })

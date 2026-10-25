@@ -82,6 +82,7 @@ public class CompareAgentService {
             cp.setId(product.getId());
             cp.setName(product.getName());
             cp.setImage(product.getImage());
+            cp.setImageFallback(product.getImageFallback());
             cp.setPrice(product.getPrice());
             cp.setRating(product.getRating());
             cp.setStock(product.getStock());

@@ -68,7 +68,7 @@ function toggleCompare() {
   <article class="product-card" :class="{ compact }">
     <div class="media">
       <router-link :to="`/product/${product.id}`" class="media-link">
-        <ProductImage :src="product.image" :alt="product.name" ratio="4 / 5" />
+        <ProductImage :src="product.image" :fallback-src="product.imageFallback" :alt="product.name" ratio="4 / 5" />
       </router-link>
       <span v-if="discount" class="discount">-{{ discount }}%</span>
       <button class="fav" :class="{ active: favored }" :aria-label="favored ? '取消收藏' : '收藏'" @click.stop="toggleFavorite">

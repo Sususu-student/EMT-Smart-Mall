@@ -71,7 +71,9 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setNickname(StringUtils.hasText(request.getNickname()) ? request.getNickname() : request.getUsername());
         user.setEmail(request.getEmail());
-        user.setRole("USER");
+        // 只允许注册为买家或卖家，管理员不能自助注册
+        String role = "SELLER".equalsIgnoreCase(request.getRole()) ? "SELLER" : "USER";
+        user.setRole(role);
         user.setStatus(1);
         user.setCreatedAt(LocalDateTime.now());
         user.setUpdatedAt(LocalDateTime.now());

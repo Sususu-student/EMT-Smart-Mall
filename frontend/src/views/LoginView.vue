@@ -1,9 +1,12 @@
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
+import { computed, onBeforeUnmount, onMounted, reactive, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
+import { productApi } from '@/api'
 import { useAuthStore } from '@/stores/auth'
 import { useCartStore } from '@/stores/cart'
+import type { Product } from '@/types'
+import { money } from '@/utils/format'
 import ProductImage from '@/components/ProductImage.vue'
 
 const route = useRoute()
@@ -14,7 +17,62 @@ const cart = useCartStore()
 const mode = ref<'login' | 'register'>('login')
 const loading = ref(false)
 const loginForm = reactive({ username: '', password: '' })
-const registerForm = reactive({ username: '', password: '', confirm: '', nickname: '', email: '' })
+const registerForm = reactive({ username: '', password: '', confirm: '', nickname: '', email: '', role: 'USER' })
+
+/* ===== 左侧展示区轮播：每 3 秒切换一个真实商品 + AGENT 推荐理由 ===== */
+const showcase = ref<Product[]>([])
+const showcaseIndex = ref(0)
+const showcaseReady = ref(false)
+let showcaseTimer: number | undefined
+
+const current = computed<Product | null>(() => showcase.value[showcaseIndex.value] || null)
+
+/** 用商品自身参数拼一句“像 Agent 说的”推荐理由，避免硬编码假数据 */
+const currentReason = computed(() => {
+  const p = current.value
+  if (!p) return ''
+  const attrs = p.attributes || {}
+  const parts: string[] = [`${money(p.price)} 的价位`]
+  for (const key of Object.keys(attrs).slice(0, 2)) {
+    const value = attrs[key]
+    if (value !== null && value !== undefined && String(value).trim()) {
+      parts.push(`${key} ${value}`)
+    }
+  }
+  if (p.rating) parts.push(`${Number(p.rating).toFixed(1)} 分口碑`)
+  return `“${parts.join('，')}，在同价位里参数比较均衡。”`
+})
+
+function nextShowcase() {
+  if (showcase.value.length < 2) return
+  showcaseIndex.value = (showcaseIndex.value + 1) % showcase.value.length
+}
+
+function goShowcase(index: number) {
+  showcaseIndex.value = index
+  restartShowcaseTimer()
+}
+
+function restartShowcaseTimer() {
+  if (showcaseTimer) window.clearInterval(showcaseTimer)
+  showcaseTimer = window.setInterval(nextShowcase, 3000)
+}
+
+onMounted(async () => {
+  try {
+    const result = await productApi.list({ page: 1, size: 8, sort: 'sales' })
+    showcase.value = result.records || []
+  } catch {
+    showcase.value = []
+  } finally {
+    showcaseReady.value = true
+    restartShowcaseTimer()
+  }
+})
+
+onBeforeUnmount(() => {
+  if (showcaseTimer) window.clearInterval(showcaseTimer)
+})
 
 async function submitLogin() {
   if (!loginForm.username || !loginForm.password) {
@@ -26,7 +84,8 @@ async function submitLogin() {
     const user = await auth.login(loginForm.username, loginForm.password)
     await cart.refresh()
     ElMessage.success(`欢迎回来，${user.nickname || user.username}`)
-    redirect(user.role === 'ADMIN' && !route.query.redirect ? '/admin' : undefined)
+    const fallback = user.role === 'ADMIN' ? '/admin' : user.role === 'SELLER' ? '/seller' : undefined
+    redirect(!route.query.redirect ? fallback : undefined)
   } finally {
     loading.value = false
   }
@@ -51,9 +110,15 @@ async function submitRegister() {
       username: registerForm.username,
       password: registerForm.password,
       nickname: registerForm.nickname || undefined,
-      email: registerForm.email || undefined
+      email: registerForm.email || undefined,
+      role: registerForm.role
     })
     await cart.refresh()
+    if (registerForm.role === 'SELLER') {
+      ElMessage.success('卖家账号已创建，去发布你的第一件商品吧')
+      router.replace('/seller')
+      return
+    }
     ElMessage.success('注册成功，开始你的第一次智能导购吧')
     redirect()
   } finally {
@@ -66,10 +131,15 @@ function redirect(fallback?: string) {
   router.replace(target)
 }
 
-function useDemo(role: 'user' | 'admin') {
+function useDemo(role: 'user' | 'admin' | 'seller') {
   mode.value = 'login'
-  loginForm.username = role === 'admin' ? 'admin' : 'demo'
-  loginForm.password = role === 'admin' ? 'Admin@123' : 'Demo@123'
+  const accounts = {
+    user: { username: 'demo', password: 'Demo@123' },
+    seller: { username: 'seller', password: 'Seller@123' },
+    admin: { username: 'admin', password: 'Admin@123' }
+  }
+  loginForm.username = accounts[role].username
+  loginForm.password = accounts[role].password
   ElMessage.success('已填入演示账号，点击登录即可')
 }
 </script>
@@ -92,14 +162,42 @@ function useDemo(role: 'user' | 'admin') {
       </div>
 
       <div class="visual-cards">
-        <div class="visual-card">
-          <span class="mini-label">AGENT 推荐理由</span>
-          <p>“IPX5 防水与 24h 续航覆盖跑步需求，4.2g 佩戴负担小。”</p>
-          <span class="verified">已校验价格 / 库存 / 参数</span>
-        </div>
-        <div class="visual-product">
-          <ProductImage src="/img/headphone.svg" alt="智能导购精选" ratio="4 / 5" />
-        </div>
+        <Transition name="showcase" mode="out-in">
+          <div v-if="current" :key="current.id" class="visual-card">
+            <span class="mini-label">AGENT 推荐理由</span>
+            <p>{{ currentReason }}</p>
+            <span class="verified">已校验价格 / 库存 / 参数</span>
+          </div>
+          <div v-else key="placeholder" class="visual-card">
+            <span class="mini-label">AGENT 推荐理由</span>
+            <p>“IPX5 防水与 24h 续航覆盖跑步需求，4.2g 佩戴负担小。”</p>
+            <span class="verified">已校验价格 / 库存 / 参数</span>
+          </div>
+        </Transition>
+
+        <Transition name="showcase" mode="out-in">
+          <div v-if="current" :key="current.id" class="visual-product">
+            <ProductImage :src="current.image" :fallback-src="current.imageFallback" :alt="current.name" ratio="4 / 5" />
+            <div class="product-caption">
+              <strong>{{ current.name }}</strong>
+              <span>{{ money(current.price) }}</span>
+            </div>
+          </div>
+          <div v-else key="placeholder" class="visual-product">
+            <ProductImage src="/img/headphone.svg" alt="智能导购精选" ratio="4 / 5" />
+          </div>
+        </Transition>
+      </div>
+
+      <div v-if="showcase.length > 1" class="showcase-dots">
+        <button
+          v-for="(item, index) in showcase"
+          :key="item.id"
+          class="showcase-dot"
+          :class="{ active: index === showcaseIndex }"
+          :aria-label="`查看第 ${index + 1} 个推荐商品`"
+          @click="goShowcase(index)"
+        ></button>
       </div>
 
       <div class="visual-foot">
@@ -147,6 +245,30 @@ function useDemo(role: 'user' | 'admin') {
         </form>
 
         <form v-else class="form" @submit.prevent="submitRegister">
+          <div class="role-picker">
+            <span class="role-label">注册为</span>
+            <div class="role-options">
+              <label class="role-option" :class="{ active: registerForm.role === 'USER' }">
+                <input v-model="registerForm.role" type="radio" value="USER" name="role" />
+                <el-icon><ShoppingBag /></el-icon>
+                <div>
+                  <strong>买家</strong>
+                  <span>浏览商品 · 对话导购 · 下单购买</span>
+                </div>
+                <el-icon v-if="registerForm.role === 'USER'" class="role-check"><CircleCheckFilled /></el-icon>
+              </label>
+              <label class="role-option" :class="{ active: registerForm.role === 'SELLER' }">
+                <input v-model="registerForm.role" type="radio" value="SELLER" name="role" />
+                <el-icon><Shop /></el-icon>
+                <div>
+                  <strong>卖家</strong>
+                  <span>发布商品 · 管理库存 · 查看订单</span>
+                </div>
+                <el-icon v-if="registerForm.role === 'SELLER'" class="role-check"><CircleCheckFilled /></el-icon>
+              </label>
+            </div>
+          </div>
+
           <label>
             <span>用户名</span>
             <el-input v-model="registerForm.username" size="large" placeholder="3-20 位字母、数字或下划线">
@@ -182,6 +304,7 @@ function useDemo(role: 'user' | 'admin') {
           <span class="demo-title">演示账号</span>
           <div class="demo-actions">
             <button @click="useDemo('user')">用户 demo / Demo@123</button>
+            <button @click="useDemo('seller')">卖家 seller / Seller@123</button>
             <button @click="useDemo('admin')">管理员 admin / Admin@123</button>
           </div>
         </div>
@@ -321,11 +444,86 @@ function useDemo(role: 'user' | 'admin') {
 }
 
 .visual-product {
+  position: relative;
   width: 175px;
   border-radius: 14px;
   overflow: hidden;
   transform: rotate(3deg);
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+}
+
+.product-caption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 22px 12px 11px;
+  background: linear-gradient(180deg, rgba(20, 19, 17, 0) 0%, rgba(20, 19, 17, 0.82) 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.product-caption strong {
+  font-size: 11px;
+  color: #fff;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.product-caption span {
+  font-family: var(--font-digit);
+  font-variant-numeric: tabular-nums;
+  font-size: 12px;
+  font-weight: 700;
+  color: #ff9c72;
+}
+
+/* 轮播切换：淡入 + 轻微上浮 */
+.showcase-enter-active,
+.showcase-leave-active {
+  transition: opacity 0.42s ease, transform 0.42s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.showcase-enter-from {
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+.showcase-leave-to {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.showcase-dots {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 18px;
+}
+
+.showcase-dot {
+  width: 16px;
+  height: 3px;
+  border: none;
+  border-radius: 99px;
+  background: #3d3a33;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.24s ease, width 0.24s ease;
+}
+
+.showcase-dot:hover {
+  background: #5d574c;
+}
+
+.showcase-dot.active {
+  width: 26px;
+  background: var(--brand);
 }
 
 .visual-foot {
@@ -418,6 +616,97 @@ function useDemo(role: 'user' | 'admin') {
   display: flex;
   flex-direction: column;
   gap: 14px;
+}
+
+/* 注册角色选择：买家 / 卖家 */
+.role-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.role-label {
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+
+.role-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 9px;
+}
+
+.role-option {
+  position: relative;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center;
+  gap: 9px;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  padding: 11px 12px;
+  cursor: pointer;
+  background: #fff;
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+}
+
+.role-option:hover {
+  border-color: var(--line-strong);
+  transform: translateY(-1px);
+}
+
+.role-option.active {
+  border-color: var(--brand);
+  background: #fff8f3;
+}
+
+.role-option input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.role-option > .el-icon:first-of-type {
+  font-size: 18px;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+
+.role-option.active > .el-icon:first-of-type {
+  color: var(--brand);
+}
+
+.role-option div {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.role-option strong {
+  font-size: 12px;
+  color: var(--ink);
+}
+
+.role-option span {
+  font-size: 9px;
+  color: var(--muted-light);
+  line-height: 1.5;
+}
+
+.role-option .role-check {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 13px;
+  color: var(--brand);
+}
+
+@media (max-width: 480px) {
+  .role-options {
+    grid-template-columns: 1fr;
+  }
 }
 
 .form label {

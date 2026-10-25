@@ -33,6 +33,11 @@ export interface Product {
   attributeSchema?: AttributeMeta[]
   tags: string[]
   image: string
+  /** 远程图加载失败时的本地兜底图 */
+  imageFallback?: string
+  /** 卖家 ID 与昵称；平台自营为空/智选自营 */
+  sellerId?: string
+  sellerName?: string
   images?: string[]
   favorited?: boolean
   status?: number
@@ -56,7 +61,7 @@ export interface User {
   email?: string
   phone?: string
   avatar?: string
-  role: 'USER' | 'ADMIN'
+  role: 'USER' | 'SELLER' | 'ADMIN'
   status?: number
   createdAt?: string
 }
@@ -106,6 +111,7 @@ export interface CartItem {
   productId: string
   name: string
   image: string
+  imageFallback?: string
   price: number
   originalPrice?: number
   stock: number
@@ -246,10 +252,26 @@ export interface AgentStep {
   createdAt: string
 }
 
+export interface SellerOverview {
+  productCount: number
+  onSaleCount: number
+  soldCount: number
+  stockTotal: number
+}
+
+export interface SellerOrderRow {
+  orderId: string
+  productId: string
+  productName: string
+  quantity: number
+  amount: number
+}
+
 export interface CompareProduct {
   id: string
   name: string
   image: string
+  imageFallback?: string
   price: number
   rating: number
   stock: number

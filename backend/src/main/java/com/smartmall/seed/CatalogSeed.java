@@ -44,6 +44,8 @@ public class CatalogSeed {
         private Map<String, Object> attributes;
         private String tags;
         private String image;
+        /** 远程图加载失败时的本地兜底图 */
+        private String imageFallback;
         private Integer status;
     }
 }

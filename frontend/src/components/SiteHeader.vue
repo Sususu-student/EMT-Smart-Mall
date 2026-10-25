@@ -114,6 +114,7 @@ function onCommand(command: string) {
                 <el-dropdown-menu>
                   <el-dropdown-item command="/profile">个人中心</el-dropdown-item>
                   <el-dropdown-item command="/orders">我的订单</el-dropdown-item>
+                  <el-dropdown-item v-if="auth.isSeller || auth.isAdmin" command="/seller">卖家中心</el-dropdown-item>
                   <el-dropdown-item v-if="auth.isAdmin" command="/admin">后台管理</el-dropdown-item>
                   <el-dropdown-item divided command="logout">退出登录</el-dropdown-item>
                 </el-dropdown-menu>
@@ -147,6 +148,7 @@ function onCommand(command: string) {
           <button @click="go('/compare')">商品对比</button>
           <button @click="go('/cart')">购物车</button>
           <button v-if="auth.isLoggedIn" @click="go('/orders')">我的订单</button>
+          <button v-if="auth.isSeller || auth.isAdmin" @click="go('/seller')">卖家中心</button>
           <button v-if="auth.isLoggedIn" @click="go('/profile')">个人中心</button>
           <button v-if="auth.isLoggedIn" @click="logout(); drawer = false">退出登录</button>
           <button v-else @click="go('/login')">登录 / 注册</button>

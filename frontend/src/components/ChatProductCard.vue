@@ -44,7 +44,7 @@ function toggleCompare() {
 <template>
   <article class="agent-product">
     <router-link :to="`/product/${product.id}`" class="thumb">
-      <ProductImage :src="product.image" :alt="product.name" ratio="1 / 1" />
+      <ProductImage :src="product.image" :fallback-src="product.imageFallback" :alt="product.name" ratio="1 / 1" />
     </router-link>
 
     <div class="content">

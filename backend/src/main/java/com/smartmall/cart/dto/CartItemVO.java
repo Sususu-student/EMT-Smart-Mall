@@ -11,6 +11,7 @@ public class CartItemVO {
     private String productId;
     private String name;
     private String image;
+    private String imageFallback;
     private BigDecimal price;
     private BigDecimal originalPrice;
     private Integer stock;

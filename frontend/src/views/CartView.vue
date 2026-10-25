@@ -94,7 +94,7 @@ function checkout() {
             @change="toggleItem(item.id, Boolean($event))"
           />
           <router-link :to="`/product/${item.productId}`" class="thumb">
-            <ProductImage :src="item.image" :alt="item.name" ratio="1 / 1" />
+            <ProductImage :src="item.image" :fallback-src="item.imageFallback" :alt="item.name" ratio="1 / 1" />
           </router-link>
           <div class="item-info">
             <router-link :to="`/product/${item.productId}`" class="item-name">{{ item.name }}</router-link>

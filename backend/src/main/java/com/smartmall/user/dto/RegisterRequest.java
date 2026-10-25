@@ -22,4 +22,8 @@ public class RegisterRequest {
 
     @Email(message = "邮箱格式不正确")
     private String email;
+
+    /** 注册角色：USER（买家）/ SELLER（卖家），只能二选一 */
+    @Pattern(regexp = "^(USER|SELLER)$", message = "角色只能是买家或卖家")
+    private String role = "USER";
 }

@@ -26,6 +26,7 @@ public class CompareResponse {
         private String id;
         private String name;
         private String image;
+        private String imageFallback;
         private BigDecimal price;
         private BigDecimal rating;
         private Integer stock;

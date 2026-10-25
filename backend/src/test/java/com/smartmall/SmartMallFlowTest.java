@@ -249,9 +249,9 @@ class SmartMallFlowTest {
                 .andExpect(status().isOk());
         assertThat(getJson("/api/admin/agent/tools", adminToken).size()).isGreaterThanOrEqualTo(8);
         JsonNode modelStatus = getJson("/api/admin/agent/model", adminToken);
-        assertThat(modelStatus.path("model").asText()).isEqualTo("deepseek-flash");
+        assertThat(modelStatus.path("model").asText()).isEqualTo("deepseek-v4.1-flash");
         var modelBody = objectMapper.createObjectNode();
-        modelBody.put("model", "deepseek-flash");
+        modelBody.put("model", "deepseek-v4.1-flash");
         modelBody.put("temperature", 0.5);
         JsonNode changedModel = putJson("/api/admin/agent/model", modelBody, adminToken);
         assertThat(changedModel.path("temperature").asDouble()).isEqualTo(0.5);
@@ -269,6 +269,55 @@ class SmartMallFlowTest {
         assertThat(checkoutConfirmed.path("orders").size()).isGreaterThanOrEqualTo(1);
         assertThat(checkoutConfirmed.path("orders").get(0).path("orderNo").asText()).isNotBlank();
         assertThat(checkoutConfirmed.path("orders").get(0).path("deliveryMethod").asText()).isEqualTo("STANDARD");
+
+        // ===== 卖家中心：注册卖家、发布商品、归属校验 =====
+        var sellerRegBody = objectMapper.createObjectNode();
+        sellerRegBody.put("username", "seller_test");
+        sellerRegBody.put("password", "Seller@123");
+        sellerRegBody.put("nickname", "测试卖家");
+        sellerRegBody.put("role", "SELLER");
+        JsonNode sellerReg = postJson("/api/user/register", sellerRegBody, null);
+        assertThat(sellerReg.path("user").path("role").asText()).isEqualTo("SELLER");
+        String sellerToken = sellerReg.path("token").asText();
+
+        var publishBody = objectMapper.createObjectNode();
+        publishBody.put("name", "测试卖家商品");
+        publishBody.put("categoryId", "cat_headphone");
+        publishBody.put("price", 199);
+        publishBody.put("stock", 20);
+        JsonNode published = postJson("/api/seller/products", publishBody, sellerToken);
+        String sellerProductId = published.path("id").asText();
+        assertThat(published.path("sellerName").asText()).isEqualTo("测试卖家");
+
+        // 卖家只能看到自己的商品
+        JsonNode myProducts = getJson("/api/seller/products?page=1&size=10", sellerToken);
+        assertThat(myProducts.path("total").asLong()).isEqualTo(1);
+
+        // 买家访问卖家接口被拒绝
+        mvc.perform(get("/api/seller/products").header("Authorization", "Bearer " + token))
+                .andExpect(status().isForbidden());
+
+        // 卖家不能修改别人的商品
+        var otherSellerBody = objectMapper.createObjectNode();
+        otherSellerBody.put("username", "seller_other");
+        otherSellerBody.put("password", "Seller@123");
+        otherSellerBody.put("role", "SELLER");
+        String otherToken = postJson("/api/user/register", otherSellerBody, null).path("token").asText();
+        mvc.perform(put("/api/seller/products/" + sellerProductId)
+                        .header("Authorization", "Bearer " + otherToken)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(publishBody)))
+                .andExpect(status().isForbidden());
+
+        // 商品详情带出卖家信息
+        JsonNode sellerProductDetail = getJson("/api/product/" + sellerProductId, null);
+        assertThat(sellerProductDetail.path("sellerId").asText()).isNotBlank();
+        assertThat(sellerProductDetail.path("sellerName").asText()).isEqualTo("测试卖家");
+
+        // 商品已带真实图片外链与本地兜底
+        JsonNode imageCheck = getJson("/api/product/p_headphone_01", null);
+        assertThat(imageCheck.path("image").asText()).contains("images.unsplash.com");
+        assertThat(imageCheck.path("imageFallback").asText()).startsWith("/images/external/");
 
         var passwordBody = objectMapper.createObjectNode();
         passwordBody.put("oldPassword", "Demo@123");

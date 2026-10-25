@@ -82,6 +82,8 @@ CREATE TABLE IF NOT EXISTS product (
     attributes      TEXT,
     tags            VARCHAR(200),
     image           VARCHAR(200),
+    image_fallback VARCHAR(255),
+    seller_id     VARCHAR(32),
     status          TINYINT DEFAULT 1,
     created_at      DATETIME,
     updated_at      DATETIME

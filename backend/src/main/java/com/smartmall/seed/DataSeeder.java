@@ -128,6 +128,7 @@ public class DataSeeder implements ApplicationRunner {
             product.setAttributes(JsonUtils.toJson(sp.getAttributes()));
             product.setTags(sp.getTags());
             product.setImage(sp.getImage());
+            product.setImageFallback(sp.getImageFallback());
             product.setStatus(sp.getStatus() == null ? 1 : sp.getStatus());
             product.setCreatedAt(now.minusDays(ThreadLocalRandom.current().nextInt(1, 120)));
             product.setUpdatedAt(now);
@@ -168,6 +169,9 @@ public class DataSeeder implements ApplicationRunner {
         }
         if (userMapper.selectCount(new LambdaQueryWrapper<SysUser>().eq(SysUser::getUsername, "demo")) == 0) {
             createUser("u_demo", "demo", "Demo@123", "体验用户", "demo@smartmall.dev", "USER");
+        }
+        if (userMapper.selectCount(new LambdaQueryWrapper<SysUser>().eq(SysUser::getUsername, "seller")) == 0) {
+            createUser("u_seller", "seller", "Seller@123", "星野优选", "seller@smartmall.dev", "SELLER");
         }
     }
 

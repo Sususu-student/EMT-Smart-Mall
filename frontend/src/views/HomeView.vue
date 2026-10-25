@@ -100,7 +100,7 @@ function ask(text?: string) {
           <div class="visual-glow"></div>
           <div class="main-card">
             <div class="card-label">EDITOR'S PICK · 本周精选</div>
-            <ProductImage :src="heroProduct?.image || '/img/headphone.svg'" :alt="heroProduct?.name || '精选商品'" ratio="4 / 5" />
+            <ProductImage :src="heroProduct?.image || '/img/headphone.svg'" :fallback-src="heroProduct?.imageFallback" :alt="heroProduct?.name || '精选商品'" ratio="4 / 5" />
             <div class="main-card-info">
               <div>
                 <strong>{{ heroProduct?.name || '声屿 Air 3 运动版' }}</strong>

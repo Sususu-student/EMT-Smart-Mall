@@ -30,6 +30,8 @@
 | 执行过程可视化 | 每一步写入 `agent_execution_log`，WebSocket 实时推送 |
 | 完整电商闭环 | 注册登录、改密、商品、收藏、购物车、地址、订单、模拟支付、物流单号、评价、售后、后台管理 |
 | 后台运营 | 商品/分类/订单/售后/评价/用户/会话审查/Agent 日志/统计 |
+| 买卖家角色 | 注册时可选买家/卖家，登录后按角色分流；卖家中心支持发布、编辑、上下架、删除自己的商品 |
+| 商品图片 | 商品主图为 Unsplash 真实照片外链，本地缓存一份兜底图，断网自动回退不破图 |
 | Agent 配置后台 | Prompt 模板在线编辑与恢复默认、模型/温度切换、工具清单、模型运行状态 |
 | 消息通知 | 支付成功、订单发货、售后处理、新售后申请（管理员）站内通知与未读数 |
 | 模拟支付闭环 | 创建支付单 → 支付网关回调 → 订单已支付 → 通知用户，支持幂等回调 |
@@ -116,12 +118,13 @@ npm run dev
 
 ### 3.5 演示账号
 
-| 角色 | 用户名 | 密码 |
-| --- | --- | --- |
-| 普通用户 | `demo` | `Demo@123` |
-| 管理员 | `admin` | `Admin@123` |
+| 角色 | 用户名 | 密码 | 说明 |
+| --- | --- | --- | --- |
+| 买家 | `demo` | `Demo@123` | 已预置收货地址、购物车、收藏、偏好和两笔演示订单 |
+| 卖家 | `seller` | `Seller@123` | 已预置一件在售商品，可进入卖家中心发布/管理商品 |
+| 管理员 | `admin` | `Admin@123` | 平台后台与 Agent 配置 |
 
-`demo` 已预置收货地址、购物车、收藏、偏好和两笔演示订单。
+登录后按角色自动跳转：买家进商城首页，卖家进 `/seller` 卖家中心，管理员进 `/admin` 后台。
 
 ### 3.6 接入 DeepSeek（可选）
 
@@ -286,6 +289,7 @@ G:\EMT
 | 售后 | `POST /api/after-sale`、`GET /api/after-sale`、`GET /api/after-sale/order/{orderId}` |
 | 支付 | `POST /api/payment/orders/{orderId}`、`POST /api/payment/callback`、`GET /api/payment/{paymentNo}` |
 | 通知 | `GET /api/notification`、`GET /api/notification/unread-count`、`PUT /api/notification/{id}/read`、`PUT /api/notification/read-all` |
+| 卖家中心 | `GET/POST /api/seller/products`、`PUT/DELETE /api/seller/products/{id}`、`GET /api/seller/overview`、`GET /api/seller/orders` |
 | 后台 | `GET /api/admin/stats`、`/products`、`/categories`、`/orders`、`/after-sales`、`/reviews`、`/users`、`/conversations`、`/agent-logs` |
 | Agent 配置 | `GET/PUT /api/admin/agent/prompts`、`GET /api/admin/agent/tools`、`GET/PUT /api/admin/agent/model` |
 
@@ -295,7 +299,7 @@ G:\EMT
 
 ## 8. 数据模型
 
-`sys_user`、`user_address`、`user_preference`、`browse_history`、`user_favorite`、`category`、`product`、`product_image`、`product_review`、`cart_item`、`orders`、`order_item`、`after_sale`、`payment_record`、`notification`、`conversation`、`dialogue_turn`、`agent_execution_log`、`agent_prompt`、`compare_record`。
+`sys_user`、`user_address`、`user_preference`、`browse_history`、`user_favorite`、`category`、`product`、`product_image`、`product_review`、`cart_item`、`orders`、`order_item`、`after_sale`、`payment_record`、`notification`、`conversation`、`dialogue_turn`、`agent_execution_log`、`agent_prompt`、`compare_record`。其中 `product.seller_id` 关联卖家，`sys_user.role` 取值为 `USER`（买家）/ `SELLER`（卖家）/ `ADMIN`（管理员）。
 
 商品参数以 JSON 文本存储在 `product.attributes`，品类维度定义在 `category.attribute_schema`，因此同一套对比算法可适配不同品类。
 

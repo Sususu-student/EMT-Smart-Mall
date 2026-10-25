@@ -163,12 +163,12 @@ async function submitReview() {
       <div class="detail-grid">
         <div class="gallery">
           <div class="main-image">
-            <ProductImage :src="product.image" :alt="product.name" ratio="1 / 1" />
+            <ProductImage :src="product.image" :fallback-src="product.imageFallback" :alt="product.name" ratio="1 / 1" />
             <span class="image-badge">{{ product.categoryName }}</span>
           </div>
           <div class="gallery-strip">
             <div class="strip-item active">
-              <ProductImage :src="product.image" :alt="product.name" ratio="1 / 1" />
+              <ProductImage :src="product.image" :fallback-src="product.imageFallback" :alt="product.name" ratio="1 / 1" />
             </div>
             <div class="strip-note">
               <el-icon><Camera /></el-icon>

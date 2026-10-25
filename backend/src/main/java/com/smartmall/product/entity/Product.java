@@ -28,6 +28,10 @@ public class Product {
     private String attributes;
     private String tags;
     private String image;
+    /** 远程图加载失败时的本地兜底图 */
+    private String imageFallback;
+    /** 发布该商品的卖家用户 ID；平台自营为空 */
+    private String sellerId;
     private Integer status;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

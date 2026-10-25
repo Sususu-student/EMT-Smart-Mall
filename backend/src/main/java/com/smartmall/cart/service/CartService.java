@@ -167,6 +167,7 @@ public class CartService {
         }
         vo.setName(product.getName());
         vo.setImage(product.getImage());
+        vo.setImageFallback(product.getImageFallback());
         vo.setPrice(product.getPrice());
         vo.setOriginalPrice(product.getOriginalPrice());
         vo.setStock(product.getStock());

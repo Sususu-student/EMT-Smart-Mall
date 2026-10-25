@@ -27,6 +27,9 @@ public class ProductVO {
     private List<Map<String, Object>> attributeSchema;
     private List<String> tags;
     private String image;
+    private String imageFallback;
+    private String sellerId;
+    private String sellerName;
     private List<String> images;
     private Boolean favorited;
     private Integer status;

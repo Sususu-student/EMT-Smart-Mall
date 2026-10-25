@@ -33,7 +33,13 @@ const router = createRouter({
         },
         { path: 'profile', name: 'profile', component: () => import('@/views/ProfileView.vue'), meta: { requiresAuth: true } },
         { path: 'chat', name: 'chat', component: () => import('@/views/ChatView.vue'), meta: { requiresAuth: true } },
-        { path: 'compare', name: 'compare', component: () => import('@/views/CompareView.vue') }
+        { path: 'compare', name: 'compare', component: () => import('@/views/CompareView.vue') },
+        {
+          path: 'seller',
+          name: 'seller',
+          component: () => import('@/views/SellerCenterView.vue'),
+          meta: { requiresAuth: true, requiresSeller: true }
+        }
       ]
     },
     {
@@ -68,6 +74,10 @@ router.beforeEach((to) => {
     return { name: 'login', query: { redirect: to.fullPath } }
   }
   if (to.meta.requiresAdmin && !auth.isAdmin) {
+    return { name: 'home' }
+  }
+  // 卖家中心：卖家与管理员可进；买家会被挡回首页
+  if (to.meta.requiresSeller && !auth.isSeller && !auth.isAdmin) {
     return { name: 'home' }
   }
   return true
