@@ -376,7 +376,7 @@ public class SlotService {
                 + "\n当前消息: " + text
                 + "\n输出示例: {\"category\":\"蓝牙耳机\",\"keyword\":null,\"minPrice\":null,\"maxPrice\":300,"
                 + "\"brand\":null,\"scene\":\"跑步\",\"features\":[\"防水\"]}";
-        String answer = llmService.complete(system, user);
+        String answer = llmService.completeFast(system, user);
         if (answer == null) {
             return null;
         }

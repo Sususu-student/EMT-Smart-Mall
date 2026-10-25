@@ -18,6 +18,10 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -29,6 +33,13 @@ public class RecommendationService {
     private final ProductService productService;
     private final FieldValidator fieldValidator;
     private final PromptService promptService;
+
+    /** 推荐理由并发线程池：候选商品通常 3-5 个，固定小池即可 */
+    private final ExecutorService reasonExecutor = Executors.newFixedThreadPool(6, runnable -> {
+        Thread thread = new Thread(runnable, "reason-gen");
+        thread.setDaemon(true);
+        return thread;
+    });
 
     public Result generate(List<ScoredProduct> scored, Slots slots) {
         List<String> issues = new ArrayList<>();
@@ -72,8 +83,13 @@ public class RecommendationService {
         return new Result(items, llmUsed, issues);
     }
 
+    /**
+     * 为每个候选商品并发生成推荐理由。
+     * 推理模型单次输出越长延迟越高，拆成 N 个短并发请求后总耗时约等于最慢的一条。
+     */
     private Map<String, String> askLlm(List<ScoredProduct> scored, Slots slots) {
-        List<Map<String, Object>> facts = new ArrayList<>();
+        String system = promptService.text("recommend.system");
+        List<CompletableFuture<Map.Entry<String, String>>> futures = new ArrayList<>();
         for (ScoredProduct sp : scored) {
             Product p = sp.getProduct();
             Map<String, Object> fact = new LinkedHashMap<>();
@@ -83,23 +99,68 @@ public class RecommendationService {
             fact.put("stock", p.getStock());
             fact.put("rating", p.getRating());
             fact.put("attributes", JsonUtils.toMap(p.getAttributes()));
-            facts.add(fact);
+
+            String user = "用户需求: " + JsonUtils.toJson(slots)
+                    + "\n商品事实: " + JsonUtils.toJson(fact)
+                    + "\n请只为这一件商品写一条 20-60 字的中文推荐理由。"
+                    + "\n严格要求：只输出一行 JSON，形如 {\"reason\":\"推荐理由\"}，不要输出其它任何内容。";
+
+            futures.add(CompletableFuture.supplyAsync(() -> {
+                String reason = askReasonOnce(system, user);
+                if (reason == null) {
+                    // 解析失败时重试一次，避免因为一次格式抖动退回模板
+                    reason = askReasonOnce(system, user + "\n注意：上次输出无法解析，请严格只输出 JSON。");
+                }
+                return reason == null ? null : Map.entry(p.getId(), reason);
+            }, reasonExecutor));
         }
-        String system = promptService.text("recommend.system");
-        String user = "用户需求: " + JsonUtils.toJson(slots)
-                + "\n商品事实: " + JsonUtils.toJson(facts);
-        String answer = llmService.complete(system, user);
-        if (answer == null) {
-            return Map.of();
-        }
-        Map<String, Object> json = JsonUtils.toMap(JsonUtils.extractJson(answer));
-        Object reasons = json.get("reasons");
-        if (!(reasons instanceof Map<?, ?> map)) {
-            return Map.of();
-        }
+
         Map<String, String> result = new LinkedHashMap<>();
-        map.forEach((key, value) -> result.put(String.valueOf(key), String.valueOf(value)));
+        for (CompletableFuture<Map.Entry<String, String>> future : futures) {
+            try {
+                Map.Entry<String, String> entry = future.get(45, TimeUnit.SECONDS);
+                if (entry != null) {
+                    result.put(entry.getKey(), entry.getValue());
+                }
+            } catch (Exception e) {
+                log.warn("并发推荐理由生成失败: {}", e.getMessage());
+            }
+        }
         return result;
+    }
+
+    /**
+     * 调用一次 LLM 并尽量解析出理由文本。
+     * 兼容三种返回：{"reason":"..."}、{"reasons":{"id":"..."}}、以及纯文本理由。
+     */
+    private String askReasonOnce(String system, String user) {
+        String answer = llmService.complete(system, user);
+        if (answer == null || answer.isBlank()) {
+            return null;
+        }
+        try {
+            Map<String, Object> json = JsonUtils.toMap(JsonUtils.extractJson(answer));
+            Object reason = json.get("reason");
+            if (reason == null) {
+                Object reasons = json.get("reasons");
+                if (reasons instanceof Map<?, ?> map && !map.isEmpty()) {
+                    reason = map.values().iterator().next();
+                }
+            }
+            if (reason != null) {
+                String text = String.valueOf(reason).trim();
+                if (!text.isEmpty() && !"null".equalsIgnoreCase(text)) {
+                    return text;
+                }
+            }
+        } catch (Exception ignored) {
+            // 落到纯文本兜底
+        }
+        String plain = answer.trim();
+        if (plain.startsWith("{") || plain.contains("\"reason\"")) {
+            return null;
+        }
+        return plain.isEmpty() ? null : plain;
     }
 
     private String templateReason(Product product, Slots slots, Map<String, Category> categories) {

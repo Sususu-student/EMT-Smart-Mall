@@ -466,7 +466,7 @@ public class GuideAgentService {
         var trace = logService.start(taskId, conversationId, "guide-agent", "chitchat", "闲聊回复", message);
         String reply = null;
         if (llmService.isAvailable()) {
-            reply = llmService.complete(promptService.text("chitchat.system"), message);
+            reply = llmService.completeFast(promptService.text("chitchat.system"), message);
         }
         if (reply == null) {
             reply = "你好，我是智选商城的智能导购助手。你可以直接描述需求，比如“想买跑步用的蓝牙耳机，预算 300 以内”，"

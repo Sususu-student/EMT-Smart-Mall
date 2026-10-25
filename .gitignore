@@ -20,6 +20,11 @@ frontend/dist-ssr/
 *.log
 logs/
 
+# 本地敏感配置：真实 API Key / 数据库密码请放这里，不要提交
+backend/src/main/resources/application-local.yml
+backend/src/main/resources/application-secret.yml
+**/application-local.yml
+
 # 系统
 .DS_Store
 Thumbs.db

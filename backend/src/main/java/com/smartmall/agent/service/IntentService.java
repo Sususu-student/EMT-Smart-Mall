@@ -44,7 +44,7 @@ public class IntentService {
         }
         String system = promptService.text("intent.system");
         String user = "对话上下文：\n" + String.join("\n", context) + "\n\n当前用户消息：" + text;
-        String answer = llmService.complete(system, user);
+        String answer = llmService.completeFast(system, user);
         if (answer == null) {
             return rule;
         }

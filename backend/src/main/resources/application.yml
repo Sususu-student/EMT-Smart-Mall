@@ -50,11 +50,17 @@ app:
 
 llm:
   # 留空则自动降级为规则引擎，项目在无 API Key 时仍可完整演示
+  # 安全约定：不要把真实 Key 写进本文件，请用环境变量 DEEPSEEK_API_KEY 注入
   api-key: ${DEEPSEEK_API_KEY:}
   base-url: ${DEEPSEEK_BASE_URL:https://api.deepseek.com/v1}
-  model: ${DEEPSEEK_MODEL:deepseek-flash}
+  model: ${DEEPSEEK_MODEL:deepseek-v4.1-flash}
+  # 快速模型：用于意图识别、槽位提取等短输出任务；留空表示复用主模型
+  fast-model: ${DEEPSEEK_FAST_MODEL:}
   temperature: 0.3
   timeout-seconds: 30
+  # 输出 token 上限：限制推理模型的无界输出，显著降低延迟
+  short-task-max-tokens: 512
+  gen-task-max-tokens: 1600
   enabled: true
   max-consecutive-failures: 3
   cooldown-seconds: 60
