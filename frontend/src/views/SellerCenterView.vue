@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { onMounted, reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { ElMessage, ElMessageBox } from 'element-plus'
-import { productApi, sellerApi } from '@/api'
+import { ElMessage, ElMessageBox, type UploadRequestOptions } from 'element-plus'
+import { productApi, sellerApi, uploadApi } from '@/api'
 import type { Category, Product, SellerOrderRow, SellerOverview } from '@/types'
 import { dateTime, money } from '@/utils/format'
 import { useAuthStore } from '@/stores/auth'
@@ -24,6 +24,7 @@ const keyword = ref('')
 const dialog = ref(false)
 const saving = ref(false)
 const editingId = ref<string | null>(null)
+const uploading = ref(false)
 
 const form = reactive({
   name: '',
@@ -122,6 +123,36 @@ function openEdit(product: Product) {
     tags: (product.tags || []).join(',')
   })
   dialog.value = true
+}
+
+function onImagePicked(options: UploadRequestOptions) {
+  const file = options.file as File
+  if (!file) return
+  if (file.size > 5 * 1024 * 1024) {
+    ElMessage.warning('图片不能超过 5MB')
+    return
+  }
+  if (!/^image\/(jpeg|png|webp|gif)$/.test(file.type)) {
+    ElMessage.warning('只支持 jpg / png / webp / gif 格式')
+    return
+  }
+  uploading.value = true
+  uploadApi
+    .image(file)
+    .then((result) => {
+      form.image = result.url
+      ElMessage.success('图片已上传')
+    })
+    .catch(() => {
+      ElMessage.error('图片上传失败，请重试')
+    })
+    .finally(() => {
+      uploading.value = false
+    })
+}
+
+function clearImage() {
+  form.image = ''
 }
 
 function parseAttributes(): Record<string, string> {
@@ -371,8 +402,30 @@ function switchTab(name: string) {
         <el-form-item label="商品描述">
           <el-input v-model="form.description" type="textarea" :rows="3" placeholder="选填" />
         </el-form-item>
-        <el-form-item label="主图 URL">
-          <el-input v-model="form.image" placeholder="选填，留空使用占位图" />
+        <el-form-item label="商品主图">
+          <div class="upload-block">
+            <div v-if="form.image" class="upload-preview">
+              <img :src="form.image" alt="主图预览" />
+              <div class="upload-preview-actions">
+                <span class="upload-ok">已上传</span>
+                <el-button size="small" round @click="clearImage">移除</el-button>
+              </div>
+            </div>
+            <el-upload
+              v-else
+              class="upload-box"
+              drag
+              :show-file-list="false"
+              :http-request="onImagePicked"
+              accept="image/jpeg,image/png,image/webp,image/gif"
+            >
+              <div v-loading="uploading" class="upload-inner">
+                <el-icon class="upload-icon"><UploadFilled /></el-icon>
+                <p>把图片拖到这里，或<em>点击选择</em></p>
+                <span>支持 jpg / png / webp / gif，最大 5MB</span>
+              </div>
+            </el-upload>
+          </div>
         </el-form-item>
         <el-form-item label="标签（逗号分隔）">
           <el-input v-model="form.tags" placeholder="例如：降噪,长续航" />
@@ -603,6 +656,91 @@ function switchTab(name: string) {
   font-family: var(--font-digit);
   font-size: 11px;
   color: var(--muted);
+}
+
+.upload-block {
+  width: 100%;
+}
+
+.upload-box {
+  width: 100%;
+}
+
+.upload-box :deep(.el-upload),
+.upload-box :deep(.el-upload-dragger) {
+  width: 100%;
+}
+
+.upload-box :deep(.el-upload-dragger) {
+  border-radius: 12px;
+  border: 1px dashed var(--line-strong);
+  background: #fdfcf9;
+  padding: 22px 16px;
+  transition: border-color 0.22s ease, background 0.22s ease;
+}
+
+.upload-box :deep(.el-upload-dragger:hover) {
+  border-color: var(--brand);
+  background: #fff8f3;
+}
+
+.upload-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  min-height: 78px;
+  justify-content: center;
+}
+
+.upload-icon {
+  font-size: 26px;
+  color: var(--muted-light);
+}
+
+.upload-inner p {
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+
+.upload-inner p em {
+  font-style: normal;
+  color: var(--brand);
+}
+
+.upload-inner span {
+  font-size: 10px;
+  color: var(--muted-light);
+}
+
+.upload-preview {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px;
+  background: #fdfcf9;
+}
+
+.upload-preview img {
+  width: 78px;
+  height: 78px;
+  object-fit: cover;
+  border-radius: 9px;
+  background: var(--bg);
+}
+
+.upload-preview-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.upload-ok {
+  font-size: 11px;
+  color: var(--green);
 }
 
 .publish-form :deep(.el-form-item) {

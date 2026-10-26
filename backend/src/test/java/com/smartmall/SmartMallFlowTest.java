@@ -314,10 +314,69 @@ class SmartMallFlowTest {
         assertThat(sellerProductDetail.path("sellerId").asText()).isNotBlank();
         assertThat(sellerProductDetail.path("sellerName").asText()).isEqualTo("测试卖家");
 
-        // 商品已带真实图片外链与本地兜底
+        // 商品已带真实图片外链与本地兜底（每个商品图片不同）
         JsonNode imageCheck = getJson("/api/product/p_headphone_01", null);
         assertThat(imageCheck.path("image").asText()).contains("images.unsplash.com");
-        assertThat(imageCheck.path("imageFallback").asText()).startsWith("/images/external/");
+        assertThat(imageCheck.path("imageFallback").asText()).startsWith("/images/catalog/");
+
+        // 同品类不同商品应使用不同图片
+        JsonNode secondProduct = getJson("/api/product/p_headphone_02", null);
+        assertThat(secondProduct.path("image").asText())
+                .isNotEqualTo(imageCheck.path("image").asText());
+
+        // ===== 忘记密码：用户名 + 邮箱自助重置 =====
+        var resetBody = objectMapper.createObjectNode();
+        resetBody.put("username", "seller_test");
+        resetBody.put("email", "seller_test@smartmall.dev");
+        resetBody.put("newPassword", "NewPass@123");
+        // 注册时未填邮箱，这里应报不匹配
+        mvc.perform(post("/api/user/reset-password")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(resetBody)))
+                .andExpect(status().isBadRequest());
+
+        // 给测试卖家补一个邮箱后再重置
+        var profileBody = objectMapper.createObjectNode();
+        profileBody.put("email", "seller_test@smartmall.dev");
+        putJson("/api/user/profile", profileBody, sellerToken);
+        mvc.perform(post("/api/user/reset-password")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(resetBody)))
+                .andExpect(status().isOk());
+        // 用新密码可以登录
+        var reloginBody = objectMapper.createObjectNode();
+        reloginBody.put("username", "seller_test");
+        reloginBody.put("password", "NewPass@123");
+        assertThat(postJson("/api/user/login", reloginBody, null).path("token").asText()).isNotBlank();
+
+        // ===== 管理员重置指定用户密码 =====
+        var adminResetBody = objectMapper.createObjectNode();
+        String tempPassword = postJson("/api/admin/user/" + sellerReg.path("user").path("id").asText()
+                + "/reset-password", adminResetBody, adminToken).asText();
+        assertThat(tempPassword).isNotBlank();
+        // 用临时密码可以登录
+        var tempLogin = objectMapper.createObjectNode();
+        tempLogin.put("username", "seller_test");
+        tempLogin.put("password", tempPassword);
+        assertThat(postJson("/api/user/login", tempLogin, null).path("token").asText()).isNotBlank();
+
+        // ===== 图片上传：卖家可传，买家被拒，非图片被拒 =====
+        var imageFile = new org.springframework.mock.web.MockMultipartFile(
+                "file", "test.png", "image/png", "fake-image-bytes".getBytes());
+        mvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders
+                        .multipart("/api/upload/image").file(imageFile)
+                        .header("Authorization", "Bearer " + sellerToken))
+                .andExpect(status().isOk());
+        mvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders
+                        .multipart("/api/upload/image").file(imageFile)
+                        .header("Authorization", "Bearer " + token))
+                .andExpect(status().isForbidden());
+        var textFile = new org.springframework.mock.web.MockMultipartFile(
+                "file", "bad.txt", "text/plain", "not an image".getBytes());
+        mvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders
+                        .multipart("/api/upload/image").file(textFile)
+                        .header("Authorization", "Bearer " + sellerToken))
+                .andExpect(status().isBadRequest());
 
         var passwordBody = objectMapper.createObjectNode();
         passwordBody.put("oldPassword", "Demo@123");

@@ -2,7 +2,7 @@
 import { computed, onBeforeUnmount, onMounted, reactive, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
-import { productApi } from '@/api'
+import { authApi, productApi } from '@/api'
 import { useAuthStore } from '@/stores/auth'
 import { useCartStore } from '@/stores/cart'
 import type { Product } from '@/types'
@@ -15,6 +15,9 @@ const auth = useAuthStore()
 const cart = useCartStore()
 
 const mode = ref<'login' | 'register'>('login')
+const forgotDialog = ref(false)
+const forgotSaving = ref(false)
+const forgotForm = reactive({ username: '', email: '', newPassword: '', confirm: '' })
 const loading = ref(false)
 const loginForm = reactive({ username: '', password: '' })
 const registerForm = reactive({ username: '', password: '', confirm: '', nickname: '', email: '', role: 'USER' })
@@ -131,6 +134,43 @@ function redirect(fallback?: string) {
   router.replace(target)
 }
 
+function openForgot() {
+  forgotForm.username = loginForm.username || ''
+  forgotForm.email = ''
+  forgotForm.newPassword = ''
+  forgotForm.confirm = ''
+  forgotDialog.value = true
+}
+
+async function submitForgot() {
+  if (!forgotForm.username.trim() || !forgotForm.email.trim()) {
+    ElMessage.warning('请填写用户名和注册邮箱')
+    return
+  }
+  if (forgotForm.newPassword.length < 6) {
+    ElMessage.warning('新密码至少 6 位')
+    return
+  }
+  if (forgotForm.newPassword !== forgotForm.confirm) {
+    ElMessage.warning('两次输入的新密码不一致')
+    return
+  }
+  forgotSaving.value = true
+  try {
+    await authApi.resetPassword({
+      username: forgotForm.username.trim(),
+      email: forgotForm.email.trim(),
+      newPassword: forgotForm.newPassword
+    })
+    forgotDialog.value = false
+    loginForm.username = forgotForm.username.trim()
+    loginForm.password = ''
+    ElMessage.success('密码已重置，请用新密码登录')
+  } finally {
+    forgotSaving.value = false
+  }
+}
+
 function useDemo(role: 'user' | 'admin' | 'seller') {
   mode.value = 'login'
   const accounts = {
@@ -239,6 +279,9 @@ function useDemo(role: 'user' | 'admin' | 'seller') {
               <template #prefix><el-icon><Lock /></el-icon></template>
             </el-input>
           </label>
+          <div class="form-assist">
+            <button type="button" class="forgot-link" @click="openForgot">忘记密码？</button>
+          </div>
           <el-button type="primary" size="large" native-type="submit" :loading="loading" class="submit">
             登录
           </el-button>
@@ -312,6 +355,33 @@ function useDemo(role: 'user' | 'admin' | 'seller') {
         <p class="terms">登录即表示同意本演示项目的使用说明。演示环境不产生真实交易。</p>
       </div>
     </div>
+
+    <el-dialog v-model="forgotDialog" title="重置密码" width="440px">
+      <p class="forgot-tip">
+        输入你的用户名和注册时填写的邮箱，校验通过后即可设置新密码。
+      </p>
+      <el-form label-position="top">
+        <el-form-item label="用户名">
+          <el-input v-model="forgotForm.username" placeholder="你的用户名" />
+        </el-form-item>
+        <el-form-item label="注册邮箱">
+          <el-input v-model="forgotForm.email" placeholder="注册时填写的邮箱" />
+        </el-form-item>
+        <el-form-item label="新密码">
+          <el-input v-model="forgotForm.newPassword" type="password" show-password placeholder="至少 6 位" />
+        </el-form-item>
+        <el-form-item label="确认新密码">
+          <el-input v-model="forgotForm.confirm" type="password" show-password placeholder="再次输入" />
+        </el-form-item>
+      </el-form>
+      <div class="forgot-note">
+        演示环境不发送邮件，仅校验邮箱是否匹配。生产环境应改为邮件验证码或一次性链接。
+      </div>
+      <template #footer>
+        <el-button @click="forgotDialog = false">取消</el-button>
+        <el-button type="primary" :loading="forgotSaving" @click="submitForgot">重置密码</el-button>
+      </template>
+    </el-dialog>
   </div>
 </template>
 
@@ -616,6 +686,45 @@ function useDemo(role: 'user' | 'admin' | 'seller') {
   display: flex;
   flex-direction: column;
   gap: 14px;
+}
+
+/* 忘记密码入口 */
+.form-assist {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: -4px;
+}
+
+.forgot-link {
+  border: none;
+  background: transparent;
+  color: var(--brand);
+  font-size: 11px;
+  cursor: pointer;
+  padding: 0;
+  transition: opacity 0.2s ease;
+}
+
+.forgot-link:hover {
+  opacity: 0.75;
+  text-decoration: underline;
+}
+
+.forgot-tip {
+  font-size: 11px;
+  line-height: 1.7;
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+
+.forgot-note {
+  margin-top: 4px;
+  padding: 10px 12px;
+  background: #fbf8f1;
+  border-radius: 9px;
+  font-size: 10px;
+  line-height: 1.7;
+  color: var(--muted);
 }
 
 /* 注册角色选择：买家 / 卖家 */

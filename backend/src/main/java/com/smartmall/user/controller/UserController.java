@@ -7,6 +7,7 @@ import com.smartmall.user.dto.AddressRequest;
 import com.smartmall.user.dto.ChangePasswordRequest;
 import com.smartmall.user.dto.LoginRequest;
 import com.smartmall.user.dto.LoginResponse;
+import com.smartmall.user.dto.ResetPasswordRequest;
 import com.smartmall.user.dto.PreferenceUpdateRequest;
 import com.smartmall.user.dto.PreferenceVO;
 import com.smartmall.user.dto.ProfileVO;
@@ -46,6 +47,14 @@ public class UserController {
     @PostMapping("/login")
     public ApiResponse<LoginResponse> login(@Valid @RequestBody LoginRequest request) {
         return ApiResponse.ok(userService.login(request));
+    }
+
+    /** 自助找回密码：用户名 + 注册邮箱校验通过后设置新密码 */
+    @PublicApi
+    @PostMapping("/reset-password")
+    public ApiResponse<Void> resetPassword(@Valid @RequestBody ResetPasswordRequest request) {
+        userService.resetPassword(request);
+        return ApiResponse.ok();
     }
 
     @GetMapping("/profile")

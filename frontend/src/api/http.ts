@@ -50,4 +50,17 @@ export async function request<T>(config: AxiosRequestConfig): Promise<T> {
   return (await http.request(config)) as unknown as T
 }
 
+/** 上传文件：走 multipart/form-data，超时放宽到 2 分钟 */
+export async function upload<T>(url: string, file: File): Promise<T> {
+  const form = new FormData()
+  form.append('file', file)
+  return (await http.request({
+    url,
+    method: 'post',
+    data: form,
+    headers: { 'Content-Type': 'multipart/form-data' },
+    timeout: 120000
+  })) as unknown as T
+}
+
 export { TOKEN_KEY }

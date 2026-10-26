@@ -4,6 +4,7 @@ tools/
 .cache/
 backend/target/
 backend/data/
+backend/uploads/
 frontend/node_modules/
 frontend/dist/
 frontend/dist-ssr/

@@ -20,6 +20,7 @@ import com.smartmall.agent.service.ConversationService;
 import com.smartmall.agent.service.PromptService;
 import com.smartmall.agent.llm.LlmService;
 import com.smartmall.agent.tool.AgentToolService;
+import com.smartmall.user.service.UserService;
 import com.smartmall.auth.AdminOnly;
 import com.smartmall.common.ApiResponse;
 import com.smartmall.common.PageResult;
@@ -56,6 +57,7 @@ public class AdminController {
     private final PromptService promptService;
     private final LlmService llmService;
     private final AgentToolService agentToolService;
+    private final UserService userService;
 
     @GetMapping("/stats")
     public ApiResponse<DashboardVO> stats() {
@@ -147,6 +149,12 @@ public class AdminController {
     public ApiResponse<Void> updateUserStatus(@PathVariable String id, @RequestParam Integer status) {
         adminService.updateUserStatus(id, status);
         return ApiResponse.ok();
+    }
+
+    /** 管理员重置用户密码，返回临时密码（仅本次显示） */
+    @PostMapping("/user/{id}/reset-password")
+    public ApiResponse<String> resetUserPassword(@PathVariable String id) {
+        return ApiResponse.ok(userService.adminResetPassword(id));
     }
 
     @GetMapping("/agent-logs")

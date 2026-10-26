@@ -104,7 +104,7 @@ function onCommand(command: string) {
           </button>
 
           <template v-if="auth.isLoggedIn">
-            <el-dropdown trigger="click" @command="onCommand">
+            <el-dropdown trigger="click" :teleported="true" @command="onCommand">
               <button class="user-trigger">
                 <span class="avatar">{{ (auth.user?.nickname || auth.user?.username || '智').slice(0, 1) }}</span>
                 <span class="user-name">{{ auth.user?.nickname || auth.user?.username }}</span>
@@ -130,7 +130,7 @@ function onCommand(command: string) {
       </div>
     </header>
 
-    <el-drawer v-model="drawer" direction="rtl" size="78%" :with-header="false">
+    <el-drawer v-model="drawer" direction="rtl" size="78%" :with-header="false" :append-to-body="true">
       <div class="mobile-menu">
         <div class="mobile-brand">
           <span class="brand-mark">智</span>

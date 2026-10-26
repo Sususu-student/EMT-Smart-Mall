@@ -74,7 +74,7 @@ async function openItem(item: NotificationItem) {
       </el-badge>
     </button>
 
-    <el-drawer v-model="visible" title="消息通知" direction="rtl" size="390px">
+    <el-drawer v-model="visible" title="消息通知" direction="rtl" size="390px" :append-to-body="true">
       <div class="notice-head">
         <span>{{ unread ? `${unread} 条未读` : '全部已读' }}</span>
         <button v-if="unread" class="read-all" @click="readAll">全部已读</button>

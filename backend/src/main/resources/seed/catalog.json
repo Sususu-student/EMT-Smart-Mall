@@ -679,7 +679,7 @@
       "tags": "蓝牙耳机,运动,降噪,防水,跑步,声屿",
       "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/headphone.jpg"
+      "imageFallback": "/images/catalog/headphone/1.jpg"
     },
     {
       "id": "p_headphone_02",
@@ -702,9 +702,9 @@
         "蓝牙版本": "5.4"
       },
       "tags": "蓝牙耳机,运动,通勤,防水,跑步,澎湃",
-      "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/headphone.jpg"
+      "imageFallback": "/images/catalog/headphone/2.jpg"
     },
     {
       "id": "p_headphone_03",
@@ -727,9 +727,9 @@
         "蓝牙版本": "5.2"
       },
       "tags": "蓝牙耳机,运动,通勤,防水,跑步,律动",
-      "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/headphone.jpg"
+      "imageFallback": "/images/catalog/headphone/3.jpg"
     },
     {
       "id": "p_headphone_04",
@@ -752,9 +752,9 @@
         "蓝牙版本": "5.3"
       },
       "tags": "蓝牙耳机,运动,降噪,防水,跑步,澎湃",
-      "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1484704849700-f032a568e944?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/headphone.jpg"
+      "imageFallback": "/images/catalog/headphone/4.jpg"
     },
     {
       "id": "p_headphone_05",
@@ -777,9 +777,9 @@
         "蓝牙版本": "5.4"
       },
       "tags": "蓝牙耳机,运动,通勤,防水,跑步,声屿",
-      "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1545127398-14699f92334b?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/headphone.jpg"
+      "imageFallback": "/images/catalog/headphone/5.jpg"
     },
     {
       "id": "p_headphone_06",
@@ -802,9 +802,9 @@
         "蓝牙版本": "5.2"
       },
       "tags": "蓝牙耳机,运动,通勤,防水,跑步,澎湃",
-      "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1577174881658-0f30ed549adc?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/headphone.jpg"
+      "imageFallback": "/images/catalog/headphone/6.jpg"
     },
     {
       "id": "p_headphone_07",
@@ -827,9 +827,9 @@
         "蓝牙版本": "5.3"
       },
       "tags": "蓝牙耳机,运动,通勤,防水,跑步,云听",
-      "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1524678606370-a47ad25cb82a?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/headphone.jpg"
+      "imageFallback": "/images/catalog/headphone/7.jpg"
     },
     {
       "id": "p_headphone_08",
@@ -852,9 +852,9 @@
         "蓝牙版本": "5.4"
       },
       "tags": "蓝牙耳机,运动,通勤,防水,跑步,声屿",
-      "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/headphone.jpg"
+      "imageFallback": "/images/catalog/headphone/8.jpg"
     },
     {
       "id": "p_headphone_09",
@@ -877,9 +877,9 @@
         "蓝牙版本": "5.2"
       },
       "tags": "蓝牙耳机,运动,通勤,防水,跑步,云听",
-      "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/headphone.jpg"
+      "imageFallback": "/images/catalog/headphone/9.jpg"
     },
     {
       "id": "p_headphone_10",
@@ -902,9 +902,9 @@
         "蓝牙版本": "5.3"
       },
       "tags": "蓝牙耳机,运动,降噪,防水,跑步,声屿",
-      "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1606220945770-b5b6c2c55bf1?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/headphone.jpg"
+      "imageFallback": "/images/catalog/headphone/10.jpg"
     },
     {
       "id": "p_phone_01",
@@ -929,7 +929,7 @@
       "tags": "智能手机,5G,拍照,日常,星野",
       "image": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/phone.jpg"
+      "imageFallback": "/images/catalog/phone/1.jpg"
     },
     {
       "id": "p_phone_02",
@@ -952,9 +952,9 @@
         "重量": 189
       },
       "tags": "智能手机,5G,拍照,大存储,星野",
-      "image": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/phone.jpg"
+      "imageFallback": "/images/catalog/phone/2.jpg"
     },
     {
       "id": "p_phone_03",
@@ -977,9 +977,9 @@
         "重量": 199
       },
       "tags": "智能手机,5G,拍照,大存储,极光",
-      "image": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1580910051074-3eb694886505?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/phone.jpg"
+      "imageFallback": "/images/catalog/phone/3.jpg"
     },
     {
       "id": "p_phone_04",
@@ -1002,9 +1002,9 @@
         "重量": 210
       },
       "tags": "智能手机,5G,拍照,日常,极光",
-      "image": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1523206489230-c012c64b2b48?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/phone.jpg"
+      "imageFallback": "/images/catalog/phone/4.jpg"
     },
     {
       "id": "p_phone_05",
@@ -1027,9 +1027,9 @@
         "重量": 178
       },
       "tags": "智能手机,5G,拍照,大存储,星野",
-      "image": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/phone.jpg"
+      "imageFallback": "/images/catalog/phone/5.jpg"
     },
     {
       "id": "p_phone_06",
@@ -1052,9 +1052,9 @@
         "重量": 189
       },
       "tags": "智能手机,5G,拍照,大存储,青柚",
-      "image": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1567581935884-3349723552ca?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/phone.jpg"
+      "imageFallback": "/images/catalog/phone/6.jpg"
     },
     {
       "id": "p_phone_07",
@@ -1077,9 +1077,9 @@
         "重量": 199
       },
       "tags": "智能手机,5G,拍照,日常,青柚",
-      "image": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/phone.jpg"
+      "imageFallback": "/images/catalog/phone/7.jpg"
     },
     {
       "id": "p_phone_08",
@@ -1102,9 +1102,9 @@
         "重量": 210
       },
       "tags": "智能手机,5G,拍照,大存储,云舟",
-      "image": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1616348436168-de43ad0db179?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/phone.jpg"
+      "imageFallback": "/images/catalog/phone/8.jpg"
     },
     {
       "id": "p_phone_09",
@@ -1127,9 +1127,9 @@
         "重量": 178
       },
       "tags": "智能手机,5G,拍照,大存储,云舟",
-      "image": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/phone.jpg"
+      "imageFallback": "/images/catalog/phone/9.jpg"
     },
     {
       "id": "p_phone_10",
@@ -1152,9 +1152,9 @@
         "重量": 189
       },
       "tags": "智能手机,5G,拍照,日常,青柚",
-      "image": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1585060544812-6b45742d762f?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/phone.jpg"
+      "imageFallback": "/images/catalog/phone/10.jpg"
     },
     {
       "id": "p_watch_01",
@@ -1178,7 +1178,7 @@
       "tags": "智能手表,运动,健康监测,防水,云听",
       "image": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/watch.jpg"
+      "imageFallback": "/images/catalog/watch/1.jpg"
     },
     {
       "id": "p_watch_02",
@@ -1200,9 +1200,9 @@
         "重量": 38
       },
       "tags": "智能手表,运动,健康监测,防水,云听",
-      "image": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/watch.jpg"
+      "imageFallback": "/images/catalog/watch/2.jpg"
     },
     {
       "id": "p_watch_03",
@@ -1224,9 +1224,9 @@
         "重量": 45
       },
       "tags": "智能手表,运动,健康监测,防水,星野",
-      "image": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1434493789847-2f02dc6ca35d?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/watch.jpg"
+      "imageFallback": "/images/catalog/watch/3.jpg"
     },
     {
       "id": "p_watch_04",
@@ -1248,9 +1248,9 @@
         "重量": 32
       },
       "tags": "智能手表,运动,健康监测,防水,律动",
-      "image": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1508057198894-247b23fe5ade?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/watch.jpg"
+      "imageFallback": "/images/catalog/watch/4.jpg"
     },
     {
       "id": "p_watch_05",
@@ -1272,9 +1272,9 @@
         "重量": 38
       },
       "tags": "智能手表,运动,健康监测,防水,律动",
-      "image": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/watch.jpg"
+      "imageFallback": "/images/catalog/watch/5.jpg"
     },
     {
       "id": "p_watch_06",
@@ -1296,9 +1296,9 @@
         "重量": 45
       },
       "tags": "智能手表,运动,健康监测,防水,律动",
-      "image": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1539874754764-5a96559165b0?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/watch.jpg"
+      "imageFallback": "/images/catalog/watch/6.jpg"
     },
     {
       "id": "p_watch_07",
@@ -1320,9 +1320,9 @@
         "重量": 32
       },
       "tags": "智能手表,运动,健康监测,防水,星野",
-      "image": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1548171915-e79a380a2a4b?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/watch.jpg"
+      "imageFallback": "/images/catalog/watch/7.jpg"
     },
     {
       "id": "p_watch_08",
@@ -1344,9 +1344,9 @@
         "重量": 38
       },
       "tags": "智能手表,运动,健康监测,防水,律动",
-      "image": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/watch.jpg"
+      "imageFallback": "/images/catalog/watch/8.jpg"
     },
     {
       "id": "p_watch_09",
@@ -1368,9 +1368,9 @@
         "重量": 45
       },
       "tags": "智能手表,运动,健康监测,防水,云听",
-      "image": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1622434641406-a158123450f9?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/watch.jpg"
+      "imageFallback": "/images/catalog/watch/9.jpg"
     },
     {
       "id": "p_watch_10",
@@ -1392,9 +1392,9 @@
         "重量": 32
       },
       "tags": "智能手表,运动,健康监测,防水,云听",
-      "image": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1594534475808-b18fc33b045e?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/watch.jpg"
+      "imageFallback": "/images/catalog/watch/10.jpg"
     },
     {
       "id": "p_laptop_01",
@@ -1419,7 +1419,7 @@
       "tags": "笔记本电脑,轻薄本,便携,办公,极光",
       "image": "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/laptop.jpg"
+      "imageFallback": "/images/catalog/laptop/1.jpg"
     },
     {
       "id": "p_laptop_02",
@@ -1442,9 +1442,9 @@
         "续航": 10
       },
       "tags": "笔记本电脑,轻薄本,便携,办公,云舟",
-      "image": "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/laptop.jpg"
+      "imageFallback": "/images/catalog/laptop/2.jpg"
     },
     {
       "id": "p_laptop_03",
@@ -1467,9 +1467,9 @@
         "续航": 12
       },
       "tags": "笔记本电脑,轻薄本,大屏,办公,磐石",
-      "image": "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/laptop.jpg"
+      "imageFallback": "/images/catalog/laptop/3.jpg"
     },
     {
       "id": "p_laptop_04",
@@ -1492,9 +1492,9 @@
         "续航": 15
       },
       "tags": "笔记本电脑,轻薄本,大屏,办公,云舟",
-      "image": "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/laptop.jpg"
+      "imageFallback": "/images/catalog/laptop/4.jpg"
     },
     {
       "id": "p_laptop_05",
@@ -1517,9 +1517,9 @@
         "续航": 8
       },
       "tags": "笔记本电脑,轻薄本,便携,办公,云舟",
-      "image": "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/laptop.jpg"
+      "imageFallback": "/images/catalog/laptop/5.jpg"
     },
     {
       "id": "p_laptop_06",
@@ -1542,9 +1542,9 @@
         "续航": 10
       },
       "tags": "笔记本电脑,轻薄本,便携,办公,磐石",
-      "image": "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1484788984921-03950022c9ef?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/laptop.jpg"
+      "imageFallback": "/images/catalog/laptop/6.jpg"
     },
     {
       "id": "p_laptop_07",
@@ -1567,9 +1567,9 @@
         "续航": 12
       },
       "tags": "笔记本电脑,轻薄本,大屏,办公,云舟",
-      "image": "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/laptop.jpg"
+      "imageFallback": "/images/catalog/laptop/7.jpg"
     },
     {
       "id": "p_laptop_08",
@@ -1592,9 +1592,9 @@
         "续航": 15
       },
       "tags": "笔记本电脑,轻薄本,大屏,办公,磐石",
-      "image": "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1593642702821-c8da6771f0c6?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/laptop.jpg"
+      "imageFallback": "/images/catalog/laptop/9.jpg"
     },
     {
       "id": "p_laptop_09",
@@ -1617,9 +1617,9 @@
         "续航": 8
       },
       "tags": "笔记本电脑,轻薄本,便携,办公,磐石",
-      "image": "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1603302576837-37561b2e2302?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/laptop.jpg"
+      "imageFallback": "/images/catalog/laptop/10.jpg"
     },
     {
       "id": "p_laptop_10",
@@ -1644,7 +1644,7 @@
       "tags": "笔记本电脑,轻薄本,便携,办公,极光",
       "image": "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/laptop.jpg"
+      "imageFallback": "/images/catalog/laptop/1.jpg"
     },
     {
       "id": "p_keyboard_01",
@@ -1668,7 +1668,7 @@
       "tags": "机械键盘,办公,无线,红轴,律动",
       "image": "https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/keyboard.jpg"
+      "imageFallback": "/images/catalog/keyboard/1.jpg"
     },
     {
       "id": "p_keyboard_02",
@@ -1690,9 +1690,9 @@
         "重量": 680
       },
       "tags": "机械键盘,办公,有线,茶轴,律动",
-      "image": "https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1595044426077-d36d9236d54a?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/keyboard.jpg"
+      "imageFallback": "/images/catalog/keyboard/2.jpg"
     },
     {
       "id": "p_keyboard_03",
@@ -1714,9 +1714,9 @@
         "重量": 820
       },
       "tags": "机械键盘,办公,有线,青轴,云舟",
-      "image": "https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/keyboard.jpg"
+      "imageFallback": "/images/catalog/keyboard/3.jpg"
     },
     {
       "id": "p_keyboard_04",
@@ -1738,9 +1738,9 @@
         "重量": 950
       },
       "tags": "机械键盘,办公,无线,静音红轴,磐石",
-      "image": "https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1601445638532-3c6f6c3aa1d6?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/keyboard.jpg"
+      "imageFallback": "/images/catalog/keyboard/4.jpg"
     },
     {
       "id": "p_keyboard_05",
@@ -1762,9 +1762,9 @@
         "重量": 520
       },
       "tags": "机械键盘,办公,有线,红轴,磐石",
-      "image": "https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1615869442320-fd02a129c77c?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/keyboard.jpg"
+      "imageFallback": "/images/catalog/keyboard/5.jpg"
     },
     {
       "id": "p_keyboard_06",
@@ -1786,9 +1786,9 @@
         "重量": 680
       },
       "tags": "机械键盘,办公,有线,茶轴,云舟",
-      "image": "https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1541140532154-b024d705b90a?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/keyboard.jpg"
+      "imageFallback": "/images/catalog/keyboard/6.jpg"
     },
     {
       "id": "p_keyboard_07",
@@ -1812,7 +1812,7 @@
       "tags": "机械键盘,办公,无线,青轴,云舟",
       "image": "https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/keyboard.jpg"
+      "imageFallback": "/images/catalog/keyboard/1.jpg"
     },
     {
       "id": "p_keyboard_08",
@@ -1834,9 +1834,9 @@
         "重量": 950
       },
       "tags": "机械键盘,办公,有线,静音红轴,云舟",
-      "image": "https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1595044426077-d36d9236d54a?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/keyboard.jpg"
+      "imageFallback": "/images/catalog/keyboard/2.jpg"
     },
     {
       "id": "p_keyboard_09",
@@ -1858,9 +1858,9 @@
         "重量": 520
       },
       "tags": "机械键盘,办公,有线,红轴,云舟",
-      "image": "https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/keyboard.jpg"
+      "imageFallback": "/images/catalog/keyboard/3.jpg"
     },
     {
       "id": "p_keyboard_10",
@@ -1882,9 +1882,9 @@
         "重量": 680
       },
       "tags": "机械键盘,办公,无线,茶轴,云舟",
-      "image": "https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1601445638532-3c6f6c3aa1d6?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/keyboard.jpg"
+      "imageFallback": "/images/catalog/keyboard/4.jpg"
     },
     {
       "id": "p_running_01",
@@ -1908,7 +1908,7 @@
       "tags": "跑步鞋,运动,缓震,透气,公路,行野",
       "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/running.jpg"
+      "imageFallback": "/images/catalog/running/1.jpg"
     },
     {
       "id": "p_running_02",
@@ -1930,9 +1930,9 @@
         "适合路面": "跑道"
       },
       "tags": "跑步鞋,运动,缓震,透气,跑道,步履",
-      "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/running.jpg"
+      "imageFallback": "/images/catalog/running/2.jpg"
     },
     {
       "id": "p_running_03",
@@ -1954,9 +1954,9 @@
         "适合路面": "全地形"
       },
       "tags": "跑步鞋,运动,缓震,透气,全地形,风驰",
-      "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/running.jpg"
+      "imageFallback": "/images/catalog/running/3.jpg"
     },
     {
       "id": "p_running_04",
@@ -1978,9 +1978,9 @@
         "适合路面": "越野"
       },
       "tags": "跑步鞋,运动,缓震,透气,越野,步履",
-      "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1560769629-975ec94e6a86?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/running.jpg"
+      "imageFallback": "/images/catalog/running/4.jpg"
     },
     {
       "id": "p_running_05",
@@ -2002,9 +2002,9 @@
         "适合路面": "公路"
       },
       "tags": "跑步鞋,运动,缓震,透气,公路,行野",
-      "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/running.jpg"
+      "imageFallback": "/images/catalog/running/5.jpg"
     },
     {
       "id": "p_running_06",
@@ -2026,9 +2026,9 @@
         "适合路面": "跑道"
       },
       "tags": "跑步鞋,运动,缓震,透气,跑道,行野",
-      "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/running.jpg"
+      "imageFallback": "/images/catalog/running/6.jpg"
     },
     {
       "id": "p_running_07",
@@ -2050,9 +2050,9 @@
         "适合路面": "全地形"
       },
       "tags": "跑步鞋,运动,缓震,透气,全地形,步履",
-      "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1587563871167-1ee9c731aefb?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/running.jpg"
+      "imageFallback": "/images/catalog/running/7.jpg"
     },
     {
       "id": "p_running_08",
@@ -2074,9 +2074,9 @@
         "适合路面": "越野"
       },
       "tags": "跑步鞋,运动,缓震,透气,越野,风驰",
-      "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1539185441755-769473a23570?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/running.jpg"
+      "imageFallback": "/images/catalog/running/8.jpg"
     },
     {
       "id": "p_running_09",
@@ -2098,9 +2098,9 @@
         "适合路面": "公路"
       },
       "tags": "跑步鞋,运动,缓震,透气,公路,风驰",
-      "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1465453869711-7e174808ace9?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/running.jpg"
+      "imageFallback": "/images/catalog/running/9.jpg"
     },
     {
       "id": "p_running_10",
@@ -2122,9 +2122,9 @@
         "适合路面": "跑道"
       },
       "tags": "跑步鞋,运动,缓震,透气,跑道,步履",
-      "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1491553895911-0055eca6402d?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/running.jpg"
+      "imageFallback": "/images/catalog/running/10.jpg"
     },
     {
       "id": "p_yoga_01",
@@ -2148,7 +2148,7 @@
       "tags": "瑜伽垫,健身,防滑,TPE,行野",
       "image": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/yoga.jpg"
+      "imageFallback": "/images/catalog/yoga/1.jpg"
     },
     {
       "id": "p_yoga_02",
@@ -2170,9 +2170,9 @@
         "材质": "天然橡胶"
       },
       "tags": "瑜伽垫,健身,防滑,天然橡胶,栖居",
-      "image": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1575052814086-f385e2e2ad1b?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/yoga.jpg"
+      "imageFallback": "/images/catalog/yoga/2.jpg"
     },
     {
       "id": "p_yoga_03",
@@ -2194,9 +2194,9 @@
         "材质": "PU"
       },
       "tags": "瑜伽垫,健身,防滑,PU,行野",
-      "image": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/yoga.jpg"
+      "imageFallback": "/images/catalog/yoga/3.jpg"
     },
     {
       "id": "p_yoga_04",
@@ -2218,9 +2218,9 @@
         "材质": "TPE"
       },
       "tags": "瑜伽垫,健身,防滑,TPE,行野",
-      "image": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/yoga.jpg"
+      "imageFallback": "/images/catalog/yoga/4.jpg"
     },
     {
       "id": "p_yoga_05",
@@ -2242,9 +2242,9 @@
         "材质": "天然橡胶"
       },
       "tags": "瑜伽垫,健身,防滑,天然橡胶,行野",
-      "image": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/yoga.jpg"
+      "imageFallback": "/images/catalog/yoga/5.jpg"
     },
     {
       "id": "p_yoga_06",
@@ -2266,9 +2266,9 @@
         "材质": "PU"
       },
       "tags": "瑜伽垫,健身,防滑,PU,云履",
-      "image": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1588286840104-8957b019727f?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/yoga.jpg"
+      "imageFallback": "/images/catalog/yoga/6.jpg"
     },
     {
       "id": "p_yoga_07",
@@ -2290,9 +2290,9 @@
         "材质": "TPE"
       },
       "tags": "瑜伽垫,健身,防滑,TPE,行野",
-      "image": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1552196563-55cd4e45efb3?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/yoga.jpg"
+      "imageFallback": "/images/catalog/yoga/7.jpg"
     },
     {
       "id": "p_yoga_08",
@@ -2314,9 +2314,9 @@
         "材质": "天然橡胶"
       },
       "tags": "瑜伽垫,健身,防滑,天然橡胶,行野",
-      "image": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1591291621164-2c6367723315?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/yoga.jpg"
+      "imageFallback": "/images/catalog/yoga/8.jpg"
     },
     {
       "id": "p_yoga_09",
@@ -2338,9 +2338,9 @@
         "材质": "PU"
       },
       "tags": "瑜伽垫,健身,防滑,PU,云履",
-      "image": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1601925260368-ae2f83cf8b7f?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/yoga.jpg"
+      "imageFallback": "/images/catalog/yoga/9.jpg"
     },
     {
       "id": "p_yoga_10",
@@ -2362,9 +2362,9 @@
         "材质": "TPE"
       },
       "tags": "瑜伽垫,健身,防滑,TPE,栖居",
-      "image": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1518310383802-640c2de311b2?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/yoga.jpg"
+      "imageFallback": "/images/catalog/yoga/10.jpg"
     },
     {
       "id": "p_skincare_01",
@@ -2388,7 +2388,7 @@
       "tags": "护肤品,保湿,干性肌,日常护理,素研",
       "image": "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/skincare.jpg"
+      "imageFallback": "/images/catalog/skincare/1.jpg"
     },
     {
       "id": "p_skincare_02",
@@ -2410,9 +2410,9 @@
         "功效": "修护"
       },
       "tags": "护肤品,修护,油性肌,防晒,青柚",
-      "image": "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/skincare.jpg"
+      "imageFallback": "/images/catalog/skincare/2.jpg"
     },
     {
       "id": "p_skincare_03",
@@ -2434,9 +2434,9 @@
         "功效": "美白"
       },
       "tags": "护肤品,美白,混合肌,防晒,青柚",
-      "image": "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/skincare.jpg"
+      "imageFallback": "/images/catalog/skincare/3.jpg"
     },
     {
       "id": "p_skincare_04",
@@ -2458,9 +2458,9 @@
         "功效": "抗皱"
       },
       "tags": "护肤品,抗皱,敏感肌,日常护理,素研",
-      "image": "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/skincare.jpg"
+      "imageFallback": "/images/catalog/skincare/4.jpg"
     },
     {
       "id": "p_skincare_05",
@@ -2482,9 +2482,9 @@
         "功效": "保湿"
       },
       "tags": "护肤品,保湿,干性肌,防晒,青柚",
-      "image": "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/skincare.jpg"
+      "imageFallback": "/images/catalog/skincare/5.jpg"
     },
     {
       "id": "p_skincare_06",
@@ -2506,9 +2506,9 @@
         "功效": "修护"
       },
       "tags": "护肤品,修护,油性肌,防晒,素研",
-      "image": "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1612817288484-6f916006741a?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/skincare.jpg"
+      "imageFallback": "/images/catalog/skincare/6.jpg"
     },
     {
       "id": "p_skincare_07",
@@ -2530,9 +2530,9 @@
         "功效": "美白"
       },
       "tags": "护肤品,美白,混合肌,日常护理,凝光",
-      "image": "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1585652757141-8837d676fac8?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/skincare.jpg"
+      "imageFallback": "/images/catalog/skincare/7.jpg"
     },
     {
       "id": "p_skincare_08",
@@ -2554,9 +2554,9 @@
         "功效": "抗皱"
       },
       "tags": "护肤品,抗皱,敏感肌,防晒,青柚",
-      "image": "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/skincare.jpg"
+      "imageFallback": "/images/catalog/skincare/8.jpg"
     },
     {
       "id": "p_skincare_09",
@@ -2578,9 +2578,9 @@
         "功效": "保湿"
       },
       "tags": "护肤品,保湿,干性肌,防晒,凝光",
-      "image": "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/skincare.jpg"
+      "imageFallback": "/images/catalog/skincare/9.jpg"
     },
     {
       "id": "p_skincare_10",
@@ -2602,9 +2602,9 @@
         "功效": "修护"
       },
       "tags": "护肤品,修护,油性肌,日常护理,青柚",
-      "image": "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1512207736890-6ffed8a84e8d?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/skincare.jpg"
+      "imageFallback": "/images/catalog/skincare/10.jpg"
     },
     {
       "id": "p_coffee_01",
@@ -2628,7 +2628,7 @@
       "tags": "咖啡机,半自动,家用,手动,晨光",
       "image": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/coffee.jpg"
+      "imageFallback": "/images/catalog/coffee/1.jpg"
     },
     {
       "id": "p_coffee_02",
@@ -2650,9 +2650,9 @@
         "清洗方式": "可拆卸"
       },
       "tags": "咖啡机,半自动,家用,可拆卸,晨光",
-      "image": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1517668808822-9ebb02f2a0e6?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/coffee.jpg"
+      "imageFallback": "/images/catalog/coffee/2.jpg"
     },
     {
       "id": "p_coffee_03",
@@ -2674,9 +2674,9 @@
         "清洗方式": "自动清洗"
       },
       "tags": "咖啡机,半自动,家用,自动清洗,岩咖",
-      "image": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/coffee.jpg"
+      "imageFallback": "/images/catalog/coffee/3.jpg"
     },
     {
       "id": "p_coffee_04",
@@ -2698,9 +2698,9 @@
         "清洗方式": "手动"
       },
       "tags": "咖啡机,半自动,家用,手动,晨光",
-      "image": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/coffee.jpg"
+      "imageFallback": "/images/catalog/coffee/4.jpg"
     },
     {
       "id": "p_coffee_05",
@@ -2722,9 +2722,9 @@
         "清洗方式": "可拆卸"
       },
       "tags": "咖啡机,半自动,家用,可拆卸,晨光",
-      "image": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1572442388796-11668a67e53d?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/coffee.jpg"
+      "imageFallback": "/images/catalog/coffee/5.jpg"
     },
     {
       "id": "p_coffee_06",
@@ -2746,9 +2746,9 @@
         "清洗方式": "自动清洗"
       },
       "tags": "咖啡机,半自动,家用,自动清洗,岩咖",
-      "image": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/coffee.jpg"
+      "imageFallback": "/images/catalog/coffee/6.jpg"
     },
     {
       "id": "p_coffee_07",
@@ -2770,9 +2770,9 @@
         "清洗方式": "手动"
       },
       "tags": "咖啡机,半自动,家用,手动,栖居",
-      "image": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/coffee.jpg"
+      "imageFallback": "/images/catalog/coffee/7.jpg"
     },
     {
       "id": "p_coffee_08",
@@ -2794,9 +2794,9 @@
         "清洗方式": "可拆卸"
       },
       "tags": "咖啡机,半自动,家用,可拆卸,晨光",
-      "image": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/coffee.jpg"
+      "imageFallback": "/images/catalog/coffee/8.jpg"
     },
     {
       "id": "p_coffee_09",
@@ -2818,9 +2818,9 @@
         "清洗方式": "自动清洗"
       },
       "tags": "咖啡机,半自动,家用,自动清洗,岩咖",
-      "image": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/coffee.jpg"
+      "imageFallback": "/images/catalog/coffee/9.jpg"
     },
     {
       "id": "p_coffee_10",
@@ -2842,9 +2842,9 @@
         "清洗方式": "手动"
       },
       "tags": "咖啡机,半自动,家用,手动,栖居",
-      "image": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/coffee.jpg"
+      "imageFallback": "/images/catalog/coffee/10.jpg"
     },
     {
       "id": "p_purifier_01",
@@ -2868,7 +2868,7 @@
       "tags": "空气净化器,除甲醛,静音,家用,磐石",
       "image": "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/purifier.jpg"
+      "imageFallback": "/images/catalog/purifier/1.jpg"
     },
     {
       "id": "p_purifier_02",
@@ -2890,9 +2890,9 @@
         "功率": 50
       },
       "tags": "空气净化器,除甲醛,静音,家用,磐石",
-      "image": "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1585771724684-38269d6639fd?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/purifier.jpg"
+      "imageFallback": "/images/catalog/purifier/2.jpg"
     },
     {
       "id": "p_purifier_03",
@@ -2914,9 +2914,9 @@
         "功率": 65
       },
       "tags": "空气净化器,除甲醛,静音,家用,晨光",
-      "image": "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/purifier.jpg"
+      "imageFallback": "/images/catalog/purifier/3.jpg"
     },
     {
       "id": "p_purifier_04",
@@ -2938,9 +2938,9 @@
         "功率": 35
       },
       "tags": "空气净化器,除甲醛,静音,家用,磐石",
-      "image": "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1610557892470-55d9e80c0bce?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/purifier.jpg"
+      "imageFallback": "/images/catalog/purifier/5.jpg"
     },
     {
       "id": "p_purifier_05",
@@ -2962,9 +2962,9 @@
         "功率": 50
       },
       "tags": "空气净化器,除甲醛,静音,家用,栖居",
-      "image": "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/purifier.jpg"
+      "imageFallback": "/images/catalog/purifier/6.jpg"
     },
     {
       "id": "p_purifier_06",
@@ -2988,7 +2988,7 @@
       "tags": "空气净化器,除甲醛,静音,家用,磐石",
       "image": "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/purifier.jpg"
+      "imageFallback": "/images/catalog/purifier/1.jpg"
     },
     {
       "id": "p_purifier_07",
@@ -3010,9 +3010,9 @@
         "功率": 35
       },
       "tags": "空气净化器,除甲醛,静音,家用,栖居",
-      "image": "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1585771724684-38269d6639fd?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/purifier.jpg"
+      "imageFallback": "/images/catalog/purifier/2.jpg"
     },
     {
       "id": "p_purifier_08",
@@ -3034,9 +3034,9 @@
         "功率": 50
       },
       "tags": "空气净化器,除甲醛,静音,家用,磐石",
-      "image": "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/purifier.jpg"
+      "imageFallback": "/images/catalog/purifier/3.jpg"
     },
     {
       "id": "p_purifier_09",
@@ -3058,9 +3058,9 @@
         "功率": 65
       },
       "tags": "空气净化器,除甲醛,静音,家用,晨光",
-      "image": "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1610557892470-55d9e80c0bce?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/purifier.jpg"
+      "imageFallback": "/images/catalog/purifier/5.jpg"
     },
     {
       "id": "p_purifier_10",
@@ -3082,9 +3082,9 @@
         "功率": 35
       },
       "tags": "空气净化器,除甲醛,静音,家用,磐石",
-      "image": "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/purifier.jpg"
+      "imageFallback": "/images/catalog/purifier/6.jpg"
     },
     {
       "id": "p_beans_01",
@@ -3108,7 +3108,7 @@
       "tags": "咖啡豆,浅烘,埃塞俄比亚,花香果酸,晨光",
       "image": "https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/beans.jpg"
+      "imageFallback": "/images/catalog/beans/1.jpg"
     },
     {
       "id": "p_beans_02",
@@ -3130,9 +3130,9 @@
         "风味": "坚果可可"
       },
       "tags": "咖啡豆,中烘,哥伦比亚,坚果可可,晨光",
-      "image": "https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/beans.jpg"
+      "imageFallback": "/images/catalog/beans/2.jpg"
     },
     {
       "id": "p_beans_03",
@@ -3154,9 +3154,9 @@
         "风味": "焦糖甜感"
       },
       "tags": "咖啡豆,深烘,云南,焦糖甜感,晨光",
-      "image": "https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1524350876685-274059332603?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/beans.jpg"
+      "imageFallback": "/images/catalog/beans/3.jpg"
     },
     {
       "id": "p_beans_04",
@@ -3178,9 +3178,9 @@
         "风味": "莓果"
       },
       "tags": "咖啡豆,浅烘,巴西,莓果,山间",
-      "image": "https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1587734195503-904fca47e0e9?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/beans.jpg"
+      "imageFallback": "/images/catalog/beans/4.jpg"
     },
     {
       "id": "p_beans_05",
@@ -3202,9 +3202,9 @@
         "风味": "花香果酸"
       },
       "tags": "咖啡豆,中烘,埃塞俄比亚,花香果酸,山间",
-      "image": "https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1611854779393-1b2da9d400fe?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/beans.jpg"
+      "imageFallback": "/images/catalog/beans/5.jpg"
     },
     {
       "id": "p_beans_06",
@@ -3226,9 +3226,9 @@
         "风味": "坚果可可"
       },
       "tags": "咖啡豆,深烘,哥伦比亚,坚果可可,山间",
-      "image": "https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1502462041640-b3d7e50d0662?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/beans.jpg"
+      "imageFallback": "/images/catalog/beans/6.jpg"
     },
     {
       "id": "p_beans_07",
@@ -3250,9 +3250,9 @@
         "风味": "焦糖甜感"
       },
       "tags": "咖啡豆,浅烘,云南,焦糖甜感,晨光",
-      "image": "https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/beans.jpg"
+      "imageFallback": "/images/catalog/beans/7.jpg"
     },
     {
       "id": "p_beans_08",
@@ -3274,9 +3274,9 @@
         "风味": "莓果"
       },
       "tags": "咖啡豆,中烘,巴西,莓果,晨光",
-      "image": "https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/beans.jpg"
+      "imageFallback": "/images/catalog/beans/8.jpg"
     },
     {
       "id": "p_beans_09",
@@ -3298,9 +3298,9 @@
         "风味": "花香果酸"
       },
       "tags": "咖啡豆,深烘,埃塞俄比亚,花香果酸,岩咖",
-      "image": "https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/beans.jpg"
+      "imageFallback": "/images/catalog/beans/9.jpg"
     },
     {
       "id": "p_beans_10",
@@ -3322,9 +3322,9 @@
         "风味": "坚果可可"
       },
       "tags": "咖啡豆,浅烘,哥伦比亚,坚果可可,山间",
-      "image": "https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/beans.jpg"
+      "imageFallback": "/images/catalog/beans/10.jpg"
     },
     {
       "id": "p_backpack_01",
@@ -3348,7 +3348,7 @@
       "tags": "双肩包,通勤,电脑包,防水,栖居",
       "image": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/backpack.jpg"
+      "imageFallback": "/images/catalog/backpack/1.jpg"
     },
     {
       "id": "p_backpack_02",
@@ -3370,9 +3370,9 @@
         "材质": "聚酯纤维"
       },
       "tags": "双肩包,通勤,电脑包,轻量,拾光",
-      "image": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/backpack.jpg"
+      "imageFallback": "/images/catalog/backpack/2.jpg"
     },
     {
       "id": "p_backpack_03",
@@ -3394,9 +3394,9 @@
         "材质": "帆布"
       },
       "tags": "双肩包,通勤,电脑包,防水,行野",
-      "image": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1581605405669-fcdf81165afa?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/backpack.jpg"
+      "imageFallback": "/images/catalog/backpack/3.jpg"
     },
     {
       "id": "p_backpack_04",
@@ -3418,9 +3418,9 @@
         "材质": "尼龙"
       },
       "tags": "双肩包,通勤,电脑包,轻量,栖居",
-      "image": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1547949003-9792a18a2601?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/backpack.jpg"
+      "imageFallback": "/images/catalog/backpack/4.jpg"
     },
     {
       "id": "p_backpack_05",
@@ -3442,9 +3442,9 @@
         "材质": "聚酯纤维"
       },
       "tags": "双肩包,通勤,电脑包,防水,行野",
-      "image": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/backpack.jpg"
+      "imageFallback": "/images/catalog/backpack/5.jpg"
     },
     {
       "id": "p_backpack_06",
@@ -3466,9 +3466,9 @@
         "材质": "帆布"
       },
       "tags": "双肩包,通勤,电脑包,轻量,行野",
-      "image": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1577733966973-d680bffd2e80?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/backpack.jpg"
+      "imageFallback": "/images/catalog/backpack/6.jpg"
     },
     {
       "id": "p_backpack_07",
@@ -3490,9 +3490,9 @@
         "材质": "尼龙"
       },
       "tags": "双肩包,通勤,电脑包,防水,拾光",
-      "image": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/backpack.jpg"
+      "imageFallback": "/images/catalog/backpack/8.jpg"
     },
     {
       "id": "p_backpack_08",
@@ -3514,9 +3514,9 @@
         "材质": "聚酯纤维"
       },
       "tags": "双肩包,通勤,电脑包,轻量,拾光",
-      "image": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1622260614153-03223fb72052?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/backpack.jpg"
+      "imageFallback": "/images/catalog/backpack/9.jpg"
     },
     {
       "id": "p_backpack_09",
@@ -3540,7 +3540,7 @@
       "tags": "双肩包,通勤,电脑包,防水,栖居",
       "image": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/backpack.jpg"
+      "imageFallback": "/images/catalog/backpack/1.jpg"
     },
     {
       "id": "p_backpack_10",
@@ -3562,9 +3562,9 @@
         "材质": "尼龙"
       },
       "tags": "双肩包,通勤,电脑包,轻量,行野",
-      "image": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/backpack.jpg"
+      "imageFallback": "/images/catalog/backpack/2.jpg"
     },
     {
       "id": "p_robot_01",
@@ -3586,9 +3586,9 @@
         "水箱": 0.3
       },
       "tags": "扫地机器人,扫拖一体,自动集尘,智能家居,云舟",
-      "image": "https://images.unsplash.com/photo-1558317374-067fb5f30001?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/robot.jpg"
+      "imageFallback": "/images/catalog/robot/1.jpg"
     },
     {
       "id": "p_robot_02",
@@ -3610,9 +3610,9 @@
         "水箱": 0.4
       },
       "tags": "扫地机器人,扫拖一体,自动集尘,智能家居,磐石",
-      "image": "https://images.unsplash.com/photo-1558317374-067fb5f30001?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/robot.jpg"
+      "imageFallback": "/images/catalog/robot/2.jpg"
     },
     {
       "id": "p_robot_03",
@@ -3634,9 +3634,9 @@
         "水箱": 0.5
       },
       "tags": "扫地机器人,扫拖一体,自动集尘,智能家居,栖居",
-      "image": "https://images.unsplash.com/photo-1558317374-067fb5f30001?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/robot.jpg"
+      "imageFallback": "/images/catalog/robot/3.jpg"
     },
     {
       "id": "p_robot_04",
@@ -3658,9 +3658,9 @@
         "水箱": 0.3
       },
       "tags": "扫地机器人,扫拖一体,自动集尘,智能家居,云舟",
-      "image": "https://images.unsplash.com/photo-1558317374-067fb5f30001?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/robot.jpg"
+      "imageFallback": "/images/catalog/robot/4.jpg"
     },
     {
       "id": "p_robot_05",
@@ -3682,9 +3682,9 @@
         "水箱": 0.4
       },
       "tags": "扫地机器人,扫拖一体,自动集尘,智能家居,磐石",
-      "image": "https://images.unsplash.com/photo-1558317374-067fb5f30001?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/robot.jpg"
+      "imageFallback": "/images/catalog/robot/5.jpg"
     },
     {
       "id": "p_robot_06",
@@ -3706,9 +3706,9 @@
         "水箱": 0.5
       },
       "tags": "扫地机器人,扫拖一体,自动集尘,智能家居,云舟",
-      "image": "https://images.unsplash.com/photo-1558317374-067fb5f30001?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/robot.jpg"
+      "imageFallback": "/images/catalog/robot/1.jpg"
     },
     {
       "id": "p_robot_07",
@@ -3730,9 +3730,9 @@
         "水箱": 0.3
       },
       "tags": "扫地机器人,扫拖一体,自动集尘,智能家居,磐石",
-      "image": "https://images.unsplash.com/photo-1558317374-067fb5f30001?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/robot.jpg"
+      "imageFallback": "/images/catalog/robot/2.jpg"
     },
     {
       "id": "p_robot_08",
@@ -3754,9 +3754,9 @@
         "水箱": 0.4
       },
       "tags": "扫地机器人,扫拖一体,自动集尘,智能家居,磐石",
-      "image": "https://images.unsplash.com/photo-1558317374-067fb5f30001?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/robot.jpg"
+      "imageFallback": "/images/catalog/robot/3.jpg"
     },
     {
       "id": "p_robot_09",
@@ -3778,9 +3778,9 @@
         "水箱": 0.5
       },
       "tags": "扫地机器人,扫拖一体,自动集尘,智能家居,云舟",
-      "image": "https://images.unsplash.com/photo-1558317374-067fb5f30001?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/robot.jpg"
+      "imageFallback": "/images/catalog/robot/4.jpg"
     },
     {
       "id": "p_robot_10",
@@ -3802,9 +3802,9 @@
         "水箱": 0.3
       },
       "tags": "扫地机器人,扫拖一体,自动集尘,智能家居,云舟",
-      "image": "https://images.unsplash.com/photo-1558317374-067fb5f30001?auto=format&fit=crop&w=800&q=80",
+      "image": "https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=800&q=80",
       "status": 1,
-      "imageFallback": "/images/external/robot.jpg"
+      "imageFallback": "/images/catalog/robot/5.jpg"
     }
   ]
 }

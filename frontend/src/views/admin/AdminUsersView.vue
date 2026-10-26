@@ -44,6 +44,33 @@ function changePage(value: number) {
   page.value = value
   load()
 }
+
+function roleLabel(role: string) {
+  if (role === 'ADMIN') return '管理员'
+  if (role === 'SELLER') return '卖家'
+  return '买家'
+}
+
+function roleTag(role: string) {
+  if (role === 'ADMIN') return 'danger'
+  if (role === 'SELLER') return 'warning'
+  return 'info'
+}
+
+/** 管理员重置密码：弹出新生成的临时密码，仅显示一次 */
+async function resetPassword(user: User) {
+  await ElMessageBox.confirm(
+    `确定重置用户「${user.username}」的密码吗？系统会生成一个新的临时密码。`,
+    '重置密码',
+    { confirmButtonText: '确认重置', cancelButtonText: '取消', type: 'warning' }
+  )
+  const temp = await adminApi.resetUserPassword(user.id)
+  await ElMessageBox.alert(
+    `用户「${user.username}」的新临时密码是：\n\n${temp}\n\n请复制并转告用户，关闭后无法再次查看。`,
+    '重置成功',
+    { confirmButtonText: '我已记录', type: 'success' }
+  )
+}
 </script>
 
 <template>
@@ -74,8 +101,8 @@ function changePage(value: number) {
         <el-table-column prop="email" label="邮箱" min-width="180" />
         <el-table-column label="角色" width="100">
           <template #default="{ row }">
-            <el-tag :type="row.role === 'ADMIN' ? 'danger' : 'info'" size="small" round>
-              {{ row.role === 'ADMIN' ? '管理员' : '普通用户' }}
+            <el-tag :type="roleTag(row.role)" size="small" round>
+              {{ roleLabel(row.role) }}
             </el-tag>
           </template>
         </el-table-column>
@@ -89,8 +116,9 @@ function changePage(value: number) {
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column label="操作" width="120" fixed="right">
+        <el-table-column label="操作" width="200" fixed="right">
           <template #default="{ row }">
+            <el-button link type="primary" @click="resetPassword(row)">重置密码</el-button>
             <el-button link type="primary" :disabled="row.role === 'ADMIN'" @click="toggleStatus(row)">
               {{ (row.status ?? 1) === 1 ? '禁用' : '启用' }}
             </el-button>

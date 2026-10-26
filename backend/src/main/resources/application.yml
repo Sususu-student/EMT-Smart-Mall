@@ -20,6 +20,7 @@ spring:
   servlet:
     multipart:
       max-file-size: 5MB
+      max-request-size: 10MB
 
 mybatis-plus:
   configuration:
@@ -38,6 +39,10 @@ springdoc:
     path: /v3/api-docs
 
 app:
+  # 上传文件落盘目录（相对后端运行目录），通过 /uploads/** 访问
+  upload:
+    dir: ${UPLOAD_DIR:uploads}
+    max-size: 5242880
   jwt:
     secret: ${JWT_SECRET:smart-guide-mall-demo-secret-key-please-change-in-production-2026}
     expire-hours: 72

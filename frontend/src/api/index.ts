@@ -1,4 +1,4 @@
-import { request } from './http'
+import { request, upload } from './http'
 import type {
   Address,
   AddressPayload,
@@ -35,7 +35,9 @@ export const authApi = {
   login: (data: { username: string; password: string }) =>
     request<LoginResponse>({ url: '/user/login', method: 'post', data }),
   register: (data: { username: string; password: string; nickname?: string; email?: string; role?: string }) =>
-    request<LoginResponse>({ url: '/user/register', method: 'post', data })
+    request<LoginResponse>({ url: '/user/register', method: 'post', data }),
+  resetPassword: (data: { username: string; email: string; newPassword: string }) =>
+    request<void>({ url: '/user/reset-password', method: 'post', data })
 }
 
 export const userApi = {
@@ -87,6 +89,10 @@ export const afterSaleApi = {
     request<AfterSale>({ url: '/after-sale', method: 'post', data }),
   mine: () => request<AfterSale[]>({ url: '/after-sale' }),
   byOrder: (orderId: string) => request<AfterSale[]>({ url: `/after-sale/order/${orderId}` })
+}
+
+export const uploadApi = {
+  image: (file: File) => upload<{ url: string }>('/upload/image', file)
 }
 
 export const sellerApi = {
@@ -199,6 +205,8 @@ export const adminApi = {
   users: (params: Record<string, unknown>) => request<PageResult<User>>({ url: '/admin/users', params }),
   updateUserStatus: (id: string, status: number) =>
     request<void>({ url: `/admin/user/${id}/status`, method: 'put', params: { status } }),
+  resetUserPassword: (id: string) =>
+    request<string>({ url: `/admin/user/${id}/reset-password`, method: 'post' }),
   agentLogs: (params: Record<string, unknown>) =>
     request<PageResult<ExecutionLog>>({ url: '/admin/agent-logs', params })
 }

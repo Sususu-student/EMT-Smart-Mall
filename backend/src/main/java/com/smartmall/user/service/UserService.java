@@ -15,6 +15,7 @@ import com.smartmall.user.dto.ChangePasswordRequest;
 import com.smartmall.user.dto.LoginRequest;
 import com.smartmall.user.dto.LoginResponse;
 import com.smartmall.user.dto.PreferenceItem;
+import com.smartmall.user.dto.ResetPasswordRequest;
 import com.smartmall.user.dto.PreferenceUpdateRequest;
 import com.smartmall.user.dto.PreferenceVO;
 import com.smartmall.user.dto.ProfileVO;
@@ -32,6 +33,7 @@ import com.smartmall.user.mapper.SysUserMapper;
 import com.smartmall.user.mapper.UserAddressMapper;
 import com.smartmall.user.mapper.UserPreferenceMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -43,6 +45,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -146,6 +149,73 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(request.getNewPassword()));
         user.setUpdatedAt(LocalDateTime.now());
         userMapper.updateById(user);
+    }
+
+    /**
+     * 自助找回密码：校验「用户名 + 注册邮箱」是否匹配。
+     * 为避免暴露账号是否存在，账号不存在与邮箱不匹配返回同一句提示。
+     */
+    @Transactional
+    public void resetPassword(ResetPasswordRequest request) {
+        SysUser user = userMapper.selectOne(new LambdaQueryWrapper<SysUser>()
+                .eq(SysUser::getUsername, request.getUsername())
+                .last("LIMIT 1"));
+        String mismatch = "用户名与邮箱不匹配，请检查后重试";
+        if (user == null) {
+            throw new BizException(mismatch);
+        }
+        if (!StringUtils.hasText(user.getEmail())
+                || !user.getEmail().equalsIgnoreCase(request.getEmail().trim())) {
+            throw new BizException(mismatch);
+        }
+        if (user.getStatus() != null && user.getStatus() == 0) {
+            throw new BizException("账号已被禁用，请联系管理员");
+        }
+        if (passwordEncoder.matches(request.getNewPassword(), user.getPassword())) {
+            throw new BizException("新密码不能与原密码相同");
+        }
+        user.setPassword(passwordEncoder.encode(request.getNewPassword()));
+        user.setUpdatedAt(LocalDateTime.now());
+        userMapper.updateById(user);
+        log.info("用户 {} 通过邮箱校验自助重置了密码", user.getUsername());
+    }
+
+    /** 管理员重置指定用户密码，返回随机生成的临时密码 */
+    @Transactional
+    public String adminResetPassword(String userId) {
+        SysUser user = userMapper.selectById(userId);
+        if (user == null) {
+            throw BizException.notFound("用户不存在");
+        }
+        String temp = randomPassword();
+        user.setPassword(passwordEncoder.encode(temp));
+        user.setUpdatedAt(LocalDateTime.now());
+        userMapper.updateById(user);
+        log.info("管理员重置了用户 {} 的密码", user.getUsername());
+        return temp;
+    }
+
+    /** 生成 8 位临时密码，保证同时包含字母与数字 */
+    private String randomPassword() {
+        String letters = "abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ";
+        String digits = "23456789";
+        java.security.SecureRandom random = new java.security.SecureRandom();
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < 6; i++) {
+            sb.append(letters.charAt(random.nextInt(letters.length())));
+        }
+        for (int i = 0; i < 2; i++) {
+            sb.append(digits.charAt(random.nextInt(digits.length())));
+        }
+        // 洗牌避免固定格式
+        char[] chars = sb.toString().toCharArray();
+        for (int i = chars.length - 1; i > 0; i--) {
+            int j = random.nextInt(i + 1);
+            char tmp = chars[i];
+            chars[i] = chars[j];
+            chars[j] = tmp;
+        }
+        return new String(chars);
     }
 
     public List<UserAddress> addresses() {
