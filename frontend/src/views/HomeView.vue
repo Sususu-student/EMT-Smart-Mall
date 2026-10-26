@@ -285,9 +285,7 @@ function ask(text?: string) {
 .hero {
   position: relative;
   padding: 76px 0 64px;
-  background:
-    radial-gradient(circle at 76% 12%, rgba(240, 90, 40, 0.12), transparent 42%),
-    linear-gradient(180deg, #f4efe4 0%, #eee8db 100%);
+  background: var(--hero-bg);
 }
 
 .hero-grid {
@@ -317,7 +315,7 @@ function ask(text?: string) {
   right: 2px;
   bottom: 2px;
   height: 9px;
-  background: rgba(240, 90, 40, 0.18);
+  background: var(--glow-accent);
   z-index: -1;
 }
 
@@ -333,7 +331,7 @@ function ask(text?: string) {
   display: flex;
   align-items: center;
   gap: 10px;
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line-strong);
   border-radius: 16px;
   padding: 8px 8px 8px 16px;
@@ -364,7 +362,7 @@ function ask(text?: string) {
   gap: 5px;
   border: none;
   background: var(--ink);
-  color: #fff;
+  color: var(--on-ink);
   border-radius: 11px;
   padding: 13px 18px;
   font-size: 13px;
@@ -388,7 +386,7 @@ function ask(text?: string) {
 
 .chip {
   border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.6);
+  background: var(--chip-bg);
   color: var(--ink-soft);
   border-radius: 99px;
   padding: 7px 12px;
@@ -400,7 +398,7 @@ function ask(text?: string) {
 .chip:hover {
   border-color: var(--brand);
   color: var(--brand-deep);
-  background: #fff;
+  background: var(--surface);
 }
 
 .hero-stats {
@@ -443,18 +441,18 @@ function ask(text?: string) {
   width: 440px;
   height: 440px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(240, 90, 40, 0.18), transparent 65%);
+  background: radial-gradient(circle, var(--glow-accent), transparent 65%);
   filter: blur(10px);
 }
 
 .main-card {
   position: relative;
   width: 360px;
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 20px;
   padding: 14px;
-  box-shadow: 0 40px 80px rgba(47, 40, 27, 0.16);
+  box-shadow: var(--shadow-card-hover);
   transform: rotate(-2.5deg);
   z-index: 2;
 }
@@ -499,12 +497,12 @@ function ask(text?: string) {
 
 .float-card {
   position: absolute;
-  background: rgba(255, 255, 255, 0.94);
+  background: var(--surface-glass);
   backdrop-filter: blur(10px);
   border: 1px solid var(--line);
   border-radius: 14px;
   padding: 14px;
-  box-shadow: 0 20px 44px rgba(47, 40, 27, 0.12);
+  box-shadow: var(--shadow-float);
   z-index: 3;
 }
 
@@ -582,7 +580,7 @@ function ask(text?: string) {
 .brand-strip {
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
-  background: #fbf9f4;
+  background: var(--section-alt-bg);
 }
 
 .brand-strip-inner {
@@ -591,7 +589,7 @@ function ask(text?: string) {
   align-items: center;
   justify-content: space-between;
   gap: 20px;
-  color: #a89f90;
+  color: var(--panel-dark-muted);
   font-family: 'Noto Serif SC', 'Songti SC', serif;
   font-size: 15px;
   letter-spacing: 0.12em;
@@ -600,7 +598,7 @@ function ask(text?: string) {
 .brand-strip-inner i {
   width: 3px;
   height: 3px;
-  background: #cfc6b6;
+  background: var(--panel-dark-line);
   border-radius: 50%;
 }
 
@@ -615,7 +613,7 @@ function ask(text?: string) {
   display: flex;
   align-items: center;
   gap: 12px;
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 14px;
   padding: 18px 16px;
@@ -678,7 +676,7 @@ function ask(text?: string) {
 }
 
 .feature-section {
-  background: #fbf9f4;
+  background: var(--section-alt-bg);
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
 }
@@ -709,7 +707,7 @@ function ask(text?: string) {
   margin-top: 26px;
   border: none;
   background: var(--ink);
-  color: #fff;
+  color: var(--on-ink);
   border-radius: 99px;
   padding: 14px 22px;
   font-size: 13px;
@@ -767,8 +765,8 @@ function ask(text?: string) {
   grid-template-columns: 1.05fr 0.95fr;
   gap: 40px;
   align-items: center;
-  background: #191815;
-  color: #f4efe6;
+  background: var(--panel-dark-bg);
+  color: var(--panel-dark-ink);
   border-radius: 24px;
   padding: 54px;
   position: relative;
@@ -792,21 +790,21 @@ function ask(text?: string) {
 }
 
 .banner-copy .eyebrow {
-  color: #ff9c72;
+  color: var(--panel-dark-accent);
 }
 
 .banner-copy .eyebrow::before {
-  background: #ff9c72;
+  background: var(--panel-dark-accent);
 }
 
 .banner-copy h2 {
   font-size: clamp(32px, 4vw, 46px);
   margin: 16px 0 18px;
-  color: #fff;
+  color: var(--panel-dark-ink);
 }
 
 .banner-copy p {
-  color: #b7afa2;
+  color: var(--panel-dark-muted);
   font-size: 14px;
   line-height: 1.9;
   max-width: 440px;
@@ -824,7 +822,7 @@ function ask(text?: string) {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: #fff;
+  background: var(--surface);
   color: var(--ink);
   border-radius: 99px;
   padding: 13px 20px;
@@ -835,15 +833,15 @@ function ask(text?: string) {
 
 .light-btn:hover {
   background: var(--brand);
-  color: #fff;
+  color: #ffffff;
 }
 
 .ghost-light {
   border: none;
   background: transparent;
-  color: #cfc7ba;
+  color: var(--panel-dark-muted);
   font-size: 12px;
-  border-bottom: 1px solid #575147;
+  border-bottom: 1px solid var(--panel-dark-line);
   padding: 2px 0;
   cursor: pointer;
 }
@@ -854,8 +852,8 @@ function ask(text?: string) {
 }
 
 .mini-matrix {
-  background: #23211d;
-  border: 1px solid #3a362f;
+  background: var(--panel-dark-sunken);
+  border: 1px solid var(--panel-dark-line);
   border-radius: 16px;
   padding: 20px;
   font-size: 12px;
@@ -866,12 +864,12 @@ function ask(text?: string) {
   display: grid;
   grid-template-columns: 1fr 0.8fr 0.8fr;
   padding: 10px 6px;
-  border-bottom: 1px solid #35322b;
+  border-bottom: 1px solid var(--panel-dark-line);
   text-align: right;
 }
 
 .matrix-head {
-  color: #8f887d;
+  color: var(--panel-dark-muted);
   font-size: 10px;
   letter-spacing: 0.08em;
 }
@@ -883,22 +881,22 @@ function ask(text?: string) {
 
 .matrix-row span {
   text-align: left;
-  color: #9f978a;
+  color: var(--panel-dark-muted);
 }
 
 .matrix-row b {
   font-weight: 600;
-  color: #e9e2d6;
+  color: var(--panel-dark-ink);
 }
 
 .matrix-row b.best {
-  color: #ff9c72;
+  color: var(--panel-dark-accent);
 }
 
 .matrix-foot {
   padding: 14px 6px 2px;
   font-size: 10px;
-  color: #7d766a;
+  color: var(--panel-dark-muted);
 }
 
 @media (max-width: 1080px) {

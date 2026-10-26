@@ -127,7 +127,7 @@ function changePage(value: number) {
 
 <style scoped>
 .panel {
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 15px;
   padding: 20px;
@@ -189,13 +189,13 @@ function changePage(value: number) {
 }
 
 .turn {
-  background: #fbf8f1;
+  background: var(--surface-sunken);
   border-radius: 10px;
   padding: 11px 12px;
 }
 
 .turn.user {
-  background: #1b1a17;
+  background: var(--panel-dark-bg);
   color: #fff;
 }
 
@@ -236,7 +236,7 @@ function changePage(value: number) {
 
 .turn-products span {
   font-size: 8.5px;
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 99px;
   padding: 2px 7px;

@@ -172,7 +172,7 @@ function statusType(status: string) {
 
 <style scoped>
 .panel {
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 15px;
   padding: 20px;
@@ -260,7 +260,7 @@ function statusType(status: string) {
 }
 
 .log-detail pre {
-  background: #1b1a17;
+  background: var(--panel-dark-bg);
   color: #d8d0c3;
   border-radius: 9px;
   padding: 12px;

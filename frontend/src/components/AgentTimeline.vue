@@ -69,7 +69,7 @@ function icon(status: string) {
 
 <style scoped>
 .timeline-card {
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 16px;
   padding: 20px;
@@ -100,7 +100,7 @@ function icon(status: string) {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: #d8d0c0;
+  background: var(--line-strong);
   margin-top: 6px;
 }
 
@@ -186,7 +186,7 @@ function icon(status: string) {
   place-items: center;
   color: #38a169;
   font-size: 16px;
-  background: #fff;
+  background: var(--surface);
   z-index: 1;
 }
 

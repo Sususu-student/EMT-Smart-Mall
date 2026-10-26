@@ -410,14 +410,14 @@ async function submitReview() {
   border-radius: 20px;
   overflow: hidden;
   border: 1px solid var(--line);
-  background: #fff;
+  background: var(--surface);
 }
 
 .image-badge {
   position: absolute;
   left: 16px;
   top: 16px;
-  background: rgba(255, 255, 255, 0.9);
+  background: var(--surface-glass);
   backdrop-filter: blur(6px);
   border-radius: 99px;
   padding: 6px 12px;
@@ -503,7 +503,7 @@ async function submitReview() {
 
 .price-panel {
   margin: 22px 0;
-  background: #fbf8f1;
+  background: var(--surface-sunken);
   border: 1px solid var(--line);
   border-radius: 14px;
   padding: 16px 18px;
@@ -547,7 +547,7 @@ async function submitReview() {
 }
 
 .attr-cell {
-  background: #fff;
+  background: var(--surface);
   padding: 12px;
 }
 
@@ -697,7 +697,7 @@ async function submitReview() {
 
 .detail-tabs {
   margin-top: 56px;
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 18px;
   padding: 10px 26px 26px;
@@ -841,7 +841,7 @@ async function submitReview() {
 }
 
 .agent-compare {
-  background: #fbf8f1;
+  background: var(--surface-sunken);
   border: 1px solid var(--line);
   border-radius: 14px;
   padding: 20px;

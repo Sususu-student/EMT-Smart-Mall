@@ -121,7 +121,7 @@ async function openItem(item: NotificationItem) {
 }
 
 .bell-btn:hover {
-  background: #fff;
+  background: var(--surface);
   border-color: var(--line);
 }
 
@@ -157,7 +157,7 @@ async function openItem(item: NotificationItem) {
   width: 100%;
   text-align: left;
   border: 1px solid var(--line);
-  background: #fff;
+  background: var(--surface);
   border-radius: 10px;
   padding: 11px;
   cursor: pointer;
@@ -169,7 +169,7 @@ async function openItem(item: NotificationItem) {
 }
 
 .notice-item.unread {
-  background: #fffaf6;
+  background: var(--brand-tint-strong);
   border-color: #f3d6c7;
 }
 

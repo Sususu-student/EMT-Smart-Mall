@@ -156,7 +156,7 @@ function changePage(value: number) {
 
 <style scoped>
 .panel {
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 15px;
   padding: 20px;
@@ -207,7 +207,7 @@ function changePage(value: number) {
 }
 
 .handle-info {
-  background: #fbf8f1;
+  background: var(--surface-sunken);
   border-radius: 9px;
   padding: 12px;
   margin-bottom: 14px;

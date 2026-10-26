@@ -386,7 +386,7 @@ function dimensionDisplay(key: string, productId: string) {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 16px;
   padding: 14px 16px;
@@ -403,7 +403,7 @@ function dimensionDisplay(key: string, productId: string) {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: #fbf8f1;
+  background: var(--surface-sunken);
   border: 1px solid var(--line);
   border-radius: 10px;
   padding: 5px 8px 5px 5px;
@@ -486,7 +486,7 @@ function dimensionDisplay(key: string, productId: string) {
   grid-template-columns: 0.85fr 1.15fr;
   gap: 50px;
   align-items: center;
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 20px;
   padding: 60px;
@@ -513,7 +513,7 @@ function dimensionDisplay(key: string, productId: string) {
 .empty-card.a {
   left: 20px;
   top: 20px;
-  background: #fbf8f1;
+  background: var(--surface-sunken);
   color: var(--muted-light);
   transform: rotate(-7deg);
 }
@@ -522,7 +522,7 @@ function dimensionDisplay(key: string, productId: string) {
   right: 30px;
   top: 0;
   background: var(--ink);
-  color: #fff;
+  color: var(--on-ink);
   transform: rotate(5deg);
 }
 
@@ -567,7 +567,7 @@ function dimensionDisplay(key: string, productId: string) {
   align-items: center;
   justify-content: space-between;
   gap: 30px;
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 18px;
   padding: 40px;
@@ -609,7 +609,7 @@ function dimensionDisplay(key: string, productId: string) {
 }
 
 .recommend-card {
-  background: #191815;
+  background: var(--panel-dark-bg);
   color: #f4efe6;
   border-radius: 18px;
   padding: 30px;
@@ -622,7 +622,7 @@ function dimensionDisplay(key: string, productId: string) {
 }
 
 .recommend-card .eyebrow::before {
-  background: #ff9c72;
+  background: var(--panel-dark-accent);
 }
 
 .recommend-title {
@@ -668,7 +668,7 @@ function dimensionDisplay(key: string, productId: string) {
 }
 
 .highlights .pill {
-  background: #26241f;
+  background: var(--panel-dark-raised);
   border-color: #3a362f;
   color: #d8d0c3;
 }
@@ -692,7 +692,7 @@ function dimensionDisplay(key: string, productId: string) {
 }
 
 .score-board {
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 16px;
   padding: 22px;
@@ -739,7 +739,7 @@ function dimensionDisplay(key: string, productId: string) {
 
 .score-row:first-child .rank {
   background: var(--ink);
-  color: #fff;
+  color: var(--on-ink);
 }
 
 .score-row strong {
@@ -760,7 +760,7 @@ function dimensionDisplay(key: string, productId: string) {
 .bar span {
   display: block;
   height: 100%;
-  background: #cfc6b6;
+  background: var(--line-strong);
   border-radius: 99px;
   transition: width 0.5s ease;
 }
@@ -775,7 +775,7 @@ function dimensionDisplay(key: string, productId: string) {
 }
 
 .matrix-section {
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 16px;
   padding: 22px;
@@ -821,7 +821,7 @@ function dimensionDisplay(key: string, productId: string) {
 .matrix thead th {
   vertical-align: bottom;
   font-weight: 500;
-  background: #fbf9f4;
+  background: var(--surface-sunken);
   border-top: 1px solid var(--line);
 }
 
@@ -884,7 +884,7 @@ function dimensionDisplay(key: string, productId: string) {
 .matrix td.best {
   color: var(--brand-deep);
   font-weight: 600;
-  background: #fff8f3;
+  background: var(--brand-tint-strong);
 }
 
 .best-icon {
@@ -894,7 +894,7 @@ function dimensionDisplay(key: string, productId: string) {
 
 .score-row-table td {
   border-bottom: none;
-  background: #fbf9f4;
+  background: var(--surface-sunken);
   font-size: 14px;
 }
 
@@ -906,7 +906,7 @@ function dimensionDisplay(key: string, productId: string) {
   display: grid;
   grid-template-columns: 0.8fr 1.2fr;
   gap: 30px;
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 16px;
   padding: 24px;
@@ -1011,7 +1011,7 @@ function dimensionDisplay(key: string, productId: string) {
 .picker-tip {
   margin-top: 16px;
   padding: 11px;
-  background: #fbf8f1;
+  background: var(--surface-sunken);
   border-radius: 8px;
   font-size: 9.5px;
   color: var(--muted);

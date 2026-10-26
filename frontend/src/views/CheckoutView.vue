@@ -299,7 +299,7 @@ async function submitOrder() {
 }
 
 .card {
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 16px;
   padding: 20px 22px;
@@ -334,7 +334,7 @@ async function submitOrder() {
   position: relative;
   text-align: left;
   border: 1px solid var(--line);
-  background: #fff;
+  background: var(--surface);
   border-radius: 12px;
   padding: 14px;
   cursor: pointer;
@@ -347,7 +347,7 @@ async function submitOrder() {
 
 .address-card.active {
   border-color: var(--brand);
-  background: #fff8f3;
+  background: var(--brand-tint-strong);
 }
 
 .address-top {
@@ -442,7 +442,7 @@ async function submitOrder() {
 .summary {
   position: sticky;
   top: 96px;
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 16px;
   padding: 22px;
@@ -482,7 +482,7 @@ async function submitOrder() {
 }
 
 .deliver-to {
-  background: #fbf8f1;
+  background: var(--surface-sunken);
   border-radius: 10px;
   padding: 12px;
   font-size: 10px;
@@ -520,7 +520,7 @@ async function submitOrder() {
   align-items: center;
   gap: 10px;
   border: 1px solid var(--line);
-  background: #fff;
+  background: var(--surface);
   border-radius: 11px;
   padding: 13px;
   text-align: left;
@@ -534,7 +534,7 @@ async function submitOrder() {
 
 .delivery-option.active {
   border-color: var(--brand);
-  background: #fff8f3;
+  background: var(--brand-tint-strong);
 }
 
 .delivery-option .el-icon {

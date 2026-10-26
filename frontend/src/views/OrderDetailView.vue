@@ -358,7 +358,7 @@ async function copyOrderNo() {
   display: flex;
   align-items: center;
   gap: 18px;
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 18px;
   padding: 24px 26px;
@@ -416,7 +416,7 @@ async function copyOrderNo() {
 }
 
 .panel {
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 16px;
   padding: 20px 22px;
@@ -462,7 +462,7 @@ async function copyOrderNo() {
   height: 22px;
   border-radius: 50%;
   border: 1px solid var(--line-strong);
-  background: #fff;
+  background: var(--surface);
   color: #fff;
   display: grid;
   place-items: center;
@@ -486,7 +486,7 @@ async function copyOrderNo() {
 }
 
 .step.done .line {
-  background: #a8cfbd;
+  background: var(--success-tint);
 }
 
 .step:last-child .line {
@@ -632,7 +632,7 @@ async function copyOrderNo() {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  background: #fbf8f1;
+  background: var(--surface-sunken);
   border-radius: 10px;
   padding: 14px 16px;
   margin-bottom: 12px;

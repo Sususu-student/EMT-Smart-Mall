@@ -6,6 +6,22 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="description" content="智选商城 · 由大语言模型驱动的智能导购 Agent 电商平台" />
     <title>智选商城 · 智能导购</title>
+    <script>
+      // 在样式生效前决定主题，避免刷新时白屏闪烁（FOUC）
+      (function () {
+        try {
+          var stored = localStorage.getItem('sg_theme')
+          var dark = stored ? stored === 'dark'
+            : window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+          if (dark) {
+            document.documentElement.classList.add('dark')
+            document.documentElement.style.colorScheme = 'dark'
+          }
+        } catch (e) {
+          /* localStorage 不可用时忽略，默认浅色 */
+        }
+      })()
+    </script>
   </head>
   <body>
     <div id="app"></div>

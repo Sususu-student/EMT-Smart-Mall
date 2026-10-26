@@ -93,7 +93,7 @@ onBeforeUnmount(() => {
 .radar-wrap {
   width: 100%;
   height: 360px;
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 16px;
   overflow: hidden;

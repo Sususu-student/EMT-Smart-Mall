@@ -163,7 +163,7 @@ async function remove(item: Category) {
 
 <style scoped>
 .panel {
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 15px;
   padding: 20px;

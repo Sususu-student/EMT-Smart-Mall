@@ -181,7 +181,7 @@ function changePage(value: number) {
 
 .tabs button {
   border: 1px solid var(--line);
-  background: #fff;
+  background: var(--surface);
   border-radius: 99px;
   padding: 8px 16px;
   font-size: 12px;
@@ -198,7 +198,7 @@ function changePage(value: number) {
 .tabs button.active {
   background: var(--ink);
   border-color: var(--ink);
-  color: #fff;
+  color: var(--on-ink);
 }
 
 .order-list {
@@ -209,7 +209,7 @@ function changePage(value: number) {
 }
 
 .order-card {
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 16px;
   overflow: hidden;
@@ -221,7 +221,7 @@ function changePage(value: number) {
   justify-content: space-between;
   gap: 14px;
   padding: 14px 20px;
-  background: #fbf9f4;
+  background: var(--surface-sunken);
   border-bottom: 1px solid var(--line);
 }
 
@@ -258,7 +258,7 @@ function changePage(value: number) {
   border-radius: 9px;
   overflow: hidden;
   border: 1px solid var(--line);
-  background: #f3eee5;
+  background: var(--surface-sunken);
 }
 
 .thumb img {

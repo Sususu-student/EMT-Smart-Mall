@@ -183,7 +183,7 @@ function changePage(value: number) {
   display: flex;
   align-items: center;
   gap: 10px;
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line-strong);
   border-radius: 16px;
   padding: 8px 8px 8px 18px;
@@ -207,7 +207,7 @@ function changePage(value: number) {
 .search-form button {
   border: none;
   background: var(--ink);
-  color: #fff;
+  color: var(--on-ink);
   border-radius: 11px;
   padding: 13px 26px;
   font-size: 13px;

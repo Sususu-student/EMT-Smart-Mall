@@ -187,7 +187,7 @@ async function resetPrompt(item: AgentPrompt) {
 
 <style scoped>
 .panel {
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 15px;
   padding: 22px;
@@ -243,7 +243,7 @@ async function resetPrompt(item: AgentPrompt) {
   gap: 8px;
   margin-top: 18px;
   padding: 12px;
-  background: #fbf8f1;
+  background: var(--surface-sunken);
   border-radius: 9px;
   font-size: 9.5px;
   line-height: 1.8;
@@ -256,14 +256,14 @@ async function resetPrompt(item: AgentPrompt) {
 }
 
 .model-note code {
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 3px;
   padding: 0 3px;
 }
 
 .status-card {
-  background: #191815;
+  background: var(--panel-dark-bg);
   color: #eee7db;
   border-radius: 13px;
   padding: 20px;
@@ -307,7 +307,7 @@ async function resetPrompt(item: AgentPrompt) {
   border: 1px solid var(--line);
   border-radius: 12px;
   padding: 16px;
-  background: #fdfcf9;
+  background: var(--surface-sunken);
 }
 
 .prompt-head {
@@ -333,7 +333,7 @@ async function resetPrompt(item: AgentPrompt) {
 }
 
 .prompt-card pre {
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 8px;
   padding: 10px;
@@ -363,7 +363,7 @@ async function resetPrompt(item: AgentPrompt) {
   font-size: 9px;
   line-height: 1.7;
   color: var(--muted);
-  background: #fbf8f1;
+  background: var(--surface-sunken);
   border-radius: 8px;
   padding: 10px;
 }

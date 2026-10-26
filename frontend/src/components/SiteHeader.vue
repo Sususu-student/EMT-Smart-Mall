@@ -5,6 +5,7 @@ import { useAuthStore } from '@/stores/auth'
 import { useCartStore } from '@/stores/cart'
 import { useCompareStore } from '@/stores/compare'
 import NotificationBell from './NotificationBell.vue'
+import ThemeToggle from './ThemeToggle.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -90,6 +91,8 @@ function onCommand(command: string) {
             <button type="submit" class="search-btn">搜索</button>
           </form>
 
+          <ThemeToggle />
+
           <NotificationBell />
 
           <button class="icon-btn compare-btn" aria-label="商品对比" @click="go('/compare')">
@@ -152,6 +155,10 @@ function onCommand(command: string) {
           <button v-if="auth.isLoggedIn" @click="go('/profile')">个人中心</button>
           <button v-if="auth.isLoggedIn" @click="logout(); drawer = false">退出登录</button>
           <button v-else @click="go('/login')">登录 / 注册</button>
+          <div class="mobile-theme">
+            <span>夜间模式</span>
+            <ThemeToggle />
+          </div>
         </nav>
       </div>
     </el-drawer>
@@ -166,8 +173,8 @@ function onCommand(command: string) {
 }
 
 .notice {
-  background: var(--ink);
-  color: #f4efe6;
+  background: var(--panel-dark-bg);
+  color: var(--panel-dark-ink);
   font-size: 12px;
   overflow: hidden;
   max-height: 40px;
@@ -192,7 +199,7 @@ function onCommand(command: string) {
 .notice-link {
   background: transparent;
   border: none;
-  color: #ffb38f;
+  color: var(--panel-dark-accent);
   font-size: 12px;
   display: inline-flex;
   align-items: center;
@@ -204,10 +211,10 @@ function onCommand(command: string) {
 .header {
   position: relative;
   z-index: 20;
-  background: rgba(244, 239, 228, 0.82);
+  background: var(--header-bg);
   backdrop-filter: blur(14px) saturate(1.35);
   -webkit-backdrop-filter: blur(14px) saturate(1.35);
-  border-bottom: 1px solid rgba(228, 221, 205, 0.7);
+  border-bottom: 1px solid var(--line);
   transition: background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
@@ -219,15 +226,15 @@ function onCommand(command: string) {
   right: 0;
   top: -1px;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 179, 143, 0.55), transparent);
+  background: linear-gradient(90deg, transparent, var(--panel-dark-accent), transparent);
 }
 
 .header-wrap.scrolled .header {
-  background: rgba(244, 239, 228, 0.68);
+  background: var(--header-bg-scrolled);
   backdrop-filter: blur(20px) saturate(1.5);
   -webkit-backdrop-filter: blur(20px) saturate(1.5);
-  border-bottom-color: rgba(228, 221, 205, 0.55);
-  box-shadow: 0 10px 30px rgba(38, 33, 25, 0.06);
+  border-bottom-color: var(--line);
+  box-shadow: var(--shadow-float);
 }
 
 .header-inner {
@@ -249,7 +256,7 @@ function onCommand(command: string) {
   height: 40px;
   border-radius: 12px;
   background: var(--ink);
-  color: #fff;
+  color: var(--on-ink);
   display: grid;
   place-items: center;
   font-family: var(--font-serif);
@@ -336,7 +343,7 @@ function onCommand(command: string) {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: #fff;
+  background: var(--input-bg);
   border: 1px solid var(--line);
   border-radius: 99px;
   padding: 4px 5px 4px 14px;
@@ -346,7 +353,7 @@ function onCommand(command: string) {
 
 .search:focus-within {
   border-color: var(--ink);
-  box-shadow: 0 6px 20px rgba(27, 26, 23, 0.08);
+  box-shadow: var(--shadow-float);
 }
 
 .search-icon {
@@ -367,7 +374,7 @@ function onCommand(command: string) {
 .search-btn {
   border: none;
   background: var(--ink);
-  color: #fff;
+  color: var(--on-ink);
   border-radius: 99px;
   padding: 7px 14px;
   font-size: 12px;
@@ -395,7 +402,7 @@ function onCommand(command: string) {
 }
 
 .icon-btn:hover {
-  background: #fff;
+  background: var(--surface);
   border-color: var(--line);
 }
 
@@ -420,7 +427,7 @@ function onCommand(command: string) {
   align-items: center;
   gap: 7px;
   border: 1px solid var(--line);
-  background: #fff;
+  background: var(--surface);
   border-radius: 99px;
   padding: 4px 10px 4px 4px;
   cursor: pointer;
@@ -450,7 +457,7 @@ function onCommand(command: string) {
   padding: 9px 18px;
   border-radius: 99px;
   background: var(--ink);
-  color: #fff;
+  color: var(--on-ink);
   font-size: 13px;
   transition: background 0.2s;
 }
@@ -465,7 +472,7 @@ function onCommand(command: string) {
   height: 40px;
   border-radius: 50%;
   border: 1px solid var(--line);
-  background: #fff;
+  background: var(--surface);
   cursor: pointer;
   place-items: center;
 }
@@ -488,6 +495,16 @@ function onCommand(command: string) {
 .mobile-nav {
   display: flex;
   flex-direction: column;
+}
+
+.mobile-theme {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 4px;
+  border-bottom: 1px solid var(--line);
+  font-size: 16px;
+  color: var(--ink);
 }
 
 .mobile-nav button {

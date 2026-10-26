@@ -3,6 +3,7 @@ import { computed, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 import NotificationBell from '@/components/NotificationBell.vue'
+import ThemeToggle from '@/components/ThemeToggle.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -93,6 +94,7 @@ function logout() {
         </div>
         <div class="top-right">
           <span class="agent-pill"><span class="dot"></span> Agent 运行中</span>
+          <ThemeToggle />
           <NotificationBell />
           <button class="top-icon" aria-label="前台" @click="router.push('/')"><el-icon><Monitor /></el-icon></button>
           <button class="top-avatar" @click="logout">{{ (auth.user?.nickname || auth.user?.username || '管').slice(0, 1) }}</button>
@@ -132,12 +134,12 @@ function logout() {
 .admin-shell {
   min-height: 100vh;
   display: flex;
-  background: #f3f0e9;
+  background: var(--surface-sunken);
 }
 
 .admin-sidebar {
   width: 236px;
-  background: #191815;
+  background: var(--panel-dark-bg);
   color: #eee7db;
   display: flex;
   flex-direction: column;
@@ -206,7 +208,7 @@ function logout() {
 }
 
 .admin-nav a:hover {
-  background: #23211d;
+  background: var(--panel-dark-sunken);
   color: #fff;
 }
 
@@ -248,7 +250,7 @@ function logout() {
   gap: 8px;
   padding: 10px;
   margin-top: 6px;
-  background: #23211d;
+  background: var(--panel-dark-sunken);
   border-radius: 9px;
 }
 
@@ -301,7 +303,7 @@ function logout() {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: rgba(255, 255, 255, 0.75);
+  background: var(--surface-glass);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--line);
   position: sticky;
@@ -321,7 +323,7 @@ function logout() {
   height: 34px;
   border-radius: 8px;
   border: 1px solid var(--line);
-  background: #fff;
+  background: var(--surface);
   cursor: pointer;
   place-items: center;
 }
@@ -349,7 +351,7 @@ function logout() {
   font-size: 9px;
   color: var(--muted);
   border: 1px solid var(--line);
-  background: #fff;
+  background: var(--surface);
   border-radius: 99px;
   padding: 6px 10px;
 }
@@ -366,7 +368,7 @@ function logout() {
   height: 34px;
   border-radius: 9px;
   border: 1px solid var(--line);
-  background: #fff;
+  background: var(--surface);
   cursor: pointer;
   color: var(--muted);
 }
@@ -377,7 +379,7 @@ function logout() {
   border-radius: 50%;
   border: none;
   background: var(--ink);
-  color: #fff;
+  color: var(--on-ink);
   font-size: 12px;
   font-weight: 700;
   cursor: pointer;

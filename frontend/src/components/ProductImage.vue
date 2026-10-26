@@ -61,7 +61,7 @@ function onError() {
 .product-image {
   width: 100%;
   overflow: hidden;
-  background: #f1ede4;
+  background: var(--surface-sunken);
   display: grid;
   place-items: center;
 }

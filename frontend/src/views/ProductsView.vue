@@ -283,7 +283,7 @@ function changeSort(value: string) {
   gap: 8px;
   margin-top: 20px;
   max-width: 620px;
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 99px;
   padding: 5px 5px 5px 18px;
@@ -344,7 +344,7 @@ function changeSort(value: string) {
 .page-search-btn {
   border: none;
   background: var(--ink);
-  color: #fff;
+  color: var(--on-ink);
   border-radius: 99px;
   padding: 9px 22px;
   font-size: 13px;
@@ -437,7 +437,7 @@ function changeSort(value: string) {
 .cat-all:hover,
 .cat-root-name:hover,
 .price-option:hover {
-  background: #fff;
+  background: var(--surface);
   color: var(--ink);
 }
 
@@ -453,7 +453,7 @@ function changeSort(value: string) {
 .cat-all.active,
 .cat-root-name.active {
   background: var(--ink);
-  color: #fff;
+  color: var(--on-ink);
 }
 
 .cat-root-name.active :deep(.category-icon) {
@@ -498,7 +498,7 @@ function changeSort(value: string) {
 
 .filter-tip {
   margin-top: 20px;
-  background: #fff;
+  background: var(--surface);
   border: 1px dashed var(--line-strong);
   border-radius: 12px;
   padding: 14px;
@@ -545,7 +545,7 @@ function changeSort(value: string) {
   align-items: center;
   gap: 5px;
   border: 1px solid var(--line-strong);
-  background: #fff;
+  background: var(--surface);
   border-radius: 99px;
   padding: 5px 10px;
   font-size: 11px;
@@ -575,7 +575,7 @@ function changeSort(value: string) {
   align-items: center;
   gap: 4px;
   border: 1px solid var(--line);
-  background: #fff;
+  background: var(--surface);
   border-radius: 9px;
   padding: 9px 12px;
   font-size: 12px;
@@ -614,7 +614,7 @@ function changeSort(value: string) {
 
   .filters.open {
     display: block;
-    background: #fff;
+    background: var(--surface);
     border: 1px solid var(--line);
     border-radius: 14px;
     padding: 18px;

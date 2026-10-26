@@ -602,7 +602,7 @@ function goOrder(order: Order) {
 
 .sessions,
 .insight {
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 16px;
   display: flex;
@@ -636,7 +636,7 @@ function goOrder(order: Order) {
   height: 30px;
   border-radius: 50%;
   border: 1px solid var(--line);
-  background: #fff;
+  background: var(--surface);
   cursor: pointer;
   display: grid;
   place-items: center;
@@ -645,7 +645,7 @@ function goOrder(order: Order) {
 
 .new-chat:hover {
   background: var(--ink);
-  color: #fff;
+  color: var(--on-ink);
 }
 
 .new-chat-wide {
@@ -696,7 +696,7 @@ function goOrder(order: Order) {
 
 .session.active {
   background: var(--ink);
-  color: #fff;
+  color: var(--on-ink);
 }
 
 .session-icon {
@@ -770,7 +770,7 @@ function goOrder(order: Order) {
   gap: 8px;
   align-items: flex-start;
   padding: 8px;
-  background: #fbf8f1;
+  background: var(--surface-sunken);
   border-radius: 9px;
 }
 
@@ -778,7 +778,7 @@ function goOrder(order: Order) {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #b9b1a3;
+  background: var(--muted-light);
   margin-top: 4px;
   flex-shrink: 0;
 }
@@ -821,7 +821,7 @@ function goOrder(order: Order) {
   flex-direction: column;
   min-width: 0;
   min-height: 0;
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 16px;
   overflow: hidden;
@@ -833,7 +833,7 @@ function goOrder(order: Order) {
   justify-content: space-between;
   padding: 14px 20px;
   border-bottom: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.9);
+  background: var(--surface-glass);
   flex-shrink: 0;
 }
 
@@ -848,7 +848,7 @@ function goOrder(order: Order) {
   height: 38px;
   border-radius: 12px;
   background: var(--ink);
-  color: #fff;
+  color: var(--on-ink);
   display: grid;
   place-items: center;
   font-size: 12px;
@@ -972,7 +972,7 @@ function goOrder(order: Order) {
   align-items: center;
   gap: 10px;
   border: 1px solid var(--line);
-  background: #fff;
+  background: var(--surface);
   border-radius: 12px;
   padding: 12px;
   cursor: pointer;
@@ -1064,7 +1064,7 @@ function goOrder(order: Order) {
   height: 30px;
   border-radius: 9px;
   background: var(--ink);
-  color: #fff;
+  color: var(--on-ink);
   display: grid;
   place-items: center;
   font-size: 9px;
@@ -1086,14 +1086,14 @@ function goOrder(order: Order) {
 .bubble {
   border-radius: 14px;
   padding: 13px 16px;
-  background: #f3efe7;
+  background: var(--surface-sunken);
   font-size: 13px;
   line-height: 1.75;
 }
 
 .message.user .bubble {
   background: var(--ink);
-  color: #fff;
+  color: var(--on-ink);
   border-bottom-right-radius: 4px;
   max-width: 640px;
 }
@@ -1135,7 +1135,7 @@ function goOrder(order: Order) {
 }
 
 .degraded-tag {
-  background: #fff1e8;
+  background: var(--danger-tint);
   color: #b9532a;
   font-size: 8px;
   padding: 1px 5px;
@@ -1143,7 +1143,7 @@ function goOrder(order: Order) {
 }
 
 .pref-tag {
-  background: #edf6f0;
+  background: var(--success-tint);
   color: #2f7a5c;
 }
 
@@ -1211,7 +1211,7 @@ function goOrder(order: Order) {
 
 .clarify-chip {
   border: 1px solid var(--line);
-  background: #fff;
+  background: var(--surface);
   border-radius: 99px;
   padding: 5px 10px;
   font-size: 10px;
@@ -1229,7 +1229,7 @@ function goOrder(order: Order) {
 .chat-compare {
   margin-top: 12px;
   border: 1px solid #f2d8c8;
-  background: #fff9f4;
+  background: var(--brand-tint-soft);
   border-radius: 11px;
   padding: 12px;
   min-width: min(520px, 100%);
@@ -1268,7 +1268,7 @@ function goOrder(order: Order) {
   display: flex;
   align-items: center;
   gap: 6px;
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 6px;
   padding: 4px 8px;
@@ -1302,7 +1302,7 @@ function goOrder(order: Order) {
   justify-content: space-between;
   gap: 12px;
   border: 1px solid var(--line);
-  background: #fff;
+  background: var(--surface);
   border-radius: 9px;
   padding: 10px 12px;
   text-align: left;
@@ -1339,7 +1339,7 @@ function goOrder(order: Order) {
 .composer {
   padding: 10px 18px 14px;
   border-top: 1px solid var(--line);
-  background: #fff;
+  background: var(--surface);
   flex-shrink: 0;
 }
 
@@ -1351,7 +1351,7 @@ function goOrder(order: Order) {
   border-radius: 14px;
   padding: 8px 8px 8px 14px;
   transition: border-color 0.2s, box-shadow 0.2s;
-  background: #fff;
+  background: var(--surface);
 }
 
 .composer-box:focus-within {
@@ -1379,7 +1379,7 @@ function goOrder(order: Order) {
   border-radius: 10px;
   border: none;
   background: var(--ink);
-  color: #fff;
+  color: var(--on-ink);
   cursor: pointer;
   display: grid;
   place-items: center;
@@ -1474,7 +1474,7 @@ function goOrder(order: Order) {
   font-size: 9.5px;
   line-height: 1.7;
   color: var(--muted);
-  background: #fbf8f1;
+  background: var(--surface-sunken);
   border-radius: 9px;
   padding: 11px;
 }

@@ -395,7 +395,7 @@ function useDemo(role: 'user' | 'admin' | 'seller') {
 
 .auth-visual {
   position: relative;
-  background: #191815;
+  background: var(--panel-dark-bg);
   color: #f4efe6;
   padding: 34px 48px;
   display: flex;
@@ -459,7 +459,7 @@ function useDemo(role: 'user' | 'admin' | 'seller') {
 }
 
 .visual-copy .eyebrow::before {
-  background: #ff9c72;
+  background: var(--panel-dark-accent);
 }
 
 .visual-copy h1 {
@@ -588,7 +588,7 @@ function useDemo(role: 'user' | 'admin' | 'seller') {
 }
 
 .showcase-dot:hover {
-  background: #5d574c;
+  background: var(--muted);
 }
 
 .showcase-dot.active {
@@ -611,7 +611,7 @@ function useDemo(role: 'user' | 'admin' | 'seller') {
 .visual-foot i {
   width: 3px;
   height: 3px;
-  background: #555147;
+  background: var(--muted);
   border-radius: 50%;
 }
 
@@ -720,7 +720,7 @@ function useDemo(role: 'user' | 'admin' | 'seller') {
 .forgot-note {
   margin-top: 4px;
   padding: 10px 12px;
-  background: #fbf8f1;
+  background: var(--surface-sunken);
   border-radius: 9px;
   font-size: 10px;
   line-height: 1.7;
@@ -756,7 +756,7 @@ function useDemo(role: 'user' | 'admin' | 'seller') {
   border-radius: 11px;
   padding: 11px 12px;
   cursor: pointer;
-  background: #fff;
+  background: var(--surface);
   transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
 }
 
@@ -767,7 +767,7 @@ function useDemo(role: 'user' | 'admin' | 'seller') {
 
 .role-option.active {
   border-color: var(--brand);
-  background: #fff8f3;
+  background: var(--brand-tint-strong);
 }
 
 .role-option input {
@@ -866,7 +866,7 @@ function useDemo(role: 'user' | 'admin' | 'seller') {
 
 .demo-actions button {
   border: 1px solid var(--line);
-  background: #fff;
+  background: var(--surface);
   border-radius: 6px;
   padding: 5px 9px;
   font-size: 9px;

@@ -176,7 +176,7 @@ function checkout() {
 }
 
 .cart-list {
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 16px;
   padding: 6px 20px;
@@ -282,7 +282,7 @@ function checkout() {
 .summary {
   position: sticky;
   top: 96px;
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 16px;
   padding: 22px;

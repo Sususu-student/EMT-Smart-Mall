@@ -476,7 +476,7 @@ function switchTab(name: string) {
 }
 
 .stat-card {
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 14px;
   padding: 18px;
@@ -528,7 +528,7 @@ function switchTab(name: string) {
   display: flex;
   align-items: center;
   gap: 16px;
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 13px;
   padding: 13px 16px;
@@ -583,12 +583,12 @@ function switchTab(name: string) {
 }
 
 .tag.ok {
-  background: #edf6f0;
+  background: var(--success-tint);
   color: var(--green);
 }
 
 .tag.off {
-  background: #f6efef;
+  background: var(--danger-tint-strong);
   color: #b9532a;
 }
 
@@ -625,7 +625,7 @@ function switchTab(name: string) {
   text-align: center;
   padding: 54px 20px;
   color: var(--muted);
-  background: #fff;
+  background: var(--surface);
   border: 1px dashed var(--line-strong);
   border-radius: 14px;
 }
@@ -674,14 +674,14 @@ function switchTab(name: string) {
 .upload-box :deep(.el-upload-dragger) {
   border-radius: 12px;
   border: 1px dashed var(--line-strong);
-  background: #fdfcf9;
+  background: var(--surface-sunken);
   padding: 22px 16px;
   transition: border-color 0.22s ease, background 0.22s ease;
 }
 
 .upload-box :deep(.el-upload-dragger:hover) {
   border-color: var(--brand);
-  background: #fff8f3;
+  background: var(--brand-tint-strong);
 }
 
 .upload-inner {
@@ -720,7 +720,7 @@ function switchTab(name: string) {
   border: 1px solid var(--line);
   border-radius: 12px;
   padding: 12px;
-  background: #fdfcf9;
+  background: var(--surface-sunken);
 }
 
 .upload-preview img {

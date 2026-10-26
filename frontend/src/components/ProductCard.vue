@@ -112,7 +112,7 @@ function toggleCompare() {
 
 <style scoped>
 .product-card {
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 16px;
   overflow: hidden;
@@ -142,7 +142,7 @@ function toggleCompare() {
 .media {
   position: relative;
   overflow: hidden;
-  background: #f2ede3;
+  background: var(--surface-sunken);
 }
 
 .media-link {
@@ -172,7 +172,7 @@ function toggleCompare() {
   height: 32px;
   border-radius: 50%;
   border: none;
-  background: rgba(255, 255, 255, 0.86);
+  background: var(--chip-bg);
   backdrop-filter: blur(4px);
   color: var(--ink-soft);
   cursor: pointer;
@@ -184,7 +184,7 @@ function toggleCompare() {
 .fav:hover,
 .fav.active {
   color: var(--brand);
-  background: #fff;
+  background: var(--surface-raised);
 }
 
 .hover-actions {
@@ -207,7 +207,7 @@ function toggleCompare() {
   right: 0;
   bottom: 0;
   height: 76px;
-  background: linear-gradient(180deg, rgba(27, 26, 23, 0) 0%, rgba(27, 26, 23, 0.34) 100%);
+  background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.34) 100%);
   opacity: 0;
   transition: opacity 0.26s ease;
   pointer-events: none;
@@ -226,7 +226,7 @@ function toggleCompare() {
   justify-content: center;
   gap: 4px;
   border: none;
-  background: rgba(27, 26, 23, 0.88);
+  background: var(--overlay-scrim);
   color: #fff;
   backdrop-filter: blur(6px);
   border-radius: 8px;
@@ -327,7 +327,7 @@ function toggleCompare() {
   height: 32px;
   border-radius: 50%;
   border: 1px solid var(--line);
-  background: #fff;
+  background: var(--surface);
   cursor: pointer;
   display: grid;
   place-items: center;
@@ -338,7 +338,7 @@ function toggleCompare() {
 .add-btn:hover:not(:disabled) {
   background: var(--ink);
   border-color: var(--ink);
-  color: #fff;
+  color: var(--on-ink);
 }
 
 .add-btn:disabled {

@@ -1,4 +1,5 @@
 :root {
+  /* ===== 第一层：调色板（随主题变化） ===== */
   --ink: #1b1a17;
   --ink-soft: #3d3a33;
   --muted: #7b756a;
@@ -13,6 +14,32 @@
   --brand-soft: #fff0e7;
   --green: #2f7a5c;
   --gold: #b8893d;
+
+  /* ===== 第二层：语义变量（组件一律用这一层） ===== */
+  /* 面：页面底 / 卡片面 / 卡内衬（气泡、代码块） */
+  --surface-page: var(--bg);
+  --surface: var(--card);
+  --surface-sunken: #fbf9f4;
+  --surface-raised: #ffffff;
+  /* 悬浮操作条、图片上的深色蒙层 */
+  --overlay-scrim: rgba(27, 26, 23, 0.88);
+  --chip-bg: #ffffff;
+  /* 毛玻璃浮层（悬浮卡片、图片上的说明卡） */
+  --surface-glass: rgba(255, 255, 255, 0.94);
+  --input-bg: #ffffff;
+  /* 品牌色的低透明度底，用于标签与强调块 */
+  --brand-tint: var(--brand-soft);
+  /* 品牌色的极浅底：选中项、提示条、悬浮态 */
+  --brand-tint-strong: #fff8f3;
+  --brand-tint-soft: #fff9f4;
+  --brand-tint-line: #f6e0d2;
+  /* 语义化的状态底色 */
+  --success-tint: #edf6f0;
+  --danger-tint: #fff1e8;
+  --danger-tint-strong: #f6efef;
+  --glow-brand: none;
+  /* 深色（--ink）底上的反白文字 */
+  --on-ink: #ffffff;
 
   /* 字体 token */
   --font-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'STSong', serif;
@@ -31,6 +58,28 @@
   --shadow-card-hover: 0 22px 48px rgba(38, 33, 25, 0.11);
   --shadow-float: 0 14px 34px rgba(38, 33, 25, 0.08);
 
+  /* 商品图片在暗色下的处理强度（浅色模式无效果） */
+  --product-image-filter: none;
+
+  /* Hero 与区块底色 */
+  --hero-bg: radial-gradient(circle at 76% 12%, rgba(240, 90, 40, 0.12), transparent 42%),
+    linear-gradient(180deg, #f4efe4 0%, #eee8db 100%);
+  --section-alt-bg: #fbf9f4;
+  --glow-accent: rgba(240, 90, 40, 0.18);
+
+  /* 深色区块（对比横幅、页脚等常驻深色区域） */
+  --panel-dark-bg: #191815;
+  --panel-dark-ink: #f4efe6;
+  --panel-dark-muted: #8f887d;
+  --panel-dark-line: #35322b;
+  --panel-dark-sunken: #23211d;
+  --panel-dark-raised: #2a2823;
+  --panel-dark-accent: #ff9c72;
+
+  /* 毛玻璃导航 */
+  --header-bg: rgba(244, 239, 228, 0.82);
+  --header-bg-scrolled: rgba(244, 239, 228, 0.68);
+
   --el-color-primary: #f05a28;
   --el-color-primary-light-3: #f47f55;
   --el-color-primary-light-5: #f8a184;
@@ -46,6 +95,105 @@
   --el-border-color: #e4ddcd;
   --el-border-color-light: #ece6da;
   --el-fill-color-blank: #ffffff;
+  --el-bg-color: #ffffff;
+  --el-bg-color-page: #f4efe4;
+  --el-bg-color-overlay: #ffffff;
+  --el-text-color-secondary: #7b756a;
+  --el-text-color-placeholder: #a49d90;
+  --el-fill-color-light: #fbf9f4;
+  --el-fill-color-lighter: #fdfcf9;
+  --el-mask-color: rgba(255, 255, 255, 0.9);
+}
+
+/* ===== 暗色主题 ===== */
+html.dark {
+  color-scheme: dark;
+
+  --bg: #121212;
+  --bg-deep: #0d0d0d;
+  --card: #1e1e1e;
+  --ink: #ededed;
+  --ink-soft: #c9c9c9;
+  --muted: #9a9a9a;
+  --muted-light: #6f6f6f;
+  --line: #2e2e2e;
+  --line-strong: #3d3d3d;
+
+  /* 品牌橙提亮：在 #121212 上对比度从 4.0 提升到 6.1 */
+  --brand: #ff6b35;
+  --brand-deep: #ff8552;
+  --brand-soft: rgba(255, 107, 53, 0.14);
+  --green: #4fae83;
+  --gold: #d4a55c;
+
+  --surface-page: var(--bg);
+  --surface: var(--card);
+  --surface-sunken: #171717;
+  --surface-raised: #262626;
+  --overlay-scrim: rgba(0, 0, 0, 0.82);
+  --chip-bg: #242424;
+  --surface-glass: rgba(30, 30, 30, 0.92);
+  --input-bg: #1a1a1a;
+  --on-ink: #121212;
+  --brand-tint: rgba(255, 107, 53, 0.14);
+  --brand-tint-strong: rgba(255, 107, 53, 0.12);
+  --brand-tint-soft: rgba(255, 107, 53, 0.08);
+  --brand-tint-line: rgba(255, 107, 53, 0.32);
+  --success-tint: rgba(79, 174, 131, 0.14);
+  --danger-tint: rgba(255, 107, 53, 0.14);
+  --danger-tint-strong: rgba(214, 69, 69, 0.16);
+
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.45);
+  --shadow-card-hover: 0 22px 48px rgba(0, 0, 0, 0.6);
+  --shadow-float: 0 14px 34px rgba(0, 0, 0, 0.5);
+
+  /* 商品图降亮，避免白底照片在暗色下刺眼 */
+  --product-image-filter: brightness(0.88) contrast(0.96);
+
+  /* Hero 改为深灰渐变 + 橙色光晕，保留大字标题的冲击力 */
+  --hero-bg: radial-gradient(circle at 76% 10%, rgba(255, 107, 53, 0.16), transparent 46%),
+    radial-gradient(circle at 20% 90%, rgba(255, 107, 53, 0.06), transparent 40%),
+    linear-gradient(180deg, #181818 0%, #121212 100%);
+  --section-alt-bg: #171717;
+  --glow-accent: rgba(255, 107, 53, 0.28);
+
+  /* 深色区块：暗色下比页面再沉一档，保持层次 */
+  --panel-dark-bg: #0b0b0b;
+  --panel-dark-ink: #ededed;
+  --panel-dark-muted: #8a8a8a;
+  --panel-dark-line: #2a2a2a;
+  --panel-dark-sunken: #151515;
+  --panel-dark-raised: #1f1f1f;
+  --panel-dark-accent: var(--brand);
+
+  --header-bg: rgba(18, 18, 18, 0.82);
+  --header-bg-scrolled: rgba(18, 18, 18, 0.66);
+
+  --el-color-primary: #ff6b35;
+  --el-color-primary-light-3: #ff8a5c;
+  --el-color-primary-light-5: #ffa585;
+  --el-color-primary-light-7: #7a3a22;
+  --el-color-primary-light-8: #4d2617;
+  --el-color-primary-light-9: #2a1a12;
+  --el-color-primary-dark-2: #ff8552;
+  --el-text-color-primary: #ededed;
+  --el-text-color-regular: #c9c9c9;
+  --el-text-color-secondary: #9a9a9a;
+  --el-text-color-placeholder: #6f6f6f;
+  --el-border-color: #2e2e2e;
+  --el-border-color-light: #262626;
+  --el-border-color-lighter: #222222;
+  --el-fill-color-blank: #1e1e1e;
+  --el-fill-color: #262626;
+  --el-fill-color-light: #222222;
+  --el-fill-color-lighter: #1c1c1c;
+  --el-bg-color: #1e1e1e;
+  --el-bg-color-page: #121212;
+  --el-bg-color-overlay: #242424;
+  --el-mask-color: rgba(0, 0, 0, 0.75);
+  --el-disabled-bg-color: #232323;
+  --el-disabled-text-color: #5c5c5c;
+  --el-disabled-border-color: #2e2e2e;
 }
 
 *,
@@ -106,7 +254,7 @@ h1, h2, h3, h4, p {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #d5cdbf;
+  background: var(--line-strong);
   border-radius: 99px;
   border: 2px solid var(--bg);
 }
@@ -235,7 +383,7 @@ h1, h2, h3, h4, p {
   gap: 6px;
   padding: 5px 11px;
   border-radius: 99px;
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
   font-size: 12px;
   color: var(--ink-soft);
@@ -251,7 +399,7 @@ h1, h2, h3, h4, p {
 .pill.dark {
   background: var(--ink);
   border-color: var(--ink);
-  color: #fff;
+  color: var(--on-ink);
 }
 
 .surface {
@@ -453,4 +601,165 @@ body.chat-route .store-main {
   .product-card:hover .media img {
     transform: none !important;
   }
+}
+
+/* ============================================================
+   主题切换：颜色平滑过渡
+   ============================================================ */
+
+html {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* 切换瞬间禁用位移动画，避免卡片 hover、轮播等过渡抖动 */
+html.theme-switching *,
+html.theme-switching *::before,
+html.theme-switching *::after {
+  transition-property: background-color, border-color, color, fill, stroke, box-shadow, opacity !important;
+  transform: none !important;
+}
+
+/* 常见容器统一带上颜色过渡，避免只有底层背景变化而边框文字跳变 */
+body,
+.surface,
+.product-card,
+.category-card,
+.page-head,
+.footer,
+.header,
+.timeline-card,
+.el-card,
+.el-dialog,
+.el-drawer,
+.el-input__wrapper,
+.el-textarea__inner,
+.el-select__wrapper,
+.el-button,
+.el-tag,
+.el-table,
+.el-table__cell,
+.el-tabs__item {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+/* 商品图片：暗色下降亮，悬停恢复真实亮度 */
+.product-image img,
+.product-card .media img {
+  transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1), filter 0.3s ease;
+}
+
+html.dark .product-image img,
+html.dark .product-card .media img {
+  filter: var(--product-image-filter);
+}
+
+/* 悬停时恢复正常亮度，便于看清商品细节 */
+@media (hover: hover) {
+  html.dark .product-card:hover .media img,
+  html.dark .product-image:hover img {
+    filter: brightness(1) contrast(1);
+  }
+}
+
+/* ============================================================
+   暗色模式细节打磨
+   ============================================================ */
+
+/* 卡片：暗色下加一圈极淡内描边，避免与背景糊在一起 */
+html.dark .surface,
+html.dark .product-card,
+html.dark .category-card,
+html.dark .timeline-card {
+  box-shadow: var(--shadow-card), inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+}
+
+/* 品牌色发光：突出科技感 */
+html.dark .el-button--primary {
+  --el-button-bg-color: var(--brand);
+  --el-button-border-color: var(--brand);
+  --el-button-hover-bg-color: #ff8552;
+  --el-button-hover-border-color: #ff8552;
+  box-shadow: 0 0 0 1px rgba(255, 107, 53, 0.25), 0 4px 16px rgba(255, 107, 53, 0.22);
+}
+
+html.dark .el-button--primary:hover {
+  box-shadow: 0 0 0 1px rgba(255, 107, 53, 0.4), 0 6px 22px rgba(255, 107, 53, 0.32);
+}
+
+html.dark .el-tabs__active-bar {
+  box-shadow: 0 0 10px rgba(255, 107, 53, 0.7);
+}
+
+html.dark .eyebrow {
+  text-shadow: 0 0 12px rgba(255, 107, 53, 0.35);
+}
+
+/* 滚动条 */
+html.dark ::-webkit-scrollbar-thumb {
+  background: #3a3a3a;
+  border-color: var(--bg);
+}
+
+html.dark ::-webkit-scrollbar-thumb:hover {
+  background: var(--muted);
+}
+
+/* 选中文本 */
+html.dark ::selection {
+  background: var(--brand);
+  color: #121212;
+}
+
+/* 表格：暗色下斑马纹与表头 */
+html.dark .el-table {
+  --el-table-border-color: var(--line);
+  --el-table-header-bg-color: #222222;
+  --el-table-row-hover-bg-color: #262626;
+  --el-table-bg-color: var(--card);
+  --el-table-tr-bg-color: var(--card);
+  --el-table-header-text-color: var(--muted);
+  --el-table-text-color: var(--ink-soft);
+}
+
+/* 输入框：暗色下用略深的底，和白卡区分 */
+html.dark .el-input__wrapper,
+html.dark .el-textarea__inner,
+html.dark .el-select__wrapper {
+  background-color: var(--input-bg);
+  box-shadow: 0 0 0 1px var(--line) inset;
+}
+
+html.dark .el-input__wrapper.is-focus,
+html.dark .el-select__wrapper.is-focused {
+  box-shadow: 0 0 0 1px var(--brand) inset, 0 0 12px rgba(255, 107, 53, 0.18);
+}
+
+/* 下拉与弹层 */
+html.dark .el-popper,
+html.dark .el-dropdown__popper,
+html.dark .el-select__popper {
+  background: var(--surface-raised);
+  border-color: var(--line);
+}
+
+html.dark .el-dropdown-menu {
+  background: var(--surface-raised);
+}
+
+html.dark .el-dropdown-menu__item:not(.is-disabled):hover,
+html.dark .el-select-dropdown__item.is-hovering {
+  background: #2e2e2e;
+  color: var(--ink);
+}
+
+/* 分页 */
+html.dark .el-pagination.is-background .el-pager li {
+  background: #242424;
+  color: var(--ink-soft);
+}
+
+html.dark .el-pagination.is-background .el-pager li.is-active {
+  background: var(--brand);
+  color: #121212;
 }

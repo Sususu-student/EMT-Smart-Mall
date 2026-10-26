@@ -236,7 +236,7 @@ function renderCharts() {
 }
 
 .stat-card {
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 15px;
   padding: 20px;
@@ -247,7 +247,7 @@ function renderCharts() {
 
 .stat-card.dark {
   background: var(--ink);
-  color: #fff;
+  color: var(--on-ink);
   border-color: var(--ink);
 }
 
@@ -298,7 +298,7 @@ function renderCharts() {
 }
 
 .panel {
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 15px;
   padding: 20px;

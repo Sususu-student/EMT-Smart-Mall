@@ -123,11 +123,11 @@ onMounted(async () => {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #7d766a;
+  background: var(--muted);
 }
 
 .status-dot.live {
-  background: #5fd39b;
+  background: var(--green);
   box-shadow: 0 0 0 3px rgba(95, 211, 155, 0.15);
 }
 

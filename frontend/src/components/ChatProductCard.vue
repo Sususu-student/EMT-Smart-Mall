@@ -89,7 +89,7 @@ function toggleCompare() {
   display: flex;
   gap: 14px;
   padding: 12px;
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 14px;
   transition: border-color 0.2s, box-shadow 0.2s;
@@ -162,7 +162,7 @@ function toggleCompare() {
   font-size: 12px;
   line-height: 1.7;
   color: var(--ink-soft);
-  background: #fbf8f1;
+  background: var(--surface-sunken);
   border-radius: 8px;
   padding: 8px 10px;
 }
@@ -214,7 +214,7 @@ function toggleCompare() {
   align-items: center;
   gap: 3px;
   border: 1px solid var(--line);
-  background: #fff;
+  background: var(--surface);
   color: var(--ink-soft);
   font-size: 10px;
   border-radius: 6px;
@@ -231,7 +231,7 @@ function toggleCompare() {
 .act.primary {
   background: var(--ink);
   border-color: var(--ink);
-  color: #fff;
+  color: var(--on-ink);
 }
 
 .act.primary:hover {

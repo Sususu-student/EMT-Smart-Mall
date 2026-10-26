@@ -449,7 +449,7 @@ async function savePreferences() {
 }
 
 .user-card {
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 16px;
   padding: 24px;
@@ -508,7 +508,7 @@ async function savePreferences() {
 }
 
 .side-nav {
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 16px;
   padding: 8px;
@@ -536,7 +536,7 @@ async function savePreferences() {
 
 .side-nav button.active {
   background: var(--ink);
-  color: #fff;
+  color: var(--on-ink);
 }
 
 .profile-main {
@@ -547,7 +547,7 @@ async function savePreferences() {
 }
 
 .panel {
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 16px;
   padding: 22px;
@@ -592,7 +592,7 @@ async function savePreferences() {
   display: flex;
   align-items: center;
   gap: 10px;
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 13px;
   padding: 15px;
