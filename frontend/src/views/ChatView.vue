@@ -1100,8 +1100,8 @@ function goOrder(order: Order) {
 
 .assistant-bubble {
   /* 品牌色极浅底 + 左侧品牌色描边，让 AI 与用户消息一眼可辨 */
-  background: linear-gradient(180deg, #fff7f1 0%, #fdf6ee 100%);
-  border: 1px solid #f6e0d2;
+  background: var(--bubble-ai-bg);
+  border: 1px solid var(--bubble-ai-border);
   border-left: 3px solid var(--brand);
   border-bottom-left-radius: 4px;
 }

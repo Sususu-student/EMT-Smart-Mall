@@ -33,6 +33,9 @@
   --brand-tint-strong: #fff8f3;
   --brand-tint-soft: #fff9f4;
   --brand-tint-line: #f6e0d2;
+  /* AI 消息气泡：浅色下是极浅暖色，暗色下换成深灰以免包住商品卡 */
+  --bubble-ai-bg: linear-gradient(180deg, #fff7f1 0%, #fdf6ee 100%);
+  --bubble-ai-border: #f6e0d2;
   /* 语义化的状态底色 */
   --success-tint: #edf6f0;
   --danger-tint: #fff1e8;
@@ -139,6 +142,8 @@ html.dark {
   --brand-tint-strong: rgba(255, 107, 53, 0.12);
   --brand-tint-soft: rgba(255, 107, 53, 0.08);
   --brand-tint-line: rgba(255, 107, 53, 0.32);
+  --bubble-ai-bg: linear-gradient(180deg, #1c1c1c 0%, #191919 100%);
+  --bubble-ai-border: #2c2c2c;
   --success-tint: rgba(79, 174, 131, 0.14);
   --danger-tint: rgba(255, 107, 53, 0.14);
   --danger-tint-strong: rgba(214, 69, 69, 0.16);

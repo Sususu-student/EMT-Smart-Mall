@@ -80,7 +80,7 @@ function onError() {
   height: 100%;
   display: grid;
   place-items: center;
-  background: linear-gradient(135deg, #f3ede2, #e6ddcd);
+  background: linear-gradient(135deg, var(--surface-sunken), var(--line));
   color: #b4a993;
   font-family: var(--font-serif);
   letter-spacing: 0.2em;
