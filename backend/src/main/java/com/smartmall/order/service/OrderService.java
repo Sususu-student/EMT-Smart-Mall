@@ -279,6 +279,11 @@ public class OrderService {
         item.setProductImage(product.getImage());
         item.setProductPrice(product.getPrice());
         item.setQuantity(quantity);
+        // 固化发货归属：平台自营商品没有卖家，用占位标识，便于卖家侧查询
+        item.setSellerId(StringUtils.hasText(product.getSellerId())
+                ? product.getSellerId() : OrderItem.PLATFORM_SELLER);
+        item.setShipStatus(OrderItem.SHIP_PENDING);
+        item.setRefundStatus("NONE");
         return item;
     }
 

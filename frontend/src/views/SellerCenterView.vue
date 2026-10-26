@@ -3,7 +3,7 @@ import { onMounted, reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { ElMessage, ElMessageBox, type UploadRequestOptions } from 'element-plus'
 import { productApi, sellerApi, uploadApi } from '@/api'
-import type { Category, Product, SellerOrderRow, SellerOverview } from '@/types'
+import type { Category, Product, SellerOrderDetail, SellerOrderRow, SellerOverview } from '@/types'
 import { dateTime, money } from '@/utils/format'
 import { useAuthStore } from '@/stores/auth'
 import ProductImage from '@/components/ProductImage.vue'
@@ -20,6 +20,19 @@ const orders = ref<SellerOrderRow[]>([])
 const total = ref(0)
 const page = ref(1)
 const keyword = ref('')
+
+/* 订单管理 */
+const ordersLoading = ref(false)
+const orderFilter = ref('')
+const orderPage = ref(1)
+const orderPageSize = ref(10)
+const orderTotal = ref(0)
+const shipDialog = ref(false)
+const shipSaving = ref(false)
+const shipTarget = ref<SellerOrderRow | null>(null)
+const shipForm = reactive({ carrier: '顺丰速运', trackingNo: '' })
+const detailDialog = ref(false)
+const orderDetail = ref<SellerOrderDetail | null>(null)
 
 const dialog = ref(false)
 const saving = ref(false)
@@ -83,8 +96,56 @@ async function loadProducts() {
   total.value = list.total
 }
 
-async function loadOrders() {
-  orders.value = await sellerApi.orders(10)
+async function loadOrders(targetPage = orderPage.value) {
+  ordersLoading.value = true
+  try {
+    const result = await sellerApi.orders({
+      shipStatus: orderFilter.value || undefined,
+      page: targetPage,
+      size: orderPageSize.value
+    })
+    orders.value = result.records
+    orderTotal.value = result.total
+    orderPage.value = targetPage
+  } catch {
+    orders.value = []
+    orderTotal.value = 0
+  } finally {
+    ordersLoading.value = false
+  }
+}
+
+function openShip(row: SellerOrderRow) {
+  shipTarget.value = row
+  shipForm.carrier = '顺丰速运'
+  shipForm.trackingNo = ''
+  shipDialog.value = true
+}
+
+async function confirmShip() {
+  if (!shipTarget.value) return
+  shipSaving.value = true
+  try {
+    const result = await sellerApi.ship(shipTarget.value.orderId, {
+      carrier: shipForm.carrier,
+      trackingNo: shipForm.trackingNo || undefined
+    })
+    ElMessage.success(`已发货，运单号 ${result.trackingNo}`)
+    shipDialog.value = false
+    await loadOrders()
+    await loadOverview()
+  } finally {
+    shipSaving.value = false
+  }
+}
+
+async function openOrderDetail(row: SellerOrderRow) {
+  orderDetail.value = await sellerApi.orderDetail(row.orderId)
+  detailDialog.value = true
+}
+
+async function loadOverview() {
+  overview.value = await sellerApi.overview()
 }
 
 function openPublish() {
@@ -232,7 +293,7 @@ async function removeProduct(product: Product) {
 
 function switchTab(name: string) {
   tab.value = name
-  if (name === 'orders' && !orders.value.length) loadOrders()
+  if (name === 'orders' && !orders.value.length) loadOrders(1)
 }
 </script>
 
@@ -266,6 +327,12 @@ function switchTab(name: string) {
         <article class="stat-card dark">
           <span>库存总量</span>
           <strong>{{ overview?.stockTotal ?? 0 }}</strong>
+        </article>
+        <article class="stat-card alert" @click="tab = 'orders'; loadOrders(1)">
+          <span>待发货订单</span>
+          <strong>{{ overview?.pendingShipOrders ?? 0 }}</strong>
+          <em v-if="overview?.pendingShipItems">共 {{ overview.pendingShipItems }} 件商品</em>
+          <em v-else>暂无待处理</em>
         </article>
       </section>
 
@@ -340,23 +407,70 @@ function switchTab(name: string) {
         </el-tab-pane>
 
         <el-tab-pane label="我的订单" name="orders">
-          <el-table :data="orders" style="width: 100%">
-            <el-table-column prop="productName" label="商品" min-width="200" />
-            <el-table-column label="数量" width="90">
-              <template #default="{ row }">{{ row.quantity }}</template>
-            </el-table-column>
-            <el-table-column label="金额" width="120">
-              <template #default="{ row }">{{ money(row.amount) }}</template>
-            </el-table-column>
-            <el-table-column label="订单号" min-width="180">
+          <div class="order-toolbar">
+            <el-radio-group v-model="orderFilter" size="default" @change="loadOrders(1)">
+              <el-radio-button value="">全部</el-radio-button>
+              <el-radio-button value="PENDING">待发货</el-radio-button>
+              <el-radio-button value="SHIPPED">已发货</el-radio-button>
+            </el-radio-group>
+            <span class="order-total">共 {{ orderTotal }} 单</span>
+          </div>
+
+          <el-table v-loading="ordersLoading" :data="orders" style="width: 100%">
+            <el-table-column label="订单号" min-width="170">
               <template #default="{ row }">
-                <span class="order-no">{{ row.orderId }}</span>
+                <span class="order-no">{{ row.orderNo || row.orderId }}</span>
+                <span class="order-time">{{ dateTime(row.createdAt) }}</span>
+              </template>
+            </el-table-column>
+            <el-table-column label="收货人" min-width="150">
+              <template #default="{ row }">
+                <strong class="receiver">{{ row.receiver }}</strong>
+                <span class="order-time">{{ row.phone }}</span>
+              </template>
+            </el-table-column>
+            <el-table-column label="收货地址" min-width="200">
+              <template #default="{ row }">
+                <span class="addr">{{ row.addressText }}</span>
+              </template>
+            </el-table-column>
+            <el-table-column label="我的商品" width="110">
+              <template #default="{ row }">{{ row.myItemCount }} 件</template>
+            </el-table-column>
+            <el-table-column label="金额" width="110">
+              <template #default="{ row }">{{ money(row.myAmount) }}</template>
+            </el-table-column>
+            <el-table-column label="发货状态" width="120">
+              <template #default="{ row }">
+                <el-tag :type="row.shipStatus === 'SHIPPED' ? 'success' : 'warning'" size="small" round>
+                  {{ row.shipStatusLabel }}
+                </el-tag>
+              </template>
+            </el-table-column>
+            <el-table-column label="操作" width="150" fixed="right">
+              <template #default="{ row }">
+                <el-button v-if="row.shipStatus !== 'SHIPPED'" link type="primary" @click="openShip(row)">
+                  发货
+                </el-button>
+                <el-button link @click="openOrderDetail(row)">详情</el-button>
               </template>
             </el-table-column>
           </el-table>
-          <div v-if="!orders.length" class="empty-state small">
-            <strong>还没有订单</strong>
-            <p>买家下单后会显示在这里。</p>
+
+          <el-pagination
+            v-if="orderTotal > orderPageSize"
+            background
+            layout="total, prev, pager, next"
+            :total="orderTotal"
+            :page-size="orderPageSize"
+            :current-page="orderPage"
+            style="margin-top: 18px; justify-content: flex-end"
+            @current-change="loadOrders"
+          />
+
+          <div v-if="!ordersLoading && !orders.length" class="empty-state small">
+            <strong>{{ orderFilter === 'PENDING' ? '没有待发货的订单' : '还没有订单' }}</strong>
+            <p>买家下单并支付后会显示在这里。</p>
           </div>
         </el-tab-pane>
       </el-tabs>
@@ -438,10 +552,229 @@ function switchTab(name: string) {
         </el-button>
       </template>
     </el-dialog>
+
+    <!-- 发货 -->
+    <el-dialog v-model="shipDialog" title="确认发货" width="460px">
+      <div v-if="shipTarget" class="ship-body">
+        <div class="ship-target">
+          <strong>{{ shipTarget.receiver }}</strong>
+          <span>{{ shipTarget.phone }}</span>
+          <p>{{ shipTarget.addressText }}</p>
+        </div>
+        <el-form label-position="top" class="publish-form">
+          <el-form-item label="快递公司">
+            <el-select v-model="shipForm.carrier" style="width: 100%">
+              <el-option label="顺丰速运" value="顺丰速运" />
+              <el-option label="中通快递" value="中通快递" />
+              <el-option label="圆通速递" value="圆通速递" />
+              <el-option label="韵达快递" value="韵达快递" />
+              <el-option label="京东物流" value="京东物流" />
+              <el-option label="EMS" value="EMS" />
+            </el-select>
+          </el-form-item>
+          <el-form-item label="运单号">
+            <el-input v-model="shipForm.trackingNo" placeholder="留空则自动生成" />
+          </el-form-item>
+        </el-form>
+        <p class="ship-hint">只会把属于你的 {{ shipTarget.myItemCount }} 件商品标记为已发货。</p>
+      </div>
+      <template #footer>
+        <el-button round @click="shipDialog = false">取消</el-button>
+        <el-button type="primary" round :loading="shipSaving" @click="confirmShip">确认发货</el-button>
+      </template>
+    </el-dialog>
+
+    <!-- 订单详情 -->
+    <el-dialog v-model="detailDialog" title="订单详情" width="560px">
+      <div v-if="orderDetail" class="detail-body">
+        <div class="detail-meta">
+          <div><span>订单号</span><strong>{{ orderDetail.orderNo || orderDetail.orderId }}</strong></div>
+          <div><span>下单时间</span><strong>{{ dateTime(orderDetail.createdAt) }}</strong></div>
+          <div><span>收货人</span><strong>{{ orderDetail.receiver }} · {{ orderDetail.phone }}</strong></div>
+          <div><span>收货地址</span><strong>{{ orderDetail.addressText }}</strong></div>
+          <div v-if="orderDetail.remark"><span>买家备注</span><strong>{{ orderDetail.remark }}</strong></div>
+        </div>
+
+        <div v-for="item in orderDetail.items" :key="item.id" class="detail-item">
+          <img :src="item.productImage || '/img/default.svg'" :alt="item.productName" />
+          <div class="di-main">
+            <strong>{{ item.productName }}</strong>
+            <span>{{ money(item.price) }} × {{ item.quantity }}</span>
+            <span v-if="item.trackingNo" class="di-ship">
+              {{ item.carrier }} · {{ item.trackingNo }}
+            </span>
+          </div>
+          <div class="di-right">
+            <b>{{ money(item.amount) }}</b>
+            <el-tag :type="item.shipStatus === 'SHIPPED' ? 'success' : 'warning'" size="small" round>
+              {{ item.shipStatus === 'SHIPPED' ? '已发货' : '待发货' }}
+            </el-tag>
+          </div>
+        </div>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
 <style scoped>
+.order-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.order-total {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.order-no {
+  display: block;
+  font-family: var(--font-digit);
+  font-size: 12px;
+  color: var(--ink);
+}
+
+.order-time {
+  display: block;
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+.receiver {
+  display: block;
+  font-size: 13px;
+  color: var(--ink);
+}
+
+.addr {
+  font-size: 12px;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+
+/* 发货弹窗 */
+.ship-target {
+  background: var(--surface-sunken);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-bottom: 16px;
+}
+
+.ship-target strong {
+  font-size: 13px;
+  color: var(--ink);
+}
+
+.ship-target span {
+  font-size: 12px;
+  color: var(--muted);
+  margin-left: 8px;
+}
+
+.ship-target p {
+  font-size: 12px;
+  color: var(--ink-soft);
+  margin-top: 6px;
+  line-height: 1.6;
+}
+
+.ship-hint {
+  font-size: 11px;
+  color: var(--muted);
+  background: var(--brand-tint);
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+
+/* 订单详情 */
+.detail-meta {
+  display: grid;
+  gap: 8px;
+  background: var(--surface-sunken);
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-bottom: 16px;
+}
+
+.detail-meta div {
+  display: flex;
+  gap: 10px;
+  font-size: 12px;
+}
+
+.detail-meta span {
+  color: var(--muted);
+  flex-shrink: 0;
+  width: 62px;
+}
+
+.detail-meta strong {
+  color: var(--ink);
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.detail-item:last-child {
+  border-bottom: none;
+}
+
+.detail-item img {
+  width: 52px;
+  height: 52px;
+  object-fit: cover;
+  border-radius: 8px;
+  background: var(--surface-sunken);
+  flex-shrink: 0;
+}
+
+.di-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.di-main strong {
+  display: block;
+  font-size: 13px;
+  color: var(--ink);
+}
+
+.di-main span {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.di-ship {
+  display: block;
+  color: var(--green) !important;
+}
+
+.di-right {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.di-right b {
+  display: block;
+  font-family: var(--font-digit);
+  font-size: 14px;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+
 .seller-page {
   padding: 40px 0 70px;
   min-height: 70vh;

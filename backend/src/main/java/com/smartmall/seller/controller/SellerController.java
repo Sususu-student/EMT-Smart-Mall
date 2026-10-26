@@ -3,6 +3,7 @@ package com.smartmall.seller.controller;
 import com.smartmall.admin.dto.AdminProductRequest;
 import com.smartmall.common.ApiResponse;
 import com.smartmall.common.PageResult;
+import com.smartmall.order.dto.ShipRequest;
 import com.smartmall.product.dto.ProductVO;
 import com.smartmall.seller.service.SellerService;
 import jakarta.validation.Valid;
@@ -66,8 +67,25 @@ public class SellerController {
         return ApiResponse.ok();
     }
 
+    /** 订单列表：按子项发货状态筛选（PENDING / SHIPPED / 空为全部） */
     @GetMapping("/orders")
-    public ApiResponse<List<Map<String, Object>>> orders(@RequestParam(defaultValue = "10") int limit) {
-        return ApiResponse.ok(sellerService.recentOrders(limit));
+    public ApiResponse<PageResult<Map<String, Object>>> orders(
+            @RequestParam(required = false) String shipStatus,
+            @RequestParam(defaultValue = "1") long page,
+            @RequestParam(defaultValue = "10") long size) {
+        return ApiResponse.ok(sellerService.orders(shipStatus, page, size));
+    }
+
+    /** 订单详情：含自己商品的明细与收货信息 */
+    @GetMapping("/orders/{id}")
+    public ApiResponse<Map<String, Object>> orderDetail(@PathVariable String id) {
+        return ApiResponse.ok(sellerService.orderDetail(id));
+    }
+
+    /** 发货：只更新属于自己且待发货的子项 */
+    @PostMapping("/orders/{id}/ship")
+    public ApiResponse<Map<String, Object>> ship(@PathVariable String id,
+                                                 @RequestBody(required = false) ShipRequest request) {
+        return ApiResponse.ok(sellerService.ship(id, request));
     }
 }

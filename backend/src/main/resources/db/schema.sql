@@ -149,7 +149,14 @@ CREATE TABLE IF NOT EXISTS order_item (
     product_name    VARCHAR(200),
     product_image   VARCHAR(200),
     product_price   DECIMAL(10,2),
-    quantity        INT
+    quantity        INT,
+    -- 发货归属：下单时按商品的 seller_id 固化，支持多卖家订单各自发货
+    seller_id       VARCHAR(32),
+    ship_status     VARCHAR(32) DEFAULT 'PENDING',
+    carrier         VARCHAR(64),
+    tracking_no     VARCHAR(64),
+    shipped_at      DATETIME,
+    refund_status   VARCHAR(32) DEFAULT 'NONE'
 );
 
 CREATE TABLE IF NOT EXISTS conversation (

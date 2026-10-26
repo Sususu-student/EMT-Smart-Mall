@@ -257,14 +257,51 @@ export interface SellerOverview {
   onSaleCount: number
   soldCount: number
   stockTotal: number
+  /** 待发货订单数 */
+  pendingShipOrders: number
+  /** 待发货商品件数 */
+  pendingShipItems: number
 }
 
+/** 卖家视角的订单行（按自己商品聚合） */
 export interface SellerOrderRow {
   orderId: string
+  orderNo: string
+  orderStatus: string
+  orderStatusLabel: string
+  /** PENDING 待发货 / SHIPPED 已发货 */
+  shipStatus: string
+  shipStatusLabel: string
+  receiver: string
+  phone: string
+  addressText: string
+  remark?: string
+  deliveryMethod?: string
+  createdAt: string
+  paidAt?: string
+  myItemCount: number
+  myAmount: number
+  carrier?: string
+  trackingNo?: string
+}
+
+/** 卖家订单详情中的商品明细 */
+export interface SellerOrderItem {
+  id: number
   productId: string
   productName: string
+  productImage?: string
   quantity: number
+  price: number
   amount: number
+  shipStatus: string
+  carrier?: string
+  trackingNo?: string
+  shippedAt?: string
+}
+
+export interface SellerOrderDetail extends SellerOrderRow {
+  items: SellerOrderItem[]
 }
 
 export interface CompareProduct {

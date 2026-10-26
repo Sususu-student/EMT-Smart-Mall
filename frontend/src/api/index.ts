@@ -25,6 +25,7 @@ import type {
   Product,
   Profile,
   Review,
+  SellerOrderDetail,
   SellerOrderRow,
   SellerOverview,
   Turn,
@@ -106,7 +107,15 @@ export const sellerApi = {
   toggleStatus: (id: string, status: number) =>
     request<Product>({ url: `/seller/products/${id}/status`, method: 'put', params: { status } }),
   remove: (id: string) => request<void>({ url: `/seller/products/${id}`, method: 'delete' }),
-  orders: (limit = 10) => request<SellerOrderRow[]>({ url: '/seller/orders', params: { limit } })
+  orders: (params: { shipStatus?: string; page?: number; size?: number } = {}) =>
+    request<PageResult<SellerOrderRow>>({ url: '/seller/orders', params }),
+  orderDetail: (id: string) => request<SellerOrderDetail>({ url: `/seller/orders/${id}` }),
+  ship: (id: string, data: { carrier?: string; trackingNo?: string }) =>
+    request<{ orderId: string; shippedCount: number; carrier: string; trackingNo: string; orderStatus: string }>({
+      url: `/seller/orders/${id}/ship`,
+      method: 'post',
+      data
+    })
 }
 
 export const notificationApi = {

@@ -378,6 +378,90 @@ class SmartMallFlowTest {
                         .header("Authorization", "Bearer " + sellerToken))
                 .andExpect(status().isBadRequest());
 
+        // ===== 卖家发货闭环：买家下单 → 卖家发货 → 买家看到已发货 =====
+        // 卖家把自己的商品补足库存
+        var restockBody = objectMapper.createObjectNode();
+        restockBody.put("name", "测试卖家商品");
+        restockBody.put("categoryId", "cat_headphone");
+        restockBody.put("price", 199);
+        restockBody.put("stock", 50);
+        putJson("/api/seller/products/" + sellerProductId, restockBody, sellerToken);
+
+        var addressBody = objectMapper.createObjectNode();
+        addressBody.put("receiver", "发货测试买家");
+        addressBody.put("phone", "13800002222");
+        addressBody.put("province", "广东省");
+        addressBody.put("city", "深圳市");
+        addressBody.put("district", "南山区");
+        addressBody.put("detail", "测试路 1 号");
+        addressBody.put("isDefault", 1);
+        String sellerTestAddressId = postJson("/api/user/address", addressBody, token).path("id").asText();
+
+        var shipOrderBody = objectMapper.createObjectNode();
+        shipOrderBody.put("productId", sellerProductId);
+        shipOrderBody.put("quantity", 2);
+        shipOrderBody.put("addressId", sellerTestAddressId);
+        String shipOrderId = postJson("/api/order", shipOrderBody, token).path("id").asText();
+        putJson("/api/order/" + shipOrderId + "/pay", objectMapper.createObjectNode(), token);
+
+        // 卖家首页应出现待发货统计
+        JsonNode overview = getJson("/api/seller/overview", sellerToken);
+        assertThat(overview.path("pendingShipOrders").asLong()).isEqualTo(1);
+        assertThat(overview.path("pendingShipItems").asLong()).isEqualTo(2);
+
+        // 待发货列表能看到收货信息
+        JsonNode pendingOrders = getJson("/api/seller/orders?shipStatus=PENDING&page=1&size=10", sellerToken);
+        assertThat(pendingOrders.path("total").asLong()).isEqualTo(1);
+        JsonNode firstOrder = pendingOrders.path("records").get(0);
+        assertThat(firstOrder.path("shipStatusLabel").asText()).isEqualTo("待发货");
+        assertThat(firstOrder.path("receiver").asText()).isEqualTo("发货测试买家");
+        assertThat(firstOrder.path("myItemCount").asInt()).isEqualTo(2);
+
+        // 订单详情含商品明细
+        JsonNode sellerOrderDetail = getJson("/api/seller/orders/" + shipOrderId, sellerToken);
+        assertThat(sellerOrderDetail.path("items").size()).isEqualTo(1);
+        assertThat(sellerOrderDetail.path("items").get(0).path("shipStatus").asText()).isEqualTo("PENDING");
+
+        // 买家不能发货
+        mvc.perform(post("/api/seller/orders/" + shipOrderId + "/ship")
+                        .contentType(MediaType.APPLICATION_JSON).content("{}")
+                        .header("Authorization", "Bearer " + token))
+                .andExpect(status().isForbidden());
+
+        // 卖家发货
+        var sellerShipBody = objectMapper.createObjectNode();
+        sellerShipBody.put("carrier", "顺丰速运");
+        sellerShipBody.put("trackingNo", "SFTEST0001");
+        JsonNode sellerShipped = postJson("/api/seller/orders/" + shipOrderId + "/ship", sellerShipBody, sellerToken);
+        assertThat(sellerShipped.path("shippedCount").asInt()).isEqualTo(1);
+        assertThat(sellerShipped.path("trackingNo").asText()).isEqualTo("SFTEST0001");
+        assertThat(sellerShipped.path("orderStatus").asText()).isEqualTo("SHIPPED");
+
+        // 买家侧订单变为已发货
+        JsonNode buyerOrder = getJson("/api/order/" + shipOrderId, token);
+        assertThat(buyerOrder.path("status").asText()).isEqualTo("SHIPPED");
+
+        // 重复发货被拒绝
+        mvc.perform(post("/api/seller/orders/" + shipOrderId + "/ship")
+                        .contentType(MediaType.APPLICATION_JSON).content("{}")
+                        .header("Authorization", "Bearer " + sellerToken))
+                .andExpect(status().isBadRequest());
+
+        // 已发货筛选能查到，待发货筛选查不到
+        assertThat(getJson("/api/seller/orders?shipStatus=SHIPPED&page=1&size=10", sellerToken)
+                .path("total").asLong()).isEqualTo(1);
+        assertThat(getJson("/api/seller/orders?shipStatus=PENDING&page=1&size=10", sellerToken)
+                .path("total").asLong()).isEqualTo(0);
+
+        // 别的卖家不能看/发这个订单
+        var otherLogin = objectMapper.createObjectNode();
+        otherLogin.put("username", "seller_other");
+        otherLogin.put("password", "Seller@123");
+        String otherSellerToken = postJson("/api/user/login", otherLogin, null).path("token").asText();
+        mvc.perform(get("/api/seller/orders/" + shipOrderId)
+                        .header("Authorization", "Bearer " + otherSellerToken))
+                .andExpect(status().isForbidden());
+
         var passwordBody = objectMapper.createObjectNode();
         passwordBody.put("oldPassword", "Demo@123");
         passwordBody.put("newPassword", "Demo@1234");
