@@ -32,6 +32,11 @@ export default defineConfig({
         target: process.env.VITE_PROXY_TARGET || 'http://localhost:8080',
         ws: true,
         changeOrigin: true
+      },
+      // 卖家上传的商品图片由后端提供，开发环境必须代理，否则会命中 SPA 回退返回 index.html
+      '/uploads': {
+        target: process.env.VITE_PROXY_TARGET || 'http://localhost:8080',
+        changeOrigin: true
       }
     }
   }
