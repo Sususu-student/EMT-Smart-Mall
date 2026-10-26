@@ -34,8 +34,10 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -51,6 +53,134 @@ public class ProductService {
     private final BrowseHistoryMapper browseHistoryMapper;
     private final SysUserMapper userMapper;
 
+    /** 常见同义词：用户口语 -> 商品库实际用词，命中后追加为额外检索词 */
+    private static final Map<String, String> SYNONYMS = Map.ofEntries(
+            Map.entry("背包", "双肩包"),
+            Map.entry("书包", "双肩包"),
+            Map.entry("耳塞", "蓝牙耳机"),
+            Map.entry("运动鞋", "跑鞋"),
+            Map.entry("球鞋", "跑鞋"),
+            Map.entry("手提包", "斜挎包"),
+            Map.entry("电脑", "笔记本"),
+            Map.entry("平板", "笔记本"),
+            Map.entry("爽肤水", "精华"),
+            Map.entry("面霜", "精华"),
+            Map.entry("扫地机", "扫拖机器人"),
+            Map.entry("吸尘器", "扫拖机器人")
+    );
+
+    /** 关键词 + 其同义词，用于扩展检索范围 */
+    private List<String> expandSynonyms(String keyword) {
+        List<String> expanded = new ArrayList<>();
+        for (Map.Entry<String, String> entry : SYNONYMS.entrySet()) {
+            if (keyword.contains(entry.getKey()) && !keyword.contains(entry.getValue())) {
+                expanded.add(entry.getValue());
+            }
+        }
+        return expanded;
+    }
+
+    /** 品类名包含关键词的品类 id（含其子孙品类） */
+    private List<String> categoriesMatching(String keyword) {
+        List<Category> hits = categoryMapper.selectList(new LambdaQueryWrapper<Category>()
+                .like(Category::getName, keyword));
+        if (hits.isEmpty()) {
+            return List.of();
+        }
+        Set<String> ids = new LinkedHashSet<>();
+        for (Category hit : hits) {
+            ids.add(hit.getId());
+            ids.addAll(descendantIds(hit.getId()));
+        }
+        return new ArrayList<>(ids);
+    }
+
+    /**
+     * 关键词检索。商品名基本都是型号（如「澎湃 Beat 3 运动版」），
+     * 用户输入的往往是品类词（「耳机」）或多个词组合（「降噪耳机」），
+     * 因此分三步：
+     * 1) 整串匹配名称/卖点/品牌/标签/品类名
+     * 2) 整串匹配不到时，按 2 字窗口切词，要求所有词都命中（AND）
+     * 3) 每个词可以命中商品字段，也可以命中品类名
+     */
+    private void applyKeywordFilter(LambdaQueryWrapper<Product> wrapper, String keyword) {
+        List<String> fullMatchCategories = categoriesMatching(keyword);
+        List<String> tokens = tokenize(keyword);
+        // 每个 token 对应的品类命中集合，提前算好避免在 lambda 里查库
+        Map<String, List<String>> tokenCategories = new LinkedHashMap<>();
+        for (String token : tokens) {
+            tokenCategories.put(token, categoriesMatching(token));
+        }
+
+        wrapper.and(outer -> {
+            // 分支 1：整串匹配商品字段或品类名
+            outer.nested(w -> {
+                w.like(Product::getName, keyword)
+                        .or().like(Product::getSubtitle, keyword)
+                        .or().like(Product::getBrand, keyword)
+                        .or().like(Product::getTags, keyword);
+                if (!fullMatchCategories.isEmpty()) {
+                    w.or().in(Product::getCategoryId, fullMatchCategories);
+                }
+            });
+
+            // 分支 2：仅当能切出多个词时才降级，避免生成空的 OR 分组
+            if (tokens.size() >= 2) {
+                outer.or(inner -> inner.nested(andGroup -> {
+                    boolean first = true;
+                    for (String token : tokens) {
+                        List<String> categories = tokenCategories.getOrDefault(token, List.of());
+                        java.util.function.Consumer<LambdaQueryWrapper<Product>> condition = t -> {
+                            t.like(Product::getName, token)
+                                    .or().like(Product::getSubtitle, token)
+                                    .or().like(Product::getBrand, token)
+                                    .or().like(Product::getTags, token);
+                            if (!categories.isEmpty()) {
+                                t.or().in(Product::getCategoryId, categories);
+                            }
+                        };
+                        if (first) {
+                            andGroup.nested(condition);
+                            first = false;
+                        } else {
+                            andGroup.and(condition);
+                        }
+                    }
+                }));
+            }
+
+            // 分支 3：同义词扩展，例如用户搜「背包」而库里叫「双肩包」
+            for (String synonym : expandSynonyms(keyword)) {
+                List<String> synonymCategories = categoriesMatching(synonym);
+                outer.or(w -> {
+                    w.like(Product::getName, synonym)
+                            .or().like(Product::getSubtitle, synonym)
+                            .or().like(Product::getBrand, synonym)
+                            .or().like(Product::getTags, synonym);
+                    if (!synonymCategories.isEmpty()) {
+                        w.or().in(Product::getCategoryId, synonymCategories);
+                    }
+                });
+            }
+        });
+    }
+
+    /** 把「降噪耳机」切成 [降噪, 耳机]；最短 2 字，避免过度切分 */
+    private List<String> tokenize(String keyword) {
+        if (keyword.length() < 4) {
+            return List.of();
+        }
+        List<String> tokens = new ArrayList<>();
+        for (int i = 0; i + 2 <= keyword.length(); i += 2) {
+            String token = keyword.substring(i, Math.min(i + 2, keyword.length()));
+            if (token.length() == 2 && !tokens.contains(token)) {
+                tokens.add(token);
+            }
+        }
+        // 只有一个词时没有降级意义，返回空避免和整串条件重复
+        return tokens.size() < 2 ? List.of() : tokens;
+    }
+
     public PageResult<ProductVO> list(ProductQuery query, String userId) {
         query.normalize();
         List<String> categoryIds = StringUtils.hasText(query.getCategoryId())
@@ -62,11 +192,7 @@ public class ProductService {
             wrapper.in(Product::getCategoryId, categoryIds);
         }
         if (StringUtils.hasText(query.getKeyword())) {
-            String keyword = query.getKeyword().trim();
-            wrapper.and(w -> w.like(Product::getName, keyword)
-                    .or().like(Product::getSubtitle, keyword)
-                    .or().like(Product::getBrand, keyword)
-                    .or().like(Product::getTags, keyword));
+            applyKeywordFilter(wrapper, query.getKeyword().trim());
         }
         if (query.getMinPrice() != null) {
             wrapper.ge(Product::getPrice, query.getMinPrice());

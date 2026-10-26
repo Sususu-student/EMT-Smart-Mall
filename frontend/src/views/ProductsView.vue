@@ -19,6 +19,17 @@ const activeCategory = computed(() => (route.query.categoryId as string) || '')
 const keyword = computed(() => (route.query.keyword as string) || '')
 const page = computed(() => Number(route.query.page || 1))
 
+/** 搜索框输入值：与 URL 解耦，回车或点按钮才提交，避免每个字符都请求 */
+const searchInput = ref(keyword.value)
+watch(keyword, (value) => {
+  searchInput.value = value
+})
+
+function submitSearch() {
+  const value = searchInput.value.trim()
+  updateQuery({ keyword: value || undefined })
+}
+
 const priceOptions = [
   { label: '200 元以内', min: 0, max: 200 },
   { label: '200 - 500 元', min: 200, max: 500 },
@@ -142,6 +153,20 @@ function changeSort(value: string) {
           {{ keyword ? `共找到 ${total} 件相关商品，` : '所有商品参数均由数据库提供，' }}
           支持按品类、价格和功能偏好筛选，Agent 推荐时会引用这些真实字段。
         </p>
+
+        <form class="page-search" role="search" @submit.prevent="submitSearch">
+          <el-icon class="page-search-icon"><Search /></el-icon>
+          <input
+            v-model="searchInput"
+            type="search"
+            placeholder="搜索商品名称、品牌或卖点，例如：降噪耳机、咖啡机、跑鞋…"
+            aria-label="搜索商品"
+          />
+          <button v-if="searchInput" type="button" class="page-search-clear" aria-label="清空关键词" @click="searchInput = ''; submitSearch()">
+            <el-icon><Close /></el-icon>
+          </button>
+          <button type="submit" class="page-search-btn">搜索</button>
+        </form>
       </div>
     </div>
 
@@ -249,6 +274,98 @@ function changeSort(value: string) {
 <style scoped>
 .products-page {
   padding-bottom: 40px;
+}
+
+/* 商品页搜索栏 */
+.page-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 20px;
+  max-width: 620px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  padding: 5px 5px 5px 18px;
+  box-shadow: var(--shadow-card);
+  transition: border-color 0.24s ease, box-shadow 0.24s ease;
+}
+
+.page-search:focus-within {
+  border-color: var(--brand);
+  box-shadow: 0 8px 26px rgba(240, 90, 40, 0.12);
+}
+
+.page-search-icon {
+  color: var(--muted);
+  font-size: 17px;
+  flex-shrink: 0;
+}
+
+.page-search input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 14px;
+  color: var(--ink);
+  font-family: inherit;
+}
+
+.page-search input::placeholder {
+  color: var(--muted-light);
+}
+
+/* 去掉浏览器 search 输入框自带的清除按钮，用自绘的 */
+.page-search input::-webkit-search-cancel-button {
+  appearance: none;
+}
+
+.page-search-clear {
+  width: 26px;
+  height: 26px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--muted-light);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.page-search-clear:hover {
+  color: var(--ink);
+  background: var(--bg);
+}
+
+.page-search-btn {
+  border: none;
+  background: var(--ink);
+  color: #fff;
+  border-radius: 99px;
+  padding: 9px 22px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.2s ease;
+}
+
+.page-search-btn:hover {
+  background: var(--brand);
+}
+
+@media (max-width: 620px) {
+  .page-search {
+    padding-left: 14px;
+  }
+
+  .page-search-btn {
+    padding: 9px 16px;
+  }
 }
 
 .products-layout {
