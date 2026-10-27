@@ -4,6 +4,7 @@ import { ElMessage, ElMessageBox } from 'element-plus'
 import { adminApi, productApi } from '@/api'
 import type { AdminProductPayload, Category, Product } from '@/types'
 import { money } from '@/utils/format'
+import { resolveAssetUrl } from '@/api/http'
 
 const loading = ref(true)
 const products = ref<Product[]>([])
@@ -280,7 +281,7 @@ function categoryName(id: string) {
         <el-table-column label="商品" min-width="260">
           <template #default="{ row }">
             <div class="product-cell">
-              <img :src="row.image" :alt="row.name" />
+              <img :src="resolveAssetUrl(row.image)" :alt="row.name" />
               <div>
                 <strong>{{ row.name }}</strong>
                 <span>{{ row.brand }} · {{ categoryName(row.categoryId) }}</span>

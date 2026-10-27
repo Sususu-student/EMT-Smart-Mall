@@ -6,6 +6,7 @@ import { userApi } from '@/api'
 import type { Address, Preference, Product, Profile } from '@/types'
 import { useAuthStore } from '@/stores/auth'
 import ProductCard from '@/components/ProductCard.vue'
+import { resolveAssetUrl } from '@/api/http'
 
 const router = useRouter()
 const auth = useAuthStore()
@@ -282,7 +283,7 @@ async function savePreferences() {
             </div>
             <div class="mini-products">
               <router-link v-for="product in history.slice(0, 4)" :key="product.id" :to="`/product/${product.id}`" class="mini-product">
-                <img :src="product.image" :alt="product.name" />
+                <img :src="resolveAssetUrl(product.image)" :alt="product.name" />
                 <span>{{ product.name }}</span>
               </router-link>
             </div>

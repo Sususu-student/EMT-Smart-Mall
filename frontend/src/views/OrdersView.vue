@@ -5,6 +5,7 @@ import { ElMessage, ElMessageBox } from 'element-plus'
 import { orderApi } from '@/api'
 import type { Order } from '@/types'
 import { dateTime, money, orderStatusType } from '@/utils/format'
+import { resolveAssetUrl } from '@/api/http'
 
 const router = useRouter()
 const active = ref('ALL')
@@ -111,7 +112,7 @@ function changePage(value: number) {
           <div class="order-body" @click="router.push(`/order/${order.id}`)">
             <div class="order-thumbs">
               <div v-for="item in order.items.slice(0, 3)" :key="item.id" class="thumb">
-                <img :src="item.productImage" :alt="item.productName" />
+                <img :src="resolveAssetUrl(item.productImage)" :alt="item.productName" />
               </div>
             </div>
             <div class="order-summary">

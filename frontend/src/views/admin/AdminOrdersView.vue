@@ -4,6 +4,7 @@ import { ElMessage, ElMessageBox } from 'element-plus'
 import { adminApi } from '@/api'
 import type { Order } from '@/types'
 import { dateTime, money, orderStatusType } from '@/utils/format'
+import { resolveAssetUrl } from '@/api/http'
 
 const loading = ref(true)
 const orders = ref<Order[]>([])
@@ -108,7 +109,7 @@ function changePage(value: number) {
         <el-table-column label="商品" min-width="220">
           <template #default="{ row }">
             <div class="items-cell">
-              <img v-for="item in row.items.slice(0, 3)" :key="item.id" :src="item.productImage" :alt="item.productName" />
+              <img v-for="item in row.items.slice(0, 3)" :key="item.id" :src="resolveAssetUrl(item.productImage)" :alt="item.productName" />
               <span>{{ row.items[0]?.productName }} 等 {{ row.totalQuantity }} 件</span>
             </div>
           </template>
@@ -159,7 +160,7 @@ function changePage(value: number) {
         <div class="detail-section">
           <h4>商品</h4>
           <div v-for="item in current.items" :key="item.id" class="detail-item">
-            <img :src="item.productImage" :alt="item.productName" />
+            <img :src="resolveAssetUrl(item.productImage)" :alt="item.productName" />
             <div>
               <strong>{{ item.productName }}</strong>
               <span>{{ money(item.productPrice) }} × {{ item.quantity }}</span>

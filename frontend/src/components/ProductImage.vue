@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
+import { resolveAssetUrl } from '@/api/http'
 
 const props = withDefaults(
   defineProps<{
@@ -27,7 +28,9 @@ const currentSrc = ref('')
 watch(
   () => [props.src, props.fallbackSrc, stage.value] as const,
   () => {
-    currentSrc.value = stage.value === 0 ? props.src || '' : stage.value === 1 ? props.fallbackSrc || '' : ''
+    const raw = stage.value === 0 ? props.src || '' : stage.value === 1 ? props.fallbackSrc || '' : ''
+    // 卖家上传的图是 /uploads/... 相对路径，独立部署时要补上后端源
+    currentSrc.value = resolveAssetUrl(raw)
   },
   { immediate: true }
 )

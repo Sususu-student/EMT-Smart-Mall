@@ -1,5 +1,6 @@
 server:
-  port: 8080
+  # 允许平台通过 PORT 环境变量注入（Render/Railway/Heroku 等）
+  port: ${PORT:8080}
   shutdown: graceful
   compression:
     enabled: true
@@ -47,6 +48,7 @@ app:
     secret: ${JWT_SECRET:smart-guide-mall-demo-secret-key-please-change-in-production-2026}
     expire-hours: 72
   cors:
+    # 本地开发默认放行 Vite；线上部署用 CORS_ORIGINS 覆盖（逗号分隔）
     allowed-origins: ${CORS_ORIGINS:http://localhost:5173,http://127.0.0.1:5173,https://emt-smart-mall.pages.dev}
   seed:
     enabled: true

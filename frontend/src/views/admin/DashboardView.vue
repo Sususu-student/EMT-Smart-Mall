@@ -5,6 +5,7 @@ import * as echarts from 'echarts'
 import { adminApi, agentApi } from '@/api'
 import type { Dashboard, LlmStatus } from '@/types'
 import { dateTime, money, orderStatusType } from '@/utils/format'
+import { resolveAssetUrl } from '@/api/http'
 
 const router = useRouter()
 const data = ref<Dashboard | null>(null)
@@ -170,7 +171,7 @@ function renderCharts() {
         <div class="top-products">
           <div v-for="(product, index) in data?.topProducts || []" :key="product.id" class="top-product">
             <span class="rank">{{ index + 1 }}</span>
-            <img :src="product.image" :alt="product.name" />
+            <img :src="resolveAssetUrl(product.image)" :alt="product.name" />
             <div class="top-copy">
               <strong>{{ product.name }}</strong>
               <span>{{ product.categoryName }} · {{ money(product.price) }}</span>

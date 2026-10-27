@@ -7,6 +7,7 @@ import type { Category, Product, SellerOrderDetail, SellerOrderRow, SellerOvervi
 import { dateTime, money } from '@/utils/format'
 import { useAuthStore } from '@/stores/auth'
 import ProductImage from '@/components/ProductImage.vue'
+import { resolveAssetUrl } from '@/api/http'
 
 const router = useRouter()
 const auth = useAuthStore()
@@ -519,7 +520,7 @@ function switchTab(name: string) {
         <el-form-item label="商品主图">
           <div class="upload-block">
             <div v-if="form.image" class="upload-preview">
-              <img :src="form.image" alt="主图预览" />
+              <img :src="resolveAssetUrl(form.image)" alt="主图预览" />
               <div class="upload-preview-actions">
                 <span class="upload-ok">已上传</span>
                 <el-button size="small" round @click="clearImage">移除</el-button>

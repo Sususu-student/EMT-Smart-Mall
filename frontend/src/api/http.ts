@@ -3,8 +3,30 @@ import { ElMessage } from 'element-plus'
 
 const TOKEN_KEY = 'sg_token'
 
+/**
+ * API 基址。
+ * - 本地开发：留空走 '/api'，由 Vite 代理转发到 8080
+ * - 线上部署：在构建环境里设 VITE_API_BASE，例如 https://api.example.com/api
+ */
+export const API_BASE = (import.meta.env.VITE_API_BASE as string | undefined)?.replace(/\/$/, '') || '/api'
+
+/**
+ * 后端返回的资源地址（如上传后的 /uploads/xxx.jpg）是相对根路径的，
+ * 部署到独立前端域名后需要补上后端源，否则会打到前端自己身上。
+ */
+export const API_ORIGIN = API_BASE.startsWith('http') ? API_BASE.replace(/\/api$/, '') : ''
+
+/** 把后端返回的相对路径转成可访问的绝对地址 */
+export function resolveAssetUrl(url?: string | null): string {
+  if (!url) return ''
+  if (/^(https?:)?\/\//.test(url) || url.startsWith('data:') || url.startsWith('blob:')) {
+    return url
+  }
+  return API_ORIGIN ? `${API_ORIGIN}${url.startsWith('/') ? '' : '/'}${url}` : url
+}
+
 const http = axios.create({
-  baseURL: 'https://api.20838639.xyz/api',
+  baseURL: API_BASE,
   timeout: 60000
 })
 

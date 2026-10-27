@@ -5,6 +5,7 @@ import { ElMessage, ElMessageBox } from 'element-plus'
 import { afterSaleApi, orderApi, paymentApi } from '@/api'
 import type { AfterSale, Order } from '@/types'
 import { dateTime, money, orderStatusType } from '@/utils/format'
+import { resolveAssetUrl } from '@/api/http'
 
 const route = useRoute()
 const router = useRouter()
@@ -208,7 +209,7 @@ async function copyOrderNo() {
             <div class="items">
               <article v-for="item in order.items" :key="item.id" class="item">
                 <router-link :to="`/product/${item.productId}`" class="thumb">
-                  <img :src="item.productImage" :alt="item.productName" />
+                  <img :src="resolveAssetUrl(item.productImage)" :alt="item.productName" />
                 </router-link>
                 <div class="item-info">
                   <router-link :to="`/product/${item.productId}`" class="item-name">{{ item.productName }}</router-link>
