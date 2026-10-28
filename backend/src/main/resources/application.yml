@@ -48,8 +48,9 @@ app:
     secret: ${JWT_SECRET:smart-guide-mall-demo-secret-key-please-change-in-production-2026}
     expire-hours: 72
   cors:
-    # 本地开发默认放行 Vite；线上部署用 CORS_ORIGINS 覆盖（逗号分隔）
-    allowed-origins: ${CORS_ORIGINS:http://localhost:5173,http://127.0.0.1:5173,https://emt-smart-mall.pages.dev}
+    # 本地开发默认放行 Vite；线上部署可用 CORS_ORIGINS 覆盖（逗号分隔）
+    # 已放行：Pages 默认域名 + 自定义根域名（含 www）
+    allowed-origins: ${CORS_ORIGINS:http://localhost:5173,http://127.0.0.1:5173,https://emt-smart-mall.pages.dev,https://20838639.xyz,https://www.20838639.xyz}
   seed:
     enabled: true
   order:
