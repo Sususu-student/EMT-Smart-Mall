@@ -4,7 +4,7 @@ import { ElMessage } from 'element-plus'
 const TOKEN_KEY = 'sg_token'
 
 const http = axios.create({
-  baseURL: '/api',
+  baseURL: 'https://api.20838639.xyz/api',
   timeout: 60000
 })
 
