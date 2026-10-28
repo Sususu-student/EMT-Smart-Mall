@@ -14,4 +14,5 @@ public class AddCartRequest {
     @Min(value = 1, message = "数量至少为 1")
     @Max(value = 99, message = "单次最多购买 99 件")
     private Integer quantity = 1;
+
 }
