@@ -20,6 +20,7 @@ import { useCompareStore } from '@/stores/compare'
 import ChatProductCard from '@/components/ChatProductCard.vue'
 import CategoryIcon from '@/components/CategoryIcon.vue'
 import AgentTimeline from '@/components/AgentTimeline.vue'
+import { resolveWsUrl } from '@/api/http'
 
 interface ChatMessage {
   id: string
@@ -254,9 +255,9 @@ function connectSocket() {
     }
     return
   }
-  const protocol = window.location.protocol === 'https:' ? 'wss' : 'ws'
   const token = encodeURIComponent(auth.token)
-  const url = `${protocol}://${window.location.host}/ws/agent?token=${token}&conversationId=${conversationId.value}`
+  // 线上部署时 WebSocket 要指向后端域名，否则会连到前端自己的域名上握手失败
+  const url = resolveWsUrl(`/ws/agent?token=${token}&conversationId=${conversationId.value}`)
   socket = new WebSocket(url)
   socket.onmessage = (event) => {
     try {

@@ -25,6 +25,20 @@ export function resolveAssetUrl(url?: string | null): string {
   return API_ORIGIN ? `${API_ORIGIN}${url.startsWith('/') ? '' : '/'}${url}` : url
 }
 
+/**
+ * 拼出 WebSocket 地址。
+ * - 本地开发：走当前域名（Vite 代理 /ws 到 8080）
+ * - 线上部署：走 VITE_API_BASE 所在主机，并自动切换 ws/wss
+ */
+export function resolveWsUrl(path: string): string {
+  if (API_ORIGIN) {
+    const secure = API_ORIGIN.startsWith('https://')
+    return `${secure ? 'wss' : 'ws'}://${API_ORIGIN.replace(/^https?:\/\//, '')}${path}`
+  }
+  const protocol = window.location.protocol === 'https:' ? 'wss' : 'ws'
+  return `${protocol}://${window.location.host}${path}`
+}
+
 const http = axios.create({
   baseURL: API_BASE,
   timeout: 60000
