@@ -47,7 +47,7 @@ app:
     secret: ${JWT_SECRET:smart-guide-mall-demo-secret-key-please-change-in-production-2026}
     expire-hours: 72
   cors:
-    allowed-origins: ${CORS_ORIGINS:http://localhost:5173,http://127.0.0.1:5173}
+    allowed-origins: ${CORS_ORIGINS:http://localhost:5173,http://127.0.0.1:5173,https://emt-smart-mall.pages.dev}
   seed:
     enabled: true
   order:
