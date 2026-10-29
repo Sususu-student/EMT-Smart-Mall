@@ -1,5 +1,7 @@
 import { request, upload } from './http'
 import type {
+  CsConversation,
+  CsMessage,
   BuyerAnalytics,
   SellerAnalytics,
   Brand,
@@ -93,6 +95,20 @@ export const afterSaleApi = {
     request<AfterSale>({ url: '/after-sale', method: 'post', data }),
   mine: () => request<AfterSale[]>({ url: '/after-sale' }),
   byOrder: (orderId: string) => request<AfterSale[]>({ url: `/after-sale/order/${orderId}` })
+}
+
+export const csApi = {
+  openByOrder: (orderId: string) =>
+    request<CsConversation>({ url: '/cs/open', method: 'post', data: { orderId } }),
+  conversations: () => request<CsConversation[]>({ url: '/cs/conversations' }),
+  messages: (id: string) => request<CsMessage[]>({ url: `/cs/conversations/${id}/messages` }),
+  markRead: (id: string) => request<void>({ url: `/cs/conversations/${id}/read`, method: 'post' }),
+  unread: () => request<{ count: number }>({ url: '/cs/unread' })
+}
+
+export const priceWatchApi = {
+  toggle: (productId: string) => request<{ watching: boolean }>({ url: `/price-watch/${productId}`, method: 'post' }),
+  status: (productId: string) => request<{ watching: boolean }>({ url: `/price-watch/${productId}` })
 }
 
 export const analyticsApi = {

@@ -18,6 +18,8 @@ public class ChatResponse {
     private List<String> clarifyOptions = new ArrayList<>();
     private List<OrderVO> orders = new ArrayList<>();
     private CompareResponse compare;
+    /** 场景搭配方案（意图为 scene_plan 时返回） */
+    private ScenePlanVO scenePlan;
     private List<AgentStep> steps = new ArrayList<>();
     private boolean degraded;
     private String memorySummary;

@@ -124,7 +124,8 @@ public class PromptService {
                 """
                         你是电商智能导购系统的意图分类器。只输出一个 JSON 对象，不要输出 Markdown。
                         可选意图：
-                        - search_product: 用户想找/买某类商品，描述需求、预算、场景
+                        - search_product: 用户想找/买某类商品
+                        - scene_plan: 用户描述一个具体场景（如去海边度假、通勤办公、在家健身、露营徒步），希望得到一整套搭配方案
                         - compare: 用户要求对比两个或多个商品
                         - ask_detail: 用户询问某个已推荐商品的具体参数或细节
                         - query_order: 用户询问订单、物流、发货状态

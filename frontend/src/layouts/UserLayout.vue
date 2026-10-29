@@ -54,6 +54,7 @@ const groups = computed(() => {
   const seller: NavItem[] = [
     { key: 'seller-products', label: '商品管理', icon: 'Goods', path: '/seller', tab: 'products' },
     { key: 'seller-orders', label: '店铺订单', icon: 'Box', path: '/seller', tab: 'orders' },
+    { key: 'customer-service', label: '客服消息', icon: 'ChatLineRound', path: '/messages' },
     { key: 'seller-analytics', label: '数据分析', icon: 'TrendCharts', path: '/seller', tab: 'analytics' }
   ]
 
@@ -85,6 +86,9 @@ const activeKey = computed(() => {
   }
   if (path.startsWith('/after-sales')) {
     return 'after-sales'
+  }
+  if (path.startsWith('/messages')) {
+    return 'customer-service'
   }
   if (path.startsWith('/admin')) {
     return 'admin'

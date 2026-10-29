@@ -43,6 +43,7 @@ const router = createRouter({
       children: [
         { path: 'orders', name: 'orders', component: () => import('@/views/OrdersView.vue') },
         { path: 'after-sales', name: 'after-sales', component: () => import('@/views/AfterSalesView.vue') },
+        { path: 'messages', name: 'customer-service', component: () => import('@/views/CustomerServiceView.vue') },
         { path: 'profile', name: 'profile', component: () => import('@/views/ProfileView.vue') },
         {
           path: 'seller',

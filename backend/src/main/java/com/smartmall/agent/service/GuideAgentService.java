@@ -59,6 +59,7 @@ public class GuideAgentService {
     private final ProductSearchTool searchTool;
     private final RecommendationService recommendationService;
     private final CompareAgentService compareAgentService;
+    private final ScenePlannerService scenePlannerService;
     private final OrderService orderService;
     private final CartService cartService;
     private final ProductService productService;
@@ -105,6 +106,7 @@ public class GuideAgentService {
 
             switch (intent.getIntent()) {
                 case Intents.COMPARE -> handleCompare(message, slots, conversation.getId(), taskId, userId, response, steps);
+                case Intents.SCENE_PLAN -> handleScenePlan(message, slots, conversation.getId(), taskId, response, steps);
                 case Intents.ORDER -> handleOrder(message, conversation.getId(), taskId, userId, response, steps);
                 case Intents.ADD_TO_CART -> handleAddToCart(message, slots, conversation.getId(), taskId, response, steps);
                 case Intents.CHECKOUT -> handleCheckout(message, slots, conversation.getId(), taskId, response, steps);
@@ -211,6 +213,112 @@ public class GuideAgentService {
         if (StringUtils.hasText(slots.getScene())) {
             userService.learnPreference(userId, "场景", slots.getScene(), BigDecimal.valueOf(0.8));
         }
+    }
+
+/**
+     * 场景搭配：识别场景 + 抽取预算 → 组合整套商品 → 由 LLM 生成搭配理由。
+     * 与单件推荐的区别在于输出是一整个方案，而不是一堆候选。
+     */
+    private void handleScenePlan(String message, Slots slots, String conversationId, String taskId,
+                                 ChatResponse response, List<AgentStep> steps) {
+        response.setIntent(Intents.SCENE_PLAN);
+
+        var sceneTrace = logService.start(taskId, conversationId, "guide-agent", "detect_scene",
+                "识别使用场景", message);
+        ScenePlannerService.Scene scene = scenePlannerService.detectScene(message);
+        if (scene == null) {
+            steps.add(sceneTrace.failed("未识别到具体场景"));
+            response.setReply("我可以帮你做场景搭配。告诉我场景和预算就行，比如「明天去海边度假，预算 1000」或者「在家健身买点什么」。");
+            response.getClarifyOptions().addAll(List.of(
+                    "明天去海边度假，预算 1000",
+                    "通勤办公配一套，预算 800",
+                    "在家健身装备，预算 500"));
+            return;
+        }
+        steps.add(sceneTrace.success("场景：" + scene.getName()));
+
+        // 预算：优先取自然语言里的金额，没有就用默认档位
+        BigDecimal budget = extractBudget(message);
+        var planTrace = logService.start(taskId, conversationId, "guide-agent", "plan_scene",
+                "生成搭配方案", scene.getName() + "，预算 " + budget);
+        ScenePlannerService.Plan plan = scenePlannerService.plan(scene, budget);
+        steps.add(planTrace.success("搭配 " + plan.getItems().size() + " 件，合计 ¥" + plan.getTotal()));
+
+        if (plan.getItems().isEmpty()) {
+            response.setReply("这个预算下暂时没找到合适的商品组合，可以稍微放宽预算再试试。");
+            return;
+        }
+
+        // 搭配理由交给 LLM 生成，降级时用模板兜底
+        String reason = null;
+        if (llmService.isAvailable()) {
+            var reasonTrace = logService.start(taskId, conversationId, "guide-agent", "explain_plan",
+                    "生成搭配理由", "让模型解释为什么这样搭");
+            try {
+                String prompt = "你是一位贴心的导购。用户要去「" + scene.getName() + "」，预算 ¥" + plan.getBudget()
+                        + "。\n已为你选好以下商品：\n"
+                        + scenePlannerService.describe(plan)
+                        + "\n请用 2-3 句话解释为什么这样搭配，语气自然、有画面感，不要罗列参数，不要重复价格明细。";
+                reason = llmService.completeFast(promptService.text("chitchat.system"), prompt);
+                steps.add(reasonTrace.success("已生成搭配说明"));
+            } catch (Exception e) {
+                steps.add(reasonTrace.failed("模型生成失败，使用模板文案"));
+            }
+        }
+        if (reason == null || reason.isBlank()) {
+            reason = "按「" + scene.getName() + "」的典型需求搭配了 " + plan.getItems().size()
+                    + " 件商品，覆盖了主要使用环节，合计 ¥" + plan.getTotal() + "，在预算之内。";
+        }
+
+        response.setScenePlan(buildScenePlanVO(plan, reason));
+        response.setReply("已为你准备一套「" + scene.getName() + "」方案，共 " + plan.getItems().size()
+                + " 件，合计 ¥" + plan.getTotal() + "。可以直接一键加购，也可以让我换一套。");
+    }
+
+    /** 从用户原话中提取预算金额，支持「预算1000」「1000以内」「不超过800」等说法 */
+    private BigDecimal extractBudget(String message) {
+        if (message == null) {
+            return new BigDecimal("1000");
+        }
+        java.util.regex.Matcher m = java.util.regex.Pattern
+                .compile("(\\d{2,6})\\s*(?:元|块|以内|以下)?").matcher(message);
+        BigDecimal best = null;
+        while (m.find()) {
+            try {
+                BigDecimal v = new BigDecimal(m.group(1));
+                // 忽略像年份、数量这类明显不是预算的数字
+                if (v.compareTo(new BigDecimal("50")) >= 0 && v.compareTo(new BigDecimal("100000")) <= 0) {
+                    best = best == null ? v : best.max(v);
+                }
+            } catch (NumberFormatException ignored) {
+            }
+        }
+        return best == null ? new BigDecimal("1000") : best;
+    }
+
+    /** 把内部 Plan 转成前端渲染用的 VO */
+    private com.smartmall.agent.dto.ScenePlanVO buildScenePlanVO(ScenePlannerService.Plan plan, String reason) {
+        com.smartmall.agent.dto.ScenePlanVO vo = new com.smartmall.agent.dto.ScenePlanVO();
+        vo.setSceneKey(plan.getSceneKey());
+        vo.setSceneName(plan.getSceneName());
+        vo.setBudget(plan.getBudget());
+        vo.setTotal(plan.getTotal());
+        vo.setWithinBudget(plan.isWithinBudget());
+        vo.setReason(reason);
+        List<com.smartmall.agent.dto.ScenePlanVO.PlanItemVO> items = new ArrayList<>();
+        for (ScenePlannerService.PlanItem item : plan.getItems()) {
+            com.smartmall.agent.dto.ScenePlanVO.PlanItemVO vo2 = new com.smartmall.agent.dto.ScenePlanVO.PlanItemVO();
+            vo2.setProductId(item.getProductId());
+            vo2.setName(item.getName());
+            vo2.setImage(item.getImage());
+            vo2.setImageFallback(item.getImageFallback());
+            vo2.setPrice(item.getPrice());
+            vo2.setRole(item.getRole());
+            vo2.setRating(item.getRating());
+            items.add(vo2);
+        }
+        vo.setItems(items);
+        return vo;
     }
 
     private void handleCompare(String message, Slots slots, String conversationId, String taskId,

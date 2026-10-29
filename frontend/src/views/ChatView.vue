@@ -12,12 +12,12 @@ import type {
   LlmStatus,
   Order,
   RecommendedProduct,
-  Turn
-} from '@/types'
+  Turn, ScenePlan } from '@/types'
 import { dateTime, intentLabel, money, orderStatusType } from '@/utils/format'
 import { useAuthStore } from '@/stores/auth'
 import { useCompareStore } from '@/stores/compare'
 import ChatProductCard from '@/components/ChatProductCard.vue'
+import ScenePlanCard from '@/components/ScenePlanCard.vue'
 import CategoryIcon from '@/components/CategoryIcon.vue'
 import AgentTimeline from '@/components/AgentTimeline.vue'
 import { resolveWsUrl } from '@/api/http'
@@ -30,6 +30,7 @@ interface ChatMessage {
   clarifyOptions?: string[]
   orders?: Order[]
   compare?: CompareResult
+  scenePlan?: ScenePlan
   intent?: string
   steps?: AgentStep[]
   degraded?: boolean
@@ -226,6 +227,7 @@ function applyResponse(response: ChatResponse) {
     clarifyOptions: response.clarifyOptions || [],
     orders: response.orders || [],
     compare: response.compare,
+    scenePlan: response.scenePlan,
     intent: response.intent,
     steps: response.steps || [],
     degraded: response.degraded,
@@ -449,6 +451,9 @@ function goOrder(order: Order) {
                   <div v-if="message.products?.length" class="msg-products">
                     <ChatProductCard v-for="item in message.products" :key="item.product.id" :item="item" />
                   </div>
+
+                  <!-- 场景搭配方案：一整套商品 + 搭配理由 -->
+                  <ScenePlanCard v-if="message.scenePlan" :plan="message.scenePlan" />
 
                   <div v-if="message.compare" class="chat-compare">
                     <div class="cc-head">

@@ -26,6 +26,9 @@ public class IntentService {
     private final PromptService promptService;
 
     private static final Pattern COMPARE = Pattern.compile("对比|比较|哪个好|哪款好|选哪个|怎么选|差别|区别|vs|VS");
+    /** 场景搭配：用户描述的是一整个场景，需要组合多件商品 */
+    private static final Pattern SCENE = Pattern.compile(
+            "海边|沙滩|度假|海岛|海滨|通勤|上班|办公|健身|瑜伽|露营|户外|徒步|野营|登山|约会|相亲|穿搭");
     private static final Pattern ORDER = Pattern.compile("订单|物流|发货|到货|快递|签收|退款|售后|买的东西|支付状态");
     private static final Pattern CART = Pattern.compile("加入购物车|加购|加到购物车|放进购物车|购物车|买这个|就要这个");
     private static final Pattern CHECKOUT = Pattern.compile("确认下单|提交订单|帮我下单|去结算|结算吧|下单吧|就下单|下单|确认支付并下单");
@@ -68,6 +71,11 @@ public class IntentService {
 
     public IntentResult ruleDetect(String text) {
         String lower = text.toLowerCase(Locale.ROOT);
+        // 场景搭配放在最前面：用户描述的是"去海边""在家健身"这类场景，
+        // 若落到 search_product 只会返回一堆零散商品，拿不到整套方案
+        if (SCENE.matcher(text).find()) {
+            return IntentResult.of(Intents.SCENE_PLAN, 0.92, "rule", "命中场景描述（海边/通勤/健身等）");
+        }
         if (COMPARE.matcher(text).find()) {
             return IntentResult.of(Intents.COMPARE, 0.95, "rule", "命中对比关键词");
         }

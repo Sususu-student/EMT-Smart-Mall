@@ -2,10 +2,11 @@
 import { computed, onBeforeUnmount, onMounted, reactive, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { ElMessage, ElMessageBox } from 'element-plus'
-import { afterSaleApi, orderApi, paymentApi } from '@/api'
-import type { AfterSale, Order } from '@/types'
+import { afterSaleApi, csApi, orderApi, paymentApi } from '@/api'
+import type { AfterSale, CsConversation, Order } from '@/types'
 import { dateTime, money, orderStatusType } from '@/utils/format'
 import { resolveAssetUrl } from '@/api/http'
+import CustomerServicePanel from '@/components/CustomerServicePanel.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -52,6 +53,23 @@ const statusText = computed(() => {
   if (status === 'CLOSED') return '订单已关闭'
   return ''
 })
+
+// ---------- 联系卖家 ----------
+const csConversation = ref<CsConversation | null>(null)
+/** 订单里含卖家商品时才允许联系卖家（平台自营订单没有卖家可找） */
+const canContactSeller = computed(() => {
+  const items: any[] = (order.value as any)?.items || []
+  return items.some((i) => Boolean(i.sellerId))
+})
+
+async function openCustomerService() {
+  if (!order.value) return
+  try {
+    csConversation.value = await csApi.openByOrder(order.value.id)
+  } catch (e: any) {
+    ElMessage.error(e?.response?.data?.message || '无法打开客服会话')
+  }
+}
 
 // ---------- 待支付倒计时 ----------
 // 后端下单时会写入 expiredAt，并由定时任务在超时后关闭订单并回滚库存。
@@ -217,8 +235,17 @@ async function copyOrderNo() {
           </template>
           <el-button v-else-if="order.status === 'SHIPPED'" type="primary" round @click="confirmReceipt">确认收货</el-button>
           <el-button v-if="canApplyAfterSale" round @click="openAfterSale">申请售后</el-button>
+          <el-button v-if="canContactSeller" round @click="openCustomerService">联系卖家</el-button>
         </div>
       </section>
+
+      <!-- 客服会话 -->
+      <CustomerServicePanel
+        v-if="csConversation"
+        :conversation="csConversation"
+        class="cs-block"
+        @close="csConversation = null"
+      />
 
       <div class="order-detail-grid">
         <div class="main-col">
@@ -371,6 +398,11 @@ async function copyOrderNo() {
 </template>
 
 <style scoped>
+.cs-block {
+  margin-top: 16px;
+  max-width: 560px;
+}
+
 .countdown {
   font-size: 12.5px;
   color: var(--brand);

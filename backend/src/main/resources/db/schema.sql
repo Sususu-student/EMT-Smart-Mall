@@ -66,6 +66,51 @@ CREATE TABLE IF NOT EXISTS category (
     status            TINYINT DEFAULT 1
 );
 
+-- 客服会话：买家就某个订单联系卖家，一对一会话
+CREATE TABLE IF NOT EXISTS cs_conversation (
+    id          VARCHAR(32) PRIMARY KEY,
+    order_id    VARCHAR(32),
+    buyer_id    VARCHAR(32) NOT NULL,
+    seller_id   VARCHAR(32) NOT NULL,
+    -- 最后一条消息摘要与时间，用于列表排序
+    last_message VARCHAR(200),
+    last_at     DATETIME,
+    -- 双方未读数
+    buyer_unread  INT DEFAULT 0,
+    seller_unread INT DEFAULT 0,
+    created_at  DATETIME,
+    UNIQUE KEY uk_cs_order_buyer (order_id, buyer_id, seller_id),
+    KEY idx_cs_buyer (buyer_id),
+    KEY idx_cs_seller (seller_id)
+);
+
+CREATE TABLE IF NOT EXISTS cs_message (
+    id              BIGINT AUTO_INCREMENT PRIMARY KEY,
+    conversation_id VARCHAR(32) NOT NULL,
+    sender_id       VARCHAR(32) NOT NULL,
+    sender_role     VARCHAR(20),
+    content         VARCHAR(1000),
+    read_flag       TINYINT DEFAULT 0,
+    created_at      DATETIME,
+    KEY idx_cs_msg_conv (conversation_id)
+);
+
+-- 降价提醒：用户对某商品设置提醒，定时任务扫描到降价后发站内信
+CREATE TABLE IF NOT EXISTS price_watch (
+    id             BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_id        VARCHAR(32) NOT NULL,
+    product_id     VARCHAR(32) NOT NULL,
+    -- 加入提醒时的价格，用于判断是否真的降了
+    baseline_price DECIMAL(10,2),
+    -- 目标价：低于此价才通知；为空表示任何降价都通知
+    target_price   DECIMAL(10,2),
+    notified       TINYINT DEFAULT 0,
+    notified_at    DATETIME,
+    created_at     DATETIME,
+    UNIQUE KEY uk_watch_user_product (user_id, product_id),
+    KEY idx_watch_product (product_id)
+);
+
 -- 品牌档案：首页品牌条点击后展示品牌介绍与该品牌全部商品
 CREATE TABLE IF NOT EXISTS brand (
     id            VARCHAR(32) PRIMARY KEY,

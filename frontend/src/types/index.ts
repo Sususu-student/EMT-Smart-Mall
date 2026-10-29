@@ -383,6 +383,7 @@ export interface ChatResponse {
   clarifyOptions: string[]
   orders: Order[]
   compare?: CompareResult
+  scenePlan?: ScenePlan
   steps: AgentStep[]
   degraded: boolean
   memorySummary?: string
@@ -549,4 +550,47 @@ export interface SellerAnalytics {
   ratings: RatingBucket[]
   reviewKeywords: AnalyticsKeyword[]
   funnel: FunnelStep[]
+}
+
+/* ===== 场景搭配 ===== */
+export interface ScenePlanItem {
+  productId: string
+  name: string
+  image?: string
+  imageFallback?: string
+  price: number
+  role: string
+  rating?: number
+}
+
+export interface ScenePlan {
+  sceneKey: string
+  sceneName: string
+  budget: number
+  total: number
+  withinBudget: boolean
+  reason: string
+  items: ScenePlanItem[]
+}
+
+/* ===== 客服会话 ===== */
+export interface CsConversation {
+  id: string
+  orderId: string
+  buyerId: string
+  sellerId: string
+  lastMessage?: string
+  lastAt?: string
+  unread: number
+  myRole: 'buyer' | 'seller'
+  createdAt?: string
+}
+
+export interface CsMessage {
+  id: number | string
+  conversationId: string
+  senderId: string
+  senderRole: string
+  content: string
+  createdAt?: string
 }

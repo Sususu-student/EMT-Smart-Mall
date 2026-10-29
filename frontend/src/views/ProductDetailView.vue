@@ -2,7 +2,7 @@
 import { computed, onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
-import { productApi } from '@/api'
+import { priceWatchApi, productApi } from '@/api'
 import type { Product, Review } from '@/types'
 import { attributeEntries, dateOnly, money } from '@/utils/format'
 import { useAuthStore } from '@/stores/auth'
@@ -54,6 +54,10 @@ async function load() {
     reviews.value = rev.records
     reviewTotal.value = rev.total
     reviewPage.value = 1
+    // 已登录时查询是否已开启降价提醒
+    if (auth.isLoggedIn) {
+      priceWatchApi.status(id).then((r) => { watching.value = r.watching }).catch(() => {})
+    }
   } finally {
     loading.value = false
   }
@@ -99,6 +103,24 @@ async function toggleFavorite() {
   const { userApi } = await import('@/api')
   favored.value = await userApi.toggleFavorite(product.value.id)
   ElMessage.success(favored.value ? '已收藏' : '已取消收藏')
+}
+
+/** 降价提醒：开启后系统每天扫描价格，降价会发站内信 */
+const watching = ref(false)
+
+async function togglePriceWatch() {
+  if (!product.value) return
+  if (!auth.isLoggedIn) {
+    router.push({ name: 'login', query: { redirect: route.fullPath } })
+    return
+  }
+  try {
+    const res = await priceWatchApi.toggle(product.value.id)
+    watching.value = res.watching
+    ElMessage.success(res.watching ? '已开启降价提醒，降价后会通知你' : '已关闭降价提醒')
+  } catch {
+    ElMessage.error('操作失败，请稍后重试')
+  }
 }
 
 function toggleCompare() {
@@ -236,6 +258,10 @@ async function submitReview() {
             <button :class="{ active: inCompare }" @click="toggleCompare">
               <el-icon><DataAnalysis /></el-icon>
               {{ inCompare ? '已在对比清单' : '加入对比' }}
+            </button>
+            <button :class="{ active: watching }" @click="togglePriceWatch">
+              <el-icon><BellFilled v-if="watching" /><Bell v-else /></el-icon>
+              {{ watching ? '已开启降价提醒' : '降价提醒' }}
             </button>
             <button @click="askAgent">
               <el-icon><ChatDotRound /></el-icon>
