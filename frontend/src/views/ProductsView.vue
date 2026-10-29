@@ -230,7 +230,9 @@ function changeSort(value: string) {
             <button v-if="activePriceLabel" class="filter-chip" @click="selectPrice(null)">
               {{ activePriceLabel }} <el-icon><Close /></el-icon>
             </button>
-            <span v-if="!hasFilters" class="result-count">共 {{ total }} 件商品</span>
+            <span v-if="!hasFilters" class="result-count">
+              {{ loading ? '加载中…' : `共 ${total} 件商品` }}
+            </span>
           </div>
           <div class="toolbar-right">
             <button class="mobile-filter-btn" @click="mobileFilter = !mobileFilter">
