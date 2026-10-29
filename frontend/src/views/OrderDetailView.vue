@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, reactive, ref, watch } from 'vue'
+import { computed, onBeforeUnmount, onMounted, reactive, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { afterSaleApi, orderApi, paymentApi } from '@/api'
@@ -51,6 +51,43 @@ const statusText = computed(() => {
   if (status === 'CANCELLED') return '订单已取消，库存已释放'
   if (status === 'CLOSED') return '订单已关闭'
   return ''
+})
+
+// ---------- 待支付倒计时 ----------
+// 后端下单时会写入 expiredAt，并由定时任务在超时后关闭订单并回滚库存。
+// 前端只负责展示剩余时间，避免用户误以为可以无限期挂着不付。
+const now = ref(Date.now())
+let ticker: ReturnType<typeof setInterval> | null = null
+
+const countdown = computed(() => {
+  const o = order.value
+  if (!o || o.status !== 'PENDING_PAYMENT' || !o.expiredAt) return ''
+  const left = new Date(o.expiredAt).getTime() - now.value
+  if (left <= 0) return ''
+  const total = Math.floor(left / 1000)
+  const h = Math.floor(total / 3600)
+  const m = Math.floor((total % 3600) / 60)
+  const sec = total % 60
+  const pad = (n: number) => String(n).padStart(2, '0')
+  return h > 0 ? `${pad(h)}:${pad(m)}:${pad(sec)}` : `${pad(m)}:${pad(sec)}`
+})
+
+/** 每秒刷新一次倒计时显示 */
+onMounted(() => {
+  ticker = setInterval(() => {
+    now.value = Date.now()
+  }, 1000)
+})
+
+onBeforeUnmount(() => {
+  if (ticker) clearInterval(ticker)
+})
+
+/** 倒计时归零后刷新订单，让状态同步为已关闭 */
+watch(countdown, (val, old) => {
+  if (old && !val && order.value?.status === 'PENDING_PAYMENT') {
+    load()
+  }
 })
 
 onMounted(load)
@@ -169,6 +206,9 @@ async function copyOrderNo() {
             <el-tag :type="orderStatusType(order.status)" effect="light" round>{{ order.status }}</el-tag>
           </div>
           <p>{{ statusText }}</p>
+          <p v-if="order.status === 'PENDING_PAYMENT' && countdown" class="countdown">
+            剩余支付时间 <strong>{{ countdown }}</strong>
+          </p>
         </div>
         <div class="status-actions">
           <template v-if="order.status === 'PENDING_PAYMENT'">
@@ -331,6 +371,18 @@ async function copyOrderNo() {
 </template>
 
 <style scoped>
+.countdown {
+  font-size: 12.5px;
+  color: var(--brand);
+  margin-top: 6px;
+}
+
+.countdown strong {
+  font-family: var(--font-digit);
+  font-size: 15px;
+  letter-spacing: 0.04em;
+}
+
 .order-detail-page {
   padding: 24px 0 50px;
   min-height: 60vh;

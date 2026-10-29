@@ -40,6 +40,7 @@ const groups = computed(() => {
   const account: NavItem[] = [
     { key: 'overview', label: '账户概览', icon: 'User', path: '/profile', tab: 'overview' },
     { key: 'orders', label: '我的订单', icon: 'Tickets', path: '/orders' },
+    { key: 'after-sales', label: '我的售后', icon: 'Service', path: '/after-sales' },
     { key: 'address', label: '收货地址', icon: 'Location', path: '/profile', tab: 'address' },
     { key: 'favorites', label: '我的收藏', icon: 'Star', path: '/profile', tab: 'favorites' }
   ]
@@ -81,6 +82,9 @@ const activeKey = computed(() => {
   }
   if (path.startsWith('/orders')) {
     return 'orders'
+  }
+  if (path.startsWith('/after-sales')) {
+    return 'after-sales'
   }
   if (path.startsWith('/admin')) {
     return 'admin'
