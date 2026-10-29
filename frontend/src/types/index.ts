@@ -478,3 +478,75 @@ export interface AdminProductPayload {
   image?: string
   status: number
 }
+
+/* ===== 数据分析 ===== */
+export interface CategoryShare {
+  name: string
+  amount: number
+  count: number
+}
+
+export interface PreferenceScore {
+  name: string
+  score: number
+  raw: number
+}
+
+export interface AnalyticsKeyword {
+  word: string
+  weight: number
+  type: string
+}
+
+export interface BuyerAnalytics {
+  totalSpent: number
+  orderCount: number
+  itemCount: number
+  categoryShares: CategoryShare[]
+  preferences: PreferenceScore[]
+  keywords: AnalyticsKeyword[]
+}
+
+export interface SellerKpi {
+  totalSales: number
+  orderCount: number
+  pendingShipCount: number
+  viewCount: number
+  avgRating: number
+  productCount: number
+}
+
+export interface TrendPoint {
+  date: string
+  sales: number
+  avgOrder: number
+  orders: number
+}
+
+export interface ProductPoint {
+  name: string
+  views: number
+  sales: number
+  stock: number
+  rating: number
+}
+
+export interface RatingBucket {
+  star: number
+  count: number
+}
+
+export interface FunnelStep {
+  name: string
+  value: number
+  rate: number
+}
+
+export interface SellerAnalytics {
+  kpi: SellerKpi
+  trend: TrendPoint[]
+  products: ProductPoint[]
+  ratings: RatingBucket[]
+  reviewKeywords: AnalyticsKeyword[]
+  funnel: FunnelStep[]
+}

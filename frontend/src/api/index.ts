@@ -1,5 +1,7 @@
 import { request, upload } from './http'
 import type {
+  BuyerAnalytics,
+  SellerAnalytics,
   Brand,
   Address,
   AddressPayload,
@@ -91,6 +93,11 @@ export const afterSaleApi = {
     request<AfterSale>({ url: '/after-sale', method: 'post', data }),
   mine: () => request<AfterSale[]>({ url: '/after-sale' }),
   byOrder: (orderId: string) => request<AfterSale[]>({ url: `/after-sale/order/${orderId}` })
+}
+
+export const analyticsApi = {
+  buyer: () => request<BuyerAnalytics>({ url: '/analytics/buyer' }),
+  seller: (days = 30) => request<SellerAnalytics>({ url: '/analytics/seller', params: { days } })
 }
 
 export const brandApi = {

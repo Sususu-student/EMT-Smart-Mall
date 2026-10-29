@@ -7,6 +7,7 @@ import type { Address, Preference, Product, Profile } from '@/types'
 import { useAuthStore } from '@/stores/auth'
 import ProductCard from '@/components/ProductCard.vue'
 import { resolveAssetUrl } from '@/api/http'
+import BuyerAnalytics from '@/components/BuyerAnalytics.vue'
 
 const router = useRouter()
 const auth = useAuthStore()
@@ -40,6 +41,7 @@ const tabs = [
   { name: 'address', label: '收货地址' },
   { name: 'favorites', label: '我的收藏' },
   { name: 'preferences', label: '导购偏好' },
+  { name: 'analytics', label: '消费画像' },
   { name: 'history', label: '浏览足迹' }
 ]
 
@@ -334,6 +336,18 @@ async function savePreferences() {
               <strong>还没有收藏商品</strong>
               <p>看到喜欢的商品点一下星标，就会出现在这里。</p>
             </div>
+          </div>
+        </template>
+
+        <template v-else-if="active === 'analytics'">
+          <div class="panel">
+            <div class="panel-head">
+              <div>
+                <h3>消费画像</h3>
+                <p class="panel-desc">基于你的订单与浏览行为生成，看得出来你更偏爱什么。</p>
+              </div>
+            </div>
+            <BuyerAnalytics />
           </div>
         </template>
 

@@ -7,6 +7,7 @@ import type { Category, Product, SellerOrderDetail, SellerOrderRow, SellerOvervi
 import { dateTime, money } from '@/utils/format'
 import { useAuthStore } from '@/stores/auth'
 import ProductImage from '@/components/ProductImage.vue'
+import SellerAnalytics from '@/components/SellerAnalytics.vue'
 import { resolveAssetUrl } from '@/api/http'
 
 const router = useRouter()
@@ -473,6 +474,10 @@ function switchTab(name: string) {
             <strong>{{ orderFilter === 'PENDING' ? '没有待发货的订单' : '还没有订单' }}</strong>
             <p>买家下单并支付后会显示在这里。</p>
           </div>
+        </el-tab-pane>
+
+        <el-tab-pane label="数据分析" name="analytics">
+          <SellerAnalytics v-if="tab === 'analytics'" />
         </el-tab-pane>
       </el-tabs>
     </div>
