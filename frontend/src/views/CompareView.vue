@@ -23,6 +23,17 @@ const pickerLoading = ref(false)
 const weightDraft = reactive<Record<string, number>>({})
 const hasCustomWeights = ref(false)
 
+/**
+ * 页内友好提示：替代会遮挡顶部的全局 toast。
+ * 用于「跨品类无法对比」这类需要解释原因、可能反复出现的场景。
+ */
+interface CompareNotice {
+  type: 'category' | 'error'
+  title: string
+  text: string
+}
+const notice = ref<CompareNotice | null>(null)
+
 const products = computed(() => (result.value?.products?.length ? result.value.products : selected.value))
 const canCompare = computed(() => selected.value.length >= 2)
 
@@ -76,6 +87,7 @@ async function loadSelected() {
 async function runCompare(custom = false) {
   if (!canCompare.value) return
   computing.value = true
+  notice.value = null
   try {
     const weights: Record<string, number> = {}
     if (custom) {
@@ -92,6 +104,25 @@ async function runCompare(custom = false) {
     }
     hasCustomWeights.value = custom
     if (custom) ElMessage.success('已按新权重重新计算')
+  } catch (e: any) {
+    // 后端仍可能因为数据变化拒绝对比，这里用页内提示说明原因，
+    // 并清空结果，避免界面一直停在「正在分析」
+    const raw: string = e?.response?.data?.message || e?.message || ''
+    result.value = null
+    if (raw.includes('品类')) {
+      // 跨品类是最常见的情况，换成有指向性的说法，并告诉用户下一步怎么做
+      notice.value = {
+        type: 'category',
+        title: '这几件商品没法直接比',
+        text: '它们的品类不同，参数维度对不上。换成同品类的商品，对比结果才有参考意义。'
+      }
+    } else {
+      notice.value = {
+        type: 'error',
+        title: '对比没能完成',
+        text: raw || '可能是网络波动，稍后再试一次。'
+      }
+    }
   } finally {
     computing.value = false
   }
@@ -99,6 +130,8 @@ async function runCompare(custom = false) {
 
 function removeProduct(id: string) {
   compareStore.remove(id)
+  // 移出商品后约束可能已解除，清掉提示避免残留误导
+  notice.value = null
   ElMessage.info('已移出对比清单')
 }
 
@@ -128,11 +161,23 @@ async function searchPicker() {
 
 function addProduct(product: Product) {
   if (compareStore.has(product.id)) return
+  // 品类校验前置到选择阶段：跨品类对比没有可比性，与其等提交后再报错，
+  // 不如在这里就拦下来并说明原因，体验更顺
+  if (selected.value.length && product.categoryId !== selected.value[0].categoryId) {
+    const current = selected.value[0].categoryName || '当前品类'
+    notice.value = {
+      type: 'category',
+      title: '只能对比同一品类',
+      text: `已选的是「${current}」，这件属于「${product.categoryName || '其他品类'}」。换个同品类的试试？`
+    }
+    return
+  }
   if (!compareStore.add(product.id)) {
     ElMessage.warning(`最多同时对比 ${compareStore.max} 件商品`)
     return
   }
   pickerResults.value = pickerResults.value.filter((item) => item.id !== product.id)
+  notice.value = null
   ElMessage.success('已加入对比')
 }
 
@@ -198,6 +243,22 @@ function dimensionDisplay(key: string, productId: string) {
         </div>
       </section>
 
+      <!-- 页内提示：比全局 toast 更克制，且不会遮挡顶部导航 -->
+      <transition name="notice-fade">
+        <aside v-if="notice" class="compare-notice" :class="notice.type" role="status">
+          <span class="notice-icon">
+            <el-icon><InfoFilled /></el-icon>
+          </span>
+          <div class="notice-body">
+            <strong>{{ notice.title }}</strong>
+            <p>{{ notice.text }}</p>
+          </div>
+          <button class="notice-close" type="button" aria-label="关闭提示" @click="notice = null">
+            <el-icon><Close /></el-icon>
+          </button>
+        </aside>
+      </transition>
+
       <section v-if="!selected.length" class="compare-empty">
         <div class="empty-visual">
           <div class="empty-card a">A</div>
@@ -235,7 +296,7 @@ function dimensionDisplay(key: string, productId: string) {
           <div class="recommend-card">
             <span class="eyebrow">AGENT RECOMMENDATION</span>
             <div class="recommend-title">
-              <h2>{{ result?.recommendedName || '正在分析…' }}</h2>
+              <h2>{{ result?.recommendedName || (computing ? '正在分析…' : '暂无法对比') }}</h2>
               <span v-if="result?.scores.length" class="recommend-score">
                 {{ result.scores[0].totalScore }}<small>分</small>
               </span>
@@ -370,6 +431,89 @@ function dimensionDisplay(key: string, productId: string) {
 </template>
 
 <style scoped>
+/*
+ * 页内提示条
+ * 用于跨品类等「需要解释原因」的约束提示，替代会遮挡顶部的全局 toast。
+ * 克制的左侧色条 + 浅底，与页面的编辑风格保持一致。
+ */
+.compare-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: 16px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--gold);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
+}
+
+.compare-notice.error {
+  border-left-color: var(--brand);
+}
+
+.notice-icon {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(201, 162, 39, 0.14);
+  color: var(--gold);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.compare-notice.error .notice-icon {
+  background: var(--brand-tint);
+  color: var(--brand);
+}
+
+.notice-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.notice-body strong {
+  display: block;
+  font-size: 13px;
+  color: var(--ink);
+  margin-bottom: 3px;
+}
+
+.notice-body p {
+  font-size: 12.5px;
+  line-height: 1.7;
+  color: var(--ink-soft);
+}
+
+.notice-close {
+  border: none;
+  background: none;
+  color: var(--muted-light);
+  cursor: pointer;
+  padding: 2px;
+  border-radius: 6px;
+  transition: color 0.2s, background 0.2s;
+  flex-shrink: 0;
+}
+
+.notice-close:hover {
+  color: var(--ink);
+  background: var(--surface-sunken);
+}
+
+.notice-fade-enter-active,
+.notice-fade-leave-active {
+  transition: opacity 0.24s ease, transform 0.24s ease;
+}
+
+.notice-fade-enter-from,
+.notice-fade-leave-to {
+  opacity: 0;
+  transform: translateY(-4px);
+}
 .compare-page {
   padding-bottom: 50px;
 }

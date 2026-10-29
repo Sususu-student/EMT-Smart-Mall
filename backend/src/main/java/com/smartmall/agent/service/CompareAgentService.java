@@ -72,7 +72,8 @@ public class CompareAgentService {
         long categoryCount = ordered.stream().map(Product::getCategoryId).distinct().count();
         if (categoryCount > 1) {
             matrixTrace.failed("跨品类对比被拦截");
-            throw new BizException("只能对比同一品类的商品，请选择同品类商品后再试");
+            // 说明「为什么不行」，而不是只下命令，用户才知道下一步怎么做
+            throw new BizException("这几件商品的品类不同，参数维度对不上，没法放在一起比。换成同品类的商品再试试");
         }
 
         CompareResponse response = new CompareResponse();
