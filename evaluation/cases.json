@@ -368,7 +368,7 @@
         "intent": "query_order",
         "ordersMin": 1,
         "replyContains": [
-          "已支付"
+          "待支付"
         ]
       }
     },
@@ -590,6 +590,70 @@
           "categoryName": "机械键盘",
           "maxPrice": 200
         }
+      }
+    },
+    {
+      "id": "P01",
+      "group": "scene",
+      "turns": [
+        "明天去海边度假，预算1000"
+      ],
+      "expect": {
+        "intent": "scene_plan",
+        "scenePlan": true,
+        "sceneItemsMin": 2,
+        "sceneWithinBudget": true,
+        "sceneReasonMinLength": 20
+      }
+    },
+    {
+      "id": "P02",
+      "group": "scene",
+      "turns": [
+        "在家健身买点什么，预算500"
+      ],
+      "expect": {
+        "intent": "scene_plan",
+        "scenePlan": true,
+        "sceneItemsMin": 2,
+        "sceneWithinBudget": true
+      }
+    },
+    {
+      "id": "P03",
+      "group": "scene",
+      "turns": [
+        "通勤办公配一套，预算800"
+      ],
+      "expect": {
+        "intent": "scene_plan",
+        "scenePlan": true,
+        "sceneItemsMin": 2,
+        "sceneWithinBudget": true
+      }
+    },
+    {
+      "id": "P04",
+      "group": "scene",
+      "turns": [
+        "通勤用的降噪耳机，500以内"
+      ],
+      "expect": {
+        "intent": "search_product",
+        "scenePlan": false,
+        "minProducts": 1
+      }
+    },
+    {
+      "id": "P05",
+      "group": "scene",
+      "turns": [
+        "想买一台咖啡机，预算2000"
+      ],
+      "expect": {
+        "intent": "search_product",
+        "scenePlan": false,
+        "minProducts": 1
       }
     }
   ],

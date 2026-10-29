@@ -108,6 +108,23 @@ function evaluateCase(testCase, final) {
     const count = final?.orders?.length || 0
     check(checks, 'ordersMin', count >= expect.ordersMin, `>=${expect.ordersMin}`, count)
   }
+  // 场景搭配：校验是否产出方案、件数是否达标、是否控制在预算内
+  if (expect.scenePlan !== undefined) {
+    check(checks, 'scenePlan', Boolean(final?.scenePlan) === expect.scenePlan, expect.scenePlan, Boolean(final?.scenePlan))
+  }
+  if (expect.sceneItemsMin !== undefined) {
+    const count = final?.scenePlan?.items?.length || 0
+    check(checks, 'sceneItemsMin', count >= expect.sceneItemsMin, `>=${expect.sceneItemsMin}`, count)
+  }
+  if (expect.sceneWithinBudget !== undefined) {
+    const ok = final?.scenePlan ? Boolean(final.scenePlan.withinBudget) : false
+    check(checks, 'sceneWithinBudget', ok === expect.sceneWithinBudget, expect.sceneWithinBudget, ok)
+  }
+  if (expect.sceneReasonMinLength !== undefined) {
+    const len = (final?.scenePlan?.reason || '').length
+    check(checks, 'sceneReasonMinLength', len >= expect.sceneReasonMinLength,
+      `>=${expect.sceneReasonMinLength}`, len)
+  }
   if (expect.clarifyOptionsMin !== undefined) {
     const count = final?.clarifyOptions?.length || 0
     check(checks, 'clarifyOptionsMin', count >= expect.clarifyOptionsMin, `>=${expect.clarifyOptionsMin}`, count)

@@ -30,3 +30,4 @@ backend/src/main/resources/application-secret.yml
 .DS_Store
 Thumbs.db
 uploads/
+evaluation/reports/
