@@ -8,6 +8,7 @@ import com.smartmall.agent.dto.ExecutionLogVO;
 import com.smartmall.agent.entity.AgentExecutionLog;
 import com.smartmall.agent.mapper.AgentExecutionLogMapper;
 import com.smartmall.agent.ws.AgentWebSocketHandler;
+import com.smartmall.common.PageParams;
 import com.smartmall.common.PageResult;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -54,8 +55,11 @@ public class AgentLogService {
 
     public PageResult<ExecutionLogVO> search(String taskId, String conversationId, String agentId,
                                              String step, long pageNo, long size) {
+        long[] checked = PageParams.check(pageNo, size, 100);
+        pageNo = checked[0];
+        size = checked[1];
         Page<AgentExecutionLog> page = logMapper.selectPage(
-                new Page<>(Math.max(1, pageNo), Math.min(100, Math.max(1, size))),
+                new Page<>(pageNo, size),
                 new LambdaQueryWrapper<AgentExecutionLog>()
                         .eq(taskId != null && !taskId.isBlank(), AgentExecutionLog::getTaskId, taskId)
                         .eq(conversationId != null && !conversationId.isBlank(),

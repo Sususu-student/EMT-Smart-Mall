@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router'
 import { productApi } from '@/api'
 import type { Category, Product } from '@/types'
 import ProductCard from '@/components/ProductCard.vue'
+import ProductCardSkeleton from '@/components/ProductCardSkeleton.vue'
 import ProductImage from '@/components/ProductImage.vue'
 import CategoryIcon from '@/components/CategoryIcon.vue'
 import { money } from '@/utils/format'
@@ -225,7 +226,8 @@ function ask(text?: string) {
             完整榜单 <el-icon><ArrowRight /></el-icon>
           </router-link>
         </div>
-        <div v-loading="loading" class="product-grid">
+        <ProductCardSkeleton v-if="loading && !featured.length" :count="8" />
+        <div v-else class="product-grid">
           <ProductCard v-for="product in featured" :key="product.id" :product="product" />
         </div>
       </div>
@@ -269,7 +271,8 @@ function ask(text?: string) {
             更多新品 <el-icon><ArrowRight /></el-icon>
           </router-link>
         </div>
-        <div class="product-grid">
+        <ProductCardSkeleton v-if="loading && !latest.length" :count="4" />
+        <div v-else class="product-grid">
           <ProductCard v-for="product in latest" :key="product.id" :product="product" />
         </div>
       </div>

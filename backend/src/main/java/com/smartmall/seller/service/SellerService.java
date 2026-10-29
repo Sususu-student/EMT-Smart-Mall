@@ -7,6 +7,7 @@ import com.smartmall.auth.AuthContext;
 import com.smartmall.auth.CurrentUser;
 import com.smartmall.common.BizException;
 import com.smartmall.common.Ids;
+import com.smartmall.common.PageParams;
 import com.smartmall.common.PageResult;
 import com.smartmall.notification.service.NotificationService;
 import com.smartmall.order.OrderStatus;
@@ -53,9 +54,12 @@ public class SellerService {
 
     /** 卖家商品列表：只返回自己发布的商品 */
     public PageResult<ProductVO> myProducts(long pageNo, long size, String keyword, Integer status) {
+        long[] checked = PageParams.check(pageNo, size, 50);
+        pageNo = checked[0];
+        size = checked[1];
         CurrentUser user = currentSeller();
         Page<Product> page = productMapper.selectPage(
-                new Page<>(Math.max(1, pageNo), Math.min(50, Math.max(1, size))),
+                new Page<>(pageNo, size),
                 new LambdaQueryWrapper<Product>()
                         .eq(Product::getSellerId, user.id())
                         .like(StringUtils.hasText(keyword), Product::getName, keyword)

@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.smartmall.auth.AuthContext;
 import com.smartmall.common.BizException;
 import com.smartmall.common.JsonUtils;
+import com.smartmall.common.PageParams;
 import com.smartmall.common.PageResult;
 import com.smartmall.product.dto.CategoryVO;
 import com.smartmall.product.dto.ProductQuery;
@@ -291,7 +292,10 @@ public class ProductService {
     }
 
     public PageResult<ProductReview> reviews(String productId, long pageNo, long size) {
-        Page<ProductReview> page = reviewMapper.selectPage(new Page<>(Math.max(1, pageNo), Math.min(50, Math.max(1, size))),
+        long[] checked = PageParams.check(pageNo, size, 50);
+        pageNo = checked[0];
+        size = checked[1];
+        Page<ProductReview> page = reviewMapper.selectPage(new Page<>(pageNo, size),
                 new LambdaQueryWrapper<ProductReview>()
                         .eq(ProductReview::getProductId, productId)
                         .eq(ProductReview::getStatus, 1)

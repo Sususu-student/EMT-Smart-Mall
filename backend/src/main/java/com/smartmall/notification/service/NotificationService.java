@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.smartmall.auth.AuthContext;
 import com.smartmall.common.BizException;
+import com.smartmall.common.PageParams;
 import com.smartmall.common.PageResult;
 import com.smartmall.notification.entity.Notification;
 import com.smartmall.notification.mapper.NotificationMapper;
@@ -54,8 +55,11 @@ public class NotificationService {
     }
 
     public PageResult<Notification> mine(long pageNo, long size) {
+        long[] checked = PageParams.check(pageNo, size, 50);
+        pageNo = checked[0];
+        size = checked[1];
         Page<Notification> page = notificationMapper.selectPage(
-                new Page<>(Math.max(1, pageNo), Math.min(50, Math.max(1, size))),
+                new Page<>(pageNo, size),
                 new LambdaQueryWrapper<Notification>()
                         .eq(Notification::getUserId, AuthContext.userId())
                         .orderByAsc(Notification::getReadStatus)

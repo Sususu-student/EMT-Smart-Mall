@@ -9,6 +9,7 @@ import com.smartmall.cart.mapper.CartItemMapper;
 import com.smartmall.cart.service.CartService;
 import com.smartmall.common.BizException;
 import com.smartmall.common.Ids;
+import com.smartmall.common.PageParams;
 import com.smartmall.common.PageResult;
 import com.smartmall.order.OrderStatus;
 import com.smartmall.order.dto.CreateOrderRequest;
@@ -124,8 +125,11 @@ public class OrderService {
     }
 
     public PageResult<OrderVO> list(String status, long pageNo, long size) {
+        long[] checked = PageParams.check(pageNo, size, 60);
+        pageNo = checked[0];
+        size = checked[1];
         String userId = AuthContext.userId();
-        Page<Order> page = orderMapper.selectPage(new Page<>(Math.max(1, pageNo), Math.min(30, Math.max(1, size))),
+        Page<Order> page = orderMapper.selectPage(new Page<>(pageNo, size),
                 new LambdaQueryWrapper<Order>()
                         .eq(Order::getUserId, userId)
                         .eq(StringUtils.hasText(status), Order::getStatus, status)
@@ -346,7 +350,10 @@ public class OrderService {
     }
 
     public PageResult<OrderVO> adminList(String keyword, String status, long pageNo, long size) {
-        Page<Order> page = orderMapper.selectPage(new Page<>(Math.max(1, pageNo), Math.min(50, Math.max(1, size))),
+        long[] checked = PageParams.check(pageNo, size, 60);
+        pageNo = checked[0];
+        size = checked[1];
+        Page<Order> page = orderMapper.selectPage(new Page<>(pageNo, size),
                 new LambdaQueryWrapper<Order>()
                         .and(StringUtils.hasText(keyword), w -> w.like(Order::getOrderNo, keyword)
                                 .or().like(Order::getReceiver, keyword))

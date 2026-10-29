@@ -11,6 +11,7 @@ import com.smartmall.aftersale.mapper.AfterSaleMapper;
 import com.smartmall.auth.AuthContext;
 import com.smartmall.common.BizException;
 import com.smartmall.common.Ids;
+import com.smartmall.common.PageParams;
 import com.smartmall.common.PageResult;
 import com.smartmall.order.entity.Order;
 import com.smartmall.notification.service.NotificationService;
@@ -96,8 +97,11 @@ public class AfterSaleService {
     }
 
     public PageResult<AfterSaleVO> adminList(String status, long pageNo, long size) {
+        long[] checked = PageParams.check(pageNo, size, 50);
+        pageNo = checked[0];
+        size = checked[1];
         Page<AfterSale> page = afterSaleMapper.selectPage(
-                new Page<>(Math.max(1, pageNo), Math.min(50, Math.max(1, size))),
+                new Page<>(pageNo, size),
                 new LambdaQueryWrapper<AfterSale>()
                         .eq(StringUtils.hasText(status), AfterSale::getStatus, status)
                         .orderByDesc(AfterSale::getCreatedAt));

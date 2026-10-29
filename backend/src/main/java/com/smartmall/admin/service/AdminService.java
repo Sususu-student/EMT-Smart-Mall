@@ -15,6 +15,7 @@ import com.smartmall.agent.entity.DialogueTurn;
 import com.smartmall.common.BizException;
 import com.smartmall.common.Ids;
 import com.smartmall.common.JsonUtils;
+import com.smartmall.common.PageParams;
 import com.smartmall.common.PageResult;
 import com.smartmall.order.OrderStatus;
 import com.smartmall.order.entity.Order;
@@ -62,13 +63,16 @@ public class AdminService {
 
     public PageResult<ProductVO> products(String keyword, String categoryId, Integer status,
                                           long pageNo, long size) {
+        long[] checked = PageParams.check(pageNo, size, 50);
+        pageNo = checked[0];
+        size = checked[1];
         LambdaQueryWrapper<Product> wrapper = new LambdaQueryWrapper<Product>()
                 .and(StringUtils.hasText(keyword), w -> w.like(Product::getName, keyword)
                         .or().like(Product::getBrand, keyword))
                 .eq(StringUtils.hasText(categoryId), Product::getCategoryId, categoryId)
                 .eq(status != null, Product::getStatus, status)
                 .orderByDesc(Product::getCreatedAt).orderByDesc(Product::getId);
-        Page<Product> page = productMapper.selectPage(new Page<>(Math.max(1, pageNo), Math.min(50, Math.max(1, size))), wrapper);
+        Page<Product> page = productMapper.selectPage(new Page<>(pageNo, size), wrapper);
         Map<String, Category> categories = productService.categoryMap();
         List<ProductVO> records = page.getRecords().stream()
                 .map(p -> productService.toVO(p, categories, null, null)).toList();
@@ -195,8 +199,11 @@ public class AdminService {
     }
 
     public PageResult<ReviewAdminVO> reviews(Integer status, String keyword, long pageNo, long size) {
+        long[] checked = PageParams.check(pageNo, size, 50);
+        pageNo = checked[0];
+        size = checked[1];
         Page<ProductReview> page = reviewMapper.selectPage(
-                new Page<>(Math.max(1, pageNo), Math.min(50, Math.max(1, size))),
+                new Page<>(pageNo, size),
                 new LambdaQueryWrapper<ProductReview>()
                         .eq(status != null, ProductReview::getStatus, status)
                         .and(StringUtils.hasText(keyword), w -> w.like(ProductReview::getContent, keyword)
@@ -249,8 +256,11 @@ public class AdminService {
     }
 
     public PageResult<AdminConversationVO> conversations(String keyword, long pageNo, long size) {
+        long[] checked = PageParams.check(pageNo, size, 50);
+        pageNo = checked[0];
+        size = checked[1];
         Page<Conversation> page = conversationMapper.selectPage(
-                new Page<>(Math.max(1, pageNo), Math.min(50, Math.max(1, size))),
+                new Page<>(pageNo, size),
                 new LambdaQueryWrapper<Conversation>()
                         .like(StringUtils.hasText(keyword), Conversation::getTitle, keyword)
                         .orderByDesc(Conversation::getUpdatedAt));
@@ -278,7 +288,10 @@ public class AdminService {
     }
 
     public PageResult<UserVO> users(String keyword, long pageNo, long size) {
-        Page<SysUser> page = userMapper.selectPage(new Page<>(Math.max(1, pageNo), Math.min(50, Math.max(1, size))),
+        long[] checked = PageParams.check(pageNo, size, 50);
+        pageNo = checked[0];
+        size = checked[1];
+        Page<SysUser> page = userMapper.selectPage(new Page<>(pageNo, size),
                 new LambdaQueryWrapper<SysUser>()
                         .and(StringUtils.hasText(keyword), w -> w.like(SysUser::getUsername, keyword)
                                 .or().like(SysUser::getNickname, keyword)

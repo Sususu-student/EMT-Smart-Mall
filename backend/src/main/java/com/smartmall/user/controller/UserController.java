@@ -18,15 +18,19 @@ import com.smartmall.user.entity.UserAddress;
 import com.smartmall.user.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Map;
 
 import java.util.List;
 
@@ -55,6 +59,23 @@ public class UserController {
     public ApiResponse<Void> resetPassword(@Valid @RequestBody ResetPasswordRequest request) {
         userService.resetPassword(request);
         return ApiResponse.ok();
+    }
+
+    /**
+     * 静默续期：用即将过期或刚过期的 token 换一个新 token。
+     * 标 @PublicApi 是因为此时 token 可能已过期，拦截器会直接拒绝，
+     * 由 service 内部用宽松模式校验（签名有效 + 过期不超过 7 天）。
+     */
+    @PublicApi
+    @PostMapping("/refresh")
+    public ApiResponse<LoginResponse> refresh(
+            @RequestBody(required = false) Map<String, String> body,
+            @RequestHeader(value = "Authorization", required = false) String header) {
+        String token = body != null ? body.get("token") : null;
+        if (!StringUtils.hasText(token) && header != null && header.startsWith("Bearer ")) {
+            token = header.substring(7).trim();
+        }
+        return ApiResponse.ok(userService.refresh(token));
     }
 
     @GetMapping("/profile")

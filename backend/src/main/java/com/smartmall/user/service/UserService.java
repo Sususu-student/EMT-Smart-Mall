@@ -2,6 +2,7 @@ package com.smartmall.user.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.smartmall.auth.AuthContext;
+import com.smartmall.auth.CurrentUser;
 import com.smartmall.auth.JwtService;
 import com.smartmall.cart.entity.CartItem;
 import com.smartmall.cart.mapper.CartItemMapper;
@@ -96,6 +97,31 @@ public class UserService {
         }
         String token = jwtService.generate(user.getId(), user.getUsername(), user.getRole());
         return new LoginResponse(token, UserVO.from(user));
+    }
+
+    /**
+     * 静默续期：用旧 token（允许已过期一段时间）换一个新的 token。
+     * 前端在收到 401 时先尝试这里，成功就重放原请求，
+     * 避免用户填了一半的表单或对话上下文因为过期全部丢失。
+     */
+    public LoginResponse refresh(String token) {
+        if (!StringUtils.hasText(token)) {
+            throw BizException.unauthorized("请先登录");
+        }
+        // 允许过期 7 天内续期，超出则必须重新登录
+        CurrentUser parsed = jwtService.parseAllowExpired(token, 7 * 24);
+        if (parsed == null) {
+            throw BizException.unauthorized("登录状态已失效，请重新登录");
+        }
+        SysUser user = userMapper.selectById(parsed.id());
+        if (user == null) {
+            throw BizException.unauthorized("用户不存在");
+        }
+        if (user.getStatus() == null || user.getStatus() != 1) {
+            throw new BizException(403, "账号已被禁用，请联系管理员");
+        }
+        String fresh = jwtService.generate(user.getId(), user.getUsername(), user.getRole());
+        return new LoginResponse(fresh, UserVO.from(user));
     }
 
     public ProfileVO profile() {

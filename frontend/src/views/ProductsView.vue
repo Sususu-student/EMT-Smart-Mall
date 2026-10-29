@@ -4,6 +4,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { productApi } from '@/api'
 import type { Category, Product } from '@/types'
 import ProductCard from '@/components/ProductCard.vue'
+import ProductCardSkeleton from '@/components/ProductCardSkeleton.vue'
 import CategoryIcon from '@/components/CategoryIcon.vue'
 
 const route = useRoute()
@@ -246,7 +247,9 @@ function changeSort(value: string) {
           </div>
         </div>
 
-        <div v-loading="loading" class="product-grid">
+        <!-- 首次加载显示骨架屏，避免白屏；切换筛选时用加载态避免闪烁 -->
+        <ProductCardSkeleton v-if="loading && !products.length" :count="12" />
+        <div v-else class="product-grid">
           <ProductCard v-for="product in products" :key="product.id" :product="product" />
         </div>
 

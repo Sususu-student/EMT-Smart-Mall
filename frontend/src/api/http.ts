@@ -64,23 +64,64 @@ http.interceptors.response.use(
     }
     return body
   },
-  (error) => {
+  async (error) => {
     const status = error.response?.status
+    const config = error.config as (AxiosRequestConfig & { _retried?: boolean }) | undefined
+    const oldToken = localStorage.getItem(TOKEN_KEY)
+
+    // 401 先尝试静默续期：续期成功后重放原请求，避免用户填到一半的内容丢失
+    if (status === 401 && oldToken && config && !config._retried) {
+      config._retried = true
+      try {
+        const fresh = await refreshToken(oldToken)
+        localStorage.setItem(TOKEN_KEY, fresh)
+        config.headers = { ...(config.headers || {}), Authorization: `Bearer ${fresh}` }
+        return http.request(config)
+      } catch {
+        clearAuthAndRedirect()
+        return Promise.reject(error)
+      }
+    }
+
     const message =
       error.response?.data?.message ||
       (error.code === 'ECONNABORTED' ? '请求超时，请稍后重试' : '网络异常，请检查后端服务是否启动')
-    if (status === 401 && localStorage.getItem(TOKEN_KEY)) {
-      localStorage.removeItem(TOKEN_KEY)
-      localStorage.removeItem('sg_user')
-      ElMessage.error('登录已过期，请重新登录')
-      const redirect = encodeURIComponent(window.location.pathname + window.location.search)
-      window.location.assign(`/login?redirect=${redirect}`)
+
+    if (status === 401 && oldToken) {
+      clearAuthAndRedirect()
     } else {
       ElMessage.error(message)
     }
     return Promise.reject(error)
   }
 )
+
+/** 续期中的共享 Promise：并发请求同时 401 时只刷新一次 */
+let refreshing: Promise<string> | null = null
+
+async function refreshToken(token: string): Promise<string> {
+  if (!refreshing) {
+    refreshing = http
+      .post('/user/refresh', { token }, { headers: { Authorization: `Bearer ${token}` } })
+      .then((data) => {
+        const payload = data as unknown as { token?: string }
+        if (!payload?.token) throw new Error('续期失败')
+        return payload.token
+      })
+      .finally(() => {
+        refreshing = null
+      })
+  }
+  return refreshing
+}
+
+function clearAuthAndRedirect() {
+  localStorage.removeItem(TOKEN_KEY)
+  localStorage.removeItem('sg_user')
+  ElMessage.error('登录已过期，请重新登录')
+  const redirect = encodeURIComponent(window.location.pathname + window.location.search)
+  window.location.assign(`/login?redirect=${redirect}`)
+}
 
 export async function request<T>(config: AxiosRequestConfig): Promise<T> {
   return (await http.request(config)) as unknown as T

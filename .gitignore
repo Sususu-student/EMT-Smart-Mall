@@ -29,3 +29,4 @@ backend/src/main/resources/application-secret.yml
 # 系统
 .DS_Store
 Thumbs.db
+uploads/
