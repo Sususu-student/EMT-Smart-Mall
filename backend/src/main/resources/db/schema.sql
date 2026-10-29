@@ -66,6 +66,23 @@ CREATE TABLE IF NOT EXISTS category (
     status            TINYINT DEFAULT 1
 );
 
+-- 品牌档案：首页品牌条点击后展示品牌介绍与该品牌全部商品
+CREATE TABLE IF NOT EXISTS brand (
+    id            VARCHAR(32) PRIMARY KEY,
+    name          VARCHAR(50) NOT NULL,
+    slogan        VARCHAR(100),
+    origin        VARCHAR(50),
+    founded       VARCHAR(20),
+    positioning   VARCHAR(100),
+    intro         TEXT,
+    story         TEXT,
+    highlight     VARCHAR(200),
+    logo_text     VARCHAR(10),
+    accent        VARCHAR(20),
+    sort_order    INT DEFAULT 0,
+    status        TINYINT DEFAULT 1
+);
+
 CREATE TABLE IF NOT EXISTS product (
     id              VARCHAR(32) PRIMARY KEY,
     name            VARCHAR(200) NOT NULL,

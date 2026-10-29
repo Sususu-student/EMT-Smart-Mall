@@ -40,9 +40,12 @@ springdoc:
     path: /v3/api-docs
 
 app:
-  # 上传文件落盘目录（相对后端运行目录），通过 /uploads/** 访问
+  # 上传文件落盘目录，通过 /uploads/** 访问。
+  # 用绝对路径而不是相对路径：从 IDEA（backend/）或命令行（项目根）启动时
+  # 相对路径会解析到两个不同目录，导致"换个启动方式历史图片就丢失"。
+  # 部署到其它环境时用 UPLOAD_DIR 覆盖即可。
   upload:
-    dir: ${UPLOAD_DIR:uploads}
+    dir: ${UPLOAD_DIR:G:/EMT/backend/uploads}
     max-size: 5242880
   jwt:
     secret: ${JWT_SECRET:smart-guide-mall-demo-secret-key-please-change-in-production-2026}

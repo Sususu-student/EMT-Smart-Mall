@@ -48,4 +48,28 @@ public class CatalogSeed {
         private String imageFallback;
         private Integer status;
     }
+
+    /** brands.json 的根结构 */
+    @Data
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class SeedBrands {
+        private List<SeedBrand> brands;
+    }
+
+    @Data
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class SeedBrand {
+        private String id;
+        private String name;
+        private String slogan;
+        private String origin;
+        private String founded;
+        private String positioning;
+        private String intro;
+        private String story;
+        private String highlight;
+        private String logoText;
+        private String accent;
+        private Integer sortOrder;
+    }
 }

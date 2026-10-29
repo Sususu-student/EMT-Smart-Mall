@@ -2,6 +2,8 @@ package com.smartmall.seed;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.smartmall.brand.entity.Brand;
+import com.smartmall.brand.mapper.BrandMapper;
 import com.smartmall.cart.entity.CartItem;
 import com.smartmall.cart.mapper.CartItemMapper;
 import com.smartmall.common.Ids;
@@ -55,6 +57,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class DataSeeder implements ApplicationRunner {
 
     private final CategoryMapper categoryMapper;
+    private final BrandMapper brandMapper;
     private final ProductMapper productMapper;
     private final ProductImageMapper productImageMapper;
     private final ProductReviewMapper reviewMapper;
@@ -81,6 +84,7 @@ public class DataSeeder implements ApplicationRunner {
     @Override
     @Transactional
     public void run(ApplicationArguments args) throws Exception {
+        seedBrandsIfAbsent();
         if (productMapper.selectCount(null) > 0) {
             log.info("检测到已有商品数据，跳过种子数据初始化");
             seedUsersIfAbsent();
@@ -161,6 +165,46 @@ public class DataSeeder implements ApplicationRunner {
 
         seedDemoData(seed, now);
         log.info("种子数据初始化完成：{} 个分类，{} 件商品", seed.getCategories().size(), seed.getProducts().size());
+    }
+
+    /**
+     * 品牌档案初始化：独立于商品种子，每次启动都幂等补齐。
+     * 这样老库升级后也能获得品牌数据，不会因为"已有商品"被跳过。
+     */
+    private void seedBrandsIfAbsent() {
+        try (InputStream in = new ClassPathResource("seed/brands.json").getInputStream()) {
+            CatalogSeed.SeedBrands seed = new ObjectMapper().readValue(in, CatalogSeed.SeedBrands.class);
+            if (seed == null || seed.getBrands() == null) {
+                return;
+            }
+            int added = 0;
+            for (CatalogSeed.SeedBrand sb : seed.getBrands()) {
+                if (brandMapper.selectById(sb.getId()) != null) {
+                    continue;
+                }
+                Brand brand = new Brand();
+                brand.setId(sb.getId());
+                brand.setName(sb.getName());
+                brand.setSlogan(sb.getSlogan());
+                brand.setOrigin(sb.getOrigin());
+                brand.setFounded(sb.getFounded());
+                brand.setPositioning(sb.getPositioning());
+                brand.setIntro(sb.getIntro());
+                brand.setStory(sb.getStory());
+                brand.setHighlight(sb.getHighlight());
+                brand.setLogoText(sb.getLogoText());
+                brand.setAccent(sb.getAccent());
+                brand.setSortOrder(sb.getSortOrder() == null ? 0 : sb.getSortOrder());
+                brand.setStatus(1);
+                brandMapper.insert(brand);
+                added++;
+            }
+            if (added > 0) {
+                log.info("品牌档案初始化完成，新增 {} 个品牌", added);
+            }
+        } catch (Exception e) {
+            log.warn("品牌档案初始化失败: {}", e.getMessage());
+        }
     }
 
     private void seedUsersIfAbsent() {

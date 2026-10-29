@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { productApi } from '@/api'
-import type { Category, Product } from '@/types'
+import { brandApi, productApi } from '@/api'
+import type { Category, Product, Brand } from '@/types'
 import ProductCard from '@/components/ProductCard.vue'
 import ProductCardSkeleton from '@/components/ProductCardSkeleton.vue'
+import BrandDialog from '@/components/BrandDialog.vue'
 import ProductImage from '@/components/ProductImage.vue'
 import CategoryIcon from '@/components/CategoryIcon.vue'
 import { money } from '@/utils/format'
@@ -40,18 +41,32 @@ const promptChips = [
 
 onMounted(async () => {
   try {
-    const [hot, fresh, cats] = await Promise.all([
+    const [hot, fresh, cats, brands] = await Promise.all([
       productApi.list({ page: 1, size: 8, sort: 'sales' }),
       productApi.list({ page: 1, size: 4, sort: 'new' }),
-      productApi.categories()
+      productApi.categories(),
+      brandApi.list().catch(() => [] as Brand[])
     ])
     featured.value = hot.records
     latest.value = fresh.records
     categories.value = cats
+    brandStrip.value = brands.slice(0, BRAND_STRIP_SIZE)
   } finally {
     loading.value = false
   }
 })
+
+/** 品牌条只展示前几个，避免首页过长；其余品牌可从商品页品牌筛选进入 */
+const BRAND_STRIP_SIZE = 6
+
+const brandStrip = ref<Brand[]>([])
+const brandDialog = ref(false)
+const activeBrand = ref<Brand | null>(null)
+
+function openBrand(brand: Brand) {
+  activeBrand.value = brand
+  brandDialog.value = true
+}
 
 function ask(text?: string) {
   const message = (text ?? prompt.value).trim()
@@ -132,7 +147,10 @@ function ask(text?: string) {
 
     <section class="brand-strip">
       <div class="container brand-strip-inner">
-        <span>声屿</span><i></i><span>澎湃</span><i></i><span>步履</span><i></i><span>凝光</span><i></i><span>岩咖</span><i></i><span>栖居</span>
+        <template v-for="(brand, index) in brandStrip" :key="brand.id">
+          <button class="brand-chip" type="button" @click="openBrand(brand)">{{ brand.name }}</button>
+          <i v-if="index < brandStrip.length - 1"></i>
+        </template>
       </div>
     </section>
 
@@ -277,6 +295,8 @@ function ask(text?: string) {
         </div>
       </div>
     </section>
+
+    <BrandDialog v-model="brandDialog" :brand="activeBrand" />
   </div>
 </template>
 
@@ -603,6 +623,40 @@ function ask(text?: string) {
   height: 3px;
   background: var(--panel-dark-line);
   border-radius: 50%;
+}
+
+/* 品牌名可点击：hover 时下划线浮出并转为品牌色 */
+.brand-chip {
+  border: none;
+  background: none;
+  padding: 6px 2px;
+  font: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.24s ease;
+}
+
+.brand-chip::after {
+  content: '';
+  position: absolute;
+  left: 2px;
+  right: 2px;
+  bottom: 0;
+  height: 1px;
+  background: var(--brand);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.28s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.brand-chip:hover {
+  color: var(--brand);
+}
+
+.brand-chip:hover::after {
+  transform: scaleX(1);
 }
 
 .category-grid {

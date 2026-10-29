@@ -252,6 +252,22 @@ export interface AgentStep {
   createdAt: string
 }
 
+/** 品牌档案 */
+export interface Brand {
+  id: string
+  name: string
+  slogan?: string
+  origin?: string
+  founded?: string
+  positioning?: string
+  intro?: string
+  story?: string
+  highlight?: string
+  logoText?: string
+  accent?: string
+  productCount: number
+}
+
 export interface SellerOverview {
   productCount: number
   onSaleCount: number

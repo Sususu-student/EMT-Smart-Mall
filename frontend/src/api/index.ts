@@ -1,5 +1,6 @@
 import { request, upload } from './http'
 import type {
+  Brand,
   Address,
   AddressPayload,
   AdminConversation,
@@ -90,6 +91,12 @@ export const afterSaleApi = {
     request<AfterSale>({ url: '/after-sale', method: 'post', data }),
   mine: () => request<AfterSale[]>({ url: '/after-sale' }),
   byOrder: (orderId: string) => request<AfterSale[]>({ url: `/after-sale/order/${orderId}` })
+}
+
+export const brandApi = {
+  list: () => request<Brand[]>({ url: '/brand/list' }),
+  detail: (id: string) => request<Brand>({ url: `/brand/${id}` }),
+  byName: (name: string) => request<Brand | null>({ url: '/brand/by-name', params: { name } })
 }
 
 export const uploadApi = {
