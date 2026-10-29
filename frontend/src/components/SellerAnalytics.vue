@@ -140,7 +140,9 @@ function renderScatter() {
         markLine: {
           silent: true,
           symbol: 'none',
-          lineStyle: { type: 'dashed', color: 'rgba(140,130,115,.35)' },
+          lineStyle: { type: 'dashed', color: 'rgba(140,130,115,.3)' },
+          // 关闭中线自带的数值标签，否则会与坐标轴刻度混在一起造成误读
+          label: { show: false },
           data: [{ xAxis: maxViews / 2 }, { yAxis: maxSales / 2 }]
         }
       }
@@ -253,6 +255,11 @@ const keywordStyle = (weight: number) => {
           <span><i style="background: #2f7a5c" />评分 ≥ 4.6</span>
           <span><i style="background: #f05a28" />4.2 - 4.6</span>
           <span><i style="background: #c9a227" />&lt; 4.2</span>
+        </div>
+        <div class="quadrant-note">
+          <span><b>右上</b>明星品：曝光与销量双高，重点保库存</span>
+          <span><b>右下</b>转化偏低：浏览量高但卖不动，检查详情页与价格</span>
+          <span><b>左上</b>潜力品：卖得动但曝光少，值得加大推广</span>
         </div>
       </section>
 
@@ -452,6 +459,22 @@ const keywordStyle = (weight: number) => {
 .chart-empty span {
   font-size: 11px;
   color: var(--muted-light);
+}
+
+.quadrant-note {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 10px;
+  color: var(--muted-light);
+  padding-top: 8px;
+  border-top: 1px dashed var(--line);
+  margin-top: 8px;
+}
+
+.quadrant-note b {
+  color: var(--muted);
+  font-weight: 600;
 }
 
 .legend-note {

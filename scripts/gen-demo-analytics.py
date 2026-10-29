@@ -121,20 +121,32 @@ def load_products():
         FROM product WHERE status = 1;
     """)
     rows = []
-    for line in out.strip().split("\n"):
+    # 用 splitlines() 而不是 split("\n")：mysql -B 输出在 Windows 上是 CRLF，
+    # 按 \n 切分会给每个字段留下尾部 \r，污染 seller_id 等精确匹配字段。
+    for line in out.splitlines():
         if not line.strip():
             continue
         parts = line.split("\t")
         if len(parts) < 6:
             continue
-        rows.append((parts[0], parts[1], parts[2], Decimal(parts[3]), float(parts[4]), parts[5]))
+        rows.append((parts[0], parts[1], parts[2], Decimal(parts[3].strip()),
+                     float(parts[4].strip()), parts[5].strip()))
     return rows
 
 
 def weighted_pick(products, k):
-    """按评分加权抽样，模拟'爆款更常被买'的真实分布"""
-    # 评分越高越常被买；价格越高购买频次越低（真实消费分布的长尾特征）
-    weights = [(max(0.5, p[4]) ** 3) / (1 + float(p[3]) / 120) for p in products]
+    """按「评分高 + 价格低」加权抽样，模拟真实的消费长尾分布。
+    高价商品被选中的概率显著更低，避免演示数据出现"一个人买了 28 万"这种
+    一看就假的数字，让统计结果更贴近普通消费者的真实结构。
+    """
+    # 评分权重：4.0 分以上才有明显优势
+    weights = []
+    for p in products:
+        rating_w = max(0.5, p[4]) ** 3
+        # 价格惩罚：价格越高权重衰减越快（120 元为半衰点，800 元以上几乎不买）
+        price = float(p[3])
+        price_w = 1.0 / ((1.0 + price / 120.0) ** 2)
+        weights.append(rating_w * price_w)
     picked, pool, w = [], list(products), list(weights)
     for _ in range(min(k, len(pool))):
         choice = random.choices(range(len(pool)), weights=w, k=1)[0]
@@ -162,7 +174,7 @@ def biz_day_offset():
     return day, boost
 
 
-def gen_orders(products, cart_pids=None, target=300):
+def gen_orders(products, cart_pids=None, target=120):
     """生成订单。优先从已加购商品中下单，符合真实转化路径，
     也能保证漏斗「加购 > 下单」单调递减。"""
     order_rows, item_rows = [], []
@@ -179,17 +191,21 @@ def gen_orders(products, cart_pids=None, target=300):
 
     made = 0
     attempts = 0
-    while made < target and attempts < target * 6:
+    # 确定性地把 40% 的订单分配给卖家商品，保证卖家端图表有稳定样本量，
+    # 其余订单走购物车/全站的加权抽样（真实转化路径）
+    seller_quota = int(target * 0.4)
+    seller_made = 0
+    while made < target and attempts < target * 20:
         attempts += 1
         day, boost = biz_day_offset()
         if random.random() > boost / 2.4:
             continue
 
-        # 75% 的订单来自「已加购」商品（真实转化路径）
-        if cart_products and random.random() < 0.75:
-            picks = weighted_pick(cart_products, random.choice([1, 1, 2]))
-        elif seller_products and random.random() < 0.35:
+        if seller_products and seller_made < seller_quota:
             picks = weighted_pick(seller_products, random.choice([1, 1, 2]))
+            seller_made += 1
+        elif cart_products and random.random() < 0.8:
+            picks = weighted_pick(cart_products, random.choice([1, 1, 2]))
         else:
             picks = weighted_pick(products, random.choice([1, 1, 1, 2, 3]))
 
@@ -258,7 +274,7 @@ def gen_orders(products, cart_pids=None, target=300):
 # ---------------------------------------------------------------- 浏览/加购
 def gen_behaviors(products, order_count):
     """浏览量约为订单的 15 倍，用于算转化漏斗"""
-    n = order_count * 15
+    n = order_count * 22
     browse_rows = []
     for _ in range(n):
         pid, pname, cat, price, rating, seller = random.choice(products)
@@ -277,7 +293,7 @@ def gen_behaviors(products, order_count):
     # 再用平台商品补足，quantity 取 1-3 模拟真实加购数量。
     seller_only = [p for p in products if p[5] == SELLER_ID]
     others = [p for p in products if p[5] != SELLER_ID]
-    cart_target = min(max(60, order_count * 2), len(products) - 1)
+    cart_target = min(max(40, order_count * 2), len(products) - 1)
 
     picked = list(seller_only)                       # 先把卖家商品全部覆盖
     remain = max(0, cart_target - len(picked))
@@ -352,8 +368,9 @@ def main():
     print(f"  · 可用商品 {len(products)} 个")
     # 先生成浏览与加购，再基于购物车生成订单：
     # 这样订单大多来自已加购商品，漏斗天然单调递减
-    cart_pids = gen_behaviors(products, 300)
-    gen_orders(products, cart_pids, target=300)
+    ORDER_TARGET = 120          # 订单量控制在合理规模，避免累计金额失真
+    cart_pids = gen_behaviors(products, ORDER_TARGET)
+    gen_orders(products, cart_pids, target=ORDER_TARGET)
 
     # 汇总校验
     out = run_sql(f"""
