@@ -24,21 +24,30 @@ const router = createRouter({
           component: () => import('@/views/CheckoutView.vue'),
           meta: { requiresAuth: true }
         },
-        { path: 'orders', name: 'orders', component: () => import('@/views/OrdersView.vue'), meta: { requiresAuth: true } },
         {
           path: 'order/:id',
           name: 'order-detail',
           component: () => import('@/views/OrderDetailView.vue'),
           meta: { requiresAuth: true }
         },
-        { path: 'profile', name: 'profile', component: () => import('@/views/ProfileView.vue'), meta: { requiresAuth: true } },
         { path: 'chat', name: 'chat', component: () => import('@/views/ChatView.vue'), meta: { requiresAuth: true } },
-        { path: 'compare', name: 'compare', component: () => import('@/views/CompareView.vue') },
+        { path: 'compare', name: 'compare', component: () => import('@/views/CompareView.vue') }
+      ]
+    },
+    {
+      // 用户中心 / 卖家工作台：统一使用左侧导航布局。
+      // 前台仍走 StoreLayout 的顶部导航，保证商品图的视觉冲击力。
+      path: '/',
+      component: () => import('@/layouts/UserLayout.vue'),
+      meta: { requiresAuth: true },
+      children: [
+        { path: 'orders', name: 'orders', component: () => import('@/views/OrdersView.vue') },
+        { path: 'profile', name: 'profile', component: () => import('@/views/ProfileView.vue') },
         {
           path: 'seller',
           name: 'seller',
           component: () => import('@/views/SellerCenterView.vue'),
-          meta: { requiresAuth: true, requiresSeller: true }
+          meta: { requiresSeller: true }
         }
       ]
     },

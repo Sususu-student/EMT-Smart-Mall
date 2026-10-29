@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { onMounted, reactive, ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { computed, onMounted, reactive, ref, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import { ElMessage, ElMessageBox, type UploadRequestOptions } from 'element-plus'
 import { productApi, sellerApi, uploadApi } from '@/api'
 import type { Category, Product, SellerOrderDetail, SellerOrderRow, SellerOverview } from '@/types'
@@ -11,10 +11,12 @@ import SellerAnalytics from '@/components/SellerAnalytics.vue'
 import { resolveAssetUrl } from '@/api/http'
 
 const router = useRouter()
+const route = useRoute()
 const auth = useAuthStore()
 
 const loading = ref(true)
-const tab = ref('products')
+/** 当前分区由路由 query 决定，左侧导航切换 query 来联动 */
+const tab = computed(() => (route.query.tab as string) || 'products')
 const overview = ref<SellerOverview | null>(null)
 const products = ref<Product[]>([])
 const categories = ref<Category[]>([])
@@ -56,6 +58,11 @@ const form = reactive({
 })
 
 const flatCategories = ref<{ id: string; name: string }[]>([])
+
+// 进入「店铺订单」分区时按需加载，等价于原来 switchTab 的行为
+watch(tab, (name) => {
+  if (name === 'orders' && !orders.value.length) loadOrders(1)
+})
 
 onMounted(async () => {
   if (!auth.isLoggedIn) {
@@ -293,10 +300,6 @@ async function removeProduct(product: Product) {
   await loadAll()
 }
 
-function switchTab(name: string) {
-  tab.value = name
-  if (name === 'orders' && !orders.value.length) loadOrders(1)
-}
 </script>
 
 <template>
@@ -330,7 +333,7 @@ function switchTab(name: string) {
           <span>库存总量</span>
           <strong>{{ overview?.stockTotal ?? 0 }}</strong>
         </article>
-        <article class="stat-card alert" @click="tab = 'orders'; loadOrders(1)">
+        <article class="stat-card alert" @click="router.push({ path: '/seller', query: { tab: 'orders' } })">
           <span>待发货订单</span>
           <strong>{{ overview?.pendingShipOrders ?? 0 }}</strong>
           <em v-if="overview?.pendingShipItems">共 {{ overview.pendingShipItems }} 件商品</em>
@@ -338,9 +341,7 @@ function switchTab(name: string) {
         </article>
       </section>
 
-      <el-tabs :model-value="tab" @tab-change="switchTab">
-        <el-tab-pane label="商品管理" name="products">
-          <div class="toolbar">
+            <div class="toolbar">
             <el-input
               v-model="keyword"
               placeholder="搜索我的商品"
@@ -406,10 +407,8 @@ function switchTab(name: string) {
             class="pager"
             @current-change="loadProducts"
           />
-        </el-tab-pane>
 
-        <el-tab-pane label="我的订单" name="orders">
-          <div class="order-toolbar">
+            <div class="order-toolbar">
             <el-radio-group v-model="orderFilter" size="default" @change="loadOrders(1)">
               <el-radio-button value="">全部</el-radio-button>
               <el-radio-button value="PENDING">待发货</el-radio-button>
@@ -474,12 +473,8 @@ function switchTab(name: string) {
             <strong>{{ orderFilter === 'PENDING' ? '没有待发货的订单' : '还没有订单' }}</strong>
             <p>买家下单并支付后会显示在这里。</p>
           </div>
-        </el-tab-pane>
 
-        <el-tab-pane label="数据分析" name="analytics">
-          <SellerAnalytics v-if="tab === 'analytics'" />
-        </el-tab-pane>
-      </el-tabs>
+            <SellerAnalytics v-if="tab === 'analytics'" />
     </div>
 
     <el-dialog v-model="dialog" :title="editingId ? '编辑商品' : '发布商品'" width="620px">

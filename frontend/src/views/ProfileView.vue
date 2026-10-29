@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, reactive, ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { userApi } from '@/api'
 import type { Address, Preference, Product, Profile } from '@/types'
@@ -10,8 +10,10 @@ import { resolveAssetUrl } from '@/api/http'
 import BuyerAnalytics from '@/components/BuyerAnalytics.vue'
 
 const router = useRouter()
+const route = useRoute()
 const auth = useAuthStore()
-const active = ref('overview')
+/** 当前显示的分区由路由 query 决定，左侧导航通过切换 query 来联动 */
+const active = computed(() => (route.query.tab as string) || 'overview')
 const loading = ref(true)
 const profile = ref<Profile | null>(null)
 const addresses = ref<Address[]>([])
@@ -35,15 +37,6 @@ const addressForm = reactive({
   detail: '',
   isDefault: false
 })
-
-const tabs = [
-  { name: 'overview', label: '账户概览' },
-  { name: 'address', label: '收货地址' },
-  { name: 'favorites', label: '我的收藏' },
-  { name: 'preferences', label: '导购偏好' },
-  { name: 'analytics', label: '消费画像' },
-  { name: 'history', label: '浏览足迹' }
-]
 
 const avatar = computed(() => (profile.value?.user.nickname || profile.value?.user.username || '智').slice(0, 1))
 
@@ -197,14 +190,6 @@ async function savePreferences() {
 
 <template>
   <div v-loading="loading" class="profile-page">
-    <div class="page-head">
-      <div class="container">
-        <span class="eyebrow">MY ACCOUNT</span>
-        <h1>个人中心</h1>
-        <p class="desc">管理收货地址、收藏与导购偏好。偏好会被 Agent 用于个性化推荐。</p>
-      </div>
-    </div>
-
     <div class="container profile-layout">
       <aside class="profile-aside">
         <div class="user-card">
@@ -220,14 +205,6 @@ async function savePreferences() {
             <el-icon><ChatDotRound /></el-icon> 找 Agent 聊聊
           </el-button>
         </div>
-
-        <nav class="side-nav">
-          <button v-for="tab in tabs" :key="tab.name" :class="{ active: active === tab.name }" @click="active = tab.name">
-            {{ tab.label }}
-          </button>
-          <button @click="router.push('/orders')">我的订单 <el-icon><ArrowRight /></el-icon></button>
-          <button v-if="auth.isAdmin" @click="router.push('/admin')">后台管理 <el-icon><ArrowRight /></el-icon></button>
-        </nav>
       </aside>
 
       <section class="profile-main">
