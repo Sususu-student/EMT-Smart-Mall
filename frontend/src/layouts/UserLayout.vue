@@ -51,11 +51,12 @@ const groups = computed(() => {
     { key: 'history', label: '浏览足迹', icon: 'Clock', path: '/profile', tab: 'history' }
   ]
 
+  // 卖家工作台：三个页面各自独立路由，不再用 query 切换分区
   const seller: NavItem[] = [
-    { key: 'seller-products', label: '商品管理', icon: 'Goods', path: '/seller', tab: 'products' },
-    { key: 'seller-orders', label: '店铺订单', icon: 'Box', path: '/seller', tab: 'orders' },
+    { key: 'seller-products', label: '商品管理', icon: 'Goods', path: '/seller' },
+    { key: 'seller-orders', label: '店铺订单', icon: 'Box', path: '/seller/orders' },
     { key: 'customer-service', label: '客服消息', icon: 'ChatLineRound', path: '/messages' },
-    { key: 'seller-analytics', label: '数据分析', icon: 'TrendCharts', path: '/seller', tab: 'analytics' }
+    { key: 'seller-analytics', label: '数据分析', icon: 'TrendCharts', path: '/seller/analytics' }
   ]
 
   const result = [
@@ -74,12 +75,19 @@ const groups = computed(() => {
   return result
 })
 
-/** 当前高亮项：路由 path + tab 同时匹配 */
+/** 当前高亮项：卖家按具体路径区分，个人中心按 tab 区分 */
 const activeKey = computed(() => {
   const path = route.path
   const tab = (route.query.tab as string) || ''
-  if (path.startsWith('/seller')) {
-    return 'seller-' + (tab || 'products')
+  // 注意顺序：/seller/orders 与 /seller/analytics 要先于 /seller 判断
+  if (path.startsWith('/seller/orders')) {
+    return 'seller-orders'
+  }
+  if (path.startsWith('/seller/analytics')) {
+    return 'seller-analytics'
+  }
+  if (path === '/seller' || path === '/seller/') {
+    return 'seller-products'
   }
   if (path.startsWith('/orders')) {
     return 'orders'
@@ -467,23 +475,20 @@ watch(() => route.fullPath, () => {
 }
 
 /*
- * 顶栏已经展示当前分区标题，内页重复的大标题可以省掉，
- * 但保留右侧的操作按钮（例如「发布商品」），所以只隐藏文字部分。
+ * 顶栏已经展示当前分区标题，内页重复的大标题可以省掉。
+ * 卖家三个页面已拆成独立路由，各自的 seller-head 只放说明文字与操作按钮。
  */
 .user-content :deep(.page-head) {
   display: none;
 }
 
 .user-content :deep(.seller-head) {
-  padding: 0 0 16px;
-  border-bottom: none;
   display: flex;
-  justify-content: flex-end;
   align-items: center;
-}
-
-.user-content :deep(.seller-head > div) {
-  display: none;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 0 16px;
+  flex-wrap: wrap;
 }
 
 /* ---------------- 移动端 ---------------- */

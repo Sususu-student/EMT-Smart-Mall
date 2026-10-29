@@ -45,10 +45,23 @@ const router = createRouter({
         { path: 'after-sales', name: 'after-sales', component: () => import('@/views/AfterSalesView.vue') },
         { path: 'messages', name: 'customer-service', component: () => import('@/views/CustomerServiceView.vue') },
         { path: 'profile', name: 'profile', component: () => import('@/views/ProfileView.vue') },
+        // 卖家工作台拆成三个独立页面，各自只加载自己需要的接口
         {
           path: 'seller',
           name: 'seller',
-          component: () => import('@/views/SellerCenterView.vue'),
+          component: () => import('@/views/seller/SellerProductsView.vue'),
+          meta: { requiresSeller: true }
+        },
+        {
+          path: 'seller/orders',
+          name: 'seller-orders',
+          component: () => import('@/views/seller/SellerOrdersView.vue'),
+          meta: { requiresSeller: true }
+        },
+        {
+          path: 'seller/analytics',
+          name: 'seller-analytics',
+          component: () => import('@/views/seller/SellerAnalyticsView.vue'),
           meta: { requiresSeller: true }
         }
       ]
