@@ -4,6 +4,7 @@
  */
 import { computed, nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
 import * as echarts from 'echarts'
+import { InfoFilled } from '@element-plus/icons-vue'
 import { analyticsApi } from '@/api'
 import type { SellerAnalytics } from '@/types'
 
@@ -194,6 +195,12 @@ const keywordStyle = (weight: number) => {
 
 <template>
   <div v-loading="loading" class="seller-analytics">
+    <!-- 数据来源说明：本项目交易数据由脚本模拟生成，用于展示分析能力 -->
+    <div class="source-note">
+      <el-icon><InfoFilled /></el-icon>
+      <span>统计基于演示数据（近 90 天模拟订单），指标口径与真实经营一致</span>
+    </div>
+
     <!-- KPI -->
     <div class="kpi-grid">
       <article class="kpi-card primary">
@@ -323,6 +330,18 @@ const keywordStyle = (weight: number) => {
 <style scoped>
 .seller-analytics {
   min-height: 400px;
+}
+
+.source-note {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--muted-light);
+  padding: 8px 12px;
+  margin-bottom: 12px;
+  background: var(--surface-sunken);
+  border-radius: 8px;
 }
 
 .kpi-grid {

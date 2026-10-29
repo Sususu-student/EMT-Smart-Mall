@@ -5,6 +5,7 @@
  */
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import * as echarts from 'echarts'
+import { InfoFilled } from '@element-plus/icons-vue'
 import { analyticsApi } from '@/api'
 import type { BuyerAnalytics } from '@/types'
 
@@ -131,6 +132,12 @@ const typeColor: Record<string, string> = {
 
 <template>
   <div v-loading="loading" class="buyer-analytics">
+    <!-- 数据来源说明 -->
+    <div class="source-note">
+      <el-icon><InfoFilled /></el-icon>
+      <span>画像基于你的订单与浏览足迹计算，演示环境包含历史模拟数据</span>
+    </div>
+
     <!-- 概览数字 -->
     <div class="overview">
       <div class="ov-item">
@@ -202,6 +209,18 @@ const typeColor: Record<string, string> = {
 <style scoped>
 .buyer-analytics {
   min-height: 320px;
+}
+
+.source-note {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--muted-light);
+  padding: 8px 12px;
+  margin-bottom: 14px;
+  background: var(--surface-sunken);
+  border-radius: 8px;
 }
 
 .overview {
